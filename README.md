@@ -2,7 +2,7 @@
 
 Kryptokrona is a decentralized blockchain from the Nordic based on CryptoNote, which forms the basis for Monero, among others. CryptoNote is a so-called “application layer” protocol further developed by TurtleCoin that enables things like: private transactions, messages and arbitrary data storage, completely decentralized.
 
-Kryptokrona API is a fully featured implementation of the Kryptokrona Network protocols and includes many useful components and tools for building decentralized private communication and payment systems.
+Kryptokrona API is a fully featured implementation of the Kryptokrona Java SDK and includes many useful components and tools for building decentralized private communication and payment systems.
 
 ## Table of Contents
 

@@ -55,6 +55,12 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.liquibase:liquibase-core")
+	implementation("org.springdoc:springdoc-openapi-ui:1.6.11")
+	implementation("org.webjars:swagger-ui")
+
+	testImplementation(kotlin("stdlib-jdk8"))
+	testImplementation(kotlin("test"))
+
 	developmentOnly("org.springframework.boot:spring-boot-devtools")
 	runtimeOnly("org.postgresql:postgresql")
 	providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")

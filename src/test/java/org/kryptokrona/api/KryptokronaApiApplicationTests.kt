@@ -1,13 +1,15 @@
-package org.kryptokrona.api;
+package org.kryptokrona.api
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.Test
+import org.springframework.boot.test.context.SpringBootTest
+import kotlin.test.assertEquals
 
 @SpringBootTest
 class KryptokronaApiApplicationTests {
 
 	@Test
-	void contextLoads() {
+	fun `can init tests`() {
+		assertEquals(true, true)
 	}
 
 }

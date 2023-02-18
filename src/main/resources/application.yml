@@ -29,7 +29,7 @@ springdoc:
 
 apiTitle: ${SYS_API_TITLE}
 apiDescription: ${SYS_API_DESCRIPTION}
-apiVersion: "0.3.0"
+apiVersion: "0.1.0"
 apiContactName: ${SYS_API_CONTACT_NAME}
 apiContactEmail: ${SYS_API_CONTACT_EMAIL}
 apiContactUrl: ${SYS_API_CONTACT_URL}

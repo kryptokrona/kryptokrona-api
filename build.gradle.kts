@@ -1,5 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.springframework.boot.gradle.tasks.bundling.BootJar
+import org.springframework.boot.gradle.tasks.bundling.BootWar
 
 //---------------------------------------------------------------------------------
 // PLUGINS
@@ -8,6 +8,7 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 plugins {
 	id("java")
 	id("com.dorongold.task-tree") version "2.1.0"
+	id("war")
 	//TODO: temporarily disable
 	// id("checkstyle")
 	// id("pmd")
@@ -17,6 +18,7 @@ plugins {
 	kotlin("jvm") version "1.7.10"
 	id("org.springframework.boot") version "2.5.3"
 	id("io.spring.dependency-management") version "1.0.11.RELEASE"
+	application
 	war
 }
 
@@ -25,22 +27,29 @@ group = "org.kryptokrona.api"
 // getting project properties (gradle.properties)
 val sdkVersion: String by project
 
-repositories {
-	mavenCentral()
-}
-
-tasks.getByName<BootJar>("bootJar") {
-	enabled = false
-}
-
-tasks.getByName<Jar>("jar") {
-	enabled = true
-}
-
 java {
 	sourceCompatibility = JavaVersion.VERSION_17
 	targetCompatibility = JavaVersion.VERSION_17
 }
+
+repositories {
+	mavenCentral()
+}
+
+tasks.getByName<BootWar>("bootWar") {
+	enabled = false
+}
+
+tasks.getByName<War>("war") {
+	duplicatesStrategy = DuplicatesStrategy.INCLUDE
+	enabled = true
+}
+
+tasks.withType<Jar> {
+	duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
+
+tasks.processResources {}
 
 sourceSets {
 	main {
@@ -54,6 +63,7 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-jdbc")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
 	implementation("org.liquibase:liquibase-core")
 	implementation("org.springdoc:springdoc-openapi-ui:1.6.11")
 	implementation("org.webjars:swagger-ui")

@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="dev" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+    <module name="kryptokrona-api.main" />
+    <option name="SPRING_BOOT_MAIN_CLASS" value="org.kryptokrona.api.KryptokronaApiApplication" />
+    <option name="VM_PARAMETERS" value="-Dspring.profiles.active=dev" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

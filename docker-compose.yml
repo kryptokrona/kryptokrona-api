@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  db-dev:
+    image: postgres
+    container_name: kryptokrona_api_db_dev
+    restart: always
+    environment:
+      POSTGRES_DB: kryptokrona_api_dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: test1234
+    volumes:
+      - db-dev:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - hugin-net
+
+volumes:
+  db-dev:
+
+networks:
+  hugin-net:
+    driver: bridge

@@ -1,4 +1,4 @@
-package org.kryptokrona.api.kryptokronaapi;
+package org.kryptokrona.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

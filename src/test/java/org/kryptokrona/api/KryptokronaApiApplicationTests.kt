@@ -1,4 +1,4 @@
-package org.kryptokrona.api.kryptokronaapi;
+package org.kryptokrona.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

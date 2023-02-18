@@ -32,9 +32,9 @@ Kryptokrona API in Java for obtaining cached data from the Kryptokrona Blockchai
 
 ## Releases
 
-| NAME     | RELEASE DATE | VERSION   | MAINTAINER         | EOL     | DESCRIPTION              |
-|----------|--------------|-----------|--------------------|---------|--------------------------|
-| Mjölnir | Not set      | [0.1.0](https://mjovanc.github.io/kryptokrona-api/0.1.0/index.html) | Marcus Cvjeticanin | Not set | To be done.              |
+| NAME | RELEASE DATE | VERSION   | MAINTAINER         | EOL     | DESCRIPTION              |
+|------|--------------|-----------|--------------------|---------|--------------------------|
+| Tor  | Not set      | [0.1.0](https://mjovanc.github.io/kryptokrona-api/0.1.0/index.html) | Marcus Cvjeticanin | Not set | To be done.              |
 
 
 ## Getting Help

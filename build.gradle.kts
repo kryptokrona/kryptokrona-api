@@ -42,10 +42,12 @@ tasks.getByName<BootWar>("bootWar") {
 
 tasks.getByName<War>("war") {
 	enabled = true
+	archiveClassifier.set("")
 }
 
 tasks.withType<Jar> {
 	duplicatesStrategy = DuplicatesStrategy.INCLUDE
+	archiveClassifier.set("")
 }
 
 tasks.processResources {

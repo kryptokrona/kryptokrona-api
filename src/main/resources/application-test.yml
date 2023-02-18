@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${POSTGRESQL_HOSTNAME:localhost}:${POSTGRESQL_PORT:5433}/${POSTGRESQL_DB_NAME:hugin_api_test}
+    username: ${POSTGRESQL_DB_USER:postgres}
+    password: ${POSTGRESQL_DB_PASSWORD:test1234}
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL10Dialect
+    hibernate:
+      ddl-auto: create
+
+apiServerUrl: ${SYS_API_SERVER_URL}

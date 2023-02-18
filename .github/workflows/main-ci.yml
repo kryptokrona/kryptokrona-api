@@ -136,6 +136,7 @@ jobs:
 
       - name: Build Docker
         run: |
+          ls -la
           docker build -t $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE:${{ env.SHA }} . --no-cache
 
       - name: Tag Image

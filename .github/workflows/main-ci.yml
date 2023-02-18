@@ -31,8 +31,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: build-dir
-          path: |
-            build/
+          path: ./build
 
   static-code-analysis:
     name: Static Code Analysis
@@ -133,10 +132,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: build-dir
+          path: ./build
 
       - name: Build Docker
         run: |
-          ls -la
           docker build -t $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE:${{ env.SHA }} . --no-cache
 
       - name: Tag Image

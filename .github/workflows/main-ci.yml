@@ -32,7 +32,7 @@ jobs:
         with:
           name: build-dir
           path: |
-            build
+            build/
 
   static-code-analysis:
     name: Static Code Analysis

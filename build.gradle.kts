@@ -68,6 +68,7 @@ dependencies {
 	implementation("org.liquibase:liquibase-core")
 	implementation("org.springdoc:springdoc-openapi-ui:1.6.11")
 	implementation("org.webjars:swagger-ui")
+	implementation("io.github.jhipster:jhipster:1.3.1")
 
 	testImplementation(kotlin("stdlib-jdk8"))
 	testImplementation(kotlin("test"))

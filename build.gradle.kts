@@ -41,7 +41,6 @@ tasks.getByName<BootWar>("bootWar") {
 }
 
 tasks.getByName<War>("war") {
-	duplicatesStrategy = DuplicatesStrategy.INCLUDE
 	enabled = true
 }
 
@@ -49,7 +48,9 @@ tasks.withType<Jar> {
 	duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
-tasks.processResources {}
+tasks.processResources {
+	duplicatesStrategy = DuplicatesStrategy.INCLUDE
+}
 
 sourceSets {
 	main {

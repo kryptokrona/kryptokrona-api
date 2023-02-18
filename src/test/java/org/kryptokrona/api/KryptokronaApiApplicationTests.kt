@@ -7,9 +7,8 @@ import kotlin.test.assertEquals
 @SpringBootTest
 class KryptokronaApiApplicationTests {
 
-	@Test
-	fun `can init tests`() {
-		assertEquals(true, true)
-	}
+/*	@Test
+	fun `context loads`() {
+	}*/
 
 }

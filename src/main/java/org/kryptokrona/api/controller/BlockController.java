@@ -104,4 +104,19 @@ public class BlockController {
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
+	@GetMapping("{id}")
+	@Operation(
+			summary = "Get a specific block by ID",
+			description = "Get a specific block by ID."
+	)
+	public ResponseEntity<Block> getById(@PathVariable long id) {
+		var obj = blockService.getById(id);
+
+		if (obj == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<>(obj, HttpStatus.OK);
+	}
+
 }

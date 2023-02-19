@@ -69,4 +69,16 @@ public class BlockService {
 		return blockRepository.findAll(paging);
 	}
 
+    public Block getById(long id) {
+		if (blockRepository.existsById(id)) {
+			Block block = blockRepository.findById(id).get();
+			log.info("Block found with ID: " + id);
+			return block;
+		}
+
+		log.info("Unable to find block with ID: " + id);
+
+		return null;
+	}
+
 }

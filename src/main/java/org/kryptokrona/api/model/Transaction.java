@@ -35,6 +35,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -67,6 +68,10 @@ public class Transaction {
     private int mixin;
 
     private Long size;
+
+    @JsonProperty("created_at")
+	@Column(name = "created_at", nullable = false, updatable = false)
+	private Date createdAt;
 
 	@ManyToOne()
     @JoinColumn(name = "block_id", referencedColumnName = "id", insertable = false, updatable = false)
@@ -158,6 +163,14 @@ public class Transaction {
         this.size = size;
     }
 
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
     public Block getBlock() {
         return block;
     }
@@ -165,4 +178,18 @@ public class Transaction {
     public void setBlock(Block block) {
         this.block = block;
     }
+
+    public List<Output> getOutputs() {
+        return outputs;
+    }
+
+    public void setOutputs(List<Output> outputs) {
+        this.outputs = outputs;
+    }
+
+    @PrePersist
+	protected void onCreate() {
+		createdAt = new Date();
+	}
+
 }

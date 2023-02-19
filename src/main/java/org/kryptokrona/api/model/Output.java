@@ -33,6 +33,7 @@ package org.kryptokrona.api.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.Date;
 
 /**
  * Output entity.
@@ -53,6 +54,10 @@ public class Output {
 	private String keyImage;
 
 	private int type;
+
+	@JsonProperty("created_at")
+	@Column(name = "created_at", nullable = false, updatable = false)
+	private Date createdAt;
 
 	@ManyToOne()
     @JoinColumn(name = "transaction_id", referencedColumnName = "id", insertable = false, updatable = false)
@@ -90,6 +95,14 @@ public class Output {
 		this.type = type;
 	}
 
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
+
 	public Transaction getTransaction() {
 		return transaction;
 	}
@@ -97,4 +110,10 @@ public class Output {
 	public void setTransaction(Transaction transaction) {
 		this.transaction = transaction;
 	}
+
+	@PrePersist
+	protected void onCreate() {
+		createdAt = new Date();
+	}
+
 }

@@ -33,10 +33,10 @@ package org.kryptokrona.api.service;
 import org.springframework.stereotype.Service;
 
 /**
- * Block Service.
+ * Output Service.
  *
  * @author Marcus Cvjeticanin
  */
 @Service
-public class BlockService {
+public class OutputService {
 }

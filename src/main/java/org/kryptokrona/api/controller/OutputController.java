@@ -57,7 +57,7 @@ import static org.kryptokrona.api.controller.OutputController.VERSION;
  */
 @RestController
 @CrossOrigin(origins="*")
-@RequestMapping("api/v" + VERSION + "/output")
+@RequestMapping("api/v" + VERSION + "/outputs")
 @Tag(name = "outputs", description = "Set of endpoints to get data of outputs.")
 public class OutputController {
 

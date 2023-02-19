@@ -58,7 +58,7 @@ import static org.kryptokrona.api.controller.TransactionController.VERSION;
  */
 @RestController
 @CrossOrigin(origins="*")
-@RequestMapping("api/v" + VERSION + "/transaction")
+@RequestMapping("api/v" + VERSION + "/transactions")
 @Tag(name = "transactions", description = "Set of endpoints to get data of transactions.")
 public class TransactionController {
 

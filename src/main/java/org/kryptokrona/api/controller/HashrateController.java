@@ -57,7 +57,7 @@ import static org.kryptokrona.api.controller.HashrateController.VERSION;
  */
 @RestController
 @CrossOrigin(origins="*")
-@RequestMapping("api/v" + VERSION + "/hashrate")
+@RequestMapping("api/v" + VERSION + "/hashrates")
 @Tag(name = "hashrates", description = "Set of endpoints to get data of hashrate.")
 public class HashrateController {
 

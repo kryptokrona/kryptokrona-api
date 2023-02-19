@@ -56,7 +56,7 @@ import static org.kryptokrona.api.controller.BlockController.VERSION;
  */
 @RestController
 @CrossOrigin(origins="*")
-@RequestMapping("api/v" + VERSION + "/block")
+@RequestMapping("api/v" + VERSION + "/blocks")
 @Tag(name = "blocks", description = "Set of endpoints to get data of blocks.")
 public class BlockController {
 

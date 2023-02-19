@@ -30,9 +30,13 @@
 
 package org.kryptokrona.api.model;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Transaction entity.
@@ -67,6 +71,20 @@ public class Transaction {
 	@ManyToOne()
     @JoinColumn(name = "block_id", referencedColumnName = "id", insertable = false, updatable = false)
 	private Block block;
+
+    @OneToMany(targetEntity = Output.class, mappedBy = "transaction", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Output> outputs;
+
+    @JsonGetter("outputs")
+    public List<String> getAllTransactionOutputs() {
+        if(outputs != null) {
+            return outputs.stream()
+                    .map(o -> {
+                        return "/api/v1/output/" + o.getId();
+                    }).collect(Collectors.toList());
+        }
+        return Collections.emptyList();
+    }
 
     public Long getId() {
         return id;

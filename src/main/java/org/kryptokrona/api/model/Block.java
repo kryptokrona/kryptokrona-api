@@ -30,11 +30,14 @@
 
 package org.kryptokrona.api.model;
 
+import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Block entity.
@@ -74,6 +77,17 @@ public class Block {
 
     @OneToMany(targetEntity = Transaction.class, mappedBy = "block", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Transaction> transactions;
+
+    @JsonGetter("transactions")
+    public List<String> getAllTransactions() {
+        if(transactions != null) {
+            return transactions.stream()
+                    .map(t -> {
+                        return "/api/v1/transaction/" + t.getId();
+                    }).collect(Collectors.toList());
+        }
+        return Collections.emptyList();
+    }
 
     public Long getId() {
         return id;

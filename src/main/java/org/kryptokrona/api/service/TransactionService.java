@@ -30,7 +30,18 @@
 
 package org.kryptokrona.api.service;
 
+import org.kryptokrona.api.model.Output;
+import org.kryptokrona.api.model.Transaction;
+import org.kryptokrona.api.repository.TransactionRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 /**
  * Transaction Service.
@@ -39,4 +50,24 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class TransactionService {
+
+    private static final Logger log = LoggerFactory.getLogger(OutputService.class);
+
+    private final TransactionRepository transactionRepository;
+
+    @Autowired
+    public TransactionService(TransactionRepository transactionRepository) {
+        this.transactionRepository = transactionRepository;
+    }
+
+    public Page<Transaction> getAll(int page, int size, String order) {
+		if (Objects.equals(order, "asc".toLowerCase())) {
+			var paging = PageRequest.of(page, size, Sort.by("id").ascending());
+			return transactionRepository.findAll(paging);
+		}
+
+		var paging = PageRequest.of(page, size, Sort.by("id").descending());
+		return transactionRepository.findAll(paging);
+	}
+
 }

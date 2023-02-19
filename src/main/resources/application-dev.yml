@@ -7,8 +7,7 @@ spring:
 #    hibernate:
 #      ddl-auto: create
   liquibase:
-
-    enabled: false
+    changeLog: "classpath:db/changelog/master.xml"
 
 logging:
   level:

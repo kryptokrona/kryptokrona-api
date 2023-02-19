@@ -62,7 +62,7 @@ public class TransactionService {
     public Page<Transaction> getAll(int page, int size, String order) {
 		if (Objects.equals(order, "asc".toLowerCase())) {
 			var paging = PageRequest.of(page, size, Sort.by("id").ascending());
-			return transactionRepository.findAll(paging);
+			return transactionRepository.findAll(paging); //TODO: gets the full object of related block (we just want the id or link /api/v1/block/id-here
 		}
 
 		var paging = PageRequest.of(page, size, Sort.by("id").descending());

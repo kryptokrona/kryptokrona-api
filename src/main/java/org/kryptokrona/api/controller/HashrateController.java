@@ -95,7 +95,7 @@ public class HashrateController {
 		var content = pagination.getContent();
 
 		Map<String, Object> response = new HashMap<>();
-		response.put("blocks", content);
+		response.put("hashrates", content);
 		response.put("current_page", pagination.getNumber());
 		response.put("total_items", pagination.getTotalElements());
 		response.put("total_pages", pagination.getTotalPages());

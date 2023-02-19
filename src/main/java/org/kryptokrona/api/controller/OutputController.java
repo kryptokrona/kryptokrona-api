@@ -30,14 +30,23 @@
 
 package org.kryptokrona.api.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.kryptokrona.api.model.Hashrate;
+import org.kryptokrona.api.model.Output;
 import org.kryptokrona.api.service.OutputService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.kryptokrona.api.controller.OutputController.VERSION;
 
@@ -54,7 +63,7 @@ public class OutputController {
 
     static final String VERSION = "1";
 
-    private static final Logger logger = LoggerFactory.getLogger(OutputController.class);
+    private static final Logger log = LoggerFactory.getLogger(OutputController.class);
 
     private final OutputService outputService;
 
@@ -62,4 +71,38 @@ public class OutputController {
     public OutputController(OutputService outputService) {
         this.outputService = outputService;
     }
+
+    @GetMapping
+	@Operation(
+			summary = "Get all outputs",
+			description = "Get all outputs with pagination.",
+			responses = {
+            @ApiResponse(
+                description = "Success",
+                responseCode = "200",
+                content = @Content(mediaType = "application/json", schema = @Schema(implementation = Output.class))
+            ),
+            @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
+        }
+	)
+	public ResponseEntity<Map<String, Object>> getAll(
+			@RequestParam(required = false, defaultValue = "0") int page,
+			@RequestParam(required = false, defaultValue = "25") int size,
+			@RequestParam(required = false, defaultValue = "desc") String order
+	) {
+		var pagination = outputService.getAll(page, size, order);
+
+		var content = pagination.getContent();
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("outputs", content);
+		response.put("current_page", pagination.getNumber());
+		response.put("total_items", pagination.getTotalElements());
+		response.put("total_pages", pagination.getTotalPages());
+
+		log.info("Getting all outputs was successful");
+
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+
 }

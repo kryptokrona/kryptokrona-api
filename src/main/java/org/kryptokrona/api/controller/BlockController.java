@@ -85,7 +85,7 @@ public class BlockController {
         }
 	)
 	public ResponseEntity<Map<String, Object>> getAll(
-			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "0") int page,
 			@RequestParam(required = false, defaultValue = "25") int size,
 			@RequestParam(required = false, defaultValue = "desc") String order
 	) {
@@ -95,7 +95,7 @@ public class BlockController {
 
 		Map<String, Object> response = new HashMap<>();
 		response.put("blocks", blocks);
-		response.put("current_page", pagination.getNumber() + 1);
+		response.put("current_page", pagination.getNumber());
 		response.put("total_items", pagination.getTotalElements());
 		response.put("total_pages", pagination.getTotalPages());
 
@@ -103,4 +103,5 @@ public class BlockController {
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
+
 }

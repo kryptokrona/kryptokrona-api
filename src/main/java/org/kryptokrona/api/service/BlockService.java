@@ -60,18 +60,12 @@ public class BlockService {
     }
 
     public Page<Block> getAll(int page, int size, String order) {
-		var pageNumber = page-1;
-
-		if (pageNumber < 0) {
-			pageNumber = 0;
-		}
-
 		if (Objects.equals(order, "asc".toLowerCase())) {
-			var paging = PageRequest.of(pageNumber, size, Sort.by("id").ascending());
+			var paging = PageRequest.of(page, size, Sort.by("id").ascending());
 			return blockRepository.findAll(paging);
 		}
 
-		var paging = PageRequest.of(pageNumber, size, Sort.by("id").descending());
+		var paging = PageRequest.of(page, size, Sort.by("id").descending());
 		return blockRepository.findAll(paging);
 	}
 }

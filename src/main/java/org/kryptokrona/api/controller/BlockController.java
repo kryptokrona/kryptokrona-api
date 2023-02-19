@@ -30,14 +30,22 @@
 
 package org.kryptokrona.api.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.kryptokrona.api.model.Block;
 import org.kryptokrona.api.service.BlockService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.kryptokrona.api.controller.BlockController.VERSION;
 
@@ -62,4 +70,37 @@ public class BlockController {
     public BlockController(BlockService blockService) {
         this.blockService = blockService;
     }
+
+    @GetMapping
+	@Operation(
+			summary = "Get all blocks",
+			description = "Get all blocks with pagination.",
+			responses = {
+            @ApiResponse(
+                description = "Success",
+                responseCode = "200",
+                content = @Content(mediaType = "application/json", schema = @Schema(implementation = Block.class))
+            ),
+            @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
+        }
+	)
+	public ResponseEntity<Map<String, Object>> getAll(
+			@RequestParam(required = false, defaultValue = "1") int page,
+			@RequestParam(required = false, defaultValue = "25") int size,
+			@RequestParam(required = false, defaultValue = "desc") String order
+	) {
+		var pagination = blockService.getAll(page, size, order);
+
+		var blocks = pagination.getContent();
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("blocks", blocks);
+		response.put("current_page", pagination.getNumber() + 1);
+		response.put("total_items", pagination.getTotalElements());
+		response.put("total_pages", pagination.getTotalPages());
+
+		logger.info("Getting all hashtags was successful");
+
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
 }

@@ -30,7 +30,17 @@
 
 package org.kryptokrona.api.service;
 
+import org.kryptokrona.api.model.Block;
+import org.kryptokrona.api.repository.BlockRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 /**
  * Block Service.
@@ -39,4 +49,29 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class BlockService {
+
+    private static final Logger logger = LoggerFactory.getLogger(BlockService.class);
+
+    private final BlockRepository blockRepository;
+
+    @Autowired
+    public BlockService(BlockRepository blockRepository) {
+        this.blockRepository = blockRepository;
+    }
+
+    public Page<Block> getAll(int page, int size, String order) {
+		var pageNumber = page-1;
+
+		if (pageNumber < 0) {
+			pageNumber = 0;
+		}
+
+		if (Objects.equals(order, "asc".toLowerCase())) {
+			var paging = PageRequest.of(pageNumber, size, Sort.by("id").ascending());
+			return blockRepository.findAll(paging);
+		}
+
+		var paging = PageRequest.of(pageNumber, size, Sort.by("id").descending());
+		return blockRepository.findAll(paging);
+	}
 }

@@ -35,8 +35,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.kryptokrona.api.model.Hashrate;
-import org.kryptokrona.api.model.Output;
 import org.kryptokrona.api.model.Transaction;
 import org.kryptokrona.api.service.TransactionService;
 import org.slf4j.Logger;

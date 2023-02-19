@@ -30,7 +30,6 @@
 
 package org.kryptokrona.api.service;
 
-import org.kryptokrona.api.model.Hashrate;
 import org.kryptokrona.api.model.Output;
 import org.kryptokrona.api.repository.OutputRepository;
 import org.slf4j.Logger;

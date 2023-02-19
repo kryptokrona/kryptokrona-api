@@ -36,6 +36,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.kryptokrona.api.model.Hashrate;
+import org.kryptokrona.api.model.Transaction;
 import org.kryptokrona.api.service.TransactionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,7 +80,7 @@ public class TransactionController {
             @ApiResponse(
                 description = "Success",
                 responseCode = "200",
-                content = @Content(mediaType = "application/json", schema = @Schema(implementation = Hashrate.class))
+                content = @Content(mediaType = "application/json", schema = @Schema(implementation = Transaction.class))
             ),
             @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
         }

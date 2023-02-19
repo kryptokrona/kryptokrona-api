@@ -111,7 +111,7 @@ public class TransactionController {
 			summary = "Get a specific transaction by ID",
 			description = "Get a specific transaction by ID."
 	)
-	public ResponseEntity<Output> getById(@PathVariable long id) {
+	public ResponseEntity<Transaction> getById(@PathVariable long id) {
 		var obj = transactionService.getById(id);
 
 		if (obj == null) {

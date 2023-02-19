@@ -4,18 +4,18 @@
   become: true
   gather_facts: yes
   vars:
-    hugin_api_name: hugin_api
+    kryptokrona_api_name: kryptokrona_api
 
     # Docker GitHub Container Registry
-    docker_image: "ghcr.io/kryptokrona/hugin-api"
+    docker_image: "ghcr.io/mjovanc/kryptokrona-api"
 
     # A list of users who will be added to the docker group.
     docker_users: [
-      "hugin_docker"
+      "kryptokrona_docker"
     ]
 
-    docker_container_name: hugin-api
-    docker_network_name: hugin
+    docker_container_name: kryptokrona-api
+    docker_network_name: kryptokrona
 
     # Docker daemon options as a dict
     docker_daemon_options: { }
@@ -30,21 +30,17 @@
 
     node_exporter_version: "{{ exporter_version }}"
 
-    website_name: hugin_api
+    website_name: kryptokrona_api
     web_server_ip: "{{ domain_name }}"
     web_server_port: "443"
     hidden_service_port: "443"
 
     # DO NOT CONFIGURE THE ABOVE YOURSELF
-
-    removal_interval: '1 years 2 months 3 days 2 hours 1 minutes 1 second'
-
-    sys_api_title: "Hugin API"
-    sys_api_description: "Hugin API is a high performance RESTful API and WebSocket server for the Hugin Messenger service. Hugin API is a high performance RESTful API and WebSocket server for the Hugin Messenger service."
+    sys_api_title: "Kryptokrona API"
+    sys_api_description: "Kryptokrona API in Java for obtaining cached data from the Kryptokrona Blockchain."
     sys_api_contact_name: "Marcus Cvjeticanin"
     sys_api_contact_email: "mjovanc@icloud.com"
-    sys_api_contact_url: "https://github.com/kryptokrona/hugin-api"
-    sys_node_hostname: "blocksum.org:11898"
+    sys_api_contact_url: "https://github.com/mjovanc/kryptokrona-api"
 
   roles:
   #- base

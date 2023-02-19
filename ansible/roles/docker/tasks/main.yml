@@ -77,7 +77,7 @@
 
 - name: Checkout Repo
   git:
-    repo=https://github.com/kryptokrona/hugin-api.git
+    repo=https://github.com/mjovanc/kryptokrona-api.git
     dest=/root/tmp/checkout
     update=yes
     accept_hostkey=yes
@@ -96,10 +96,10 @@
     networks:
       - name: "host"
 
-- name: Start Hugin API Container
+- name: Start Kryptokrona API Container
   docker_container:
     name: "{{ docker_container_name }}"
-    image: "{{ docker_image }}:{{ gitresult.after[:7] }}"
+    image: "{{ docker_image }}:latest"
     env: {
       SYS_API_SERVER_URL: "https://{{ domain_name }}",
       SYS_API_TITLE: "{{ sys_api_title }}",

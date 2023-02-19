@@ -30,7 +30,6 @@
 
 package org.kryptokrona.api.service;
 
-import org.kryptokrona.api.model.Output;
 import org.kryptokrona.api.model.Transaction;
 import org.kryptokrona.api.repository.TransactionRepository;
 import org.slf4j.Logger;

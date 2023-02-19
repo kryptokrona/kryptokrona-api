@@ -30,6 +30,7 @@
 
 package org.kryptokrona.api.service;
 
+import org.kryptokrona.api.model.Block;
 import org.kryptokrona.api.model.Hashrate;
 import org.kryptokrona.api.repository.HashrateRepository;
 import org.slf4j.Logger;
@@ -67,6 +68,18 @@ public class HashrateService {
 
 		var paging = PageRequest.of(page, size, Sort.by("id").descending());
 		return hashrateRepository.findAll(paging);
+	}
+
+    public Hashrate getById(long id) {
+		if (hashrateRepository.existsById(id)) {
+			Hashrate hashrate = hashrateRepository.findById(id).get();
+			log.info("Hashrate found with ID: " + id);
+			return hashrate;
+		}
+
+		log.info("Unable to find hashrate with ID: " + id);
+
+		return null;
 	}
 
 }

@@ -36,6 +36,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.kryptokrona.api.model.Hashrate;
+import org.kryptokrona.api.model.Output;
 import org.kryptokrona.api.model.Transaction;
 import org.kryptokrona.api.service.TransactionService;
 import org.slf4j.Logger;
@@ -103,6 +104,21 @@ public class TransactionController {
 		log.info("Getting all transactions was successful");
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+
+	@GetMapping("{id}")
+	@Operation(
+			summary = "Get a specific transaction by ID",
+			description = "Get a specific transaction by ID."
+	)
+	public ResponseEntity<Output> getById(@PathVariable long id) {
+		var obj = transactionService.getById(id);
+
+		if (obj == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<>(obj, HttpStatus.OK);
 	}
 
 }

@@ -35,6 +35,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.kryptokrona.api.model.Block;
 import org.kryptokrona.api.model.Hashrate;
 import org.kryptokrona.api.service.HashrateService;
 import org.slf4j.Logger;
@@ -102,6 +103,21 @@ public class HashrateController {
 		log.info("Getting all hashrates was successful");
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+
+	@GetMapping("{id}")
+	@Operation(
+			summary = "Get a specific hashrate by ID",
+			description = "Get a specific hashrate by ID."
+	)
+	public ResponseEntity<Hashrate> getById(@PathVariable long id) {
+		var obj = hashrateService.getById(id);
+
+		if (obj == null) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		return new ResponseEntity<>(obj, HttpStatus.OK);
 	}
 
 }

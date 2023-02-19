@@ -30,6 +30,7 @@
 
 package org.kryptokrona.api.service;
 
+import org.kryptokrona.api.model.Output;
 import org.kryptokrona.api.model.Transaction;
 import org.kryptokrona.api.repository.TransactionRepository;
 import org.slf4j.Logger;
@@ -67,6 +68,18 @@ public class TransactionService {
 
 		var paging = PageRequest.of(page, size, Sort.by("id").descending());
 		return transactionRepository.findAll(paging);
+	}
+
+    public Transaction getById(long id) {
+		if (transactionRepository.existsById(id)) {
+			Transaction transaction = transactionRepository.findById(id).get();
+			log.info("Transaction found with ID: " + id);
+			return transaction;
+		}
+
+		log.info("Unable to find transaction with ID: " + id);
+
+		return null;
 	}
 
 }

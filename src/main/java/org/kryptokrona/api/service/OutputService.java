@@ -30,6 +30,7 @@
 
 package org.kryptokrona.api.service;
 
+import org.kryptokrona.api.model.Hashrate;
 import org.kryptokrona.api.model.Output;
 import org.kryptokrona.api.repository.OutputRepository;
 import org.slf4j.Logger;
@@ -68,6 +69,18 @@ public class OutputService {
 
 		var paging = PageRequest.of(page, size, Sort.by("id").descending());
 		return outputRepository.findAll(paging);
+	}
+
+    public Output getById(long id) {
+		if (outputRepository.existsById(id)) {
+			Output output = outputRepository.findById(id).get();
+			log.info("Output found with ID: " + id);
+			return output;
+		}
+
+		log.info("Unable to find output with ID: " + id);
+
+		return null;
 	}
 
 }

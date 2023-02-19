@@ -3,9 +3,6 @@ spring:
     url: jdbc:postgresql://${POSTGRESQL_HOSTNAME:localhost}:${POSTGRESQL_PORT:5432}/${POSTGRESQL_DB_NAME:kryptokrona_api_dev}
     username: ${POSTGRESQL_DB_USER:postgres}
     password: ${POSTGRESQL_DB_PASSWORD:test1234}
-#  jpa:
-#    hibernate:
-#      ddl-auto: create
   liquibase:
     changeLog: "classpath:db/changelog/master.xml"
 

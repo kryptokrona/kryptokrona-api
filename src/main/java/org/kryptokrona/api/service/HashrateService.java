@@ -30,7 +30,18 @@
 
 package org.kryptokrona.api.service;
 
+import org.kryptokrona.api.model.Block;
+import org.kryptokrona.api.model.Hashrate;
+import org.kryptokrona.api.repository.HashrateRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 /**
  * Hashrate Service.
@@ -39,4 +50,24 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class HashrateService {
+
+    private static final Logger log = LoggerFactory.getLogger(HashrateService.class);
+
+    private final HashrateRepository hashrateRepository;
+
+    @Autowired
+    public HashrateService(HashrateRepository hashrateRepository) {
+        this.hashrateRepository = hashrateRepository;
+    }
+
+    public Page<Hashrate> getAll(int page, int size, String order) {
+		if (Objects.equals(order, "asc".toLowerCase())) {
+			var paging = PageRequest.of(page, size, Sort.by("id").ascending());
+			return hashrateRepository.findAll(paging);
+		}
+
+		var paging = PageRequest.of(page, size, Sort.by("id").descending());
+		return hashrateRepository.findAll(paging);
+	}
+
 }

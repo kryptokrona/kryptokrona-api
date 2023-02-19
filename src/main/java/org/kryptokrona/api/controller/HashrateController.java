@@ -30,14 +30,23 @@
 
 package org.kryptokrona.api.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.kryptokrona.api.model.Block;
+import org.kryptokrona.api.model.Hashrate;
 import org.kryptokrona.api.service.HashrateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.kryptokrona.api.controller.HashrateController.VERSION;
 
@@ -49,12 +58,12 @@ import static org.kryptokrona.api.controller.HashrateController.VERSION;
 @RestController
 @CrossOrigin(origins="*")
 @RequestMapping("api/v" + VERSION + "/hashrate")
-@Tag(name = "hashtags", description = "Set of endpoints to get data of hashrate.")
+@Tag(name = "hashrates", description = "Set of endpoints to get data of hashrate.")
 public class HashrateController {
 
     static final String VERSION = "1";
 
-    private static final Logger logger = LoggerFactory.getLogger(HashrateController.class);
+    private static final Logger log = LoggerFactory.getLogger(HashrateController.class);
 
     private final HashrateService hashrateService;
 
@@ -62,4 +71,38 @@ public class HashrateController {
     public HashrateController(HashrateService hashrateService) {
         this.hashrateService = hashrateService;
     }
+
+    @GetMapping
+	@Operation(
+			summary = "Get all hashrates",
+			description = "Get all hashrates with pagination.",
+			responses = {
+            @ApiResponse(
+                description = "Success",
+                responseCode = "200",
+                content = @Content(mediaType = "application/json", schema = @Schema(implementation = Hashrate.class))
+            ),
+            @ApiResponse(description = "Internal error", responseCode = "500", content = @Content)
+        }
+	)
+	public ResponseEntity<Map<String, Object>> getAll(
+			@RequestParam(required = false, defaultValue = "0") int page,
+			@RequestParam(required = false, defaultValue = "25") int size,
+			@RequestParam(required = false, defaultValue = "desc") String order
+	) {
+		var pagination = hashrateService.getAll(page, size, order);
+
+		var content = pagination.getContent();
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("blocks", content);
+		response.put("current_page", pagination.getNumber());
+		response.put("total_items", pagination.getTotalElements());
+		response.put("total_pages", pagination.getTotalPages());
+
+		log.info("Getting all hashrates was successful");
+
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+
 }

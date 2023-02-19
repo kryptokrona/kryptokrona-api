@@ -62,7 +62,7 @@ public class BlockController {
 
     static final String VERSION = "1";
 
-    private static final Logger logger = LoggerFactory.getLogger(HashrateController.class);
+    private static final Logger log = LoggerFactory.getLogger(HashrateController.class);
 
     private final BlockService blockService;
 
@@ -91,15 +91,15 @@ public class BlockController {
 	) {
 		var pagination = blockService.getAll(page, size, order);
 
-		var blocks = pagination.getContent();
+		var content = pagination.getContent();
 
 		Map<String, Object> response = new HashMap<>();
-		response.put("blocks", blocks);
+		response.put("blocks", content);
 		response.put("current_page", pagination.getNumber());
 		response.put("total_items", pagination.getTotalElements());
 		response.put("total_pages", pagination.getTotalPages());
 
-		logger.info("Getting all hashtags was successful");
+		log.info("Getting all blocks was successful");
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}

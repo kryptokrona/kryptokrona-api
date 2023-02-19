@@ -50,7 +50,7 @@ import java.util.Objects;
 @Service
 public class BlockService {
 
-    private static final Logger logger = LoggerFactory.getLogger(BlockService.class);
+    private static final Logger log = LoggerFactory.getLogger(BlockService.class);
 
     private final BlockRepository blockRepository;
 
@@ -68,4 +68,5 @@ public class BlockService {
 		var paging = PageRequest.of(page, size, Sort.by("id").descending());
 		return blockRepository.findAll(paging);
 	}
+
 }

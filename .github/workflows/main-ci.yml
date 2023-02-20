@@ -2,7 +2,7 @@ name: Kryptokrona API Main Pipeline
 
 env:
   GITHUB_REGISTRY: "ghcr.io"
-  GITHUB_OWNER: "mjovanc"
+  GITHUB_OWNER: "kryptokrona"
   GITHUB_DOCKER_IMAGE: "kryptokrona-api"
 
 on:

@@ -3,9 +3,54 @@ name: Kryptokrona API Pull Request Pipeline
 on: [ pull_request ]
 
 jobs:
+  ansible-syntax-check:
+    name: Ansible Syntax Check
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Install python3 pip and ansible latest
+      - name: Install python and ansible
+        run: sudo apt update && sudo apt install -y python3-pip && sudo pip3 install ansible
+
+      # If `roles` folder exists, create a playbook_repo.yml playbook to perform the syntax check
+      - name: Creating playbook_repo.yml from roles folder (if exists)
+        run: test -d "hugin-api/ansible/roles" || exit 0 && echo $LINE1 > playbook_repo.yml && echo $LINE2 >> playbook_repo.yml && printf "  roles:\n" >> playbook_repo.yml &&  for i in `ls hugin-api/ansible/roles`; do echo "  - $i" >> playbook_repo.yml; done
+        env:
+          LINE1: "---"
+          LINE2: "- hosts: localhost"
+
+      # Check ansible syntax if roles folder exists (repo with playbooks and roles)
+      - name: Ansible Syntax Check of all roles of the playbook
+        run: test -f "playbook_repo.yml" || exit 0 && ansible-playbook $GITHUB_WORKSPACE/playbook_repo.yml --syntax-check
+        env:
+          ANSIBLE_ACTION_WARNINGS: False
+
+      # If `roles` folder does not exist, assume we are in a repository containing just the role
+      - name: Creating role_repo.yml from roles folder (if exists)
+        run: test -d "tasks" || exit 0 && echo $LINE1 > /tmp/role_repo.yml && echo $LINE2 >> /tmp/role_repo.yml && printf "  roles:\n" >> /tmp/role_repo.yml && printf "  - `echo $GITHUB_REPOSITORY | tr "/" "\n" | tail -1`\n" >> /tmp/role_repo.yml
+        env:
+          LINE1: "---"
+          LINE2: "- hosts: localhost"
+
+      # Copy the repo content for syntax check
+      - name: Copy the repo content to /tmp/ for syntax check
+        run: test -f "/tmp/role_repo.yml" || exit 0 &&  mkdir -p /tmp/roles/ && cd .. && cp -a `echo $GITHUB_REPOSITORY | tr "/" "\n" | tail -1` /tmp/roles/
+
+      # Check ansible syntax if tasks folder exists (repo with just the role)
+      - name: Ansible Syntax Check of role
+        run: test -f "/tmp/role_repo.yml" || exit 0 &&  ANSIBLE_ROLES_PATH=/tmp/roles  ansible-playbook /tmp/role_repo.yml --syntax-check
+        env:
+          ANSIBLE_ACTION_WARNINGS: False
+
   assemble:
     name: Assemble
     runs-on: ubuntu-latest
+    needs: [ ansible-syntax-check ]
 
     steps:
       - uses: actions/checkout@v3

@@ -1,0 +1,9 @@
+openapi: 3.0.3
+info:
+  title: Kryptokrona API
+  description: Kryptokrona API
+  version: 0.1.0
+servers:
+  - url: 'https'
+paths:
+  

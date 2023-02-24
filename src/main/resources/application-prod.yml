@@ -1,9 +1,0 @@
-spring:
-  datasource:
-    url: jdbc:postgresql://${POSTGRESQL_HOSTNAME}:${POSTGRESQL_PORT}/${POSTGRESQL_DB_NAME}
-    username: ${POSTGRESQL_DB_USER}
-    password: ${POSTGRESQL_DB_PASSWORD}
-  liquibase:
-    changeLog: "classpath:db/changelog/master.xml"
-
-apiServerUrl: ${SYS_API_SERVER_URL}

@@ -5,7 +5,7 @@
 
 Kryptokrona is a decentralized blockchain from the Nordic based on CryptoNote, which forms the basis for Monero, among others. CryptoNote is a so-called “application layer” protocol further developed by TurtleCoin that enables things like: private transactions, messages and arbitrary data storage, completely decentralized.
 
-Kryptokrona API in Java for obtaining cached data from the Kryptokrona Blockchain.
+Kryptokrona API in Kotlin and Ktor for obtaining cached data from the Kryptokrona Blockchain.
 
 ## Table of Contents
 
@@ -32,9 +32,9 @@ Kryptokrona API in Java for obtaining cached data from the Kryptokrona Blockchai
 
 ## Releases
 
-| NAME | RELEASE DATE | VERSION   | MAINTAINER         | EOL     | DESCRIPTION              |
-|------|--------------|-----------|--------------------|---------|--------------------------|
-| Tor  | Not set      | [0.1.0](https://kryptokrona.github.io/kryptokrona-api/0.1.0/index.html) | Marcus Cvjeticanin | Not set | To be done.              |
+| NAME | RELEASE DATE | VERSION | MAINTAINER         | EOL     | DESCRIPTION              |
+|------|--------------|---------|--------------------|---------|--------------------------|
+| Tor  | Not set      | 0.1.0   | Marcus Cvjeticanin | Not set | To be done.              |
 
 
 ## Getting Help
@@ -42,8 +42,6 @@ Kryptokrona API in Java for obtaining cached data from the Kryptokrona Blockchai
 Are you having trouble with Kryptokrona API? We want to help!
 
 - Read through all documentation on our Wiki: https://github.com/kryptokrona/kryptokrona-api/wiki
-
-- Check the JavaDoc documentation: https://kryptokrona.github.io/kryptokrona-api/0.1.0/index.html
 
 - If you are upgrading, read the release notes for upgrade instructions and "new and noteworthy" features.
 

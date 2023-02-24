@@ -1,1 +1,0 @@
-typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"org.kryptokrona.api","l":"KryptokronaApiApplication"},{"p":"org.kryptokrona.api.config","l":"OpenApiConfig"},{"p":"org.kryptokrona.api","l":"ServletInitializer"}];updateSearchResults();

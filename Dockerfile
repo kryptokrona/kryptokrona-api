@@ -1,7 +1,6 @@
-# Using Tomcat 9.0 since the latest doesn't work with Spring Boot
-FROM tomcat:9.0-jdk17-openjdk
-ARG WAR_FILE=build/libs/kryptokrona-api.war
-RUN rm -rf /usr/local/tomcat/webapps/*
-COPY ${WAR_FILE} /usr/local/tomcat/webapps/ROOT.war
-EXPOSE 8080
+# Using Tomcat 9.0 since the latest doesn't work
+FROM tomcat:9.0.68
+EXPOSE 8080:8080
+COPY ./build/libs/kryptokrona-api.war/ /usr/local/tomcat/webapps
+WORKDIR /usr/local/tomcat
 CMD ["catalina.sh", "run"]

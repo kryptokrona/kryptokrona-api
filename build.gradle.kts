@@ -34,6 +34,7 @@ dependencies {
     implementation("io.ktor:ktor-server-swagger:$ktor_version")
     implementation("io.ktor:ktor-serialization-jackson-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
+    implementation("io.ktor:ktor-server-config-yaml-jvm:2.2.3")
     implementation("ch.qos.logback:logback-classic:$logback_version")
 
     runtimeOnly("com.squareup:kotlinpoet:0.7.0")

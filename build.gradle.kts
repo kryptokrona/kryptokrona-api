@@ -80,7 +80,7 @@ liquibase {
 
         this.arguments = mapOf(
             "logLevel" to "info",
-            "changeLogFile" to "src/main/resources/db/migration/migrations.xml",
+            "changeLogFile" to "src/main/resources/db/changelog/master.xml",
             "url" to urlDev,
             "username" to userDev,
             "password" to pwdDev
@@ -94,7 +94,7 @@ liquibase {
 
         this.arguments = mapOf(
             "logLevel" to "info",
-            "changeLogFile" to "/resources/db/migration/migrations.xml",
+            "changeLogFile" to "/resources/db/changelog/master.xml",
             "url" to url,
             "username" to user,
             "password" to pwd

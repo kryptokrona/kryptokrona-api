@@ -72,12 +72,12 @@ if (propertiesFile.exists()) {
     properties.load(propertiesFile.inputStream())
 }
 
-val urlDev = properties.getProperty("liquibase.dev.url") ?: System.getenv("LIQUIBASE_DEV_URL")
-val userDev = properties.getProperty("liquibase.dev.user") ?: System.getenv("LIQUIBASE_DEV_USER")
-val pwdDev = properties.getProperty("liquibase.dev.password") ?: System.getenv("LIQUIBASE_DEV_PASSWORD")
-
 liquibase {
     activities.register("dev") {
+        val urlDev = properties.getProperty("liquibase.dev.url") ?: System.getenv("LIQUIBASE_DEV_URL")
+        val userDev = properties.getProperty("liquibase.dev.user") ?: System.getenv("LIQUIBASE_DEV_USER")
+        val pwdDev = properties.getProperty("liquibase.dev.password") ?: System.getenv("LIQUIBASE_DEV_PASSWORD")
+
         this.arguments = mapOf(
             "logLevel" to "info",
             "changeLogFile" to "src/main/resources/db/migration/migrations.xml",

@@ -45,7 +45,7 @@ interface PostEncryptedGroup : Entity<PostEncryptedGroup> {
     var createdAt: LocalDateTime
 }
 
-object PostEncryptedGroups : Table<PostEncryptedGroup>("postencryptedgroup") {
+object PostEncryptedGroups : Table<PostEncryptedGroup>("postsencryptedgroup") {
     val id = int("id").primaryKey().bindTo { it.id }
     val txHash = varchar("tx_hash").bindTo { it.txHash }
     val txSb = varchar("tx_sb").bindTo { it.txSb }

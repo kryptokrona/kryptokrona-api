@@ -38,22 +38,21 @@ import org.ktorm.entity.sequenceOf
 import org.ktorm.schema.*
 import java.time.LocalDateTime
 
-interface Output : Entity<Output> {
-    companion object : Entity.Factory<Output>()
+interface PostEncrypted : Entity<PostEncrypted> {
+    companion object : Entity.Factory<PostEncrypted>()
     val id: Int
     var txHash: String
     var txBox: String
     var txTimestamp: Long
     var createdAt: LocalDateTime
-    //TODO: add many-to-one relationship to transactions
 }
 
-object Outputs : Table<Output>("outputs") {
+object PostsEncrypted : Table<PostEncrypted>("postsencrypted") {
     val id = int("id").primaryKey().bindTo { it.id }
-    val amount = long("amount").bindTo { it.amount }
-    val keyImage = varchar("key_image").bindTo { it.keyImage }
-    val type = int("type").bindTo { it.type }
+    val txHash = varchar("tx_hash").bindTo { it.txHash }
+    val txBox = varchar("tx_box").bindTo { it.txBox }
+    val txTimestamp = long("tx_timestamp").bindTo { it.txTimestamp }
     val createdAt = datetime("created_at").bindTo { it.createdAt }
 }
 
-val Database.outputs get() = this.sequenceOf(Outputs)
+val Database.postsencrypted get() = this.sequenceOf(PostsEncrypted)

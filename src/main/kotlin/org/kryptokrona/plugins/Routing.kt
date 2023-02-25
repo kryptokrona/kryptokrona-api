@@ -38,8 +38,7 @@ import io.ktor.server.application.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.swagger.*
 import io.ktor.server.response.*
-import org.kryptokrona.routes.blocksByIdRoute
-import org.kryptokrona.routes.blocksRoute
+import org.kryptokrona.routes.*
 
 fun Application.configureRouting() {
     install(ContentNegotiation) {
@@ -61,5 +60,14 @@ fun Application.configureRouting() {
 
         blocksRoute()
         blocksByIdRoute()
+
+        hashratesRoute()
+        hashratesByIdRoute()
+
+        outputsRoute()
+        outputsByIdRoute()
+
+        transactionsRoute()
+        transactionsByIdRoute()
     }
 }

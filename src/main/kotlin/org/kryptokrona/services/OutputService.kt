@@ -30,3 +30,6 @@
 
 package org.kryptokrona.services
 
+class OutputService {
+
+}

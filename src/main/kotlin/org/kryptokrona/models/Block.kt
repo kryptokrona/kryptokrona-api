@@ -32,12 +32,9 @@ package org.kryptokrona.models
 
 import org.ktorm.database.Database
 import org.ktorm.entity.Entity
-import org.ktorm.schema.Table
 import org.ktorm.entity.sequenceOf
-import org.ktorm.schema.int
-import org.ktorm.schema.varchar
-import org.ktorm.schema.float
-import org.ktorm.schema.long
+import org.ktorm.schema.*
+import java.time.LocalDateTime
 
 interface Block : Entity<Block> {
     companion object : Entity.Factory<Block>()
@@ -46,6 +43,7 @@ interface Block : Entity<Block> {
     var time: Long
     var difficulty: Float
     var reward: Float
+    var createdAt: LocalDateTime
 }
 
 object Blocks : Table<Block>("blocks") {
@@ -54,6 +52,7 @@ object Blocks : Table<Block>("blocks") {
     val time = long("time").bindTo { it.time }
     val difficulty = float("difficulty").bindTo { it.difficulty }
     val reward = float("reward").bindTo { it.reward }
+    val createdAt = datetime("created_at").bindTo { it.createdAt }
 }
 
 val Database.blocks get() = this.sequenceOf(Blocks)

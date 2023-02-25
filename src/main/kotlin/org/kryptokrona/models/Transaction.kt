@@ -33,29 +33,37 @@ package org.kryptokrona.models
 import org.ktorm.database.Database
 import org.ktorm.entity.Entity
 import org.ktorm.entity.sequenceOf
-import org.ktorm.schema.Table
-import org.ktorm.schema.datetime
-import org.ktorm.schema.int
-import org.ktorm.schema.long
-import org.ktorm.schema.varchar
+import org.ktorm.schema.*
 import java.time.LocalDateTime
 
-interface Output : Entity<Output> {
-    companion object : Entity.Factory<Output>()
+interface Transaction : Entity<Transaction> {
+    companion object : Entity.Factory<Transaction>()
     val id: Int
+    var hash: String
+    var time: Long
+    var confirmations: Int
+    var paymentID: String
     var amount: Long
-    var keyImage: String
-    var type: Int
+    var fee: Long
+    var mixin: Int
+    var size: Long
     var createdAt: LocalDateTime
-    //TODO: add many-to-one relationship to transactions
+    //TODO: add many-to-one relationship to Block
+    //TODO: add one-to-many relationship to Output
+
 }
 
-object Outputs : Table<Output>("outputs") {
+object Transactions : Table<Transaction>("transactions") {
     val id = int("id").primaryKey().bindTo { it.id }
+    val hash = varchar("hash").bindTo { it.hash }
+    val time = long("time").bindTo { it.time }
+    val confirmations = int("confirmations").bindTo { it.confirmations }
+    val paymentID = varchar("payment_id").bindTo { it.paymentID }
     val amount = long("amount").bindTo { it.amount }
-    val keyImage = varchar("key_image").bindTo { it.keyImage }
-    val type = int("type").bindTo { it.type }
+    val fee = long("fee").bindTo { it.fee }
+    val mixin = int("mixin").bindTo { it.mixin }
+    val size = long("size").bindTo { it.size }
     val createdAt = datetime("created_at").bindTo { it.createdAt }
 }
 
-val Database.outputs get() = this.sequenceOf(Outputs)
+val Database.transactions get() = this.sequenceOf(Transactions)

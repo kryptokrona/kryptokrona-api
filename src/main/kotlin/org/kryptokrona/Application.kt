@@ -41,6 +41,6 @@ fun main() {
 }
 
 fun Application.module() {
-    configureDatabases()
+    // configureDatabases()
     configureRouting()
 }

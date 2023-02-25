@@ -30,4 +30,27 @@
 
 package org.kryptokrona.models
 
+import org.ktorm.database.Database
+import org.ktorm.entity.Entity
+import org.ktorm.entity.sequenceOf
+import org.ktorm.schema.*
+import java.time.LocalDateTime
 
+interface PostEncryptedGroup : Entity<PostEncryptedGroup> {
+    companion object : Entity.Factory<PostEncryptedGroup>()
+    val id: Int
+    var txHash: String
+    var txSb: String
+    var txTimestamp: Long
+    var createdAt: LocalDateTime
+}
+
+object PostEncryptedGroups : Table<PostEncryptedGroup>("postencryptedgroup") {
+    val id = int("id").primaryKey().bindTo { it.id }
+    val txHash = varchar("tx_hash").bindTo { it.txHash }
+    val txSb = varchar("tx_sb").bindTo { it.txSb }
+    val txTimestamp = long("tx_timestamp").bindTo { it.txTimestamp }
+    val createdAt = datetime("created_at").bindTo { it.createdAt }
+}
+
+val Database.postencryptedgroups get() = this.sequenceOf(PostEncryptedGroups)

@@ -29,3 +29,31 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 package org.kryptokrona.models
+
+import org.kryptokrona.models.Outputs.bindTo
+import org.kryptokrona.models.Outputs.primaryKey
+import org.ktorm.database.Database
+import org.ktorm.entity.Entity
+import org.ktorm.entity.sequenceOf
+import org.ktorm.schema.*
+import java.time.LocalDateTime
+
+interface Output : Entity<Output> {
+    companion object : Entity.Factory<Output>()
+    val id: Int
+    var amount: Long
+    var keyImage: String
+    var type: Int
+    var createdAt: LocalDateTime
+    //TODO: add many-to-one relationship to transactions
+}
+
+object Outputs : Table<Output>("outputs") {
+    val id = int("id").primaryKey().bindTo { it.id }
+    val amount = long("amount").bindTo { it.amount }
+    val keyImage = varchar("key_image").bindTo { it.keyImage }
+    val type = int("type").bindTo { it.type }
+    val createdAt = datetime("created_at").bindTo { it.createdAt }
+}
+
+val Database.outputs get() = this.sequenceOf(Outputs)

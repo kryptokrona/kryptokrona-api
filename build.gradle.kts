@@ -38,6 +38,9 @@ dependencies {
     implementation("org.ktorm:ktorm-core:$ktorm_version")
     implementation("io.ktor:ktor-server-config-yaml-jvm:2.2.3")
     implementation("ch.qos.logback:logback-classic:$logback_version")
+    implementation("org.liquibase:liquibase-core")
+
+    //TODO: add liquibase
 
     runtimeOnly("com.squareup:kotlinpoet:0.7.0")
 

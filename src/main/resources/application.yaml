@@ -2,6 +2,3 @@ ktor:
   deployment:
     port: 8080
     rootPath: /api
-  application:
-    modules:
-      - org.kryptokrona.ApplicationKt.module

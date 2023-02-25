@@ -30,37 +30,3 @@
 
 package org.kryptokrona.models
 
-import org.ktorm.database.Database
-import org.ktorm.entity.Entity
-import org.ktorm.entity.sequenceOf
-import org.ktorm.schema.*
-import java.time.LocalDateTime
-
-interface Pool : Entity<Pool> {
-    companion object : Entity.Factory<Pool>()
-    val id: Int
-    var name: String
-    var url: String
-    var miners: Long
-    var soloMiners: Long
-    var fee: Float
-    var hashrate: String
-    var networkHashrate: Float
-    var height: Long
-    var createdAt: LocalDateTime
-}
-
-object Pools : Table<Pool>("pools") {
-    val id = int("id").primaryKey().bindTo { it.id }
-    val name = varchar("name").bindTo { it.name }
-    val url = varchar("url").bindTo { it.url }
-    val miners = long("miners").bindTo { it.miners }
-    val soloMiners = long("solo_miners").bindTo { it.soloMiners }
-    val fee = float("fee").bindTo { it.fee }
-    val hashrate = varchar("hashrate").bindTo { it.hashrate }
-    val networkHashrate = float("network_hashrate").bindTo { it.networkHashrate }
-    val height = long("height").bindTo { it.height }
-    val createdAt = datetime("created_at").bindTo { it.createdAt }
-}
-
-val Database.pools get() = this.sequenceOf(Pools)

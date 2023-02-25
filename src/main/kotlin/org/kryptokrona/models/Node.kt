@@ -30,30 +30,39 @@
 
 package org.kryptokrona.models
 
-import org.kryptokrona.models.Outputs.bindTo
-import org.kryptokrona.models.Outputs.primaryKey
 import org.ktorm.database.Database
 import org.ktorm.entity.Entity
 import org.ktorm.entity.sequenceOf
 import org.ktorm.schema.*
 import java.time.LocalDateTime
 
-interface Output : Entity<Output> {
-    companion object : Entity.Factory<Output>()
+interface Node : Entity<Node> {
+    companion object : Entity.Factory<Node>()
     val id: Int
-    var amount: Long
-    var keyImage: String
-    var type: Int
+    var name: String
+    var hostname: String
+    var port: Int
+    var fee: Float
+    var version: String
+    var height: Long
+    var txIn: Int
+    var txOut: Int
+    var status: String
     var createdAt: LocalDateTime
-    //TODO: add many-to-one relationship to transactions
 }
 
-object Outputs : Table<Output>("outputs") {
+object Nodes : Table<Node>("nodes") {
     val id = int("id").primaryKey().bindTo { it.id }
-    val amount = long("amount").bindTo { it.amount }
-    val keyImage = varchar("key_image").bindTo { it.keyImage }
-    val type = int("type").bindTo { it.type }
+    val name = varchar("name").bindTo { it.name }
+    val hostname = varchar("hostname").bindTo { it.hostname }
+    val port = int("port").bindTo { it.port }
+    val fee = float("fee").bindTo { it.fee }
+    val version = varchar("version").bindTo { it.version }
+    val height = long("height").bindTo { it.height }
+    val txIn = int("tx_in").bindTo { it.txIn }
+    val txOut = int("tx_out").bindTo { it.txOut }
+    val status = varchar("status").bindTo { it.status }
     val createdAt = datetime("created_at").bindTo { it.createdAt }
 }
 
-val Database.outputs get() = this.sequenceOf(Outputs)
+val Database.nodes get() = this.sequenceOf(Nodes)

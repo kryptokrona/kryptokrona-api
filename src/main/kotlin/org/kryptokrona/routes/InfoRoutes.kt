@@ -28,67 +28,20 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.plugins
+package org.kryptokrona.routes
 
-import com.fasterxml.jackson.databind.SerializationFeature
-import io.ktor.serialization.jackson.*
-import io.ktor.serialization.kotlinx.json.*
-import io.ktor.server.routing.*
 import io.ktor.server.application.*
-import io.ktor.server.plugins.contentnegotiation.*
-import io.ktor.server.plugins.swagger.*
 import io.ktor.server.response.*
-import org.kryptokrona.routes.*
+import io.ktor.server.routing.*
 
-fun Application.configureRouting() {
-    install(ContentNegotiation) {
-        json()
-        jackson {
-            enable(SerializationFeature.INDENT_OUTPUT)
-        }
+fun Route.infoRoute() {
+    get("/info") {
+        call.respondText("Hello all info!")
     }
+}
 
-    routing {
-        swaggerUI(
-            path = "swagger",
-            swaggerFile = "openapi/documentation.yaml"
-        )
-
-        get("/") {
-            call.respondText("Hello World!")
-        }
-
-        blocksRoute()
-        blocksByIdRoute()
-
-        hashratesRoute()
-        hashratesByIdRoute()
-
-        outputsRoute()
-        outputsByIdRoute()
-
-        transactionsRoute()
-        transactionsByIdRoute()
-
-        infoRoute()
-        infoByIdRoute()
-
-        nodesRoute()
-        nodesByIdRoute()
-
-        poolsRoute()
-        poolsByIdRoute()
-
-        postsEncryptedRoute()
-        postsEncryptedByIdRoute()
-
-        postsEncryptedGroupRoute()
-        postsEncryptedGroupByIdRoute()
-
-        statisticsRoute()
-        statisticsByIdRoute()
-
-        suppliesRoute()
-        suppliesByIdRoute()
+fun Route.infoByIdRoute() {
+    get("/info/{id}") {
+        call.respond(mapOf("hello" to "info"))
     }
 }

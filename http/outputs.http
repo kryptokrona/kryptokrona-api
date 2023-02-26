@@ -1,0 +1,3 @@
+### get all outputs
+GET http://localhost:8080/api/v1/outputs
+Accept: application/json

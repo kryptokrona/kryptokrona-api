@@ -3,5 +3,5 @@
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-<!--    <include file="db/changelog/2023/02/19-01-changelog.xml"/>-->
+    <include file="db/changelog/2023/02/0001.xml"/>
 </databaseChangeLog>

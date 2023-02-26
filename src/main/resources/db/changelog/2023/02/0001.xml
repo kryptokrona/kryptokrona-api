@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="0" author="mjovanc">
+        <createTable tableName="blocks">
+            <column  name="id"  type="INTEGER">
+                <constraints  nullable="false"  primaryKey="true"  unique="true"/>
+            </column>
+            <column  name="hash"  type="VARCHAR(255) NOT NULL" />
+            <column  name="time"  type="BIGINT NOT NULL" />
+            <column  name="difficulty"  type="NUMERIC(6,2)" />
+            <column  name="reward"  type="NUMERIC(6,2)" />
+            <column  name="created_at"  type="TIMESTAMP WITH TIME ZONE NOT NULL" />
+        </createTable>
+
+
+    </changeSet>
+</databaseChangeLog>

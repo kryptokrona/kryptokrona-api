@@ -51,6 +51,7 @@ dependencies {
     implementation("org.ktorm:ktorm-core:$ktorm_version")
     implementation("io.ktor:ktor-server-config-yaml-jvm:2.2.3")
     implementation("ch.qos.logback:logback-classic:$logback_version")
+    testImplementation("io.ktor:ktor-server-test-host-jvm:2.2.3")
 
     // liquibase
     liquibaseRuntime("org.liquibase:liquibase-core:$liquibase_core")

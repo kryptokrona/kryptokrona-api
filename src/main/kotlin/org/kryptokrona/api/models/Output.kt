@@ -42,8 +42,8 @@ interface Output : Entity<Output> {
     var amount: Long
     var keyImage: String
     var type: Int
+    val transactionId: Transaction
     var createdAt: LocalDateTime
-    //TODO: add many-to-one relationship to transactions
 }
 
 object Outputs : Table<Output>("outputs") {
@@ -51,6 +51,7 @@ object Outputs : Table<Output>("outputs") {
     val amount = long("amount").bindTo { it.amount }
     val keyImage = varchar("key_image").bindTo { it.keyImage }
     val type = int("type").bindTo { it.type }
+    val transactionId = int("transaction_id").references(Transactions) { it.transactionId }
     val createdAt = datetime("created_at").bindTo { it.createdAt }
 }
 

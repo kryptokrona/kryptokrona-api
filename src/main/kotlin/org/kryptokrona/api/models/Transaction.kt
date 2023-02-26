@@ -47,8 +47,8 @@ interface Transaction : Entity<Transaction> {
     var fee: Long
     var mixin: Int
     var size: Long
+    var blockId: Block
     var createdAt: LocalDateTime
-    //TODO: add many-to-one relationship to Block
     //TODO: add one-to-many relationship to Output
 
 }
@@ -63,6 +63,7 @@ object Transactions : Table<Transaction>("transactions") {
     val fee = long("fee").bindTo { it.fee }
     val mixin = int("mixin").bindTo { it.mixin }
     val size = long("size").bindTo { it.size }
+    val blockId = int("block_id").references(Blocks) { it.blockId }
     val createdAt = datetime("created_at").bindTo { it.createdAt }
 }
 

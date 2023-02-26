@@ -18,11 +18,11 @@ plugins {
     id("org.liquibase.gradle") version "2.1.1"
 }
 
-group = "org.kryptokrona"
+group = "org.kryptokrona.api"
 version = "0.1.0"
 
 application {
-    mainClass.set("org.kryptokrona.ApplicationKt")
+    mainClass.set("org.kryptokrona.api.ApplicationKt")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")

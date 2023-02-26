@@ -49,8 +49,6 @@ interface Transaction : Entity<Transaction> {
     var size: Long
     var blockId: Block
     var createdAt: LocalDateTime
-    //TODO: add one-to-many relationship to Output
-
 }
 
 object Transactions : Table<Transaction>("transactions") {

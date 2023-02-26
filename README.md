@@ -41,8 +41,6 @@ Kryptokrona API in Kotlin and Ktor for obtaining cached data from the Kryptokron
 
 Are you having trouble with Kryptokrona API? We want to help!
 
-- Read through all documentation on our Wiki: https://github.com/kryptokrona/kryptokrona-api/wiki
-
 - If you are upgrading, read the release notes for upgrade instructions and "new and noteworthy" features.
 
 - Ask a question we monitor stackoverflow.com for questions tagged with kryptokrona-api. You can also chat with the community on Hugin or Discord.
@@ -77,8 +75,6 @@ If you would like to contribute to this project there is two ways:
 - Donate to XKR address
 
 ### Pull Request
-
-Read through the developer documentation at: [https://github.com/kryptokrona/kryptokrona-api/wiki](https://github.com/kryptokrona/kryptokrona-api/wiki).
 
 We recommend using IntelliJ to work on this project.
 

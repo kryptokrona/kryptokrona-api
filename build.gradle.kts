@@ -32,13 +32,19 @@ repositories {
     mavenCentral()
 }
 
+tasks.withType<KotlinCompile>().all {
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+}
+
 dependencies {
     // various
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
+    implementation("org.ktorm:ktorm-support-postgresql:$ktorm_version")
     implementation("org.postgresql:postgresql:$postgres_version")
-    implementation("com.h2database:h2:$h2_version")
     implementation("io.ktor:ktor-server-swagger:$ktor_version")
     implementation("io.ktor:ktor-serialization-jackson-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
@@ -48,6 +54,7 @@ dependencies {
 
     // liquibase
     liquibaseRuntime("org.liquibase:liquibase-core:$liquibase_core")
+    liquibaseRuntime("info.picocli:picocli:4.6.3")
     liquibaseRuntime("ch.qos.logback:logback-core:1.2.3")
     liquibaseRuntime("ch.qos.logback:logback-classic:1.2.3")
     liquibaseRuntime("javax.xml.bind:jaxb-api:2.2.4")

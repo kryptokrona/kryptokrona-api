@@ -60,6 +60,7 @@ import io.ktor.server.routing.*
  * @return [Connection] that represent connection to the database. Please, don't forget to close this connection when
  * your application shuts down by calling [Connection.close]
  * */
+/*
 fun Application.connectToPostgres(embedded: Boolean): Connection {
     Class.forName("org.postgresql.Driver")
     if (embedded) {
@@ -71,4 +72,4 @@ fun Application.connectToPostgres(embedded: Boolean): Connection {
 
         return DriverManager.getConnection(url, user, password)
     }
-}
+}*/

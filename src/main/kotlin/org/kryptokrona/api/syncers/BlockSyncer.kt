@@ -30,3 +30,6 @@
 
 package org.kryptokrona.api.syncers
 
+class BlockSyncer {
+
+}

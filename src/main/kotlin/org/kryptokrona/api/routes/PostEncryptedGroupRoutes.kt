@@ -35,13 +35,13 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Route.postsEncryptedGroupRoute() {
-    get("/posts-encrypted-group") {
+    get("/api/v1/posts-encrypted-group") {
         call.respondText("Hello all postsEncryptedGroup!")
     }
 }
 
 fun Route.postsEncryptedGroupByIdRoute() {
-    get("/posts-encrypted-group/{id}") {
+    get("/api/v1/posts-encrypted-group/{id}") {
         call.respond(mapOf("hello" to "postsEncryptedGroup"))
     }
 }

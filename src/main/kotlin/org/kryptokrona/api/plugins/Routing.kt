@@ -54,7 +54,7 @@ fun Application.configureRouting() {
             swaggerFile = "openapi/documentation.yaml"
         )
 
-        get("/") {
+        get("/api/v1/test") {
             call.respondText("Hello World!")
         }
 

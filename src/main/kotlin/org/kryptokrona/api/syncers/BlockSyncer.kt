@@ -28,20 +28,5 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api.routes
+package org.kryptokrona.api.syncers
 
-import io.ktor.server.application.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
-
-fun Route.statisticsRoute() {
-    get("/api/v1/statistics") {
-        call.respondText("Hello all statistics!")
-    }
-}
-
-fun Route.statisticsByIdRoute() {
-    get("/api/v1/statistics/{id}") {
-        call.respond(mapOf("hello" to "statistics"))
-    }
-}

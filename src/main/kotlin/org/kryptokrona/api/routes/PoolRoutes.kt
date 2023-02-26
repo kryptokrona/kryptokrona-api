@@ -35,13 +35,13 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Route.poolsRoute() {
-    get("/pools") {
+    get("/api/v1/pools") {
         call.respondText("Hello all pools!")
     }
 }
 
 fun Route.poolsByIdRoute() {
-    get("/pools/{id}") {
+    get("/api/v1/pools/{id}") {
         call.respond(mapOf("hello" to "pools"))
     }
 }

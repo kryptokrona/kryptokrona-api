@@ -8,7 +8,7 @@ import io.ktor.server.testing.*
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
-class BlockRoutesKtTest {
+class BlockRoutesTest {
 
     @Test
     fun BlockRouteTest() = testApplication {

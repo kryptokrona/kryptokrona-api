@@ -4,7 +4,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
-import org.kryptokrona.plugins.*
+import org.kryptokrona.api.plugins.configureRouting
 import kotlin.test.*
 
 class ApplicationTest {

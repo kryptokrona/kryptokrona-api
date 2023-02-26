@@ -24,7 +24,7 @@ Kryptokrona API in Kotlin and Ktor for obtaining cached data from the Kryptokron
 ## Development Resources
 
 - Web: https://kryptokrona.org
-- Docs: https://github.com/kryptokrona/kryptokrona-api/wiki
+- Docs: https://docs.kryptokrona.org
 - Mail: mjovanc@icloud.com
 - GitHub: https://github.com/kryptokrona/kryptokrona-api
 - Hugin: apidevs group on Hugin Messenger

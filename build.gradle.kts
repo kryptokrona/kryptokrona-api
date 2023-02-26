@@ -51,10 +51,10 @@ dependencies {
     implementation("org.ktorm:ktorm-core:$ktorm_version")
     implementation("io.ktor:ktor-server-config-yaml-jvm:2.2.3")
     implementation("ch.qos.logback:logback-classic:$logback_version")
-    testImplementation("io.ktor:ktor-server-test-host-jvm:2.2.3")
 
     // liquibase
     liquibaseRuntime("org.liquibase:liquibase-core:$liquibase_core")
+    liquibaseRuntime("org.postgresql:postgresql:$postgres_version")
     liquibaseRuntime("info.picocli:picocli:4.6.3")
     liquibaseRuntime("ch.qos.logback:logback-core:1.2.3")
     liquibaseRuntime("ch.qos.logback:logback-classic:1.2.3")
@@ -63,6 +63,7 @@ dependencies {
     runtimeOnly("com.squareup:kotlinpoet:0.7.0")
 
     // testing
+    testImplementation("io.ktor:ktor-server-test-host-jvm:2.2.3")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
@@ -72,12 +73,13 @@ tasks.war {
 }
 
 // database migrations
-val dbEnv: String by project.extra { "" }
+val dbEnv: String by project.extra
 
 val propertiesFile = file("local.properties")
 val properties = Properties()
 if (propertiesFile.exists()) {
     properties.load(propertiesFile.inputStream())
+    println(properties.getProperty("liquibase.dev.url"))
 }
 
 liquibase {

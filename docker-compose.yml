@@ -3,7 +3,7 @@ version: '3.7'
 services:
   db-dev:
     image: postgres
-    container_name: kryptokrona_api_db_dev
+    container_name: kryptokrona_api_dev
     restart: always
     environment:
       POSTGRES_DB: kryptokrona_api_dev

@@ -31,13 +31,12 @@
 package org.kryptokrona.api.plugins
 
 import io.ktor.http.*
+import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
-import kotlinx.serialization.Serializable
+import io.ktor.server.routing.*
 import kotlinx.coroutines.*
 import java.sql.*
-import io.ktor.server.application.*
-import io.ktor.server.routing.*
 
 /**
  * Makes a connection to a Postgres database.

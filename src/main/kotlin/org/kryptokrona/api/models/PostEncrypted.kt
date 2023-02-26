@@ -30,8 +30,6 @@
 
 package org.kryptokrona.api.models
 
-import org.kryptokrona.api.models.Outputs.bindTo
-import org.kryptokrona.api.models.Outputs.primaryKey
 import org.ktorm.database.Database
 import org.ktorm.entity.Entity
 import org.ktorm.entity.sequenceOf

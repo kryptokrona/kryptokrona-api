@@ -93,7 +93,8 @@ liquibase {
             "changeLogFile" to "src/main/resources/db/changelog/master.xml",
             "url" to urlDev,
             "username" to userDev,
-            "password" to pwdDev
+            "password" to pwdDev,
+            "classpath" to "src/main/resources/"
         )
     }
 
@@ -104,10 +105,11 @@ liquibase {
 
         this.arguments = mapOf(
             "logLevel" to "info",
-            "changeLogFile" to "/resources/db/changelog/master.xml",
+            "changeLogFile" to "src/main/resources/db/changelog/master.xml",
             "url" to url,
             "username" to user,
-            "password" to pwd
+            "password" to pwd,
+            "classpath" to "src/main/resources/"
         )
     }
     runList = dbEnv

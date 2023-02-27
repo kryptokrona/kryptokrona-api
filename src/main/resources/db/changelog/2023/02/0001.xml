@@ -16,6 +16,24 @@
             <column  name="created_at"  type="TIMESTAMP WITH TIME ZONE NOT NULL" />
         </createTable>
 
+        <createTable tableName="transactions">
+            <column  name="id"  type="INTEGER">
+                <constraints  nullable="false"  primaryKey="true"  unique="true"/>
+            </column>
+            <column  name="hash"  type="VARCHAR(255) NOT NULL" />
+            <column  name="time"  type="BIGINT NOT NULL" />
+            <column  name="confirmations"  type="INTEGER NOT NULL" />
+            <column  name="payment_id"  type="VARCHAR(255) NOT NULL" />
+            <column  name="amount"  type="BIGINT NOT NULL" />
+            <column  name="fee"  type="NUMERIC(6,2) NOT NULL" />
+            <column  name="mixin"  type="INTEGER NOT NULL" />
+            <column  name="size"  type="BIGINT NOT NULL" />
+            <column  name="block_id"  type="INTEGER NOT NULL">
+                <constraints nullable="false" foreignKeyName="fk_transactions_blocks" references="blocks(id)"/>
+            </column>
+            <column  name="created_at"  type="TIMESTAMP WITH TIME ZONE NOT NULL" />
+        </createTable>
+
         <createTable tableName="hashrates">
             <column  name="id"  type="INTEGER">
                 <constraints  nullable="false"  primaryKey="true"  unique="true"/>
@@ -40,7 +58,7 @@
             <column  name="created_at"  type="TIMESTAMP WITH TIME ZONE NOT NULL" />
         </createTable>
 
-        <createTable tableName="outputes">
+        <createTable tableName="outputs">
             <column  name="id"  type="INTEGER">
                 <constraints  nullable="false"  primaryKey="true"  unique="true"/>
             </column>
@@ -87,25 +105,6 @@
             <column  name="tx_timestamp"  type="BIGINT NOT NULL" />
             <column  name="created_at"  type="TIMESTAMP WITH TIME ZONE NOT NULL" />
         </createTable>
-
-        <createTable tableName="transactions">
-            <column  name="id"  type="INTEGER">
-                <constraints  nullable="false"  primaryKey="true"  unique="true"/>
-            </column>
-            <column  name="hash"  type="VARCHAR(255) NOT NULL" />
-            <column  name="time"  type="BIGINT NOT NULL" />
-            <column  name="confirmations"  type="INTEGER NOT NULL" />
-            <column  name="payment_id"  type="VARCHAR(255) NOT NULL" />
-            <column  name="amount"  type="BIGINT NOT NULL" />
-            <column  name="fee"  type="NUMERIC(6,2) NOT NULL" />
-            <column  name="mixin"  type="INTEGER NOT NULL" />
-            <column  name="size"  type="BIGINT NOT NULL" />
-            <column  name="block_id"  type="INTEGER NOT NULL">
-                <constraints nullable="false" foreignKeyName="fk_transactions_blocks" references="blocks(id)"/>
-            </column>
-            <column  name="created_at"  type="TIMESTAMP WITH TIME ZONE NOT NULL" />
-        </createTable>
-
 
     </changeSet>
 </databaseChangeLog>

@@ -44,7 +44,7 @@ interface Transaction : Entity<Transaction> {
     var confirmations: Int
     var paymentID: String
     var amount: Long
-    var fee: Long
+    var fee: Float
     var mixin: Int
     var size: Long
     var blockId: Block
@@ -58,7 +58,7 @@ object Transactions : Table<Transaction>("transactions") {
     val confirmations = int("confirmations").bindTo { it.confirmations }
     val paymentID = varchar("payment_id").bindTo { it.paymentID }
     val amount = long("amount").bindTo { it.amount }
-    val fee = long("fee").bindTo { it.fee }
+    val fee = float("fee").bindTo { it.fee }
     val mixin = int("mixin").bindTo { it.mixin }
     val size = long("size").bindTo { it.size }
     val blockId = int("block_id").references(Blocks) { it.blockId }

@@ -32,4 +32,12 @@ package org.kryptokrona.api.services
 
 class PostEncryptedGroupService {
 
+    fun getAll() {
+
+    }
+
+    fun getById(id: Long) {
+
+    }
+
 }

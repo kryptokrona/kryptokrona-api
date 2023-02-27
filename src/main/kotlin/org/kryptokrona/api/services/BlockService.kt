@@ -45,4 +45,12 @@ class BlockService {
         password = config.property("postgres.password").getString()
     )
 
+    fun getAll() {
+
+    }
+
+    fun getById(id: Long) {
+
+    }
+
 }

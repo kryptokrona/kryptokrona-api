@@ -30,5 +30,14 @@
 
 package org.kryptokrona.api.services
 
-interface NodeService {
+class PostEncryptedGroupServiceImpl {
+
+    fun getAll() {
+
+    }
+
+    fun getById(id: Long) {
+
+    }
+
 }

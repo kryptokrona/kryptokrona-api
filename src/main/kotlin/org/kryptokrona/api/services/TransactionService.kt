@@ -30,14 +30,5 @@
 
 package org.kryptokrona.api.services
 
-class TransactionService {
-
-    fun getAll() {
-
-    }
-
-    fun getById(id: Long) {
-
-    }
-
+interface TransactionService {
 }

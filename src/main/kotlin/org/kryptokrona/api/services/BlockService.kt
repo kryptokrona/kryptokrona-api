@@ -30,27 +30,5 @@
 
 package org.kryptokrona.api.services
 
-import com.typesafe.config.ConfigFactory
-import io.ktor.server.config.*
-import org.ktorm.database.Database
-
-class BlockService {
-
-    private val config = HoconApplicationConfig(ConfigFactory.load())
-
-    private val database = Database.connect(
-        url = config.property("postgres.url").getString(),
-        driver = "org.postgresql.Driver",
-        user = config.property("postgres.user").getString(),
-        password = config.property("postgres.password").getString()
-    )
-
-    fun getAll() {
-
-    }
-
-    fun getById(id: Long) {
-
-    }
-
+interface BlockService {
 }

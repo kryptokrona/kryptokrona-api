@@ -30,5 +30,43 @@
 
 package org.kryptokrona.api.services
 
-interface NodeService {
+import com.typesafe.config.ConfigFactory
+import io.ktor.server.config.*
+import org.kryptokrona.api.models.Block
+import org.kryptokrona.api.models.Blocks
+import org.ktorm.database.Database
+import org.ktorm.dsl.delete
+import org.ktorm.dsl.eq
+import org.ktorm.dsl.insert
+
+class BlockServiceImpl {
+
+    private val config = HoconApplicationConfig(ConfigFactory.load())
+
+    private val database = Database.connect(
+        url = config.property("postgres.url").getString(),
+        driver = "org.postgresql.Driver",
+        user = config.property("postgres.user").getString(),
+        password = config.property("postgres.password").getString()
+    )
+
+    fun getAll() {
+        //TODO: what should be returened?
+    }
+
+    fun getById(id: Long): Block? {
+        return null
+    }
+
+    fun save(block: Block) {
+        database.insert(Blocks) {
+            // set
+            //TODO: investigating if we can pass a whole object instead of defining each attribute
+        }
+    }
+
+    fun delete(id: Int) {
+        database.delete(Blocks) { it.id eq id }
+    }
+
 }

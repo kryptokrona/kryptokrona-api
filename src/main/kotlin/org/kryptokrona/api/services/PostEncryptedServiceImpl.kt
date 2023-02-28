@@ -30,7 +30,24 @@
 
 package org.kryptokrona.api.services
 
+import org.kryptokrona.api.models.PostEncrypted
+
 class PostEncryptedServiceImpl : PostEncryptedService {
 
+    override fun getAll() {
+        TODO("Not yet implemented")
+    }
+
+    override fun getById(id: Long): PostEncrypted? {
+        TODO("Not yet implemented")
+    }
+
+    override fun save(postEncrypted: PostEncrypted) {
+        TODO("Not yet implemented")
+    }
+
+    override fun delete(id: Int) {
+        TODO("Not yet implemented")
+    }
 
 }

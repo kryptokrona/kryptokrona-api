@@ -30,7 +30,25 @@
 
 package org.kryptokrona.api.services
 
+import org.kryptokrona.api.models.Output
+
 class OutputServiceImpl : OutputService {
+
+    override fun getAll() {
+        TODO("Not yet implemented")
+    }
+
+    override fun getById(id: Long): Output? {
+        TODO("Not yet implemented")
+    }
+
+    override fun save(output: Output) {
+        TODO("Not yet implemented")
+    }
+
+    override fun delete(id: Int) {
+        TODO("Not yet implemented")
+    }
 
 
 }

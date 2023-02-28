@@ -30,7 +30,24 @@
 
 package org.kryptokrona.api.services
 
+import org.kryptokrona.api.models.Node
+
 class NodeServiceImpl : NodeService {
 
+    override fun getAll() {
+        TODO("Not yet implemented")
+    }
+
+    override fun getById(id: Long): Node? {
+        TODO("Not yet implemented")
+    }
+
+    override fun save(node: Node) {
+        TODO("Not yet implemented")
+    }
+
+    override fun delete(id: Int) {
+        TODO("Not yet implemented")
+    }
 
 }

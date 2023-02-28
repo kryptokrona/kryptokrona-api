@@ -30,7 +30,24 @@
 
 package org.kryptokrona.api.services
 
+import org.kryptokrona.api.models.Hashrate
+
 class HashrateServiceImpl : HashrateService {
 
+    override fun getAll() {
+        TODO("Not yet implemented")
+    }
+
+    override fun getById(id: Long): Hashrate? {
+        TODO("Not yet implemented")
+    }
+
+    override fun save(hashrate: Hashrate) {
+        TODO("Not yet implemented")
+    }
+
+    override fun delete(id: Int) {
+        TODO("Not yet implemented")
+    }
 
 }

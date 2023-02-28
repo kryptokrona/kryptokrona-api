@@ -30,14 +30,7 @@
 
 package org.kryptokrona.api.services
 
-class PostEncryptedServiceImpl {
+class PostEncryptedServiceImpl : PostEncryptedService {
 
-    fun getAll() {
-
-    }
-
-    fun getById(id: Long) {
-
-    }
 
 }

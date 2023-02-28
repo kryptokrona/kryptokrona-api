@@ -39,7 +39,7 @@ import org.ktorm.dsl.delete
 import org.ktorm.dsl.eq
 import org.ktorm.dsl.insert
 
-class BlockServiceImpl {
+class BlockServiceImpl : BlockService {
 
     private val config = HoconApplicationConfig(ConfigFactory.load())
 

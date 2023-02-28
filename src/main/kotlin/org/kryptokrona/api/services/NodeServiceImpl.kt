@@ -30,14 +30,7 @@
 
 package org.kryptokrona.api.services
 
-class NodeServiceImpl {
+class NodeServiceImpl : NodeService {
 
-    fun getAll() {
-
-    }
-
-    fun getById(id: Long) {
-
-    }
 
 }

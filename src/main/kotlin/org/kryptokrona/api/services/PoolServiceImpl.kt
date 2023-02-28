@@ -30,14 +30,6 @@
 
 package org.kryptokrona.api.services
 
-class PoolServiceImpl {
-
-    fun getAll() {
-
-    }
-
-    fun getById(id: Long) {
-
-    }
+class PoolServiceImpl : PoolService {
 
 }

@@ -30,14 +30,7 @@
 
 package org.kryptokrona.api.services
 
-class OutputServiceImpl {
+class OutputServiceImpl : OutputService {
 
-    fun getAll() {
-
-    }
-
-    fun getById(id: Long) {
-
-    }
 
 }

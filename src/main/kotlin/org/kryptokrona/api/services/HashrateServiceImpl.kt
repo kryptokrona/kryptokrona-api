@@ -30,14 +30,7 @@
 
 package org.kryptokrona.api.services
 
-class HashrateServiceImpl {
+class HashrateServiceImpl : HashrateService {
 
-    fun getAll() {
-
-    }
-
-    fun getById(id: Long) {
-
-    }
 
 }

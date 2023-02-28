@@ -30,5 +30,16 @@
 
 package org.kryptokrona.api.services
 
+import org.kryptokrona.api.models.Block
+
 interface BlockService {
+
+    fun getAll()
+
+    fun getById(id: Long): Block?
+
+    fun save(block: Block)
+
+    fun delete(id: Int)
+
 }

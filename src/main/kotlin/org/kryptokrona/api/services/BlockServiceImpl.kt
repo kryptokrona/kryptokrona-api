@@ -50,22 +50,22 @@ class BlockServiceImpl : BlockService {
         password = config.property("postgres.password").getString()
     )
 
-    fun getAll() {
+    override fun getAll() {
         //TODO: what should be returened?
     }
 
-    fun getById(id: Long): Block? {
+    override fun getById(id: Long): Block? {
         return null
     }
 
-    fun save(block: Block) {
+    override fun save(block: Block) {
         database.insert(Blocks) {
             // set
             //TODO: investigating if we can pass a whole object instead of defining each attribute
         }
     }
 
-    fun delete(id: Int) {
+    override fun delete(id: Int) {
         database.delete(Blocks) { it.id eq id }
     }
 

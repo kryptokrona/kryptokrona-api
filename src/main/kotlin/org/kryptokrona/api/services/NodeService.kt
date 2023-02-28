@@ -30,7 +30,6 @@
 
 package org.kryptokrona.api.services
 
-import org.kryptokrona.api.models.Hashrate
 import org.kryptokrona.api.models.Node
 
 interface NodeService {

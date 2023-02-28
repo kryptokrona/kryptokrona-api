@@ -30,7 +30,6 @@
 
 package org.kryptokrona.api.services
 
-import org.kryptokrona.api.models.Pool
 import org.kryptokrona.api.models.PostEncryptedGroup
 
 interface PostEncryptedGroupService {

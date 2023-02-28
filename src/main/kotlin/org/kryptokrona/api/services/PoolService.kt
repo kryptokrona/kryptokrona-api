@@ -30,7 +30,6 @@
 
 package org.kryptokrona.api.services
 
-import org.kryptokrona.api.models.Output
 import org.kryptokrona.api.models.Pool
 
 interface PoolService {

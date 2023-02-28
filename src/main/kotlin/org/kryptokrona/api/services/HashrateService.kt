@@ -30,5 +30,17 @@
 
 package org.kryptokrona.api.services
 
+import org.kryptokrona.api.models.Block
+import org.kryptokrona.api.models.Hashrate
+
 interface HashrateService {
+
+    fun getAll()
+
+    fun getById(id: Long): Hashrate?
+
+    fun save(hashrate: Hashrate)
+
+    fun delete(id: Int)
+
 }

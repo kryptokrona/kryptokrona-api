@@ -30,5 +30,17 @@
 
 package org.kryptokrona.api.services
 
+import org.kryptokrona.api.models.Node
+import org.kryptokrona.api.models.Output
+
 interface OutputService {
+
+    fun getAll()
+
+    fun getById(id: Long): Output?
+
+    fun save(output: Output)
+
+    fun delete(id: Int)
+
 }

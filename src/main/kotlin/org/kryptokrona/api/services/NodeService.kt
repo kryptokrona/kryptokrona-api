@@ -30,5 +30,17 @@
 
 package org.kryptokrona.api.services
 
+import org.kryptokrona.api.models.Hashrate
+import org.kryptokrona.api.models.Node
+
 interface NodeService {
+
+    fun getAll()
+
+    fun getById(id: Long): Node?
+
+    fun save(node: Node)
+
+    fun delete(id: Int)
+
 }

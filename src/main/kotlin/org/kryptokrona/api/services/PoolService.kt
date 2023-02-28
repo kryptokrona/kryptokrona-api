@@ -30,5 +30,17 @@
 
 package org.kryptokrona.api.services
 
+import org.kryptokrona.api.models.Output
+import org.kryptokrona.api.models.Pool
+
 interface PoolService {
+
+    fun getAll()
+
+    fun getById(id: Long): Pool?
+
+    fun save(pool: Pool)
+
+    fun delete(id: Int)
+
 }

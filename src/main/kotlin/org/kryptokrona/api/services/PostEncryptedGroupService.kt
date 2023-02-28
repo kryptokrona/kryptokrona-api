@@ -30,5 +30,17 @@
 
 package org.kryptokrona.api.services
 
+import org.kryptokrona.api.models.Pool
+import org.kryptokrona.api.models.PostEncryptedGroup
+
 interface PostEncryptedGroupService {
+
+    fun getAll()
+
+    fun getById(id: Long): PostEncryptedGroup?
+
+    fun save(postEncryptedGroup: PostEncryptedGroup)
+
+    fun delete(id: Int)
+
 }

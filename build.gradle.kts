@@ -8,8 +8,7 @@ val postgres_version: String by project
 val h2_version: String by project
 val ktorm_version: String by project
 val liquibase_core: String by project
-val hikaricp_version: String by project
-val ehcache_version: String by project
+val ktorm_jackson_version: String by project
 
 plugins {
     application
@@ -53,8 +52,7 @@ dependencies {
     implementation("org.ktorm:ktorm-core:$ktorm_version")
     implementation("io.ktor:ktor-server-config-yaml-jvm:2.2.3")
     implementation("ch.qos.logback:logback-classic:$logback_version")
-    implementation("com.zaxxer:HikariCP:$hikaricp_version")
-    implementation("org.ehcache:ehcache:$ehcache_version")
+    implementation("org.ktorm:ktorm-jackson:$ktorm_jackson_version")
 
     // liquibase
     liquibaseRuntime("org.liquibase:liquibase-core:$liquibase_core")

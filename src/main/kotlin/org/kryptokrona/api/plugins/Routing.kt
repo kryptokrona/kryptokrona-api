@@ -41,13 +41,6 @@ import io.ktor.server.routing.*
 import org.kryptokrona.api.routes.*
 
 fun Application.configureRouting() {
-    install(ContentNegotiation) {
-        json()
-        jackson {
-            enable(SerializationFeature.INDENT_OUTPUT)
-        }
-    }
-
     routing {
         swaggerUI(
             path = "swagger",

@@ -9,7 +9,7 @@ import kotlin.test.assertEquals
 
 class BlockRoutesTest {
 
-    /*@Test
+    @Test
     fun blockRouteTest() = testApplication {
         application {
             module()
@@ -17,5 +17,5 @@ class BlockRoutesTest {
         client.get("/v1/blocks").apply {
             assertEquals(HttpStatusCode.OK, status)
         }
-    }*/
+    }
 }

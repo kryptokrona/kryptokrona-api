@@ -30,10 +30,13 @@
 
 package org.kryptokrona.api
 
+import com.fasterxml.jackson.databind.SerializationFeature
+import io.ktor.serialization.jackson.*
+import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
-import org.kryptokrona.api.plugins.DatabaseFactory
+import io.ktor.server.plugins.contentnegotiation.*
 import org.kryptokrona.api.plugins.configureRouting
 
 fun main() {
@@ -42,6 +45,12 @@ fun main() {
 }
 
 fun Application.module() {
-    DatabaseFactory.init(environment.config)
+    install(ContentNegotiation) {
+        json()
+        jackson {
+            enable(SerializationFeature.INDENT_OUTPUT)
+        }
+    }
+
     configureRouting()
 }

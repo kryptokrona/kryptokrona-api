@@ -30,30 +30,19 @@
 
 package org.kryptokrona.api.services
 
-import com.typesafe.config.ConfigFactory
-import io.ktor.server.config.*
 import org.kryptokrona.api.models.Block
 import org.kryptokrona.api.models.Blocks
 import org.kryptokrona.api.models.blocks
-import org.kryptokrona.api.plugins.DatabaseFactory
-import org.kryptokrona.api.plugins.connectToPostgres
-import org.ktorm.database.Database
-import org.ktorm.dsl.*
+import org.kryptokrona.api.plugins.DatabaseConnection
+import org.ktorm.dsl.delete
+import org.ktorm.dsl.eq
 import org.ktorm.entity.add
 import org.ktorm.entity.find
 import org.ktorm.entity.toList
 
-// class BlockServiceImpl : BlockService
-/*
-class BlockServiceImpl {
+class BlockServiceImpl: BlockService {
 
-    // private val dataSource = connectToPostgres(false)
-
-    private val dataSource = DatabaseFactory.createHikariDataSource(url = jdbcURL, driver = driverClassName)
-
-    private val db = Database.connect(dataSource)
-
-    // private val database = Database.connect(connectToPostgres(false))
+    private val db = DatabaseConnection.database
 
     override fun getAll(): List<Block> {
        return db.blocks.toList()
@@ -71,4 +60,4 @@ class BlockServiceImpl {
         db.delete(Blocks) { it.id eq id }
     }
 
-}*/
+}

@@ -30,13 +30,15 @@
 
 package org.kryptokrona.api.routes
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.kryptokrona.api.services.BlockServiceImpl
+import org.ktorm.jackson.KtormModule
 
-// al service = BlockServiceImpl()
+val service = BlockServiceImpl()
 
 fun Route.blocksRoute() {
     get("/v1/blocks") {
@@ -47,15 +49,17 @@ fun Route.blocksRoute() {
 
 fun Route.blocksByIdRoute() {
     get("/v1/blocks/{id}") {
-        /*val id = call.parameters["id"]?.toIntOrNull()
+        val id = call.parameters["id"]?.toIntOrNull()
 
         id?.let {
             val block = service.getById(id)
 
              block?.let {
-                call.respond(HttpStatusCode.Found, it)
+                 val objectMapper = ObjectMapper().registerModule(KtormModule())
+                 val json = objectMapper.writeValueAsString(block)
+
+                 call.respond(HttpStatusCode.Found, json)
              } ?: call.respond(HttpStatusCode.NotFound, "No block found with id $id")
-        } ?: call.respond(HttpStatusCode.BadRequest)*/
-        call.respondText("hello")
+        } ?: call.respond(HttpStatusCode.BadRequest)
     }
 }

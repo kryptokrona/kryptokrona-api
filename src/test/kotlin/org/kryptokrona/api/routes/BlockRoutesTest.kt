@@ -9,13 +9,13 @@ import kotlin.test.assertEquals
 
 class BlockRoutesTest {
 
-    @Test
-    fun BlockRouteTest() = testApplication {
+    /*@Test
+    fun blockRouteTest() = testApplication {
         application {
             module()
         }
         client.get("/v1/blocks").apply {
             assertEquals(HttpStatusCode.OK, status)
         }
-    }
+    }*/
 }

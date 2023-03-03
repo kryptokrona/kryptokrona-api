@@ -33,6 +33,7 @@ package org.kryptokrona.api
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
+import org.kryptokrona.api.plugins.DatabaseFactory
 import org.kryptokrona.api.plugins.configureRouting
 
 fun main() {
@@ -41,6 +42,6 @@ fun main() {
 }
 
 fun Application.module() {
-    // configureDatabases()
+    DatabaseFactory.init(environment.config)
     configureRouting()
 }

@@ -30,6 +30,7 @@
 
 package org.kryptokrona.api.syncers
 
+/*
 import org.kryptokrona.api.services.PostEncryptedGroupServiceImpl
 import org.kryptokrona.api.services.PostEncryptedServiceImpl
 
@@ -39,4 +40,4 @@ class HuginSyncer {
 
     private val postEncryptedGroupServiceImpl: PostEncryptedGroupServiceImpl = PostEncryptedGroupServiceImpl()
 
-}
+}*/

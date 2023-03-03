@@ -31,7 +31,6 @@
 package org.kryptokrona.api.services
 
 import org.kryptokrona.api.models.Block
-import org.ktorm.dsl.Query
 
 interface BlockService {
 

@@ -42,16 +42,8 @@ import org.ktorm.entity.add
 import org.ktorm.entity.find
 import org.ktorm.entity.toList
 
+/*
 class HashrateServiceImpl : HashrateService {
-
-    private val config = HoconApplicationConfig(ConfigFactory.load())
-
-    private val db = Database.connect(
-        url = config.property("postgres.url").getString(),
-        driver = "org.postgresql.Driver",
-        user = config.property("postgres.user").getString(),
-        password = config.property("postgres.password").getString()
-    )
 
     override fun getAll(): List<Hashrate> {
         return db.hashrates.toList()
@@ -69,4 +61,4 @@ class HashrateServiceImpl : HashrateService {
         db.delete(Hashrates) { it.id eq id }
     }
 
-}
+}*/

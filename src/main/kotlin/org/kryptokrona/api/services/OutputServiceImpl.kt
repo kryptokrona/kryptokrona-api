@@ -35,6 +35,7 @@ import io.ktor.server.config.*
 import org.kryptokrona.api.models.Output
 import org.ktorm.database.Database
 
+/*
 class OutputServiceImpl : OutputService {
 
     private val config = HoconApplicationConfig(ConfigFactory.load())
@@ -63,4 +64,4 @@ class OutputServiceImpl : OutputService {
     }
 
 
-}
+}*/

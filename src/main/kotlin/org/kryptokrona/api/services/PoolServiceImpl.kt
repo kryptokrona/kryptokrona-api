@@ -35,6 +35,7 @@ import io.ktor.server.config.*
 import org.kryptokrona.api.models.Pool
 import org.ktorm.database.Database
 
+/*
 class PoolServiceImpl : PoolService {
 
     private val config = HoconApplicationConfig(ConfigFactory.load())
@@ -62,4 +63,4 @@ class PoolServiceImpl : PoolService {
         TODO("Not yet implemented")
     }
 
-}
+}*/

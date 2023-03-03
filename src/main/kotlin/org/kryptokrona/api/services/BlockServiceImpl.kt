@@ -35,22 +35,25 @@ import io.ktor.server.config.*
 import org.kryptokrona.api.models.Block
 import org.kryptokrona.api.models.Blocks
 import org.kryptokrona.api.models.blocks
+import org.kryptokrona.api.plugins.DatabaseFactory
+import org.kryptokrona.api.plugins.connectToPostgres
 import org.ktorm.database.Database
 import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.find
 import org.ktorm.entity.toList
 
-class BlockServiceImpl : BlockService {
+// class BlockServiceImpl : BlockService
+/*
+class BlockServiceImpl {
 
-    private val config = HoconApplicationConfig(ConfigFactory.load())
+    // private val dataSource = connectToPostgres(false)
 
-    private val db = Database.connect(
-        url = config.property("postgres.url").getString(),
-        driver = "org.postgresql.Driver",
-        user = config.property("postgres.user").getString(),
-        password = config.property("postgres.password").getString()
-    )
+    private val dataSource = DatabaseFactory.createHikariDataSource(url = jdbcURL, driver = driverClassName)
+
+    private val db = Database.connect(dataSource)
+
+    // private val database = Database.connect(connectToPostgres(false))
 
     override fun getAll(): List<Block> {
        return db.blocks.toList()
@@ -68,4 +71,4 @@ class BlockServiceImpl : BlockService {
         db.delete(Blocks) { it.id eq id }
     }
 
-}
+}*/

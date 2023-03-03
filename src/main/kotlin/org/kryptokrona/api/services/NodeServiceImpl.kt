@@ -42,6 +42,7 @@ import org.ktorm.entity.add
 import org.ktorm.entity.find
 import org.ktorm.entity.toList
 
+/*
 class NodeServiceImpl : NodeService {
 
     private val config = HoconApplicationConfig(ConfigFactory.load())
@@ -69,4 +70,4 @@ class NodeServiceImpl : NodeService {
         db.delete(Nodes) { it.id eq id }
     }
 
-}
+}*/

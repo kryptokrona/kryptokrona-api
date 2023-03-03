@@ -35,6 +35,7 @@ import io.ktor.server.config.*
 import org.kryptokrona.api.models.Transaction
 import org.ktorm.database.Database
 
+/*
 class TransactionServiceImpl : TransactionService {
 
     private val config = HoconApplicationConfig(ConfigFactory.load())
@@ -62,4 +63,4 @@ class TransactionServiceImpl : TransactionService {
         TODO("Not yet implemented")
     }
 
-}
+}*/

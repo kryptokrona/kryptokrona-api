@@ -35,6 +35,7 @@ import io.ktor.server.config.*
 import org.kryptokrona.api.models.PostEncrypted
 import org.ktorm.database.Database
 
+/*
 class PostEncryptedServiceImpl : PostEncryptedService {
 
     private val config = HoconApplicationConfig(ConfigFactory.load())
@@ -62,4 +63,4 @@ class PostEncryptedServiceImpl : PostEncryptedService {
         TODO("Not yet implemented")
     }
 
-}
+}*/

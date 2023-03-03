@@ -36,7 +36,7 @@ interface PostEncryptedGroupService {
 
     fun getAll()
 
-    fun getById(id: Long): PostEncryptedGroup?
+    fun getById(id: Int): PostEncryptedGroup?
 
     fun save(postEncryptedGroup: PostEncryptedGroup)
 

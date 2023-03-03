@@ -38,7 +38,7 @@ class PostEncryptedGroupServiceImpl : PostEncryptedGroupService {
         TODO("Not yet implemented")
     }
 
-    override fun getById(id: Long): PostEncryptedGroup? {
+    override fun getById(id: Int): PostEncryptedGroup? {
         TODO("Not yet implemented")
     }
 

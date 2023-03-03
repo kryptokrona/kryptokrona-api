@@ -38,7 +38,7 @@ class OutputServiceImpl : OutputService {
         TODO("Not yet implemented")
     }
 
-    override fun getById(id: Long): Output? {
+    override fun getById(id: Int): Output? {
         TODO("Not yet implemented")
     }
 

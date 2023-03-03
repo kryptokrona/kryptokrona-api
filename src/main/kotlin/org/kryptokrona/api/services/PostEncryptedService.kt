@@ -36,7 +36,7 @@ interface PostEncryptedService {
 
     fun getAll()
 
-    fun getById(id: Long): PostEncrypted?
+    fun getById(id: Int): PostEncrypted?
 
     fun save(postEncrypted: PostEncrypted)
 

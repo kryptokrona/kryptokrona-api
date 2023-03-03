@@ -36,7 +36,7 @@ interface NodeService {
 
     fun getAll()
 
-    fun getById(id: Long): Node?
+    fun getById(id: Int): Node?
 
     fun save(node: Node)
 

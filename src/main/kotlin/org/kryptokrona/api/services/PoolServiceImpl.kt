@@ -38,7 +38,7 @@ class PoolServiceImpl : PoolService {
         TODO("Not yet implemented")
     }
 
-    override fun getById(id: Long): Pool? {
+    override fun getById(id: Int): Pool? {
         TODO("Not yet implemented")
     }
 

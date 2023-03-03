@@ -38,7 +38,7 @@ class PostEncryptedServiceImpl : PostEncryptedService {
         TODO("Not yet implemented")
     }
 
-    override fun getById(id: Long): PostEncrypted? {
+    override fun getById(id: Int): PostEncrypted? {
         TODO("Not yet implemented")
     }
 

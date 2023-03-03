@@ -33,10 +33,13 @@ package org.kryptokrona.api.routes
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.kryptokrona.api.services.BlockServiceImpl
 
 fun Route.blocksRoute() {
     get("/api/v1/blocks") {
-        call.respondText("Hello all blocks!")
+        val service = BlockServiceImpl()
+        val blocks = service.getAll()
+        call.respond(blocks)
     }
 }
 

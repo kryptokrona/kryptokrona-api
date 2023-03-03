@@ -36,7 +36,7 @@ interface TransactionService {
 
     fun getAll()
 
-    fun getById(id: Long): Transaction?
+    fun getById(id: Int): Transaction?
 
     fun save(transaction: Transaction)
 

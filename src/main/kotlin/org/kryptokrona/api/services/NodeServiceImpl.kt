@@ -38,7 +38,7 @@ class NodeServiceImpl : NodeService {
         TODO("Not yet implemented")
     }
 
-    override fun getById(id: Long): Node? {
+    override fun getById(id: Int): Node? {
         TODO("Not yet implemented")
     }
 

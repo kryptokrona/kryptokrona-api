@@ -36,7 +36,7 @@ interface HashrateService {
 
     fun getAll()
 
-    fun getById(id: Long): Hashrate?
+    fun getById(id: Int): Hashrate?
 
     fun save(hashrate: Hashrate)
 

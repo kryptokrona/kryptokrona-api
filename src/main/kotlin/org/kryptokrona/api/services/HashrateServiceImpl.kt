@@ -38,7 +38,7 @@ class HashrateServiceImpl : HashrateService {
         TODO("Not yet implemented")
     }
 
-    override fun getById(id: Long): Hashrate? {
+    override fun getById(id: Int): Hashrate? {
         TODO("Not yet implemented")
     }
 

@@ -36,7 +36,7 @@ interface OutputService {
 
     fun getAll()
 
-    fun getById(id: Long): Output?
+    fun getById(id: Int): Output?
 
     fun save(output: Output)
 

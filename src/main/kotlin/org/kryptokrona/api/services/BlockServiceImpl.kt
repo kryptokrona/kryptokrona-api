@@ -34,39 +34,38 @@ import com.typesafe.config.ConfigFactory
 import io.ktor.server.config.*
 import org.kryptokrona.api.models.Block
 import org.kryptokrona.api.models.Blocks
+import org.kryptokrona.api.models.blocks
 import org.ktorm.database.Database
-import org.ktorm.dsl.delete
-import org.ktorm.dsl.eq
-import org.ktorm.dsl.insert
+import org.ktorm.dsl.*
+import org.ktorm.entity.add
+import org.ktorm.entity.find
+import org.ktorm.entity.toList
 
 class BlockServiceImpl : BlockService {
 
     private val config = HoconApplicationConfig(ConfigFactory.load())
 
-    private val database = Database.connect(
+    private val db = Database.connect(
         url = config.property("postgres.url").getString(),
         driver = "org.postgresql.Driver",
         user = config.property("postgres.user").getString(),
         password = config.property("postgres.password").getString()
     )
 
-    override fun getAll() {
-        //TODO: what should be returened?
+    override fun getAll(): List<Block> {
+       return db.blocks.toList()
     }
 
-    override fun getById(id: Long): Block? {
-        return null
+    override fun getById(id: Int): Block? {
+        return db.blocks.find { it.id eq id }
     }
 
     override fun save(block: Block) {
-        database.insert(Blocks) {
-            // set
-            //TODO: investigating if we can pass a whole object instead of defining each attribute
-        }
+        db.blocks.add(block)
     }
 
     override fun delete(id: Int) {
-        database.delete(Blocks) { it.id eq id }
+        db.delete(Blocks) { it.id eq id }
     }
 
 }

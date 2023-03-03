@@ -36,7 +36,7 @@ interface PoolService {
 
     fun getAll()
 
-    fun getById(id: Long): Pool?
+    fun getById(id: Int): Pool?
 
     fun save(pool: Pool)
 

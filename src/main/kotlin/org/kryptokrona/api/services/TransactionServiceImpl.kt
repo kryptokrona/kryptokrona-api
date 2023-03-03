@@ -38,7 +38,7 @@ class TransactionServiceImpl : TransactionService {
         TODO("Not yet implemented")
     }
 
-    override fun getById(id: Long): Transaction? {
+    override fun getById(id: Int): Transaction? {
         TODO("Not yet implemented")
     }
 

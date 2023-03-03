@@ -30,7 +30,10 @@
 
 package org.kryptokrona.api
 
-import com.fasterxml.jackson.databind.SerializationFeature
+import com.fasterxml.jackson.core.util.*
+import com.fasterxml.jackson.core.util.*
+import com.fasterxml.jackson.databind.*
+import com.fasterxml.jackson.datatype.jsr310.*
 import io.ktor.serialization.jackson.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
@@ -48,7 +51,12 @@ fun Application.module() {
     install(ContentNegotiation) {
         json()
         jackson {
-            enable(SerializationFeature.INDENT_OUTPUT)
+            configure(SerializationFeature.INDENT_OUTPUT, true)
+            setDefaultPrettyPrinter(DefaultPrettyPrinter().apply {
+                indentArraysWith(DefaultPrettyPrinter.FixedSpaceIndenter.instance)
+                indentObjectsWith(DefaultIndenter("  ", "\n"))
+            })
+            registerModule(JavaTimeModule())  // support java.time.* types
         }
     }
 

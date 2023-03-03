@@ -31,6 +31,8 @@
 package org.kryptokrona.api.routes
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.json.JsonMapper
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
@@ -55,8 +57,12 @@ fun Route.blocksByIdRoute() {
             val block = service.getById(id)
 
              block?.let {
-                 val objectMapper = ObjectMapper().registerModule(KtormModule())
-                 val json = objectMapper.writeValueAsString(block)
+                 val mapper: ObjectMapper = JsonMapper.builder()
+                     .addModule(JavaTimeModule())
+                     .addModule(KtormModule())
+                     .build()
+
+                 val json = mapper.writeValueAsString(block)
 
                  call.respond(HttpStatusCode.Found, json)
              } ?: call.respond(HttpStatusCode.NotFound, "No block found with id $id")

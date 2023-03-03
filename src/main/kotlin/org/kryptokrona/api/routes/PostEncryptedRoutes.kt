@@ -35,13 +35,13 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Route.postsEncryptedRoute() {
-    get("/api/v1/posts-encrypted") {
+    get("/v1/posts-encrypted") {
         call.respondText("Hello all postsEncrypted!")
     }
 }
 
 fun Route.postsEncryptedByIdRoute() {
-    get("/api/v1/posts-encrypted/{id}") {
+    get("/v1/posts-encrypted/{id}") {
         call.respond(mapOf("hello" to "postsEncrypted"))
     }
 }

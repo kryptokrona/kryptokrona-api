@@ -35,13 +35,13 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Route.outputsRoute() {
-    get("/api/v1/outputs") {
+    get("/v1/outputs") {
         call.respondText("Hello all outputs!")
     }
 }
 
 fun Route.outputsByIdRoute() {
-    get("/api/v1/outputs/{id}") {
+    get("/v1/outputs/{id}") {
         call.respond(mapOf("hello" to "outputs"))
     }
 }

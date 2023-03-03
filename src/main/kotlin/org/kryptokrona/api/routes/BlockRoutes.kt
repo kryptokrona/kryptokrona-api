@@ -36,7 +36,7 @@ import io.ktor.server.routing.*
 import org.kryptokrona.api.services.BlockServiceImpl
 
 fun Route.blocksRoute() {
-    get("/api/v1/blocks") {
+    get("/v1/blocks") {
         val service = BlockServiceImpl()
         val blocks = service.getAll()
         call.respond(blocks)
@@ -44,7 +44,7 @@ fun Route.blocksRoute() {
 }
 
 fun Route.blocksByIdRoute() {
-    get("/api/v1/blocks/{id}") {
+    get("/v1/blocks/{id}") {
         call.respond(mapOf("hello" to "block_id"))
     }
 }

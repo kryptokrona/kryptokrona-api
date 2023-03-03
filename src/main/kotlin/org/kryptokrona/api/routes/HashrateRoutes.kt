@@ -35,13 +35,13 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun Route.hashratesRoute() {
-    get("/api/v1/hashrates") {
+    get("/v1/hashrates") {
         call.respondText("Hello all hashrates!")
     }
 }
 
 fun Route.hashratesByIdRoute() {
-    get("/api/v1/hashrates/{id}") {
+    get("/v1/hashrates/{id}") {
         call.respond(mapOf("hello" to "hashrates"))
     }
 }

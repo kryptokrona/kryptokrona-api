@@ -33,7 +33,14 @@ package org.kryptokrona.api.services
 import com.typesafe.config.ConfigFactory
 import io.ktor.server.config.*
 import org.kryptokrona.api.models.Node
+import org.kryptokrona.api.models.Nodes
+import org.kryptokrona.api.models.nodes
 import org.ktorm.database.Database
+import org.ktorm.dsl.delete
+import org.ktorm.dsl.eq
+import org.ktorm.entity.add
+import org.ktorm.entity.find
+import org.ktorm.entity.toList
 
 class NodeServiceImpl : NodeService {
 
@@ -46,20 +53,20 @@ class NodeServiceImpl : NodeService {
         password = config.property("postgres.password").getString()
     )
 
-    override fun getAll() {
-        TODO("Not yet implemented")
+    override fun getAll(): List<Node> {
+        return db.nodes.toList()
     }
 
     override fun getById(id: Int): Node? {
-        TODO("Not yet implemented")
+        return db.nodes.find { it.id eq id }
     }
 
     override fun save(node: Node) {
-        TODO("Not yet implemented")
+        db.nodes.add(node)
     }
 
     override fun delete(id: Int) {
-        TODO("Not yet implemented")
+        db.delete(Nodes) { it.id eq id }
     }
 
 }

@@ -34,7 +34,7 @@ import org.kryptokrona.api.models.Hashrate
 
 interface HashrateService {
 
-    fun getAll()
+    fun getAll(): List<Hashrate>
 
     fun getById(id: Int): Hashrate?
 

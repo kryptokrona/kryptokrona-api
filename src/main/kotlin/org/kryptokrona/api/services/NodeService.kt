@@ -30,11 +30,12 @@
 
 package org.kryptokrona.api.services
 
+import org.kryptokrona.api.models.Hashrate
 import org.kryptokrona.api.models.Node
 
 interface NodeService {
 
-    fun getAll()
+    fun getAll(): List<Node>
 
     fun getById(id: Int): Node?
 

@@ -33,7 +33,14 @@ package org.kryptokrona.api.services
 import com.typesafe.config.ConfigFactory
 import io.ktor.server.config.*
 import org.kryptokrona.api.models.Hashrate
+import org.kryptokrona.api.models.Hashrates
+import org.kryptokrona.api.models.hashrates
 import org.ktorm.database.Database
+import org.ktorm.dsl.delete
+import org.ktorm.dsl.eq
+import org.ktorm.entity.add
+import org.ktorm.entity.find
+import org.ktorm.entity.toList
 
 class HashrateServiceImpl : HashrateService {
 
@@ -46,20 +53,20 @@ class HashrateServiceImpl : HashrateService {
         password = config.property("postgres.password").getString()
     )
 
-    override fun getAll() {
-        TODO("Not yet implemented")
+    override fun getAll(): List<Hashrate> {
+        return db.hashrates.toList()
     }
 
     override fun getById(id: Int): Hashrate? {
-        TODO("Not yet implemented")
+        return db.hashrates.find { it.id eq id }
     }
 
     override fun save(hashrate: Hashrate) {
-        TODO("Not yet implemented")
+        db.hashrates.add(hashrate)
     }
 
     override fun delete(id: Int) {
-        TODO("Not yet implemented")
+        db.delete(Hashrates) { it.id eq id }
     }
 
 }

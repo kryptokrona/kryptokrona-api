@@ -57,6 +57,7 @@ fun Application.module() {
                 indentObjectsWith(DefaultIndenter("  ", "\n"))
             })
             registerModule(JavaTimeModule())  // support java.time.* types
+            configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
         }
     }
 

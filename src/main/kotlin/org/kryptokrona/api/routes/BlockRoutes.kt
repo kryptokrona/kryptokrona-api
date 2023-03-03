@@ -31,6 +31,7 @@
 package org.kryptokrona.api.routes
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.ktor.http.*
@@ -62,6 +63,7 @@ fun Route.blocksByIdRoute() {
                      .addModule(KtormModule())
                      .build()
 
+                 // mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
                  val json = mapper.writeValueAsString(block)
 
                  call.respond(HttpStatusCode.Found, json)

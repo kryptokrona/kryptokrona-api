@@ -30,9 +30,21 @@
 
 package org.kryptokrona.api.services
 
+import com.typesafe.config.ConfigFactory
+import io.ktor.server.config.*
 import org.kryptokrona.api.models.Transaction
+import org.ktorm.database.Database
 
 class TransactionServiceImpl : TransactionService {
+
+    private val config = HoconApplicationConfig(ConfigFactory.load())
+
+    private val db = Database.connect(
+        url = config.property("postgres.url").getString(),
+        driver = "org.postgresql.Driver",
+        user = config.property("postgres.user").getString(),
+        password = config.property("postgres.password").getString()
+    )
 
     override fun getAll() {
         TODO("Not yet implemented")

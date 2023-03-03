@@ -30,21 +30,31 @@
 
 package org.kryptokrona.api.routes
 
+import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.kryptokrona.api.services.BlockServiceImpl
 
+val service = BlockServiceImpl()
+
 fun Route.blocksRoute() {
     get("/v1/blocks") {
-        val service = BlockServiceImpl()
         val blocks = service.getAll()
-        call.respond(blocks)
+        call.respond(HttpStatusCode.OK, blocks)
     }
 }
 
 fun Route.blocksByIdRoute() {
     get("/v1/blocks/{id}") {
-        call.respond(mapOf("hello" to "block_id"))
+        val id = call.parameters["id"]?.toInt()
+
+        id?.let {
+            val block = service.getById(id)
+
+             block?.let {
+                call.respond(HttpStatusCode.Found, it)
+             } ?: call.respond(HttpStatusCode.NotFound, "No block found with id $id")
+        } ?: call.respond(HttpStatusCode.BadRequest)
     }
 }

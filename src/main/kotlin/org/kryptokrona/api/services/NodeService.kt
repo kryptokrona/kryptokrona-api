@@ -30,5 +30,19 @@
 
 package org.kryptokrona.api.services
 
+import org.kryptokrona.api.models.Block
+import org.kryptokrona.api.models.Node
+
 interface NodeService {
+
+    fun getAll(size: Int, page: Int): List<Node>
+
+    fun getById(id: Long): Node?
+
+    fun save(node: Node)
+
+    fun delete(id: Long)
+
+    fun getTotalCount(): Int
+
 }

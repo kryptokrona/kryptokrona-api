@@ -30,5 +30,19 @@
 
 package org.kryptokrona.api.services
 
+import org.kryptokrona.api.models.PostEncrypted
+import org.kryptokrona.api.models.Transaction
+
 interface TransactionService {
+
+    fun getAll(size: Int, page: Int): List<Transaction>
+
+    fun getById(id: Long): Transaction?
+
+    fun save(transaction: Transaction)
+
+    fun delete(id: Long)
+
+    fun getTotalCount(): Int
+
 }

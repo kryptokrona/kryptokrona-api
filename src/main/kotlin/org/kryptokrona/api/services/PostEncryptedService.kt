@@ -30,5 +30,19 @@
 
 package org.kryptokrona.api.services
 
+import org.kryptokrona.api.models.PostEncrypted
+import org.kryptokrona.api.models.PostEncryptedGroup
+
 interface PostEncryptedService {
+
+    fun getAll(size: Int, page: Int): List<PostEncrypted>
+
+    fun getById(id: Long): PostEncrypted?
+
+    fun save(postEncrypted: PostEncrypted)
+
+    fun delete(id: Long)
+
+    fun getTotalCount(): Int
+
 }

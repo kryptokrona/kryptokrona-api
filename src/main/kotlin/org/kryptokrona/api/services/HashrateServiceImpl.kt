@@ -1,7 +1,8 @@
 package org.kryptokrona.api.services
 
-import org.kryptokrona.api.models.*
-import org.kryptokrona.api.models.blocks
+import org.kryptokrona.api.models.Hashrate
+import org.kryptokrona.api.models.Hashrates
+import org.kryptokrona.api.models.hashrates
 import org.kryptokrona.api.plugins.DatabaseConnection
 import org.ktorm.dsl.*
 import org.ktorm.entity.add

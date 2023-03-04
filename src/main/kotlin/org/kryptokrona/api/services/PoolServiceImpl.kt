@@ -1,6 +1,5 @@
 package org.kryptokrona.api.services
 
-import org.kryptokrona.api.models.Blocks
 import org.kryptokrona.api.models.Pool
 import org.kryptokrona.api.models.Pools
 import org.kryptokrona.api.models.pools

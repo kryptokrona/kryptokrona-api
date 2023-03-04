@@ -1,6 +1,8 @@
 package org.kryptokrona.api.services
 
-import org.kryptokrona.api.models.*
+import org.kryptokrona.api.models.Node
+import org.kryptokrona.api.models.Nodes
+import org.kryptokrona.api.models.nodes
 import org.kryptokrona.api.plugins.DatabaseConnection
 import org.ktorm.dsl.*
 import org.ktorm.entity.add

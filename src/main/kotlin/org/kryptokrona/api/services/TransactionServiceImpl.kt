@@ -1,6 +1,5 @@
 package org.kryptokrona.api.services
 
-import org.kryptokrona.api.models.Blocks
 import org.kryptokrona.api.models.Transaction
 import org.kryptokrona.api.models.Transactions
 import org.kryptokrona.api.models.transactions

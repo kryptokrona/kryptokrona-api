@@ -31,15 +31,18 @@
 package org.kryptokrona.api.services
 
 import org.kryptokrona.api.models.Block
+import org.ktorm.dsl.QuerySource
 
 interface BlockService {
 
-    fun getAll(): List<Block>
+    fun getAll(size: Int, page: Int): List<Block>
 
     fun getById(id: Long): Block?
 
     fun save(block: Block)
 
     fun delete(id: Long)
+
+    fun getTotalCount(): Int
 
 }

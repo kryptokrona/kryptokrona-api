@@ -39,7 +39,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-fun entitiesToJsonStr(entities: List<Any>): String {
+fun jsonObjectMapper(): ObjectMapper {
     val mapper: ObjectMapper = JsonMapper.builder()
             .addModule(JavaTimeModule())
             .addModule(KtormModule())
@@ -48,17 +48,5 @@ fun entitiesToJsonStr(entities: List<Any>): String {
     mapper.propertyNamingStrategy = PropertyNamingStrategy.SNAKE_CASE
     mapper.dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
 
-    return mapper.writeValueAsString(entities)
-}
-
-fun entityToJsonStr(entity: Any): String {
-    val mapper: ObjectMapper = JsonMapper.builder()
-            .addModule(JavaTimeModule())
-            .addModule(KtormModule())
-            .build()
-
-    mapper.propertyNamingStrategy = PropertyNamingStrategy.SNAKE_CASE
-    mapper.dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
-
-    return mapper.writeValueAsString(entity)
+    return mapper
 }

@@ -34,18 +34,21 @@ import org.kryptokrona.api.models.Block
 import org.kryptokrona.api.models.Blocks
 import org.kryptokrona.api.models.blocks
 import org.kryptokrona.api.plugins.DatabaseConnection
-import org.ktorm.dsl.delete
-import org.ktorm.dsl.eq
+import org.ktorm.dsl.*
 import org.ktorm.entity.add
+import org.ktorm.entity.count
 import org.ktorm.entity.find
-import org.ktorm.entity.toList
 
 class BlockServiceImpl: BlockService {
 
     private val db = DatabaseConnection.database
 
-    override fun getAll(): List<Block> {
-       return db.blocks.toList()
+    override fun getAll(size: Int, page: Int): List<Block> {
+       return db.from(Blocks)
+        .select()
+        .offset((page - 1) * size)
+        .limit(size)
+        .map { row -> Blocks.createEntity(row) }
     }
 
     override fun getById(id: Long): Block? {
@@ -58,6 +61,10 @@ class BlockServiceImpl: BlockService {
 
     override fun delete(id: Long) {
         db.delete(Blocks) { it.id eq id }
+    }
+
+    override fun getTotalCount(): Int {
+        return db.blocks.count()
     }
 
 }

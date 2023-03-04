@@ -1,5 +1,7 @@
 name: Kryptokrona API Main Pipeline
 
+# TODO: we should make this a reusable workflow and use in deloy-cd.yml
+
 env:
   GITHUB_REGISTRY: "ghcr.io"
   GITHUB_OWNER: "kryptokrona"
@@ -74,11 +76,10 @@ jobs:
         image: postgres:latest
         env:
           POSTGRES_DB: kryptokrona_api_dev
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: test1234
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: test1234
         ports:
           - 5432:5432
-        # Set health checks to wait until postgres has started
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -94,7 +95,7 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
-      - name: Run Liquibase Migrations to H2 file
+      - name: Run Liquibase Migrations
         run: ./gradlew update -PdbEnv=dev
 
       - name: Run Unit Test

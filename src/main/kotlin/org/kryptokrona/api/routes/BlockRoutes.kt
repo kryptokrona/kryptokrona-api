@@ -40,6 +40,8 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.kryptokrona.api.services.BlockServiceImpl
 import org.ktorm.jackson.KtormModule
+import java.text.SimpleDateFormat
+import java.util.*
 
 val service = BlockServiceImpl()
 
@@ -53,6 +55,7 @@ fun Route.blocksRoute() {
             .build()
 
         mapper.propertyNamingStrategy = PropertyNamingStrategy.SNAKE_CASE
+        mapper.dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
 
         val json = mapper.writeValueAsString(blocks)
         call.respond(HttpStatusCode.OK, json)
@@ -68,12 +71,14 @@ fun Route.blocksByIdRoute() {
 
 
              block?.let {
+                 // TODO: perhaps we should make a function for returning the JSON
                  val mapper: ObjectMapper = JsonMapper.builder()
                      .addModule(JavaTimeModule())
                      .addModule(KtormModule())
                      .build()
 
-                 // mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+                 mapper.propertyNamingStrategy = PropertyNamingStrategy.SNAKE_CASE
+                 mapper.dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
                  val json = mapper.writeValueAsString(block)
 
                  call.respond(HttpStatusCode.Found, json)

@@ -31,10 +31,8 @@
 package org.kryptokrona.api.routes
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import com.fasterxml.jackson.module.kotlin.jsonMapper
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*

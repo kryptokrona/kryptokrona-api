@@ -18,4 +18,5 @@ class BlockRoutesTest {
             assertEquals(HttpStatusCode.OK, status)
         }
     }
+
 }

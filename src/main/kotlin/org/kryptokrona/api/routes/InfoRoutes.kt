@@ -34,6 +34,9 @@ import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
+//TODO perhaps send data about which node is currently in use
+// and/or status of sync to node, perhaps also a percentage of how much is left to sync from the initial sync
+
 fun Route.infoRoute() {
     get("/v1/info") {
         call.respondText("Hello all info!")

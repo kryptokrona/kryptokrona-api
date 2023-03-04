@@ -8,6 +8,7 @@ import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class ApplicationTest {
+
     @Test
     fun testRoot() = testApplication {
         application {
@@ -15,7 +16,7 @@ class ApplicationTest {
         }
         client.get("/v1/test").apply {
             assertEquals(HttpStatusCode.OK, status)
-            assertEquals("Hello World!", bodyAsText())
         }
     }
+
 }

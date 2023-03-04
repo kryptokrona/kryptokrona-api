@@ -30,18 +30,47 @@
 
 package org.kryptokrona.api.routes
 
+import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.kryptokrona.api.services.SupplyServiceImpl
+import org.kryptokrona.api.utils.jsonObjectMapper
+
+private val service = SupplyServiceImpl()
 
 fun Route.suppliesRoute() {
     get("/v1/supplies") {
-        call.respondText("Hello all supplies!")
+        val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+        val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+
+        val items = service.getAll(size, page)
+        val totalCount = service.getTotalCount()
+
+        val result = mapOf(
+            "items" to items,
+            "page" to page,
+            "size" to size,
+            "total" to totalCount
+        )
+        val json = jsonObjectMapper().writeValueAsString(result)
+
+        call.respond(HttpStatusCode.OK, json)
     }
 }
 
 fun Route.suppliesByIdRoute() {
     get("/v1/supplies/{id}") {
-        call.respond(mapOf("hello" to "supplies"))
+        val id = call.parameters["id"]?.toLongOrNull()
+
+        id?.let {
+            val item = service.getById(id)
+
+            item?.let {
+                val json = jsonObjectMapper().writeValueAsString(item)
+
+                call.respond(HttpStatusCode.Found, json)
+            } ?: call.respond(HttpStatusCode.NotFound, "No supply found with id $id")
+        } ?: call.respond(HttpStatusCode.BadRequest)
     }
 }

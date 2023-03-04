@@ -44,6 +44,9 @@ fun Route.blocksRoute() {
         val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
         val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
 
+        //TODO: with a limit of 0 it gives results anyway which should not be possible. Problem in Ktorm? Or do we
+        // need custom handling of that in the service?
+
         val items = service.getAll(size, page)
         val totalCount = service.getTotalCount()
 

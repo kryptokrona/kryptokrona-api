@@ -3,7 +3,7 @@ name: Deploy to Staging & Production
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   backend:

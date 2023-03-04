@@ -1,6 +1,4 @@
-name: Kryptokrona API Main Pipeline
-
-# TODO: we should make this a reusable workflow and use in deloy-cd.yml
+name: Kryptokrona API Backend Pipeline
 
 env:
   GITHUB_REGISTRY: "ghcr.io"
@@ -8,9 +6,7 @@ env:
   GITHUB_DOCKER_IMAGE: "kryptokrona-api"
 
 on:
-  push:
-    branches:
-      - master
+  workflow_call:
 
 jobs:
   assemble:
@@ -115,8 +111,6 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
-      # perhaps run liquibase migrations here too and setup a postgresql database
-
       - name: Run Code Coverage
         run: echo "Hello"
 
@@ -153,79 +147,3 @@ jobs:
         run: |
           docker push $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE:${{ env.SHA }}
           docker push $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE:latest
-
-#  staging-deploy:
-#    name: Deploy Staging
-#    runs-on: ubuntu-latest
-#    needs: docker
-#
-#    steps:
-#      - name: Check out the codebase.
-#        uses: actions/checkout@v2
-#
-#      - name: Run playbook
-#        uses: dawidd6/action-ansible-playbook@v2
-#        with:
-#          playbook: provision_vps.yml
-#          directory: ./ansible
-#          key: ${{secrets.ANSIBLE_PRIVATE_KEY}}
-#          vault_password: ${{secrets.ANSIBLE_VAULT_PASS}}
-#          options: |
-#            --inventory staging.inventory
-#            --verbose
-#
-#  smoke-test-staging:
-#    name: Smoke Test Staging
-#    runs-on: ubuntu-latest
-#    needs: [ staging-deploy ]
-#
-#    steps:
-#      - uses: actions/checkout@v3
-#
-#      - name: Uses Python 3.11
-#        uses: actions/setup-python@v3
-#        with:
-#          python-version: '3.11.0-alpha.1'
-#
-#      - name: Smoke Test
-#        run: |
-#          pip3 install requests
-#          python3 scripts/tests/kryptokrona-api/smoke-test.py test-api.mjovanc.com
-#
-#  deploy-prod:
-#    name: Deploy Prod
-#    runs-on: ubuntu-latest
-#    needs: [ smoke-test-staging ]
-#
-#    steps:
-#      - name: Check out the codebase.
-#        uses: actions/checkout@v2
-#
-#      - name: Run playbook
-#        uses: dawidd6/action-ansible-playbook@v2
-#        with:
-#          playbook: provision_vps.yml
-#          directory: ./ansible
-#          key: ${{secrets.ANSIBLE_PRIVATE_KEY}}
-#          vault_password: ${{secrets.ANSIBLE_VAULT_PASS}}
-#          options: |
-#            --inventory prod.inventory
-#            --verbose
-#
-#  smoke-test-prod:
-#    name: Smoke Test Prod
-#    runs-on: ubuntu-latest
-#    needs: [ deploy-prod ]
-#
-#    steps:
-#      - uses: actions/checkout@v3
-#
-#      - name: Uses Python 3.11
-#        uses: actions/setup-python@v3
-#        with:
-#          python-version: '3.11.0-alpha.1'
-#
-#      - name: Smoke Test
-#        run: |
-#          pip3 install requests
-#          python3 scripts/tests/kryptokrona-api/smoke-test.py api.mjovanc.com

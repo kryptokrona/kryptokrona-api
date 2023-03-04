@@ -1,5 +1,7 @@
 name: Kryptokrona API Pull Request Pipeline
 
+#TODO: not done yet
+
 on: [ pull_request ]
 
 jobs:

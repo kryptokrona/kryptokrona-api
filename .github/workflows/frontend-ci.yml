@@ -1,0 +1,60 @@
+name: Kryptokrona API Frontend Pipeline
+
+env:
+  GITHUB_REGISTRY: "ghcr.io"
+  GITHUB_OWNER: "kryptokrona"
+  GITHUB_DOCKER_IMAGE: "kryptokrona-api-frontend"
+
+on:
+  workflow_call:
+
+jobs:
+  build:
+    name: Build Node ${{ matrix.node-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+    
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install Dependencies
+        run: npm install --omit=dev
+        working-directory: frontend
+
+      - name: Build
+        run: npm run build
+        working-directory: frontend
+
+  docker:
+    name: Build and Publish Docker Image
+    runs-on: ubuntu-latest
+    needs: [ build ]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: benjlevesque/short-sha@v1.2
+
+      - name: Log into registry ghcr.io
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GHCR_PAT }}
+
+      - name: Build Docker Image
+        run: |
+          docker build -t $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE-frontend:${{ env.SHA }} ./frontend --no-cache
+      
+      - name: Tag Image
+        run: |
+          docker tag $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE-frontend:${{ env.SHA }} $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE-frontend:latest
+      
+      - name: Publish Docker to GitHub Repository
+        run: |
+          docker push $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE-frontend:${{ env.SHA }}
+          docker push $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE-frontend:latest

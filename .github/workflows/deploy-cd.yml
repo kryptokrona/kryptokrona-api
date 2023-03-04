@@ -11,8 +11,10 @@ jobs:
     uses: ./.github/workflows/backend-ci.yml
     secrets: inherit
 
-  # frontend: TODO: (we will have some sort of gui to display the data etc)
-
+  frontend:
+    name: Frontend
+    uses: ./.github/workflows/frontend-ci.yml
+    secrets: inherit
 
 #  staging-deploy:
 #    name: Deploy Staging

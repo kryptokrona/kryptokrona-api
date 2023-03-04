@@ -58,7 +58,7 @@ fun Route.blocksRoute() {
 
 fun Route.blocksByIdRoute() {
     get("/v1/blocks/{id}") {
-        val id = call.parameters["id"]?.toIntOrNull()
+        val id = call.parameters["id"]?.toLongOrNull()
 
         id?.let {
             val block = service.getById(id)

@@ -6,7 +6,7 @@
 
     <changeSet id="0" author="mjovanc">
         <createTable tableName="blocks">
-            <column  name="id"  type="INTEGER">
+            <column  name="id"  type="BIGINT">
                 <constraints  nullable="false"  primaryKey="true"  unique="true"/>
             </column>
             <column  name="hash"  type="VARCHAR(255) NOT NULL" />
@@ -17,7 +17,7 @@
         </createTable>
 
         <createTable tableName="transactions">
-            <column  name="id"  type="INTEGER">
+            <column  name="id"  type="BIGINT">
                 <constraints  nullable="false"  primaryKey="true"  unique="true"/>
             </column>
             <column  name="hash"  type="VARCHAR(255) NOT NULL" />
@@ -35,7 +35,7 @@
         </createTable>
 
         <createTable tableName="hashrates">
-            <column  name="id"  type="INTEGER">
+            <column  name="id"  type="BIGINT">
                 <constraints  nullable="false"  primaryKey="true"  unique="true"/>
             </column>
             <column  name="hashrate"  type="VARCHAR(255) NOT NULL" />
@@ -43,7 +43,7 @@
         </createTable>
 
         <createTable tableName="nodes">
-            <column  name="id"  type="INTEGER">
+            <column  name="id"  type="BIGINT">
                 <constraints  nullable="false"  primaryKey="true"  unique="true"/>
             </column>
             <column  name="name"  type="VARCHAR(255) NOT NULL" />
@@ -59,7 +59,7 @@
         </createTable>
 
         <createTable tableName="outputs">
-            <column  name="id"  type="INTEGER">
+            <column  name="id"  type="BIGINT">
                 <constraints  nullable="false"  primaryKey="true"  unique="true"/>
             </column>
             <column  name="amount"  type="BIGINT NOT NULL" />
@@ -72,7 +72,7 @@
         </createTable>
 
         <createTable tableName="pools">
-            <column  name="id"  type="INTEGER">
+            <column  name="id"  type="BIGINT">
                 <constraints  nullable="false"  primaryKey="true"  unique="true"/>
             </column>
             <column  name="name"  type="VARCHAR(255) NOT NULL" />
@@ -87,7 +87,7 @@
         </createTable>
 
         <createTable tableName="postencrypted">
-            <column  name="id"  type="INTEGER">
+            <column  name="id"  type="BIGINT">
                 <constraints  nullable="false"  primaryKey="true"  unique="true"/>
             </column>
             <column  name="tx_hash"  type="VARCHAR(255) NOT NULL" />
@@ -97,7 +97,7 @@
         </createTable>
 
         <createTable tableName="postencryptedgroup">
-            <column  name="id"  type="INTEGER">
+            <column  name="id"  type="BIGINT">
                 <constraints  nullable="false"  primaryKey="true"  unique="true"/>
             </column>
             <column  name="tx_hash"  type="VARCHAR(255) NOT NULL" />

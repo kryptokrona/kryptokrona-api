@@ -38,7 +38,7 @@ import java.time.LocalDateTime
 
 interface Block : Entity<Block> {
     companion object : Entity.Factory<Block>()
-    val id: Int
+    val id: Long
     var hash: String
     var time: Long
     var difficulty: Float
@@ -47,7 +47,7 @@ interface Block : Entity<Block> {
 }
 
 object Blocks : Table<Block>("blocks") {
-    val id = int("id").primaryKey().bindTo { it.id }
+    val id = long("id").primaryKey().bindTo { it.id }
     val hash = varchar("hash").bindTo { it.hash }
     val time = long("time").bindTo { it.time }
     val difficulty = float("difficulty").bindTo { it.difficulty }

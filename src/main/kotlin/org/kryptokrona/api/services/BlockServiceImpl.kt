@@ -48,7 +48,7 @@ class BlockServiceImpl: BlockService {
        return db.blocks.toList()
     }
 
-    override fun getById(id: Int): Block? {
+    override fun getById(id: Long): Block? {
         return db.blocks.find { it.id eq id }
     }
 
@@ -56,7 +56,7 @@ class BlockServiceImpl: BlockService {
         db.blocks.add(block)
     }
 
-    override fun delete(id: Int) {
+    override fun delete(id: Long) {
         db.delete(Blocks) { it.id eq id }
     }
 

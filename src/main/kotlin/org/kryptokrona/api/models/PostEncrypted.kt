@@ -38,7 +38,7 @@ import java.time.LocalDateTime
 
 interface PostEncrypted : Entity<PostEncrypted> {
     companion object : Entity.Factory<PostEncrypted>()
-    val id: Int
+    val id: Long
     var txHash: String
     var txBox: String
     var txTimestamp: Long
@@ -46,7 +46,7 @@ interface PostEncrypted : Entity<PostEncrypted> {
 }
 
 object PostsEncrypted : Table<PostEncrypted>("postsencrypted") {
-    val id = int("id").primaryKey().bindTo { it.id }
+    val id = long("id").primaryKey().bindTo { it.id }
     val txHash = varchar("tx_hash").bindTo { it.txHash }
     val txBox = varchar("tx_box").bindTo { it.txBox }
     val txTimestamp = long("tx_timestamp").bindTo { it.txTimestamp }

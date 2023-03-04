@@ -38,7 +38,7 @@ import java.time.LocalDateTime
 
 interface Pool : Entity<Pool> {
     companion object : Entity.Factory<Pool>()
-    val id: Int
+    val id: Long
     var name: String
     var url: String
     var miners: Long
@@ -51,7 +51,7 @@ interface Pool : Entity<Pool> {
 }
 
 object Pools : Table<Pool>("pools") {
-    val id = int("id").primaryKey().bindTo { it.id }
+    val id = long("id").primaryKey().bindTo { it.id }
     val name = varchar("name").bindTo { it.name }
     val url = varchar("url").bindTo { it.url }
     val miners = long("miners").bindTo { it.miners }

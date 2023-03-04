@@ -33,21 +33,18 @@ package org.kryptokrona.api.models
 import org.ktorm.database.Database
 import org.ktorm.entity.Entity
 import org.ktorm.entity.sequenceOf
-import org.ktorm.schema.Table
-import org.ktorm.schema.datetime
-import org.ktorm.schema.int
-import org.ktorm.schema.varchar
+import org.ktorm.schema.*
 import java.time.LocalDateTime
 
 interface Hashrate : Entity<Hashrate> {
     companion object : Entity.Factory<Hashrate>()
-    val id: Int
+    val id: Long
     var hashrate: String
     var createdAt: LocalDateTime
 }
 
 object Hashrates : Table<Hashrate>("hashrates") {
-    val id = int("id").primaryKey().bindTo { it.id }
+    val id = long("id").primaryKey().bindTo { it.id }
     val hashrate = varchar("hashrate").bindTo { it.hashrate }
     val createdAt = datetime("created_at").bindTo { it.createdAt }
 }

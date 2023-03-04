@@ -36,10 +36,10 @@ interface BlockService {
 
     fun getAll(): List<Block>
 
-    fun getById(id: Int): Block?
+    fun getById(id: Long): Block?
 
     fun save(block: Block)
 
-    fun delete(id: Int)
+    fun delete(id: Long)
 
 }

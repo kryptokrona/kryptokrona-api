@@ -38,7 +38,7 @@ import java.time.LocalDateTime
 
 interface Transaction : Entity<Transaction> {
     companion object : Entity.Factory<Transaction>()
-    val id: Int
+    val id: Long
     var hash: String
     var time: Long
     var confirmations: Int
@@ -52,7 +52,7 @@ interface Transaction : Entity<Transaction> {
 }
 
 object Transactions : Table<Transaction>("transactions") {
-    val id = int("id").primaryKey().bindTo { it.id }
+    val id = long("id").primaryKey().bindTo { it.id }
     val hash = varchar("hash").bindTo { it.hash }
     val time = long("time").bindTo { it.time }
     val confirmations = int("confirmations").bindTo { it.confirmations }

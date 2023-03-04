@@ -38,7 +38,7 @@ import java.time.LocalDateTime
 
 interface Output : Entity<Output> {
     companion object : Entity.Factory<Output>()
-    val id: Int
+    val id: Long
     var amount: Long
     var keyImage: String
     var type: Int
@@ -47,7 +47,7 @@ interface Output : Entity<Output> {
 }
 
 object Outputs : Table<Output>("outputs") {
-    val id = int("id").primaryKey().bindTo { it.id }
+    val id = long("id").primaryKey().bindTo { it.id }
     val amount = long("amount").bindTo { it.amount }
     val keyImage = varchar("key_image").bindTo { it.keyImage }
     val type = int("type").bindTo { it.type }

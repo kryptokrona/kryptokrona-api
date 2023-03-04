@@ -38,7 +38,7 @@ import java.time.LocalDateTime
 
 interface Node : Entity<Node> {
     companion object : Entity.Factory<Node>()
-    val id: Int
+    val id: Long
     var name: String
     var hostname: String
     var port: Int
@@ -52,7 +52,7 @@ interface Node : Entity<Node> {
 }
 
 object Nodes : Table<Node>("nodes") {
-    val id = int("id").primaryKey().bindTo { it.id }
+    val id = long("id").primaryKey().bindTo { it.id }
     val name = varchar("name").bindTo { it.name }
     val hostname = varchar("hostname").bindTo { it.hostname }
     val port = int("port").bindTo { it.port }

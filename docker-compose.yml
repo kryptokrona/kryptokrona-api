@@ -1,7 +1,7 @@
 version: '3.7'
 
 services:
-  db-dev:
+  db:
     image: postgres
     container_name: kryptokrona_api_dev
     restart: always
@@ -10,22 +10,22 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: test1234
     volumes:
-      - db-dev:/data/postgres
+      - db:/data/postgres
     ports:
       - "5432:5432"
     networks:
       - kryptokrona_api_net
 
-  frontend:
-    build: ./frontend # does not work to build, missing index.js probably wrong inside Dockerfile
-    container_name: kryptokrona_api_frontend
-    ports:
-      - "5173:5173"
-    networks:
-      - kryptokrona_api_net
+#  frontend:
+#    build: ./frontend # does not work to build, missing index.js probably wrong inside Dockerfile
+#    container_name: kryptokrona_api_frontend
+#    ports:
+#      - "5173:5173"
+#    networks:
+#      - kryptokrona_api_net
 
 volumes:
-  db-dev:
+  db:
 
 networks:
   kryptokrona_api_net:

@@ -31,6 +31,7 @@
 package org.kryptokrona.api.routes
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.PropertyNamingStrategy
 import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.ktor.http.*
@@ -50,6 +51,8 @@ fun Route.blocksRoute() {
             .addModule(JavaTimeModule())
             .addModule(KtormModule())
             .build()
+
+        mapper.propertyNamingStrategy = PropertyNamingStrategy.SNAKE_CASE
 
         val json = mapper.writeValueAsString(blocks)
         call.respond(HttpStatusCode.OK, json)

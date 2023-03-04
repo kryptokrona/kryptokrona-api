@@ -47,6 +47,8 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
+      # perhaps run liquibase migrations here too and setup a postgresql database
+
       - name: Temporarily
         run: echo "hello"
 
@@ -67,6 +69,22 @@ jobs:
     runs-on: ubuntu-latest
     needs: [ assemble ]
 
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: kryptokrona_api_dev
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: test1234
+        ports:
+          - 5432:5432
+        # Set health checks to wait until postgres has started
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - uses: actions/checkout@v3
       - name: Set up OpenJDK 17
@@ -75,6 +93,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: 'gradle'
+
+      - name: Run Liquibase Migrations to H2 file
+        run: ./gradlew update -PdbEnv=dev
 
       - name: Run Unit Test
         run: ./gradlew test
@@ -92,6 +113,8 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
           cache: 'gradle'
+
+      # perhaps run liquibase migrations here too and setup a postgresql database
 
       - name: Run Code Coverage
         run: echo "Hello"

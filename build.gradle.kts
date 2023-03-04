@@ -65,6 +65,7 @@ dependencies {
     runtimeOnly("com.squareup:kotlinpoet:0.7.0")
 
     // testing
+    implementation("com.h2database:h2:$h2_version")
     testImplementation("io.ktor:ktor-server-test-host-jvm:2.2.3")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
@@ -86,16 +87,16 @@ if (propertiesFile.exists()) {
 
 liquibase {
     activities.register("dev") {
-        val urlDev = properties.getProperty("liquibase.dev.url") ?: System.getenv("LIQUIBASE_DEV_URL")
-        val userDev = properties.getProperty("liquibase.dev.user") ?: System.getenv("LIQUIBASE_DEV_USER")
-        val pwdDev = properties.getProperty("liquibase.dev.password") ?: System.getenv("LIQUIBASE_DEV_PASSWORD")
+        val url = properties.getProperty("liquibase.dev.url") ?: System.getenv("LIQUIBASE_DEV_URL")
+        val user = properties.getProperty("liquibase.dev.user") ?: System.getenv("LIQUIBASE_DEV_USER")
+        val password = properties.getProperty("liquibase.dev.password") ?: System.getenv("LIQUIBASE_DEV_PASSWORD")
 
         this.arguments = mapOf(
             "logLevel" to "info",
             "changeLogFile" to "src/main/resources/db/changelog/master.xml",
-            "url" to urlDev,
-            "username" to userDev,
-            "password" to pwdDev,
+            "url" to url,
+            "username" to user,
+            "password" to password,
             "classpath" to "src/main/resources/"
         )
     }
@@ -103,16 +104,17 @@ liquibase {
     activities.register("prod") {
         val url = System.getenv("LIQUIBASE_URL")
         val user = System.getenv("LIQUIBASE_USER")
-        val pwd = System.getenv("LIQUIBASE_PASSWORD")
+        val password = System.getenv("LIQUIBASE_PASSWORD")
 
         this.arguments = mapOf(
             "logLevel" to "info",
             "changeLogFile" to "src/main/resources/db/changelog/master.xml",
             "url" to url,
             "username" to user,
-            "password" to pwd,
+            "password" to password,
             "classpath" to "src/main/resources/"
         )
     }
+
     runList = dbEnv
 }

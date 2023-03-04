@@ -9,9 +9,9 @@ object DatabaseConnection {
     private val config = HoconApplicationConfig(ConfigFactory.load())
 
     val database = Database.connect(
-        url = config.property("postgres.url").getString(),
-        driver = "org.postgresql.Driver",
-        user = config.property("postgres.user").getString(),
-        password = config.property("postgres.password").getString()
+        url = config.property("db.url").getString(),
+        driver = config.property("db.driver").getString(),
+        user = config.property("db.user").getString(),
+        password = config.property("db.password").getString()
     )
 }

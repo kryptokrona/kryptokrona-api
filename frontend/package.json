@@ -1,5 +1,5 @@
 {
-	"name": "kryptokrona-api-dashboard",
+	"name": "kryptokrona-api-frontend",
 	"description": "A dashboard to present data from Kryptokrona API",
 	"version": "0.1.0",
 	"private": true,

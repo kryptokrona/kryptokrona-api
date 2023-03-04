@@ -41,9 +41,9 @@ import java.util.*
 
 fun jsonObjectMapper(): ObjectMapper {
     val mapper: ObjectMapper = JsonMapper.builder()
-            .addModule(JavaTimeModule())
-            .addModule(KtormModule())
-            .build()
+        .addModule(JavaTimeModule())
+        .addModule(KtormModule())
+        .build()
 
     mapper.propertyNamingStrategy = PropertyNamingStrategy.SNAKE_CASE
     mapper.dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)

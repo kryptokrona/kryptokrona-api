@@ -15,10 +15,10 @@ class TransactionServiceImpl : TransactionService {
 
     override fun getAll(size: Int, page: Int): List<Transaction> {
         return db.from(Transactions)
-        .select()
-        .offset((page - 1) * size)
-        .limit(size)
-        .map { row -> Transactions.createEntity(row) }
+            .select()
+            .offset((page - 1) * size)
+            .limit(size)
+            .map { row -> Transactions.createEntity(row) }
     }
 
     override fun getById(id: Long): Transaction? {

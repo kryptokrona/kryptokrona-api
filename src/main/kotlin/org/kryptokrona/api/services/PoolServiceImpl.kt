@@ -15,10 +15,10 @@ class PoolServiceImpl : PoolService {
 
     override fun getAll(size: Int, page: Int): List<Pool> {
         return db.from(Pools)
-        .select()
-        .offset((page - 1) * size)
-        .limit(size)
-        .map { row -> Pools.createEntity(row) }
+            .select()
+            .offset((page - 1) * size)
+            .limit(size)
+            .map { row -> Pools.createEntity(row) }
     }
 
     override fun getById(id: Long): Pool? {

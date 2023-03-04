@@ -38,6 +38,7 @@ import java.time.LocalDateTime
 
 interface Transaction : Entity<Transaction> {
     companion object : Entity.Factory<Transaction>()
+
     val id: Long
     var hash: String
     var time: Long

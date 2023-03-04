@@ -41,6 +41,7 @@ import java.time.LocalDateTime
 
 interface Hashrate : Entity<Hashrate> {
     companion object : Entity.Factory<Hashrate>()
+
     val id: Long
     var hashrate: String
     var createdAt: LocalDateTime

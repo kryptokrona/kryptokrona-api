@@ -16,10 +16,10 @@ class PostEncryptedServiceImpl : PostEncryptedService {
 
     override fun getAll(size: Int, page: Int): List<PostEncrypted> {
         return db.from(PostsEncrypted)
-        .select()
-        .offset((page - 1) * size)
-        .limit(size)
-        .map { row -> PostsEncrypted.createEntity(row) }
+            .select()
+            .offset((page - 1) * size)
+            .limit(size)
+            .map { row -> PostsEncrypted.createEntity(row) }
     }
 
     override fun getById(id: Long): PostEncrypted? {

@@ -38,6 +38,7 @@ import java.time.LocalDateTime
 
 interface Pool : Entity<Pool> {
     companion object : Entity.Factory<Pool>()
+
     val id: Long
     var name: String
     var url: String

@@ -15,10 +15,10 @@ class NodeServiceImpl : NodeService {
 
     override fun getAll(size: Int, page: Int): List<Node> {
         return db.from(Nodes)
-        .select()
-        .offset((page - 1) * size)
-        .limit(size)
-        .map { row -> Nodes.createEntity(row) }
+            .select()
+            .offset((page - 1) * size)
+            .limit(size)
+            .map { row -> Nodes.createEntity(row) }
     }
 
     override fun getById(id: Long): Node? {

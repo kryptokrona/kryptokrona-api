@@ -38,6 +38,7 @@ import java.time.LocalDateTime
 
 interface Node : Entity<Node> {
     companion object : Entity.Factory<Node>()
+
     val id: Long
     var name: String
     var hostname: String

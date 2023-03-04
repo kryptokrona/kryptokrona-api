@@ -15,10 +15,10 @@ class HashrateServiceImpl : HashrateService {
 
     override fun getAll(size: Int, page: Int): List<Hashrate> {
         return db.from(Hashrates)
-        .select()
-        .offset((page - 1) * size)
-        .limit(size)
-        .map { row -> Hashrates.createEntity(row) }
+            .select()
+            .offset((page - 1) * size)
+            .limit(size)
+            .map { row -> Hashrates.createEntity(row) }
     }
 
     override fun getById(id: Long): Hashrate? {

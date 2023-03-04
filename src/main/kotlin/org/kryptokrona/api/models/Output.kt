@@ -38,6 +38,7 @@ import java.time.LocalDateTime
 
 interface Output : Entity<Output> {
     companion object : Entity.Factory<Output>()
+
     val id: Long
     var amount: Long
     var keyImage: String

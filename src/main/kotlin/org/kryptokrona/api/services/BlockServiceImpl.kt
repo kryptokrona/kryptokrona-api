@@ -39,16 +39,16 @@ import org.ktorm.entity.add
 import org.ktorm.entity.count
 import org.ktorm.entity.find
 
-class BlockServiceImpl: BlockService {
+class BlockServiceImpl : BlockService {
 
     private val db = DatabaseConnection.database
 
     override fun getAll(size: Int, page: Int): List<Block> {
-       return db.from(Blocks)
-        .select()
-        .offset((page - 1) * size)
-        .limit(size)
-        .map { row -> Blocks.createEntity(row) }
+        return db.from(Blocks)
+            .select()
+            .offset((page - 1) * size)
+            .limit(size)
+            .map { row -> Blocks.createEntity(row) }
     }
 
     override fun getById(id: Long): Block? {

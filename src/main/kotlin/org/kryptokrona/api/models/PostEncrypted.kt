@@ -41,6 +41,7 @@ import java.time.LocalDateTime
 
 interface PostEncrypted : Entity<PostEncrypted> {
     companion object : Entity.Factory<PostEncrypted>()
+
     val id: Long
     var txHash: String
     var txBox: String

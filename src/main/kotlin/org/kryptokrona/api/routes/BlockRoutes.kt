@@ -69,11 +69,11 @@ fun Route.blocksByIdRoute() {
         id?.let {
             val item = service.getById(id)
 
-             item?.let {
-                 val json = jsonObjectMapper().writeValueAsString(item)
+            item?.let {
+                val json = jsonObjectMapper().writeValueAsString(item)
 
-                 call.respond(HttpStatusCode.Found, json)
-             } ?: call.respond(HttpStatusCode.NotFound, "No block found with id $id")
+                call.respond(HttpStatusCode.Found, json)
+            } ?: call.respond(HttpStatusCode.NotFound, "No block found with id $id")
         } ?: call.respond(HttpStatusCode.BadRequest)
     }
 }

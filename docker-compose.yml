@@ -14,13 +14,19 @@ services:
     ports:
       - "5432:5432"
     networks:
-      - hugin-net
+      - kryptokrona_api_net
 
-# TODO: add frontend here later
+  frontend:
+    build: ./frontend # does not work to build, missing index.js probably wrong inside Dockerfile
+    container_name: kryptokrona_api_frontend
+    ports:
+      - "5173:5173"
+    networks:
+      - kryptokrona_api_net
 
 volumes:
   db-dev:
 
 networks:
-  hugin-net:
+  kryptokrona_api_net:
     driver: bridge

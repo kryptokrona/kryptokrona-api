@@ -1,3 +1,3 @@
 ### get all blocks
-GET http://localhost:8080/api/v1/blocks
+GET http://localhost:8080/v1/blocks
 Accept: application/json

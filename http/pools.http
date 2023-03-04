@@ -1,3 +1,3 @@
 ### get all pools
-GET http://localhost:8080/api/v1/pools
+GET http://localhost:8080/v1/pools
 Accept: application/json

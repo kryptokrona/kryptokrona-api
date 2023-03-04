@@ -39,7 +39,7 @@ import org.kryptokrona.api.routes.*
 fun Application.configureRouting() {
     routing {
         swaggerUI(
-            path = "swagger",
+            path = "/docs",
             swaggerFile = "openapi/documentation.yaml"
         )
 

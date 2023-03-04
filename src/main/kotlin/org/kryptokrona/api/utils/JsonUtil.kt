@@ -30,9 +30,37 @@
 
 package org.kryptokrona.api.utils
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.PropertyNamingStrategy
+import com.fasterxml.jackson.databind.json.JsonMapper
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import org.kryptokrona.api.models.Block
 import org.ktorm.entity.Entity
+import org.ktorm.jackson.KtormModule
+import java.text.SimpleDateFormat
+import java.util.*
 
 
-fun entityToJsonStr(entity: ): String {
+fun entitiesToJsonStr(entities: List<Any>): String {
+    val mapper: ObjectMapper = JsonMapper.builder()
+            .addModule(JavaTimeModule())
+            .addModule(KtormModule())
+            .build()
 
+    mapper.propertyNamingStrategy = PropertyNamingStrategy.SNAKE_CASE
+    mapper.dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
+
+    return mapper.writeValueAsString(entities)
+}
+
+fun entityToJsonStr(entity: Any): String {
+    val mapper: ObjectMapper = JsonMapper.builder()
+            .addModule(JavaTimeModule())
+            .addModule(KtormModule())
+            .build()
+
+    mapper.propertyNamingStrategy = PropertyNamingStrategy.SNAKE_CASE
+    mapper.dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH)
+
+    return mapper.writeValueAsString(entity)
 }

@@ -16,6 +16,8 @@ services:
     networks:
       - hugin-net
 
+# TODO: add frontend here later
+
 volumes:
   db-dev:
 

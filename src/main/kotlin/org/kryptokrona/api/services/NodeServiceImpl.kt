@@ -1,27 +1,38 @@
 package org.kryptokrona.api.services
 
-import org.kryptokrona.api.models.Node
+import org.kryptokrona.api.models.*
+import org.kryptokrona.api.plugins.DatabaseConnection
+import org.ktorm.dsl.*
+import org.ktorm.entity.add
+import org.ktorm.entity.count
+import org.ktorm.entity.find
 
 class NodeServiceImpl : NodeService {
 
+    private val db = DatabaseConnection.database
+
     override fun getAll(size: Int, page: Int): List<Node> {
-        TODO("Not yet implemented")
+        return db.from(Nodes)
+        .select()
+        .offset((page - 1) * size)
+        .limit(size)
+        .map { row -> Nodes.createEntity(row) }
     }
 
     override fun getById(id: Long): Node? {
-        TODO("Not yet implemented")
+        return db.nodes.find { it.id eq id }
     }
 
     override fun save(node: Node) {
-        TODO("Not yet implemented")
+        db.nodes.add(node)
     }
 
     override fun delete(id: Long) {
-        TODO("Not yet implemented")
+        db.delete(Nodes) { it.id eq id }
     }
 
     override fun getTotalCount(): Int {
-        TODO("Not yet implemented")
+        return db.nodes.count()
     }
 
 }

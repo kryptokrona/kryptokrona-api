@@ -1,27 +1,38 @@
 package org.kryptokrona.api.services
 
-import org.kryptokrona.api.models.PostEncrypted
+import org.kryptokrona.api.models.*
+import org.kryptokrona.api.plugins.DatabaseConnection
+import org.ktorm.dsl.*
+import org.ktorm.entity.add
+import org.ktorm.entity.count
+import org.ktorm.entity.find
 
 class PostEncryptedServiceImpl : PostEncryptedService {
 
+    private val db = DatabaseConnection.database
+
     override fun getAll(size: Int, page: Int): List<PostEncrypted> {
-        TODO("Not yet implemented")
+        return db.from(PostsEncrypted)
+        .select()
+        .offset((page - 1) * size)
+        .limit(size)
+        .map { row -> PostsEncrypted.createEntity(row) }
     }
 
     override fun getById(id: Long): PostEncrypted? {
-        TODO("Not yet implemented")
+        return db.postsencrypted.find { it.id eq id }
     }
 
     override fun save(postEncrypted: PostEncrypted) {
-        TODO("Not yet implemented")
+        db.postsencrypted.add(postEncrypted)
     }
 
     override fun delete(id: Long) {
-        TODO("Not yet implemented")
+        db.delete(PostsEncrypted) { it.id eq id }
     }
 
     override fun getTotalCount(): Int {
-        TODO("Not yet implemented")
+        return db.transactions.count()
     }
 
 }

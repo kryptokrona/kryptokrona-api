@@ -30,10 +30,6 @@
 
 package org.kryptokrona.api.routes
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.databind.PropertyNamingStrategy
-import com.fasterxml.jackson.databind.json.JsonMapper
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
@@ -41,9 +37,6 @@ import io.ktor.server.routing.*
 import org.kryptokrona.api.services.BlockServiceImpl
 import org.kryptokrona.api.utils.entitiesToJsonStr
 import org.kryptokrona.api.utils.entityToJsonStr
-import org.ktorm.jackson.KtormModule
-import java.text.SimpleDateFormat
-import java.util.*
 
 val service = BlockServiceImpl()
 

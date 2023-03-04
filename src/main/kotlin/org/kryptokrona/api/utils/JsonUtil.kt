@@ -34,8 +34,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.databind.PropertyNamingStrategy
 import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import org.kryptokrona.api.models.Block
-import org.ktorm.entity.Entity
 import org.ktorm.jackson.KtormModule
 import java.text.SimpleDateFormat
 import java.util.*

@@ -33,7 +33,10 @@ package org.kryptokrona.api.models
 import org.ktorm.database.Database
 import org.ktorm.entity.Entity
 import org.ktorm.entity.sequenceOf
-import org.ktorm.schema.*
+import org.ktorm.schema.Table
+import org.ktorm.schema.datetime
+import org.ktorm.schema.long
+import org.ktorm.schema.varchar
 import java.time.LocalDateTime
 
 interface Hashrate : Entity<Hashrate> {

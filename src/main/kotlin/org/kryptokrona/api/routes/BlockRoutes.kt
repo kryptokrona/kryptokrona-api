@@ -39,8 +39,6 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import org.kryptokrona.api.models.Block
-import org.kryptokrona.api.models.Blocks
 import org.kryptokrona.api.services.BlockServiceImpl
 import org.ktorm.jackson.KtormModule
 
@@ -49,10 +47,11 @@ val service = BlockServiceImpl()
 fun Route.blocksRoute() {
     get("/v1/blocks") {
         val blocks = service.getAll()
+
         val mapper: ObjectMapper = JsonMapper.builder()
-                     .addModule(JavaTimeModule())
-                     .addModule(KtormModule())
-                     .build()
+            .addModule(JavaTimeModule())
+            .addModule(KtormModule())
+            .build()
 
         val json = mapper.writeValueAsString(blocks)
         call.respond(HttpStatusCode.OK, json)

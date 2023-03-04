@@ -19,7 +19,7 @@ jobs:
   staging-deploy:
     name: Deploy Staging
     runs-on: ubuntu-latest
-    needs: [ backend, frontend ]
+    needs: [ frontend, backend ]
 
     steps:
       - name: Run playbook

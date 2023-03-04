@@ -30,18 +30,47 @@
 
 package org.kryptokrona.api.routes
 
+import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.kryptokrona.api.services.OutputServiceImpl
+import org.kryptokrona.api.utils.jsonObjectMapper
+
+private val service = OutputServiceImpl()
 
 fun Route.outputsRoute() {
     get("/v1/outputs") {
-        call.respondText("Hello all outputs!")
+        val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+        val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+
+        val items = service.getAll(size, page)
+        val totalCount = service.getTotalCount()
+
+        val result = mapOf(
+            "items" to items,
+            "page" to page,
+            "size" to size,
+            "total" to totalCount
+        )
+        val json = jsonObjectMapper().writeValueAsString(result)
+
+        call.respond(HttpStatusCode.OK, json)
     }
 }
 
 fun Route.outputsByIdRoute() {
     get("/v1/outputs/{id}") {
-        call.respond(mapOf("hello" to "outputs"))
+        val id = call.parameters["id"]?.toLongOrNull()
+
+        id?.let {
+            val item = service.getById(id)
+
+            item?.let {
+                val json = jsonObjectMapper().writeValueAsString(item)
+
+                call.respond(HttpStatusCode.Found, json)
+            } ?: call.respond(HttpStatusCode.NotFound, "No output found with id $id")
+        } ?: call.respond(HttpStatusCode.BadRequest)
     }
 }

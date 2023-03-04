@@ -30,18 +30,46 @@
 
 package org.kryptokrona.api.routes
 
+import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.kryptokrona.api.services.PostEncryptedServiceImpl
+import org.kryptokrona.api.utils.jsonObjectMapper
+
+private val service = PostEncryptedServiceImpl()
 
 fun Route.postsEncryptedRoute() {
     get("/v1/posts-encrypted") {
-        call.respondText("Hello all postsEncrypted!")
+        val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+        val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+
+        val items = service.getAll(size, page)
+        val totalCount = service.getTotalCount()
+
+        val result = mapOf(
+            "items" to items,
+            "page" to page,
+            "size" to size,
+            "total" to totalCount
+        )
+        val json = jsonObjectMapper().writeValueAsString(result)
+
     }
 }
 
 fun Route.postsEncryptedByIdRoute() {
     get("/v1/posts-encrypted/{id}") {
-        call.respond(mapOf("hello" to "postsEncrypted"))
+        val id = call.parameters["id"]?.toLongOrNull()
+
+        id?.let {
+            val item = service.getById(id)
+
+            item?.let {
+                val json = jsonObjectMapper().writeValueAsString(item)
+
+                call.respond(HttpStatusCode.Found, json)
+            } ?: call.respond(HttpStatusCode.NotFound, "No block found with id $id")
+        } ?: call.respond(HttpStatusCode.BadRequest)
     }
 }

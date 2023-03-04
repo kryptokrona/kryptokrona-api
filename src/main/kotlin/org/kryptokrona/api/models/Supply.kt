@@ -30,4 +30,27 @@
 
 package org.kryptokrona.api.models
 
-//TODO to be defined what we should store here.
+import org.ktorm.database.Database
+import org.ktorm.entity.Entity
+import org.ktorm.entity.sequenceOf
+import org.ktorm.schema.*
+import java.time.LocalDateTime
+
+
+interface Supply : Entity<Supply> {
+    companion object : Entity.Factory<Supply>()
+
+    val id: Long
+    var supply: Long
+    var txTimestamp: Long
+    var createdAt: LocalDateTime
+}
+
+object Supplies : Table<Supply>("outputs") {
+    val id = long("id").primaryKey().bindTo { it.id }
+    val supply = long("supply").bindTo { it.supply }
+    val txTimestamp = long("tx_timestamp").bindTo { it.txTimestamp }
+    val createdAt = datetime("created_at").bindTo { it.createdAt }
+}
+
+val Database.supplies get() = this.sequenceOf(Supplies)

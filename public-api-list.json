@@ -1,0 +1,24 @@
+{
+  "apis": [
+    {
+      "name": "Kryptokrona API Official",
+      "description": "The official Kryptokrona API",
+      "url": "https://api.mjovanc.com",
+      "contact_name": "Marcus Cvjeticanin",
+      "contact_email": "mjovanc@icloud.com",
+      "github": "https://github.com/mjovanc",
+      "twitter": "mjovanc",
+      "hugin": "SEKReUhvgYYdWMx8yZwLWT5KdPJqCNPZyNYDLcz65NotD6urZ4U39ZzdC9pEBoYA61E8efUNdQv4jbND3oLS9WvSE9s1UMQcrxrf4ee65b1fb4f95b6aa7cc37e88ef25edea35ed190176ae04c205d8e9a07ae41b"
+    },
+    {
+      "name": "Kryptokrona API Staging",
+      "description": "The staging Kryptokrona API server for testing new deploys.",
+      "url": "https://test-api.mjovanc.com",
+      "contact_name": "Marcus Cvjeticanin",
+      "contact_email": "mjovanc@icloud.com",
+      "github": "https://github.com/mjovanc",
+      "twitter": "mjovanc",
+      "hugin": "SEKReUhvgYYdWMx8yZwLWT5KdPJqCNPZyNYDLcz65NotD6urZ4U39ZzdC9pEBoYA61E8efUNdQv4jbND3oLS9WvSE9s1UMQcrxrf4ee65b1fb4f95b6aa7cc37e88ef25edea35ed190176ae04c205d8e9a07ae41b"
+    }
+  ]
+}

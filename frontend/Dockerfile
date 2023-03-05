@@ -1,11 +1,11 @@
-FROM node:16-alpine AS builder
+FROM node:18-alpine AS builder
 WORKDIR /app
 COPY package*.json .
 RUN yarn install --frozen-lockfile
 COPY . .
 RUN yarn build
 
-FROM mhart/alpine-node:slim-16
+FROM node:18-alpine
 WORKDIR /app
 COPY --from=builder /app/build build/
 COPY --from=builder /app/node_modules node_modules/

@@ -16,13 +16,13 @@ services:
     networks:
       - kryptokrona_api_net
 
-#  frontend:
-#    build: ./frontend # does not work to build, missing index.js probably wrong inside Dockerfile
-#    container_name: kryptokrona_api_frontend
-#    ports:
-#      - "5173:5173"
-#    networks:
-#      - kryptokrona_api_net
+  frontend:
+    build: ./frontend
+    container_name: kryptokrona_api_frontend
+    ports:
+      - "3000:3000"
+    networks:
+      - kryptokrona_api_net
 
 volumes:
   db:

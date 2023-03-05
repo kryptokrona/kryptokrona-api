@@ -31,18 +31,12 @@
 package org.kryptokrona.api.plugins
 
 import io.ktor.server.application.*
-import io.ktor.server.plugins.swagger.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.kryptokrona.api.routes.*
 
 fun Application.configureRouting() {
     routing {
-        swaggerUI(
-            path = "/docs",
-            swaggerFile = "openapi/documentation.yaml"
-        )
-
         get("/v1/test") {
             call.respondText("Hello World!")
         }

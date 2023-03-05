@@ -46,7 +46,6 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
     implementation("org.ktorm:ktorm-support-postgresql:$ktorm_version")
     implementation("org.postgresql:postgresql:$postgres_version")
-    implementation("io.ktor:ktor-server-swagger:$ktor_version")
     implementation("io.ktor:ktor-serialization-jackson-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("org.ktorm:ktorm-core:$ktorm_version")
@@ -65,7 +64,6 @@ dependencies {
     runtimeOnly("com.squareup:kotlinpoet:0.7.0")
 
     // testing
-    implementation("com.h2database:h2:$h2_version")
     testImplementation("io.ktor:ktor-server-test-host-jvm:2.2.3")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")

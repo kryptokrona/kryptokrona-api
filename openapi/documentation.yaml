@@ -11,6 +11,9 @@ info:
     name: The 3-Clause BSD License
     url: https://github.com/kryptokrona/kryptokrona-api/blob/master/LICENSE
 servers:
-  - url: 'https'
+- url: https://api.mjovanc.com
+  description: Kryptokrona API Main Server
+- url: https://test-api.mjovanc.com
+  description: Kryptokrona API Staging Server
 paths:
   

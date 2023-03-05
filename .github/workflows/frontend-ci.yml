@@ -48,13 +48,13 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE-frontend:${{ env.SHA }} ./frontend --no-cache
+          docker build -t $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE:${{ env.SHA }} ./frontend --no-cache
       
       - name: Tag Image
         run: |
-          docker tag $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE-frontend:${{ env.SHA }} $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE-frontend:latest
+          docker tag $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE:${{ env.SHA }} $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE:latest
       
       - name: Publish Docker to GitHub Repository
         run: |
-          docker push $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE-frontend:${{ env.SHA }}
-          docker push $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE-frontend:latest
+          docker push $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE:${{ env.SHA }}
+          docker push $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE:latest

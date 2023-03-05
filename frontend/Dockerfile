@@ -1,22 +1,15 @@
-FROM node:18-alpine AS build
-
+FROM node:16-alpine AS builder
 WORKDIR /app
+COPY package*.json .
+RUN yarn install --frozen-lockfile
 COPY . .
-RUN yarn
 RUN yarn build
 
-FROM nginx:1.23.3-alpine-slim AS deploy-static
-
-WORKDIR /usr/share/nginx/html
-RUN rm -rf ./*
-COPY --from=build /app/build-static .
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
-
-FROM node:18-alpine AS deploy-node
-
+FROM mhart/alpine-node:slim-16
 WORKDIR /app
-RUN rm -rf ./*
-COPY --from=build /app/package.json .
-COPY --from=build /app/build-node .
-
-CMD ["node", "index.js"]
+COPY --from=builder /app/build build/
+COPY --from=builder /app/node_modules node_modules/
+COPY package.json .
+EXPOSE 3000
+ENV NODE_ENV=production
+CMD [ "node", "build" ]

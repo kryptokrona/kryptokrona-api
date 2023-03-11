@@ -7,8 +7,7 @@ module.exports = {
   plugins: [],
   theme: {
     fontFamily: {
-      sans: ["Graphik", "sans-serif"],
-      serif: ["Merriweather", "serif"],
+      roboto: ["Roboto Mono", "monospace", "sans-serif"],
     },
   },
 };

@@ -2,7 +2,7 @@
   import TopNavButton from "./TopNavButton.svelte";
 
 </script>
-<nav class="top-nav flex" aria-label="top navigation">
+<nav class="top-nav flex p-5 dark:bg-transparent" aria-label="top navigation">
     <div class="flex justify-end w-full items-center">
        <TopNavButton iconClass="fa-solid fa-magnifying-glass" />
        <TopNavButton iconClass="fa-solid fa-gear"/>

@@ -5,7 +5,7 @@
     export let width = "w-60";
 </script>
 
-<div class={width + " dark:bg-neutral-800 h-full relative"}>
+<div class={width + " bg-neutral-300 dark:bg-neutral-800 h-full relative"}>
     <div class="h-2/5 text-center">
         <p>{title}</p>
     </div>

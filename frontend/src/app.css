@@ -1,11 +1,14 @@
 @layer base {
   h1 {
+    font-weight: 700;
     @apply text-3xl;
   }
   h2 {
+    font-weight: 700;
     @apply text-2xl;
   }
   h3 {
+    font-weight: 700;
     @apply text-xl;
   }
 }
@@ -15,6 +18,6 @@
 @tailwind utilities;
 
 .togglebox-hidden {
-  height: 0 !important;
-  transition: all 0.3s ease-out;
+  opacity: 0;
+  display: none;
 }

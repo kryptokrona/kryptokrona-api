@@ -8,7 +8,6 @@
     };
 </script>
 
-
 <button on:click={toggleVisibillity} class="flex">
     <span class="w-8">
         {#if show}
@@ -38,13 +37,13 @@
  
     @media (max-width: 1280px) { 
         .box-grid { 
-            grid-template-columns: repeat(3, 30%);
+            grid-template-columns: repeat(3, 32%);
         }
      }
 
      @media (max-width: 768px) { 
         .box-grid { 
-            grid-template-columns: repeat(2, 48%);
+            grid-template-columns: repeat(2, 49%);
         }
       }
 

@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+
   export let data = [];
   export let labels = [];
   export let id = "";
@@ -8,7 +9,7 @@
   var options = {
     series: [{ data: data }],
     chart: {
-      type: "area",
+      type: "line",
       height: "100%",
       width: "100%",
       sparkline: {
@@ -17,7 +18,7 @@
     },
     stroke: {
       curse: "smooth",
-      width: 1,
+      width: 5,
     },
     colors: colors,
     fill: {

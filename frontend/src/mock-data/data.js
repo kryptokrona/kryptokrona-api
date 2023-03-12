@@ -26,3 +26,8 @@ export let chart5 = {
   ],
   name: "chart5",
 };
+
+export let chart6 = {
+  data: [25, 21, 35, 15, 49, 62, 69, 40, 45],
+  name: "chart6",
+};

@@ -1,7 +1,9 @@
 name: Kryptokrona API Pull Request Pipeline
 
-on: [ pull_request ]
-
+on:
+  pull_request:
+    paths-ignore:
+      - 'frontend/**'
 jobs:
   ansible-syntax-check:
     name: Ansible Syntax Check

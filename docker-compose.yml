@@ -24,6 +24,14 @@ services:
     networks:
       - kryptokrona_api_net
 
+  backend:
+    image: ghcr.io/kryptokrona/kryptokrona-api
+    container_name: kryptokrona_api_backend
+    ports:
+      - "8080:8080"
+    networks:
+      - kryptokrona_api_net
+
 volumes:
   db:
 

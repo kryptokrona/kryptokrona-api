@@ -2,4 +2,5 @@
 
 ## Maintainers List
 
-- Cvjeticanin Marcus <mjovanc@icloud.com>
+- [mjovanc](https://github.com/mjovanc) <mjovanc@icloud.com>
+- [appelskrutt34](https://github.com/appelskrutt34) 

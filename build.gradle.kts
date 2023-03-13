@@ -31,6 +31,7 @@ application {
 
 repositories {
     mavenCentral()
+    // maven("https://s01.oss.sonatype.org/content/repositories/snapshots")
 }
 
 java {
@@ -45,6 +46,10 @@ tasks.withType<KotlinCompile>().all {
 }
 
 dependencies {
+    // kryptokrona sdk
+    implementation("org.kryptokrona.sdk:kryptokrona-core:0.1.0")
+    implementation("org.kryptokrona.sdk:kryptokrona-http:0.1.0")
+
     // various
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")

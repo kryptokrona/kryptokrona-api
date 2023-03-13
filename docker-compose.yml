@@ -32,6 +32,12 @@ services:
     networks:
       - kryptokrona_api_net
 
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: kryptokrona_api_prometheus
+    ports:
+      - "9090:9090"
+
 volumes:
   db:
 

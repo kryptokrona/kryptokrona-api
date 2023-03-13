@@ -1,24 +1,26 @@
 <script>
   import { onMount } from "svelte";
-
   export let data = [];
   export let labels = [];
   export let id = "";
   export let colors = ["#1e3a8a", "#4c1d95", "#701a75", "#881337"];
 
   var options = {
-    series: [{ data: data }],
+    series: data,
     chart: {
-      type: "line",
+      type: "bar",
       height: "100%",
       width: "100%",
-      sparkline: {
-        enabled: true,
+      toolbar: {
+        show: false,
+      },
+      animations: {
+        enabled: false,
       },
     },
     stroke: {
       curse: "smooth",
-      width: 5,
+      width: 1,
     },
     colors: colors,
     fill: {

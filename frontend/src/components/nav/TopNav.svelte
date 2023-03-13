@@ -1,14 +1,17 @@
 <script>
   import TopNavButton from "./TopNavButton.svelte";
-
 </script>
-<nav class="top-nav flex pt-5 pb-5 dark:bg-transparent" aria-label="top navigation">
-    <div class="flex justify-end w-full items-center">
-       <TopNavButton iconClass="fa-solid fa-magnifying-glass" />
-       <TopNavButton iconClass="fa-solid fa-gear"/>
-       <TopNavButton iconClass="fa-solid fa-arrows-rotate" />
-       <TopNavButton iconClass="fa-regular fa-star"/>
-       <TopNavButton iconClass="fa-solid fa-display" />
-       <TopNavButton iconClass="fa-regular fa-clock" />
-    </div>  
+
+<nav class="top-nav flex pt-4 pb-4" aria-label="main navigation">
+  <a href="/">
+    <img src="./logo.png" class="w-36" alt="kryptokrona api" />
+  </a>
+  <div class="flex justify-end w-full items-center">
+    <TopNavButton iconClass="fa-solid fa-network-wired" label="nodes" />
+    <TopNavButton iconClass="fa-solid fa-gear" label="settings" />
+    <TopNavButton iconClass="fa-solid fa-arrows-rotate" label="refresh" />
+    <TopNavButton iconClass="fa-regular fa-star" label="favorite" />
+    <TopNavButton iconClass="fa-solid fa-display" label="monitor" />
+    <TopNavButton iconClass="fa-regular fa-clock" label="time" />
+  </div>
 </nav>

@@ -1,19 +1,20 @@
 <script>
   import { onMount } from "svelte";
   export let data = [];
-  export let labels = [];
   export let id = "";
   export let colors = ["#1e3a8a", "#4c1d95", "#701a75", "#881337"];
-  export let multipleDataSets = false;
 
   var options = {
-    series: multipleDataSets ? data : [{ data: data }],
+    series: data,
     chart: {
       type: "bar",
       height: "100%",
       width: "100%",
       sparkline: {
         enabled: true,
+      },
+      animations: {
+        enabled: false,
       },
     },
     stroke: {
@@ -25,7 +26,7 @@
       type: "solid",
     },
     tooltip: {
-      enabled: true,
+      enabled: false,
     },
     grid: {
       show: false,
@@ -33,7 +34,6 @@
     dataLabels: {
       enabled: false,
     },
-    labels: labels,
     legend: {
       show: false,
     },

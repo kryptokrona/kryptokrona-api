@@ -20,33 +20,37 @@
   <ToggleBox title={"Overview 1"}>
     <InfoBox
       title="CPU"
-      text={chart1.data[chart1.data.length - 1]}
+      text={chart1.data[0].data[chart1.data[0].data.length - 1]}
       width={"xl:w-60"}
     >
       <AreaChart data={chart1.data} id={chart1.name} />
     </InfoBox>
     <InfoBox
       title="RAM"
-      text={chart2.data[chart2.data.length - 1]}
+      text={chart2.data[0].data[chart2.data[0].data.length - 1]}
       width={"xl:w-60"}
     >
       <AreaChart data={chart2.data} id={chart2.name} colors={["#4c1d95"]} />
     </InfoBox>
     <InfoBox
       title="DISK"
-      text={chart3.data[chart3.data.length - 1]}
+      text={chart3.data[0].data[chart3.data[0].data.length - 1]}
       width={"xl:w-60"}
     >
       <AreaChart data={chart3.data} id={chart3.name} colors={["#701a75"]} />
     </InfoBox>
     <InfoBox
       title="TITLE"
-      text={chart4.data[chart4.data.length - 1]}
+      text={chart4.data[0].data[chart4.data[0].data.length - 1]}
       width={"xl:w-60"}
     >
       <ColumnChart data={chart4.data} id={chart4.name} colors={["#881337"]} />
     </InfoBox>
-    <InfoBox title="TITLE" text={94} width={"xl:w-96"}>
+    <InfoBox
+      title="TITLE"
+      text={chart5.data[0].data[chart5.data[0].data.length - 1]}
+      width={"xl:w-96"}
+    >
       <ColumnChart
         data={chart5.data}
         id={chart5.name}
@@ -61,7 +65,7 @@
   <ToggleBox title={"Overview 2"}>
     <InfoBox
       title="TITLE"
-      text={chart1.data[chart1.data.length - 1]}
+      text={chart6.data[0].data[chart6.data[0].data.length - 1]}
       width={"xl:w-60"}
     >
       <AreaChart data={chart1.data} id={"id1"} />
@@ -70,10 +74,10 @@
     <InfoBoxGreen title="TITLE" text={"0"} />
     <InfoBox
       title="TITLE"
-      text={chart6.data[chart6.data.length - 1]}
+      text={chart6.data[0].data[chart6.data[0].data.length - 1]}
       width={"xl:w-96"}
     >
-      <LineChart data={chart6.data} id={chart6.name} />
+      <AreaChart data={chart6.data} id={chart6.name} />
     </InfoBox>
   </ToggleBox>
 </div>

@@ -11,8 +11,8 @@
       type: "area",
       height: "100%",
       width: "100%",
-      sparkline: {
-        enabled: true,
+      toolbar: {
+        show: false,
       },
       animations: {
         enabled: false,
@@ -26,15 +26,13 @@
     fill: {
       type: "solid",
     },
-    tooltip: {
-      enabled: false,
-    },
     grid: {
       show: false,
     },
     dataLabels: {
       enabled: false,
     },
+    labels: labels,
     legend: {
       show: false,
     },

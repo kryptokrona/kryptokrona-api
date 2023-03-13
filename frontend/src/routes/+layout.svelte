@@ -1,14 +1,20 @@
 <script>
-    import "../app.css";
-    import TopNav from "../components/nav/TopNav.svelte";
+  import "../app.css";
+  import TopNav from "../components/nav/TopNav.svelte";
 </script>
-  
-<div class=" w-full flex justify-center bg-neutral-100 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100 font-roboto" style="min-height: 100vh;"> 
-    <div class="container pl-4 pr-4">
-        <TopNav />
-        <div class="p-5 mt-10">
-            <slot />
-        </div>
+
+<div
+  class=" w-full flex justify-center bg-neutral-100 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100 font-roboto"
+  style="min-height: 100vh;"
+>
+  <div class="container pl-4 pr-4">
+    <TopNav />
+    <div class="pt-5 mt-10">
+      <slot />
     </div>
+  </div>
 </div>
 
+<style global>
+  @import "../theme/chart.css";
+</style>

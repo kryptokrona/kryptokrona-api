@@ -8,11 +8,11 @@
   var options = {
     series: data,
     chart: {
-      type: "area",
+      type: "bar",
       height: "100%",
       width: "100%",
-      sparkline: {
-        enabled: true,
+      toolbar: {
+        show: false,
       },
       animations: {
         enabled: false,
@@ -27,7 +27,7 @@
       type: "solid",
     },
     tooltip: {
-      enabled: false,
+      enabled: true,
     },
     grid: {
       show: false,
@@ -35,6 +35,7 @@
     dataLabels: {
       enabled: false,
     },
+    labels: labels,
     legend: {
       show: false,
     },

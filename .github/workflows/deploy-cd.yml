@@ -88,7 +88,7 @@ jobs:
 #      - name: Smoke Test
 #        run: |
 #          pip3 install requests
-#          python3 scripts/kryptokrona-api/smoke-test.py test-api.mjovanc.com
+#          python3 scripts/smoke-test.py test-api.mjovanc.com
 #
 #  deploy-prod:
 #    name: Deploy Prod
@@ -126,4 +126,4 @@ jobs:
 #      - name: Smoke Test
 #        run: |
 #          pip3 install requests
-#          python3 scripts/kryptokrona-api/smoke-test.py api.mjovanc.com
+#          python3 scripts/smoke-test.py api.mjovanc.com

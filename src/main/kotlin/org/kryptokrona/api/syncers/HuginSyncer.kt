@@ -40,6 +40,7 @@ import org.kryptokrona.sdk.http.client.PoolChangesClient
 import org.slf4j.LoggerFactory
 import java.lang.System.getenv
 
+
 class HuginSyncer {
 
     private val logger = LoggerFactory.getLogger("HuginSyncer")
@@ -56,6 +57,8 @@ class HuginSyncer {
 
     private val poolChangesLiteClient: PoolChangesClient = PoolChangesClient(node)
 
+    private var knownPoolTxsList: List<String> = mutableListOf()
+
     suspend fun postEncryptedSync() = coroutineScope {
         launch(Dispatchers.IO) {
             while(isActive) {
@@ -64,7 +67,29 @@ class HuginSyncer {
                 val data = poolChangesLiteClient.getPoolChangesLite()
                 val transactions = data?.addedTxs
 
-                transactions?.isEmpty().let { logger.info("Fetched ${transactions?.size} transactions.") }
+                transactions?.let {
+                    logger.info("Fetched ${transactions.size} transactions.")
+
+                    val extra = it[0].transactionPrefix.extra
+                    val transactionHash = it[0].transactionHash
+
+                    knownPoolTxsList.contains(transactionHash).let { isKnown ->
+                        if (!isKnown) {
+                            logger.info("Transaction is not known, saving...")
+                            knownPoolTxsList += transactionHash
+                            savePostEncrypted()
+                        } else {
+                            logger.info("Transaction is known, skipping...")
+                        }
+                    }
+
+                    if (extra.length > 200) {
+                        logger.info("Extra is more than 200 in length, saving...")
+                    } else {
+                        logger.info("Extra is less than 200 in length, skipping...")
+                    }
+
+                } ?: logger.info("Fetched 0 transactions.")
 
                 delay(HuginConfig.POST_ENCRYPTED_SYNC_INTERVAL)
             }

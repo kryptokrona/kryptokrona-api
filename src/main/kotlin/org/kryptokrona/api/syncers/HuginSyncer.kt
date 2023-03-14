@@ -31,10 +31,12 @@
 package org.kryptokrona.api.syncers
 
 
+import com.fasterxml.jackson.module.kotlin.readValue
 import kotlinx.coroutines.*
 import org.kryptokrona.api.config.HuginConfig
 import org.kryptokrona.api.services.PostEncryptedGroupServiceImpl
 import org.kryptokrona.api.services.PostEncryptedServiceImpl
+import org.kryptokrona.api.utils.*
 import org.kryptokrona.sdk.core.node.Node
 import org.kryptokrona.sdk.http.client.PoolChangesClient
 import org.slf4j.LoggerFactory
@@ -64,27 +66,44 @@ class HuginSyncer {
             while(isActive) {
                 logger.info("Fetching encrypted posts...")
 
+                // get the data from the pool
                 val data = poolChangesLiteClient.getPoolChangesLite()
                 val transactions = data?.addedTxs
 
+                // if transactions is not null
                 transactions?.let {
                     logger.info("Fetched ${transactions.size} transactions.")
 
                     val extra = it[0].transactionPrefix.extra
                     val transactionHash = it[0].transactionHash
 
+                    // check if we have a transaction in the list already and is known
                     knownPoolTxsList.contains(transactionHash).let { isKnown ->
                         if (!isKnown) {
                             logger.info("Transaction is not known, saving...")
                             knownPoolTxsList += transactionHash
-                            savePostEncrypted()
+
                         } else {
                             logger.info("Transaction is known, skipping...")
                         }
                     }
 
+                    // validate that the extra data is longer than 200 characters
                     if (extra.length > 200) {
                         logger.info("Extra is more than 200 in length, saving...")
+
+                        val extraData = trimExtra(extra)
+                        val isBoxObj = extraData?.let { it1 -> isBoxObject(it1) }
+
+                        // if we have a box object, it is an encrypted post
+                        if (isBoxObj == true) {
+                            val boxObj = jsonObjectMapper().readValue<Box>(extraData)
+                            // var boxObj = objectMapper.readValue(new StringReader(extra), Box.class)
+
+                            // if not exist in db, save to db
+                            // savePostEncrypted()
+                        }
+
                     } else {
                         logger.info("Extra is less than 200 in length, skipping...")
                     }
@@ -101,6 +120,7 @@ class HuginSyncer {
             while(isActive) {
                 logger.info("Fetching encrypted group posts...")
                 // walletSyncData.let { logger.info("Fetched ${it?.items?.size} blocks") }
+                // val isSealBoxObj = isSealedBoxObject(extra) //TODO: fix later
                 delay(HuginConfig.POST_ENCRYPTED_GROUP_SYNC_INTERVAL)
             }
         }

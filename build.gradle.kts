@@ -65,6 +65,7 @@ dependencies {
     implementation("org.ktorm:ktorm-jackson:$ktorm_jackson_version")
     implementation("org.slf4j:slf4j-api:$slf4j_version")
     implementation("org.slf4j:slf4j-simple:$slf4j_version")
+    implementation("javax.xml.bind:jaxb-api:2.3.1")
 
     // liquibase
     liquibaseRuntime("org.liquibase:liquibase-core:$liquibase_core")

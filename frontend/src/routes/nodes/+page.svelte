@@ -20,12 +20,13 @@
     months,
   } from "../../mock-data/data";
   import { goto } from "$app/navigation";
+  import LineChartWithLabels from "../../components/charts/LineChartWithLabels.svelte";
 
   let searchInput = "";
 </script>
 
 <div class="flex items-center justify-center">
-  <div class="w-min">
+  <div class="w-full">
     <div class="relative text-neutral-900 ">
       <i class="fa-solid fa-magnifying-glass search-icon" />
       <input
@@ -42,9 +43,11 @@
       <div
         class="flex flex-row border-b p-2 dark:border-neutral-100 border-neutral-900"
       >
-        <h2 class="w-72">Name</h2>
-        <h2 class="w-72">Url</h2>
-        <h2>Port</h2>
+        <h2 class="w-full text-center sm:text-left sm:w-1/3 lg:w-1/5">Name</h2>
+        <h2 class="hidden sm:inline-block sm:w-1/3 lg:w-1/5">Url</h2>
+        <h2 class="hidden sm:inline-block sm:w-1/3 lg:w-1/5">Port</h2>
+        <h2 class="hidden lg:inline-block lg:w-1/5">Data</h2>
+        <h2 class="hidden lg:inline-block lg:w-1/5">Data</h2>
       </div>
       {#each nodes.filter((n) => n.name
           .toLowerCase()
@@ -54,10 +57,13 @@
           class={(i == nodes.length - 1 ? "rounded-md " : "") +
             "flex text-left w-full border-b p-2 dark:border-neutral-100 border-neutral-900 hover:cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-800"}
         >
-          <p class="w-72">{node.name}</p>
-          <p class="w-72">{node.url}</p>
-          <p>{node.port}</p>
-          <p />
+          <p class="w-full text-center sm:text-left sm:w-1/3 lg:w-1/5">
+            {node.name}
+          </p>
+          <p class="hidden sm:inline-block sm:w-1/3 lg:w-1/5">{node.url}</p>
+          <p class="hidden sm:inline-block sm:w-1/3 lg:w-1/5">{node.port}</p>
+          <p class="hidden lg:inline-block lg:w-1/5">data</p>
+          <p class="hidden lg:inline-block lg:w-1/5">data</p>
         </button>
       {/each}
     </div>
@@ -80,7 +86,7 @@
   <div>
     <h2 class="mb-4">Data</h2>
     <div class="xl:h-72 h-48">
-      <ColumnChartWithLabels
+      <LineChartWithLabels
         data={chart8.data}
         labels={months}
         id={chart8.name}

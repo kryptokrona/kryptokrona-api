@@ -1,8 +1,6 @@
 <script>
-  import { onMount } from "svelte";
   import AreaChart from "../components/charts/AreaChart.svelte";
   import ColumnChart from "../components/charts/ColumnChart.svelte";
-  import LineChart from "../components/charts/LineChart.svelte";
   import InfoBox from "../components/toggle-box/InfoBox.svelte";
   import InfoBoxGreen from "../components/toggle-box/InfoBoxGreen.svelte";
   import ToggleBox from "../components/toggle-box/ToggleBox.svelte";

@@ -1,7 +1,6 @@
 <script>
   import { onMount } from "svelte";
   export let data = [];
-  export let labels = [];
   export let id = "";
   export let colors = ["#1e3a8a", "#4c1d95", "#701a75", "#881337"];
 

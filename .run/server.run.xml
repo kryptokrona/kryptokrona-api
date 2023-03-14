@@ -1,5 +1,10 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="server" type="JetRunConfigurationType">
+    <envs>
+      <env name="NODE_HOSTNAME" value="privacymine.net" />
+      <env name="NODE_PORT" value="11898" />
+      <env name="NODE_SSL" value="false" />
+    </envs>
     <option name="MAIN_CLASS_NAME" value="org.kryptokrona.api.ApplicationKt" />
     <module name="kryptokrona-api.main" />
     <shortenClasspath name="NONE" />

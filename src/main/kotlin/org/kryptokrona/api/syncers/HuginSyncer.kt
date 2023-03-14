@@ -31,22 +31,62 @@
 package org.kryptokrona.api.syncers
 
 
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.*
+import org.kryptokrona.api.config.HuginConfig
 import org.kryptokrona.api.services.PostEncryptedGroupServiceImpl
 import org.kryptokrona.api.services.PostEncryptedServiceImpl
+import org.kryptokrona.sdk.core.node.Node
+import org.kryptokrona.sdk.http.client.PoolChangesClient
+import org.slf4j.LoggerFactory
+import java.lang.System.getenv
 
 class HuginSyncer {
+
+    private val logger = LoggerFactory.getLogger("HuginSyncer")
 
     private val postEncryptedServiceImpl: PostEncryptedServiceImpl = PostEncryptedServiceImpl()
 
     private val postEncryptedGroupServiceImpl: PostEncryptedGroupServiceImpl = PostEncryptedGroupServiceImpl()
 
-    suspend fun postEncryptedSync() = coroutineScope {
+    private val node: Node = Node(
+        getenv("NODE_HOSTNAME").toString(),
+        getenv("NODE_PORT").toInt(),
+        getenv("NODE_SSL").toBoolean()
+    )
 
+    private val poolChangesLiteClient: PoolChangesClient = PoolChangesClient(node)
+
+    suspend fun postEncryptedSync() = coroutineScope {
+        launch(Dispatchers.IO) {
+            while(isActive) {
+                logger.info("Fetching encrypted posts...")
+
+                val data = poolChangesLiteClient.getPoolChangesLite()
+                val transactions = data?.addedTxs
+
+                transactions?.isEmpty().let { logger.info("Fetched ${transactions?.size} transactions.") }
+
+                delay(HuginConfig.POST_ENCRYPTED_SYNC_INTERVAL)
+            }
+        }
     }
 
     suspend fun postEncryptedGroupSync() = coroutineScope {
+        launch(Dispatchers.IO) {
+            while(isActive) {
+                logger.info("Fetching encrypted group posts...")
+                // walletSyncData.let { logger.info("Fetched ${it?.items?.size} blocks") }
+                delay(HuginConfig.POST_ENCRYPTED_GROUP_SYNC_INTERVAL)
+            }
+        }
+    }
 
+    private suspend fun savePostEncrypted() = coroutineScope {
+        logger.info("Saving encrypted post...")
+    }
+
+    private suspend fun savePostEncryptedGroup() = coroutineScope {
+        logger.info("Saving encrypted group post...")
     }
 
 }

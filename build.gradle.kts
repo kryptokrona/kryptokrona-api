@@ -9,6 +9,7 @@ val h2_version: String by project
 val ktorm_version: String by project
 val liquibase_core: String by project
 val ktorm_jackson_version: String by project
+val slf4j_version: String by project
 
 plugins {
     application
@@ -62,6 +63,8 @@ dependencies {
     implementation("io.ktor:ktor-server-config-yaml-jvm:2.2.3")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("org.ktorm:ktorm-jackson:$ktorm_jackson_version")
+    implementation("org.slf4j:slf4j-api:$slf4j_version")
+    implementation("org.slf4j:slf4j-simple:$slf4j_version")
 
     // liquibase
     liquibaseRuntime("org.liquibase:liquibase-core:$liquibase_core")

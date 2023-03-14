@@ -28,41 +28,18 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api
+package org.kryptokrona.api.config
 
-import com.fasterxml.jackson.core.util.DefaultIndenter
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter
-import com.fasterxml.jackson.databind.SerializationFeature
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import io.ktor.serialization.jackson.*
-import io.ktor.serialization.kotlinx.json.*
-import io.ktor.server.application.*
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
-import io.ktor.server.plugins.contentnegotiation.*
-import org.kryptokrona.api.plugins.configureRouting
-import org.kryptokrona.api.plugins.configureSyncers
-import org.kryptokrona.api.syncers.HuginSyncer
+object HuginConfig {
 
-fun main() {
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
-        .start(wait = true)
-}
+    /**
+     * The sync interval for encrypted posts in milliseconds.
+     */
+    const val POST_ENCRYPTED_SYNC_INTERVAL: Long = 500
 
-fun Application.module() {
-    install(ContentNegotiation) {
-        json()
-        jackson {
-            configure(SerializationFeature.INDENT_OUTPUT, true)
-            setDefaultPrettyPrinter(DefaultPrettyPrinter().apply {
-                indentArraysWith(DefaultPrettyPrinter.FixedSpaceIndenter.instance)
-                indentObjectsWith(DefaultIndenter("  ", "\n"))
-            })
-            registerModule(JavaTimeModule())  // support java.time.* types
-            configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
-        }
-    }
+    /**
+     * The sync interval for encrypted group posts in milliseconds.
+     */
+    const val POST_ENCRYPTED_GROUP_SYNC_INTERVAL: Long = 500
 
-    configureRouting()
-    configureSyncers()
 }

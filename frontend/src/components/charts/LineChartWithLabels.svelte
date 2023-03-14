@@ -8,7 +8,7 @@
   var options = {
     series: data,
     chart: {
-      type: "area",
+      type: "line",
       height: "100%",
       width: "100%",
       toolbar: {
@@ -20,11 +20,14 @@
     },
     stroke: {
       curse: "smooth",
-      width: 1,
+      width: 2,
     },
     colors: colors,
     fill: {
       type: "solid",
+    },
+    tooltip: {
+      enabled: true,
     },
     grid: {
       show: false,

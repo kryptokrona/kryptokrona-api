@@ -1,10 +1,11 @@
 <script>
   export let iconClass = "fa-solid fa-magnifying-glass";
   export let label = "label";
+  export let goTo = "";
 </script>
 
 <a
-  href="/nodes"
+  href={goTo}
   aria-label={label}
   class="tooltip-container
         text-center

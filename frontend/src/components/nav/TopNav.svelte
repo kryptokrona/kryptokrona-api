@@ -7,7 +7,11 @@
     <img src="./logo.png" class="w-36" alt="kryptokrona api" />
   </a>
   <div class="flex justify-end w-full items-center">
-    <TopNavButton iconClass="fa-solid fa-network-wired" label="nodes" />
+    <TopNavButton
+      iconClass="fa-solid fa-network-wired"
+      label="nodes"
+      goTo="/nodes"
+    />
     <TopNavButton iconClass="fa-solid fa-gear" label="settings" />
     <TopNavButton iconClass="fa-solid fa-arrows-rotate" label="refresh" />
     <TopNavButton iconClass="fa-regular fa-star" label="favorite" />

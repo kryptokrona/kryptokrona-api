@@ -1,5 +1,5 @@
-const getArrayData = (length) => {
-  return Array.from({length: length}, () => Math.floor(Math.random() * length));
+const getArrayData = (length, max) => {
+  return Array.from({length: length}, () => Math.floor(Math.random() * max));
 }
 
 export let chart1 = {
@@ -50,13 +50,13 @@ export let chart5 = {
 export let chart6 = {
   data: [
     {
-      data: getArrayData(10)
+      data: getArrayData(10, 40)
     },
     {
-      data: getArrayData(10)
+      data: getArrayData(10, 40)
     },
     {
-      data: getArrayData(10)
+      data: getArrayData(10, 40)
     }
   ],
   name: "chart6",
@@ -64,15 +64,15 @@ export let chart6 = {
 export let chart7 = {
   data: [
     {
-      data: getArrayData(10),
+      data: getArrayData(10, 80),
       name: "Swepool"
     },
     {
-      data: getArrayData(10),
+      data: getArrayData(10, 80),
       name: "Göta Pool"
     },
     {
-      data: getArrayData(10),
+      data: getArrayData(10, 80),
       name: "Blocksum"
     }
   ],
@@ -82,22 +82,22 @@ export let chart7 = {
 export let chart8 = {
   data: [
     {
-      data: getArrayData(10),
+      data: getArrayData(10, 80),
       name: "Swepool"
     },
     {
-      data: getArrayData(10),
+      data: getArrayData(10, 80),
       name: "Göta Pool"
     },
     {
-      data: getArrayData(10),
+      data: getArrayData(10, 80),
       name: "Göta Pool"
     }
   ],
   name: "chart8"
 }
 
-export let months = ["jan","feb","mars","apr","may","jun","jul","aug","sep","okt","nov","dec"];
+export let months = ["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];
 
 export let nodes = [
   {

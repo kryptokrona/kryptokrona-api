@@ -19,6 +19,7 @@
     chart8,
     months,
   } from "../../mock-data/data";
+  import { goto } from "$app/navigation";
 
   let searchInput = "";
 </script>
@@ -48,15 +49,16 @@
       {#each nodes.filter((n) => n.name
           .toLowerCase()
           .includes(searchInput.toLowerCase())) as node, i}
-        <div
+        <button
+          on:click={goto(`/nodes/${node.name}`)}
           class={(i == nodes.length - 1 ? "rounded-md " : "") +
-            "flex  border-b p-2 dark:border-neutral-100 border-neutral-900 hover:cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-800"}
+            "flex text-left w-full border-b p-2 dark:border-neutral-100 border-neutral-900 hover:cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-800"}
         >
           <p class="w-72">{node.name}</p>
           <p class="w-72">{node.url}</p>
           <p>{node.port}</p>
           <p />
-        </div>
+        </button>
       {/each}
     </div>
   </div>

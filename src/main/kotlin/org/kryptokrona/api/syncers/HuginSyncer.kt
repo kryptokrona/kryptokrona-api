@@ -37,8 +37,8 @@ import org.kryptokrona.api.config.HuginConfig
 import org.kryptokrona.api.services.PostEncryptedGroupServiceImpl
 import org.kryptokrona.api.services.PostEncryptedServiceImpl
 import org.kryptokrona.api.utils.*
-import org.kryptokrona.sdk.core.node.Node
 import org.kryptokrona.sdk.http.client.PoolChangesClient
+import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
 import java.lang.System.getenv
 
@@ -81,37 +81,43 @@ class HuginSyncer {
                             logger.info("Incoming transaction $transactionHash")
                             knownPoolTxsList += transactionHash
                         } else {
-                            logger.debug("Incoming transaction $transactionHash is known...")
+                            logger.info("Incoming transaction $transactionHash is known...")
                         }
                     }
 
                     // validate that the extra data is longer than 200 characters
                     if (extra.length > 200) {
+                        logger.info("Extra is longer than 200 in length, parsing...")
                         val extraData = trimExtra(extra)
-                        val isBoxObj = isBoxObject(extraData)
-                        // val isSealedBoxObj = isSealedBoxObject(extraData)
-                        //TODO: if statement for isSealedBoxObj throws exception as well as
-                        // bug for parsing input at vin.value.amount (bug is fixed in SDK but needs to be released)
+                        val isBoxObj = "box" in extraData
+                        val isSealedBoxObj = "sb" in extraData
+
+                        logger.info("Extra Data: $extraData")
+                        logger.info("isBoxObj: $isBoxObj")
+                        logger.info("isSealedBoxObj: $isSealedBoxObj")
 
                         // encrypted post
                         if (isBoxObj) {
                             val boxObj = jsonObjectMapper().readValue<Box>(extraData)
+
                             val exists = postEncryptedServiceImpl.existsByTxBox(boxObj.box)
 
                             if (!exists) {
+                                logger.info("Box object EXISTS: $boxObj")
                                 savePostEncrypted(boxObj)
                             }
                         }
 
+                        //TODO: hangs here when isSealedBoxObj is false
                         // encrypted group post
-                        /*if (isSealedBoxObj) {
+                        if (isSealedBoxObj) {
                             val sealedBoxObj = jsonObjectMapper().readValue<SealedBox>(extraData)
                             val exists = postEncryptedGroupServiceImpl.existsByTxSb(sealedBoxObj.sb)
 
                             if (!exists) {
                                 savePostEncryptedGroup(sealedBoxObj)
                             }
-                        }*/
+                        }
 
 
                     } else {
@@ -120,7 +126,7 @@ class HuginSyncer {
 
                 } ?: logger.debug("Fetched 0 transactions.")
 
-                delay(HuginConfig.POST_ENCRYPTED_SYNC_INTERVAL)
+                delay(HuginConfig.SYNC_INTERVAL)
             }
         }
     }

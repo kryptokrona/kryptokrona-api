@@ -65,9 +65,9 @@ fun fromHex(hex: String): String {
 }
 
 fun isBoxObject(str: String): Boolean {
-    return str.contains("box")
+    return "box" in str
 }
 
 fun isSealedBoxObject(str: String): Boolean {
-    return str.contains("sb")
+    return "sb" in str
 }

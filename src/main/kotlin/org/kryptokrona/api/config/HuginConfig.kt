@@ -33,13 +33,8 @@ package org.kryptokrona.api.config
 object HuginConfig {
 
     /**
-     * The sync interval for encrypted posts in milliseconds.
+     * The sync interval in milliseconds.
      */
-    const val POST_ENCRYPTED_SYNC_INTERVAL: Long = 500
-
-    /**
-     * The sync interval for encrypted group posts in milliseconds.
-     */
-    const val POST_ENCRYPTED_GROUP_SYNC_INTERVAL: Long = 500
+    const val SYNC_INTERVAL: Long = 500
 
 }

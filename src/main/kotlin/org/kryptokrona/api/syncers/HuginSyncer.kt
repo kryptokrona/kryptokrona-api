@@ -61,7 +61,7 @@ class HuginSyncer {
 
     private var knownPoolTxsList: List<String> = mutableListOf()
 
-    suspend fun postEncryptedSync() = coroutineScope {
+    suspend fun sync() = coroutineScope {
         launch(Dispatchers.IO) {
             while(isActive) {
                 logger.info("Fetching encrypted posts...")
@@ -94,8 +94,9 @@ class HuginSyncer {
 
                         val extraData = trimExtra(extra)
                         val isBoxObj = extraData?.let { it1 -> isBoxObject(it1) }
+                        val isSealedBoxObj = extraData?.let { it1 -> isSealedBoxObject(it1) }
 
-                        // if we have a box object, it is an encrypted post
+                        // encrypted post
                         if (isBoxObj == true) {
                             val boxObj = jsonObjectMapper().readValue<Box>(extraData)
                             val exists = boxObj.box?.let { it1 -> postEncryptedServiceImpl.existsByTxBox(it1) }
@@ -105,6 +106,18 @@ class HuginSyncer {
                                 savePostEncrypted(boxObj)
                             }
                         }
+
+                        // encrypted group post
+                        if (isSealedBoxObj == true) {
+                            val sealedBoxObj = jsonObjectMapper().readValue<SealedBox>(extraData)
+                            val exists = sealedBoxObj.sb.let { it1 -> postEncryptedGroupServiceImpl.existsByTxSb(it1) }
+
+                            if (!exists) {
+                                logger.info("Encrypted group post does not exist, saving...")
+                                savePostEncryptedGroup(sealedBoxObj)
+                            }
+                        }
+
 
                     } else {
                         logger.info("Extra is less than 200 in length, skipping...")
@@ -117,22 +130,11 @@ class HuginSyncer {
         }
     }
 
-    suspend fun postEncryptedGroupSync() = coroutineScope {
-        launch(Dispatchers.IO) {
-            while(isActive) {
-                logger.info("Fetching encrypted group posts...")
-                // walletSyncData.let { logger.info("Fetched ${it?.items?.size} blocks") }
-                // val isSealBoxObj = isSealedBoxObject(extra) //TODO: fix later
-                delay(HuginConfig.POST_ENCRYPTED_GROUP_SYNC_INTERVAL)
-            }
-        }
-    }
-
     private suspend fun savePostEncrypted(boxObj: Box) = coroutineScope {
         logger.info("Saving encrypted post...")
     }
 
-    private suspend fun savePostEncryptedGroup() = coroutineScope {
+    private suspend fun savePostEncryptedGroup(sealedBox: SealedBox) = coroutineScope {
         logger.info("Saving encrypted group post...")
     }
 

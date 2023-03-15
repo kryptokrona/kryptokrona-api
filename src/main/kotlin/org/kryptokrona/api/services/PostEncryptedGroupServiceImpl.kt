@@ -33,6 +33,14 @@ class PostEncryptedGroupServiceImpl : PostEncryptedGroupService {
         db.delete(PostEncryptedGroups) { it.id eq id }
     }
 
+    override fun existsByTxSb(txSb: String): Boolean {
+        db.postencryptedgroups.find { it.txSb eq txSb }?.let {
+            return true
+        }
+
+        return false
+    }
+
     override fun getTotalCount(): Int {
         return db.postencryptedgroups.count()
     }

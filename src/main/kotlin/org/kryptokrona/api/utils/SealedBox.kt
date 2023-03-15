@@ -34,9 +34,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Box(
-    val box: String? = null,
+data class SealedBox(
+    val sb: String,
 
-    @SerialName("t")
-    val timestamp: Long = 0
+	@SerialName("t")
+	val timestamp: Long
 )

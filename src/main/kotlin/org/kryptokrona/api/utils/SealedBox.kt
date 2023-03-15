@@ -33,6 +33,10 @@ package org.kryptokrona.api.utils
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
+/**
+ * Simple sealed box object.
+ * Will be removed once it will be implemented in SDK.
+ */
 @Serializable
 data class SealedBox(
     val sb: String,

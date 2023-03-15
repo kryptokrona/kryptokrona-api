@@ -41,14 +41,8 @@ import javax.xml.bind.DatatypeConverter.parseHexBinary
 
 private val logger = LoggerFactory.getLogger("HuginCrypto")
 
-fun trimExtra(extra: String): String? {
-    return try {
-        fromHex(extra.substring(66))
-    } catch (e: Exception) {
-        // return fromHex(Buffer);
-        //TODO not done
-        null
-    }
+fun trimExtra(extra: String): String {
+    return fromHex(extra.substring(66))
 }
 
 /**
@@ -57,8 +51,8 @@ fun trimExtra(extra: String): String? {
  * @param hex - Hex value.ß
  * @return Returns hex value to string
  */
-fun fromHex(hex: String?): String? {
-    var str: String?
+fun fromHex(hex: String): String {
+    var str: String = ""
     try {
         val bytes: ByteArray = parseHexBinary(hex)
         val result = String(bytes, Charsets.UTF_8)

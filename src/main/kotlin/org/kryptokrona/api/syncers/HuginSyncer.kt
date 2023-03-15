@@ -72,57 +72,51 @@ class HuginSyncer {
 
                 // if transactions is not null
                 transactions?.let {
-                    logger.info("Fetched ${transactions.size} transactions.")
-
                     val extra = it[0].transactionPrefix.extra
                     val transactionHash = it[0].transactionHash
 
                     // check if we have a transaction in the list already and is known
                     knownPoolTxsList.contains(transactionHash).let { isKnown ->
                         if (!isKnown) {
-                            logger.info("Transaction is not known, saving...")
+                            logger.info("Incoming transaction $transactionHash")
                             knownPoolTxsList += transactionHash
                         } else {
-                            logger.info("Transaction is known, skipping...")
+                            logger.info("Incoming transaction $transactionHash is known...")
                         }
                     }
 
                     // validate that the extra data is longer than 200 characters
                     if (extra.length > 200) {
-                        logger.info("Extra is more than 200 in length, saving...")
-
                         val extraData = trimExtra(extra)
-                        val isBoxObj = extraData?.let { it1 -> isBoxObject(it1) }
-                        val isSealedBoxObj = extraData?.let { it1 -> isSealedBoxObject(it1) }
+                        val isBoxObj = isBoxObject(extraData)
+                        val isSealedBoxObj = isSealedBoxObject(extraData)
 
                         // encrypted post
-                        if (isBoxObj == true) {
+                        if (isBoxObj) {
                             val boxObj = jsonObjectMapper().readValue<Box>(extraData)
-                            val exists = boxObj.box?.let { it1 -> postEncryptedServiceImpl.existsByTxBox(it1) }
+                            val exists = postEncryptedServiceImpl.existsByTxBox(boxObj.box)
 
-                            if (exists!!) {
-                                logger.info("Encrypted post does not exist, saving...")
+                            if (!exists) {
                                 savePostEncrypted(boxObj)
                             }
                         }
 
                         // encrypted group post
-                        if (isSealedBoxObj == true) {
+                        if (isSealedBoxObj) {
                             val sealedBoxObj = jsonObjectMapper().readValue<SealedBox>(extraData)
-                            val exists = sealedBoxObj.sb.let { it1 -> postEncryptedGroupServiceImpl.existsByTxSb(it1) }
+                            val exists = postEncryptedGroupServiceImpl.existsByTxSb(sealedBoxObj.sb)
 
                             if (!exists) {
-                                logger.info("Encrypted group post does not exist, saving...")
                                 savePostEncryptedGroup(sealedBoxObj)
                             }
                         }
 
 
                     } else {
-                        logger.info("Extra is less than 200 in length, skipping...")
+                        logger.debug("Extra is less than 200 in length, skipping...")
                     }
 
-                } ?: logger.info("Fetched 0 transactions.")
+                } ?: logger.debug("Fetched 0 transactions.")
 
                 delay(HuginConfig.POST_ENCRYPTED_SYNC_INTERVAL)
             }

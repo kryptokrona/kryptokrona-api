@@ -57,7 +57,7 @@ class HuginSyncer {
         getenv("NODE_SSL").toBoolean()
     )
 
-    private val poolChangesLiteClient: PoolChangesClient = PoolChangesClient(node)
+    private val poolChangesClient: PoolChangesClient = PoolChangesClient(node)
 
     private var knownPoolTxsList: List<String> = mutableListOf()
 
@@ -67,7 +67,7 @@ class HuginSyncer {
                 logger.info("Fetching encrypted posts...")
 
                 // get the data from the pool
-                val data = poolChangesLiteClient.getPoolChangesLite()
+                val data = poolChangesClient.getPoolChangesLite()
                 val transactions = data?.addedTxs
 
                 // if transactions is not null
@@ -98,11 +98,10 @@ class HuginSyncer {
                         // if we have a box object, it is an encrypted post
                         if (isBoxObj == true) {
                             val boxObj = jsonObjectMapper().readValue<Box>(extraData)
-
                             val exists = boxObj.box?.let { it1 -> postEncryptedServiceImpl.existsByTxBox(it1) }
-                            // var boxObj = objectMapper.readValue(new StringReader(extra), Box.class)
 
                             if (exists!!) {
+                                logger.info("Encrypted post does not exist, saving...")
                                 savePostEncrypted(boxObj)
                             }
                         }

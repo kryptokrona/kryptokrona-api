@@ -6,5 +6,5 @@ import org.kryptokrona.api.syncers.HuginSyncer
 
 fun Application.configureSyncers() {
     val defferedPostEncrypted = async { HuginSyncer().postEncryptedSync() }
-    val defferedPostEncryptedGroup = async { HuginSyncer().postEncryptedGroupSync() }
+    // val defferedPostEncryptedGroup = async { HuginSyncer().postEncryptedGroupSync() }
 }

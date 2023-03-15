@@ -50,3 +50,8 @@ fun jsonObjectMapper(): ObjectMapper {
 
     return mapper
 }
+
+fun huginJsonObjectMapper(): ObjectMapper {
+    return JsonMapper.builder()
+        .build()
+}

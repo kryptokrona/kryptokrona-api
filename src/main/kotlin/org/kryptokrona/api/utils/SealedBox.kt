@@ -39,8 +39,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class SealedBox(
-    val sb: String,
+    @SerialName("sb") val secretBox: String,
 
-	@SerialName("t")
-	val timestamp: Long
+	@SerialName("t") val timestamp: Long
 )

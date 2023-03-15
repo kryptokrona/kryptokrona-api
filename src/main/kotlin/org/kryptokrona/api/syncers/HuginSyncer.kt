@@ -31,8 +31,9 @@
 package org.kryptokrona.api.syncers
 
 
-import com.fasterxml.jackson.module.kotlin.readValue
 import kotlinx.coroutines.*
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.Json
 import org.kryptokrona.api.config.HuginConfig
 import org.kryptokrona.api.services.PostEncryptedGroupServiceImpl
 import org.kryptokrona.api.services.PostEncryptedServiceImpl
@@ -59,12 +60,12 @@ class HuginSyncer {
 
     private val poolChangesClient: PoolChangesClient = PoolChangesClient(node)
 
-    private var knownPoolTxsList: List<String> = mutableListOf()
+    private var knownPoolTxsList: List<String> = listOf()
 
     suspend fun sync() = coroutineScope {
-        launch(Dispatchers.IO) {
+        launch {
             while(isActive) {
-                logger.debug("Fetching encrypted posts...")
+                logger.info("Fetching encrypted posts...")
 
                 // get the data from the pool
                 val data = poolChangesClient.getPoolChangesLite()
@@ -75,13 +76,14 @@ class HuginSyncer {
                     val extra = it[0].transactionPrefix.extra
                     val transactionHash = it[0].transactionHash
 
+                    logger.info("Incoming transaction $transactionHash")
+
                     // check if we have a transaction in the list already and is known
                     knownPoolTxsList.contains(transactionHash).let { isKnown ->
                         if (!isKnown) {
-                            logger.info("Incoming transaction $transactionHash")
                             knownPoolTxsList += transactionHash
                         } else {
-                            logger.info("Incoming transaction $transactionHash is known...")
+                            logger.info("Transaction is known, skipping...")
                         }
                     }
 
@@ -92,29 +94,37 @@ class HuginSyncer {
                         val isBoxObj = "box" in extraData
                         val isSealedBoxObj = "sb" in extraData
 
-                        logger.info("Extra Data: $extraData")
-                        logger.info("isBoxObj: $isBoxObj")
-                        logger.info("isSealedBoxObj: $isSealedBoxObj")
-
                         // encrypted post
                         if (isBoxObj) {
-                            val boxObj = jsonObjectMapper().readValue<Box>(extraData)
+                            logger.info("Running withContext, boxObj")
+                            val boxObj: Box = Json.decodeFromString(extraData)
 
-                            val exists = postEncryptedServiceImpl.existsByTxBox(boxObj.box)
+                            //TODO: does not work since it seem to be blocking the thread
+                            val exists = withContext(Dispatchers.IO) {
+                                postEncryptedServiceImpl.existsByTxBox(boxObj.box)
+                            }
+                            logger.info(exists.toString())
 
                             if (!exists) {
-                                logger.info("Box object EXISTS: $boxObj")
+                                logger.info("Box object does NOT exist: $boxObj")
                                 savePostEncrypted(boxObj)
                             }
                         }
 
-                        //TODO: hangs here when isSealedBoxObj is false
                         // encrypted group post
                         if (isSealedBoxObj) {
-                            val sealedBoxObj = jsonObjectMapper().readValue<SealedBox>(extraData)
-                            val exists = postEncryptedGroupServiceImpl.existsByTxSb(sealedBoxObj.sb)
+                            logger.info("Running withContext, sealedBoxObj")
+                            val sealedBoxObj: SealedBox = Json.decodeFromString(extraData)
+
+                            //TODO: does not work since it seem to be blocking the thread
+                            val exists = withContext(Dispatchers.IO) {
+                                postEncryptedGroupServiceImpl.existsByTxSb(sealedBoxObj.secretBox)
+                            }
+
+                            logger.info(exists.toString())
 
                             if (!exists) {
+                                logger.info("Secret Box object does NOT exist: $sealedBoxObj")
                                 savePostEncryptedGroup(sealedBoxObj)
                             }
                         }

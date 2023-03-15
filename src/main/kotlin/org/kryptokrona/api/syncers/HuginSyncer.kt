@@ -89,7 +89,9 @@ class HuginSyncer {
                     if (extra.length > 200) {
                         val extraData = trimExtra(extra)
                         val isBoxObj = isBoxObject(extraData)
-                        val isSealedBoxObj = isSealedBoxObject(extraData)
+                        // val isSealedBoxObj = isSealedBoxObject(extraData)
+                        //TODO: if statement for isSealedBoxObj throws exception as well as
+                        // bug for parsing input at vin.value.amount (bug is fixed in SDK but needs to be released)
 
                         // encrypted post
                         if (isBoxObj) {
@@ -102,14 +104,14 @@ class HuginSyncer {
                         }
 
                         // encrypted group post
-                        if (isSealedBoxObj) {
+                        /*if (isSealedBoxObj) {
                             val sealedBoxObj = jsonObjectMapper().readValue<SealedBox>(extraData)
                             val exists = postEncryptedGroupServiceImpl.existsByTxSb(sealedBoxObj.sb)
 
                             if (!exists) {
                                 savePostEncryptedGroup(sealedBoxObj)
                             }
-                        }
+                        }*/
 
 
                     } else {

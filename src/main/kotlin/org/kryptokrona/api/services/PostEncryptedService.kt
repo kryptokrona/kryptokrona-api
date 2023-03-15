@@ -42,6 +42,8 @@ interface PostEncryptedService {
 
     fun delete(id: Long)
 
+    fun existsByTxBox(txBox: String): Boolean
+
     fun getTotalCount(): Int
 
 }

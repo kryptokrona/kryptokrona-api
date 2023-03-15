@@ -34,8 +34,16 @@ class PostEncryptedServiceImpl : PostEncryptedService {
         db.delete(PostsEncrypted) { it.id eq id }
     }
 
+    override fun existsByTxBox(txBox: String): Boolean {
+        db.postsencrypted.find { it.txBox eq txBox }?.let {
+            return true
+        }
+
+        return false
+    }
+
     override fun getTotalCount(): Int {
-        return db.transactions.count()
+        return db.postsencrypted.count()
     }
 
 }

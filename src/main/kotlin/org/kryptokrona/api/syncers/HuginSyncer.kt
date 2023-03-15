@@ -98,10 +98,13 @@ class HuginSyncer {
                         // if we have a box object, it is an encrypted post
                         if (isBoxObj == true) {
                             val boxObj = jsonObjectMapper().readValue<Box>(extraData)
+
+                            val exists = boxObj.box?.let { it1 -> postEncryptedServiceImpl.existsByTxBox(it1) }
                             // var boxObj = objectMapper.readValue(new StringReader(extra), Box.class)
 
-                            // if not exist in db, save to db
-                            // savePostEncrypted()
+                            if (exists!!) {
+                                savePostEncrypted(boxObj)
+                            }
                         }
 
                     } else {
@@ -126,7 +129,7 @@ class HuginSyncer {
         }
     }
 
-    private suspend fun savePostEncrypted() = coroutineScope {
+    private suspend fun savePostEncrypted(boxObj: Box) = coroutineScope {
         logger.info("Saving encrypted post...")
     }
 

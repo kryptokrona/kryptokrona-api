@@ -82,7 +82,6 @@ class HuginSyncer {
                         if (!isKnown) {
                             logger.info("Transaction is not known, saving...")
                             knownPoolTxsList += transactionHash
-
                         } else {
                             logger.info("Transaction is known, skipping...")
                         }

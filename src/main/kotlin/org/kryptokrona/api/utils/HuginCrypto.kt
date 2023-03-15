@@ -63,11 +63,3 @@ fun fromHex(hex: String): String {
     }
     return str
 }
-
-fun isBoxObject(str: String): Boolean {
-    return "box" in str
-}
-
-fun isSealedBoxObject(str: String): Boolean {
-    return "sb" in str
-}

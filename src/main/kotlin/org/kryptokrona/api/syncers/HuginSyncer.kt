@@ -64,7 +64,7 @@ class HuginSyncer {
     suspend fun sync() = coroutineScope {
         launch(Dispatchers.IO) {
             while(isActive) {
-                logger.info("Fetching encrypted posts...")
+                logger.debug("Fetching encrypted posts...")
 
                 // get the data from the pool
                 val data = poolChangesClient.getPoolChangesLite()
@@ -81,7 +81,7 @@ class HuginSyncer {
                             logger.info("Incoming transaction $transactionHash")
                             knownPoolTxsList += transactionHash
                         } else {
-                            logger.info("Incoming transaction $transactionHash is known...")
+                            logger.debug("Incoming transaction $transactionHash is known...")
                         }
                     }
 

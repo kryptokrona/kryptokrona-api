@@ -42,7 +42,6 @@ import io.ktor.server.netty.*
 import io.ktor.server.plugins.contentnegotiation.*
 import org.kryptokrona.api.plugins.configureRouting
 import org.kryptokrona.api.plugins.configureSyncers
-import org.kryptokrona.api.syncers.HuginSyncer
 
 fun main() {
     embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)

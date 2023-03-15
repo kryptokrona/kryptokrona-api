@@ -31,7 +31,6 @@
 package org.kryptokrona.api.services
 
 import org.kryptokrona.api.models.Supply
-import org.kryptokrona.api.models.Transaction
 
 interface SupplyService {
 

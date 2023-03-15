@@ -48,8 +48,9 @@ tasks.withType<KotlinCompile>().all {
 
 dependencies {
     // kryptokrona sdk
-    implementation("org.kryptokrona.sdk:kryptokrona-core:0.1.0")
-    implementation("org.kryptokrona.sdk:kryptokrona-http:0.1.0")
+    implementation("org.kryptokrona.sdk:kryptokrona-core:0.1.1")
+    implementation("org.kryptokrona.sdk:kryptokrona-http:0.1.1")
+    implementation("org.kryptokrona.sdk:kryptokrona-util:0.1.1")
 
     // various
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")

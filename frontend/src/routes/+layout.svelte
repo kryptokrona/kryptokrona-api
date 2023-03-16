@@ -2,6 +2,20 @@
   import "../app.scss";
   import "../theme/chart.scss";
   import TopNav from "../components/nav/TopNav.svelte";
+  import { onMount } from "svelte";
+  import TopNavPhone from "../components/nav/TopNavPhone.svelte";
+
+  let isPhone = false;
+
+  onMount(() => {
+    if (typeof window === undefined) return;
+
+    isPhone = window.innerWidth < 640;
+
+    addEventListener("resize", () => {
+      isPhone = window.innerWidth < 640;
+    });
+  });
 </script>
 
 <div
@@ -9,8 +23,12 @@
   style="min-height: 100vh;"
 >
   <div class="container pl-4 pr-4">
-    <TopNav />
-    <div class="pt-5 mt-10">
+    {#if isPhone}
+      <TopNavPhone />
+    {:else}
+      <TopNav />
+    {/if}
+    <div class={isPhone ? "mt-4" : "mt-10"}>
       <slot />
     </div>
   </div>

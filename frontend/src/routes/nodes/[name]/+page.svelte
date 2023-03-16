@@ -1,28 +1,30 @@
 <script>
   import TitleAndTextContainer from "../../../components/containers/TitleAndTextContainer.svelte";
-  import MultiItemsgrid from "../../../components/grids/MultiItemsgrid.svelte";
+  import MultiItemsGrid from "../../../components/grids/MultiItemsGrid.svelte";
   import ToggleBox from "../../../components/toggle-box/ToggleBox.svelte";
 </script>
 
-<div>
-  <h1>Göta Pool</h1>
-  <div class="mt-20" />
-  <ToggleBox title="Data">
-    <MultiItemsgrid>
-      <TitleAndTextContainer />
-      <TitleAndTextContainer />
-      <TitleAndTextContainer />
-    </MultiItemsgrid>
-  </ToggleBox>
+<h1>Göta Pool</h1>
+<div class="mt-8" />
+<ToggleBox title="Data">
+  <MultiItemsGrid>
+    <TitleAndTextContainer />
+    <TitleAndTextContainer />
+    <TitleAndTextContainer />
+  </MultiItemsGrid>
+</ToggleBox>
 
-  <div class="mt-4" />
-  <ToggleBox title="Data">
-    <MultiItemsgrid>
-      <TitleAndTextContainer />
-      <TitleAndTextContainer />
-      <TitleAndTextContainer />
-      <TitleAndTextContainer />
-      <TitleAndTextContainer />
-    </MultiItemsgrid>
-  </ToggleBox>
-</div>
+<div class="mt-8" />
+
+<ToggleBox title={"Status"}>
+  <MultiItemsGrid columns={6} fullWidthOnPhone={true}>
+    <TitleAndTextContainer title="Something" text="OK" color={"bg-green-700"} />
+    <TitleAndTextContainer title="Something" text="OK" color={"bg-green-700"} />
+    <TitleAndTextContainer title="Something" text="OK" color={"bg-green-700"} />
+    <TitleAndTextContainer title="Something" text="OFFLINE" />
+    <TitleAndTextContainer title="Something" text="OFFLINE" />
+    <TitleAndTextContainer title="Something" text="OK" color={"bg-green-700"} />
+  </MultiItemsGrid>
+</ToggleBox>
+
+<div class="mt-8" />

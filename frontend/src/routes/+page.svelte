@@ -2,9 +2,8 @@
   import CircleChart from "../components/charts/CircleChart.svelte";
   import ToggleBox from "../components/toggle-box/ToggleBox.svelte";
   import { chart1, chart4, chart5 } from "../mock-data/data";
-  import MultiItemsgrid from "../components/grids/MultiItemsgrid.svelte";
+  import MultiItemsGrid from "../components/grids/MultiItemsGrid.svelte";
   import TitleAndTextContainer from "../components/containers/TitleAndTextContainer.svelte";
-  import TwoItemsGrid from "../components/grids/TwoItemsGrid.svelte";
   import AreaChartWithLabels from "../components/charts/AreaChartWithLabels.svelte";
   import ChartWithTimeButtonsContainer from "../components/containers/ChartWithTimeButtonsContainer.svelte";
   import MultiItemsGridFullWidthTablet from "../components/grids/MultiItemsGridFullWidthTablet.svelte";
@@ -12,7 +11,7 @@
 
 <div>
   <ToggleBox title={"Quick overview"}>
-    <MultiItemsgrid columns={5}>
+    <MultiItemsGrid columns={5}>
       <TitleAndTextContainer title="Threads" text="14" />
       <TitleAndTextContainer title="Uptime" text="4 days" />
       <TitleAndTextContainer title="CPU total" text="30%">
@@ -36,12 +35,12 @@
           <CircleChart data={[40]} id="id10" />
         </div>
       </TitleAndTextContainer>
-    </MultiItemsgrid>
+    </MultiItemsGrid>
   </ToggleBox>
 
   <div class="mt-8" />
 
-  <ToggleBox title={"Quick overview"}>
+  <ToggleBox title={"History"}>
     <MultiItemsGridFullWidthTablet columns={3} fullWidthOnPhone={true}>
       <ChartWithTimeButtonsContainer title="CPU usage" height={"h-80"}>
         <AreaChartWithLabels data={chart4.data} id={chart4.name} />
@@ -63,4 +62,35 @@
       </ChartWithTimeButtonsContainer>
     </MultiItemsGridFullWidthTablet>
   </ToggleBox>
+
+  <div class="mt-8" />
+
+  <ToggleBox title={"Status"}>
+    <MultiItemsGrid columns={6} fullWidthOnPhone={true}>
+      <TitleAndTextContainer
+        title="Something"
+        text="OK"
+        color={"bg-green-700"}
+      />
+      <TitleAndTextContainer
+        title="Something"
+        text="OK"
+        color={"bg-green-700"}
+      />
+      <TitleAndTextContainer
+        title="Something"
+        text="OK"
+        color={"bg-green-700"}
+      />
+      <TitleAndTextContainer title="Something" text="OFFLINE" />
+      <TitleAndTextContainer title="Something" text="OFFLINE" />
+      <TitleAndTextContainer
+        title="Something"
+        text="OK"
+        color={"bg-green-700"}
+      />
+    </MultiItemsGrid>
+  </ToggleBox>
+
+  <div class="mt-8" />
 </div>

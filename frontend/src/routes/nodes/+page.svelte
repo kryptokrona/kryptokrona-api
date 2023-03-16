@@ -21,7 +21,7 @@
   } from "../../mock-data/data";
   import { goto } from "$app/navigation";
   import LineChartWithLabels from "../../components/charts/LineChartWithLabels.svelte";
-  import MultiItemsgrid from "../../components/grids/MultiItemsgrid.svelte";
+  import MultiItemsGrid from "../../components/grids/MultiItemsGrid.svelte";
 
   let searchInput = "";
 </script>
@@ -86,7 +86,7 @@
 <div class="mt-8" />
 
 <ToggleBox title={"Data"}>
-  <MultiItemsgrid columns={5}>
+  <MultiItemsGrid columns={5}>
     <TitleAndTextContainer
       title="TITLE"
       text={chart1.data[0].data[chart1.data[0].data.length - 1]}
@@ -122,19 +122,21 @@
         multipleDataSets={true}
       />
     </TitleAndTextContainer>
-  </MultiItemsgrid>
+  </MultiItemsGrid>
 </ToggleBox>
 
 <div class="mt-8" />
 
 <ToggleBox title={"Data"}>
-  <MultiItemsgrid columns={4}>
+  <MultiItemsGrid columns={4}>
     <TitleAndTextContainer color="bg-green-700" title={"TITLE"} text="VALUE" />
     <TitleAndTextContainer color="bg-green-700" title={"TITLE"} text="VALUE" />
     <TitleAndTextContainer title={"TITLE"} text="VALUE" />
     <TitleAndTextContainer title={"TITLE"} text="VALUE" />
-  </MultiItemsgrid>
+  </MultiItemsGrid>
 </ToggleBox>
+
+<div class="mt-8" />
 
 <style>
   .search-icon {

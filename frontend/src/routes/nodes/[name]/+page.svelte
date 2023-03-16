@@ -1,6 +1,5 @@
 <script>
-  import InfoBox from "../../../components/toggle-box/InfoBox.svelte";
-  import InfoBoxGreen from "../../../components/toggle-box/InfoBoxGreen.svelte";
+  import BaseGridItem from "../../../components/grids/BaseGridItem.svelte";
   import ToggleBox from "../../../components/toggle-box/ToggleBox.svelte";
 </script>
 
@@ -8,19 +7,13 @@
   <h1>Göta Pool</h1>
   <div class="mt-20" />
   <ToggleBox title="Data">
-    <InfoBox />
-    <InfoBox width={"xl:w-96"} />
-    <InfoBox />
-    <InfoBoxGreen />
-    <InfoBox />
+    <BaseGridItem />
+    <BaseGridItem />
+    <BaseGridItem />
   </ToggleBox>
 
   <div class="mt-4" />
   <ToggleBox title="Data">
-    <InfoBox />
-    <InfoBox />
-    <InfoBox />
-    <InfoBoxGreen />
-    <InfoBox />
+    <BaseGridItem />
   </ToggleBox>
 </div>

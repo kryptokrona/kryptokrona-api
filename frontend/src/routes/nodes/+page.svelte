@@ -5,7 +5,7 @@
   import AreaChartWithLabels from "../../components/charts/AreaChartWithLabels.svelte";
   import ColumnChartWithLabels from "../../components/charts/ColumnChartWithLabels.svelte";
   import TwoItemsGrid from "../../components/grids/TwoItemsGrid.svelte";
-  import InfoBox from "../../components/toggle-box/InfoBox.svelte";
+  import BaseGridItem from "../../components/grids/BaseGridItem.svelte";
   import ToggleBox from "../../components/toggle-box/ToggleBox.svelte";
   import {
     chart1,
@@ -21,6 +21,7 @@
   } from "../../mock-data/data";
   import { goto } from "$app/navigation";
   import LineChartWithLabels from "../../components/charts/LineChartWithLabels.svelte";
+  import MultiItemsgrid from "../../components/grids/MultiItemsgrid.svelte";
 
   let searchInput = "";
 </script>
@@ -73,71 +74,55 @@
 <div class="mt-28" />
 
 <TwoItemsGrid>
-  <div>
-    <h2 class="mb-4">Data</h2>
-    <div class="xl:h-72 h-48">
-      <AreaChartWithLabels
-        data={chart7.data}
-        labels={months}
-        id={chart7.name}
-      />
-    </div>
+  <div class="w-full h-48">
+    <AreaChartWithLabels data={chart7.data} labels={months} id={chart7.name} />
   </div>
-  <div>
-    <h2 class="mb-4">Data</h2>
-    <div class="xl:h-72 h-48">
-      <LineChartWithLabels
-        data={chart8.data}
-        labels={months}
-        id={chart8.name}
-      />
-    </div>
+
+  <div class="w-full h-48">
+    <LineChartWithLabels data={chart8.data} labels={months} id={chart8.name} />
   </div>
 </TwoItemsGrid>
 
 <div class="mt-28" />
 
 <ToggleBox title={"Data"}>
-  <InfoBox
-    title="TITLE"
-    text={chart1.data[0].data[chart1.data[0].data.length - 1]}
-    width={"xl:w-60"}
-  >
-    <AreaChart data={chart1.data} id={chart1.name} />
-  </InfoBox>
-  <InfoBox
-    title="TITLE"
-    text={chart2.data[0].data[chart2.data[0].data.length - 1]}
-    width={"xl:w-60"}
-  >
-    <AreaChart data={chart2.data} id={chart2.name} colors={["#4c1d95"]} />
-  </InfoBox>
-  <InfoBox
-    title="TITLE"
-    text={chart3.data[0].data[chart3.data[0].data.length - 1]}
-    width={"xl:w-60"}
-  >
-    <AreaChart data={chart3.data} id={chart3.name} colors={["#701a75"]} />
-  </InfoBox>
-  <InfoBox
-    title="TITLE"
-    text={chart4.data[0].data[chart4.data[0].data.length - 1]}
-    width={"xl:w-60"}
-  >
-    <ColumnChart data={chart4.data} id={chart4.name} colors={["#881337"]} />
-  </InfoBox>
-  <InfoBox
-    title="TITLE"
-    text={chart5.data[0].data[chart5.data[0].data.length - 1]}
-    width={"xl:w-96"}
-  >
-    <ColumnChart
-      data={chart5.data}
-      id={chart5.name}
-      colors={["#4c1d95", "#701a75"]}
-      multipleDataSets={true}
-    />
-  </InfoBox>
+  <MultiItemsgrid columns={5}>
+    <BaseGridItem
+      title="TITLE"
+      text={chart1.data[0].data[chart1.data[0].data.length - 1]}
+    >
+      <AreaChart data={chart1.data} id={chart1.name} />
+    </BaseGridItem>
+    <BaseGridItem
+      title="TITLE"
+      text={chart2.data[0].data[chart2.data[0].data.length - 1]}
+    >
+      <AreaChart data={chart2.data} id={chart2.name} colors={["#4c1d95"]} />
+    </BaseGridItem>
+    <BaseGridItem
+      title="TITLE"
+      text={chart3.data[0].data[chart3.data[0].data.length - 1]}
+    >
+      <AreaChart data={chart3.data} id={chart3.name} colors={["#701a75"]} />
+    </BaseGridItem>
+    <BaseGridItem
+      title="TITLE"
+      text={chart4.data[0].data[chart4.data[0].data.length - 1]}
+    >
+      <ColumnChart data={chart4.data} id={chart4.name} colors={["#881337"]} />
+    </BaseGridItem>
+    <BaseGridItem
+      title="TITLE"
+      text={chart5.data[0].data[chart5.data[0].data.length - 1]}
+    >
+      <ColumnChart
+        data={chart5.data}
+        id={chart5.name}
+        colors={["#4c1d95", "#701a75"]}
+        multipleDataSets={true}
+      />
+    </BaseGridItem>
+  </MultiItemsgrid>
 </ToggleBox>
 
 <style>

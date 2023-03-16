@@ -21,3 +21,9 @@
   opacity: 0;
   display: none !important;
 }
+
+@media (max-width: 640px) {
+  body {
+    font-size: 14px !important;
+  }
+} 

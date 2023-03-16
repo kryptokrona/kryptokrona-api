@@ -4,7 +4,7 @@
 </script>
 
 <div
-  class=" w-full flex justify-center bg-neutral-100 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100 font-roboto"
+  class="w-full flex justify-center bg-neutral-100 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100 font-roboto"
   style="min-height: 100vh;"
 >
   <div class="container pl-4 pr-4">

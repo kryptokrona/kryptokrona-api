@@ -29,7 +29,7 @@ export let chart3 = {
 export let chart4 = {
   data: [
     {
-      data: [35, 31, 45, 45, 19, 22, 39, 10, 15] 
+      data: getArrayData(10, 40)
     } 
   ],
   name: "chart4",
@@ -38,11 +38,8 @@ export let chart4 = {
 export let chart5 = {
   data: [
     {
-      data: [44, 55, 57, 56, 61, 58, 63, 60, 66],
-    },
-    {
-      data: [76, 85, 101, 98, 87, 105, 91, 114, 94],
-    },
+      data: getArrayData(10, 40)
+    }
   ],
   name: "chart5",
 };
@@ -95,6 +92,11 @@ export let chart8 = {
     }
   ],
   name: "chart8"
+}
+
+export let semiCircle = {
+  data: [76],
+  name: "semicircle"
 }
 
 export let months = ["jan","feb","mar","apr","may","jun","jul","aug","sep","oct","nov","dec"];

@@ -24,7 +24,7 @@
         radialBar: {
           hollow: {
             opacity: 0,
-            size: "55%",
+            size: "40%",
           },
           track: { color: "#ffff", strokeWidth: "90%" },
           dataLabels: {

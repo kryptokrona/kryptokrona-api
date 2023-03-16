@@ -1,5 +1,5 @@
 <script>
-  import BaseGridItem from "../../../components/grids/BaseGridItem.svelte";
+  import TitleAndTextContainer from "../../../components/containers/TitleAndTextContainer.svelte";
   import MultiItemsgrid from "../../../components/grids/MultiItemsgrid.svelte";
   import ToggleBox from "../../../components/toggle-box/ToggleBox.svelte";
 </script>
@@ -9,20 +9,20 @@
   <div class="mt-20" />
   <ToggleBox title="Data">
     <MultiItemsgrid>
-      <BaseGridItem />
-      <BaseGridItem />
-      <BaseGridItem />
+      <TitleAndTextContainer />
+      <TitleAndTextContainer />
+      <TitleAndTextContainer />
     </MultiItemsgrid>
   </ToggleBox>
 
   <div class="mt-4" />
   <ToggleBox title="Data">
     <MultiItemsgrid>
-      <BaseGridItem />
-      <BaseGridItem />
-      <BaseGridItem />
-      <BaseGridItem />
-      <BaseGridItem />
+      <TitleAndTextContainer />
+      <TitleAndTextContainer />
+      <TitleAndTextContainer />
+      <TitleAndTextContainer />
+      <TitleAndTextContainer />
     </MultiItemsgrid>
   </ToggleBox>
 </div>

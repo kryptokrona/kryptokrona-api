@@ -10,9 +10,9 @@
   class="tooltip-container
         text-center
         relative 
-        bg-neutral-300
+        bg-neutral-400
         text-neutral-900
-        hover:bg-neutral-400
+        hover:bg-neutral-500
         dark:bg-neutral-700
         dark:text-neutral-100 
         dark:hover:bg-neutral-500

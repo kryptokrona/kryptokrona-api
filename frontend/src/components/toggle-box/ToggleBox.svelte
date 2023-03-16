@@ -9,12 +9,12 @@
   }
 </script>
 
-<button on:click={toggleVisibillity} class="flex">
+<button on:click={toggleVisibillity} class="flex" aria-label={title}>
   <span class="w-8">
     {#if show}
-      <i class="fa-solid fa-chevron-down text-xl" />
+      <i class="fa-solid fa-chevron-down text-xl" aria-hidden="true" />
     {:else}
-      <i class="fa-solid fa-chevron-right text-xl" />
+      <i class="fa-solid fa-chevron-right text-xl" aria-hidden="true" />
     {/if}
   </span>
   <h2 class="caret-text text-2xl font-bold">{title}</h2>

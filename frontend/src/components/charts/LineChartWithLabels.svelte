@@ -11,6 +11,7 @@
       type: "line",
       height: "100%",
       width: "100%",
+      fontFamily: "Roboto mono, sans-serif",
       toolbar: {
         show: false,
       },
@@ -20,14 +21,11 @@
     },
     stroke: {
       curse: "smooth",
-      width: 2,
+      width: 4,
     },
     colors: colors,
     fill: {
       type: "solid",
-    },
-    tooltip: {
-      enabled: true,
     },
     grid: {
       show: false,
@@ -36,9 +34,6 @@
       enabled: false,
     },
     labels: labels,
-    legend: {
-      show: false,
-    },
     yaxis: {
       opposite: true,
     },

@@ -11,6 +11,7 @@
       type: "bar",
       height: "100%",
       width: "100%",
+      fontFamily: "Roboto mono, sans-serif",
       toolbar: {
         show: false,
       },

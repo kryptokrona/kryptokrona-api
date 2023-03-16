@@ -11,6 +11,7 @@
       type: "area",
       height: "100%",
       width: "100%",
+      fontFamily: "Roboto mono, sans-serif",
       toolbar: {
         show: false,
       },
@@ -33,9 +34,6 @@
       enabled: false,
     },
     labels: labels,
-    legend: {
-      show: false,
-    },
     yaxis: {
       opposite: true,
     },

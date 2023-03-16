@@ -5,7 +5,7 @@
   import AreaChartWithLabels from "../../components/charts/AreaChartWithLabels.svelte";
   import ColumnChartWithLabels from "../../components/charts/ColumnChartWithLabels.svelte";
   import TwoItemsGrid from "../../components/grids/TwoItemsGrid.svelte";
-  import BaseGridItem from "../../components/grids/BaseGridItem.svelte";
+  import TitleAndTextContainer from "../../components/containers/TitleAndTextContainer.svelte";
   import ToggleBox from "../../components/toggle-box/ToggleBox.svelte";
   import {
     chart1,
@@ -74,11 +74,11 @@
 <div class="mt-8" />
 
 <TwoItemsGrid>
-  <div class="w-full h-48">
+  <div class="w-full h-80">
     <AreaChartWithLabels data={chart7.data} labels={months} id={chart7.name} />
   </div>
 
-  <div class="w-full h-48">
+  <div class="w-full h-80">
     <LineChartWithLabels data={chart8.data} labels={months} id={chart8.name} />
   </div>
 </TwoItemsGrid>
@@ -87,31 +87,31 @@
 
 <ToggleBox title={"Data"}>
   <MultiItemsgrid columns={5}>
-    <BaseGridItem
+    <TitleAndTextContainer
       title="TITLE"
       text={chart1.data[0].data[chart1.data[0].data.length - 1]}
     >
       <AreaChart data={chart1.data} id={chart1.name} />
-    </BaseGridItem>
-    <BaseGridItem
+    </TitleAndTextContainer>
+    <TitleAndTextContainer
       title="TITLE"
       text={chart2.data[0].data[chart2.data[0].data.length - 1]}
     >
       <AreaChart data={chart2.data} id={chart2.name} colors={["#4c1d95"]} />
-    </BaseGridItem>
-    <BaseGridItem
+    </TitleAndTextContainer>
+    <TitleAndTextContainer
       title="TITLE"
       text={chart3.data[0].data[chart3.data[0].data.length - 1]}
     >
       <AreaChart data={chart3.data} id={chart3.name} colors={["#701a75"]} />
-    </BaseGridItem>
-    <BaseGridItem
+    </TitleAndTextContainer>
+    <TitleAndTextContainer
       title="TITLE"
       text={chart4.data[0].data[chart4.data[0].data.length - 1]}
     >
       <ColumnChart data={chart4.data} id={chart4.name} colors={["#881337"]} />
-    </BaseGridItem>
-    <BaseGridItem
+    </TitleAndTextContainer>
+    <TitleAndTextContainer
       title="TITLE"
       text={chart5.data[0].data[chart5.data[0].data.length - 1]}
     >
@@ -121,7 +121,7 @@
         colors={["#4c1d95", "#701a75"]}
         multipleDataSets={true}
       />
-    </BaseGridItem>
+    </TitleAndTextContainer>
   </MultiItemsgrid>
 </ToggleBox>
 
@@ -129,10 +129,10 @@
 
 <ToggleBox title={"Data"}>
   <MultiItemsgrid columns={4}>
-    <BaseGridItem color="bg-green-700" title={"TITLE"} text="VALUE" />
-    <BaseGridItem color="bg-green-700" title={"TITLE"} text="VALUE" />
-    <BaseGridItem title={"TITLE"} text="VALUE" />
-    <BaseGridItem title={"TITLE"} text="VALUE" />
+    <TitleAndTextContainer color="bg-green-700" title={"TITLE"} text="VALUE" />
+    <TitleAndTextContainer color="bg-green-700" title={"TITLE"} text="VALUE" />
+    <TitleAndTextContainer title={"TITLE"} text="VALUE" />
+    <TitleAndTextContainer title={"TITLE"} text="VALUE" />
   </MultiItemsgrid>
 </ToggleBox>
 

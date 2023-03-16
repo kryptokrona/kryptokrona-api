@@ -71,7 +71,7 @@
   </div>
 </div>
 
-<div class="mt-28" />
+<div class="mt-8" />
 
 <TwoItemsGrid>
   <div class="w-full h-48">
@@ -83,7 +83,7 @@
   </div>
 </TwoItemsGrid>
 
-<div class="mt-28" />
+<div class="mt-8" />
 
 <ToggleBox title={"Data"}>
   <MultiItemsgrid columns={5}>
@@ -122,6 +122,17 @@
         multipleDataSets={true}
       />
     </BaseGridItem>
+  </MultiItemsgrid>
+</ToggleBox>
+
+<div class="mt-8" />
+
+<ToggleBox title={"Data"}>
+  <MultiItemsgrid columns={4}>
+    <BaseGridItem color="bg-green-700" title={"TITLE"} text="VALUE" />
+    <BaseGridItem color="bg-green-700" title={"TITLE"} text="VALUE" />
+    <BaseGridItem title={"TITLE"} text="VALUE" />
+    <BaseGridItem title={"TITLE"} text="VALUE" />
   </MultiItemsgrid>
 </ToggleBox>
 

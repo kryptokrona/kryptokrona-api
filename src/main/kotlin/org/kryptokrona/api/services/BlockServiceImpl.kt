@@ -33,7 +33,7 @@ package org.kryptokrona.api.services
 import org.kryptokrona.api.models.Block
 import org.kryptokrona.api.models.Blocks
 import org.kryptokrona.api.models.blocks
-import org.kryptokrona.api.plugins.DatabaseConnection
+import org.kryptokrona.api.plugins.DatabaseFactory
 import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.count
@@ -41,7 +41,7 @@ import org.ktorm.entity.find
 
 class BlockServiceImpl : BlockService {
 
-    private val db = DatabaseConnection.database
+    private val db = DatabaseFactory.database
 
     override fun getAll(size: Int, page: Int): List<Block> {
         return db.from(Blocks)

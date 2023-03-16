@@ -35,7 +35,7 @@ import kotlinx.serialization.Serializable
 
 /**
  * Simple sealed box object.
- * Will be removed once it will be implemented in SDK.
+ * Will be removed here when we implement SDK v0.2.0
  */
 @Serializable
 data class SealedBox(

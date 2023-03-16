@@ -3,7 +3,7 @@ package org.kryptokrona.api.services
 import org.kryptokrona.api.models.PostEncrypted
 import org.kryptokrona.api.models.PostsEncrypted
 import org.kryptokrona.api.models.postsencrypted
-import org.kryptokrona.api.plugins.DatabaseConnection
+import org.kryptokrona.api.plugins.DatabaseFactory
 import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.count
@@ -11,7 +11,7 @@ import org.ktorm.entity.find
 
 class PostEncryptedServiceImpl : PostEncryptedService {
 
-    private val db = DatabaseConnection.database
+    private val db = DatabaseFactory.database
 
     override fun getAll(size: Int, page: Int): List<PostEncrypted> {
         return db.from(PostsEncrypted)

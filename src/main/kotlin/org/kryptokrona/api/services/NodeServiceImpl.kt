@@ -3,7 +3,7 @@ package org.kryptokrona.api.services
 import org.kryptokrona.api.models.Node
 import org.kryptokrona.api.models.Nodes
 import org.kryptokrona.api.models.nodes
-import org.kryptokrona.api.plugins.DatabaseConnection
+import org.kryptokrona.api.plugins.DatabaseFactory
 import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.count
@@ -11,7 +11,7 @@ import org.ktorm.entity.find
 
 class NodeServiceImpl : NodeService {
 
-    private val db = DatabaseConnection.database
+    private val db = DatabaseFactory.database
 
     override fun getAll(size: Int, page: Int): List<Node> {
         return db.from(Nodes)

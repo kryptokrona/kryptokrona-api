@@ -1,5 +1,6 @@
 <script>
-  import "../app.css";
+  import "../app.scss";
+  import "../theme/chart.scss";
   import TopNav from "../components/nav/TopNav.svelte";
 </script>
 
@@ -14,7 +15,3 @@
     </div>
   </div>
 </div>
-
-<style global>
-  @import "../theme/chart.css";
-</style>

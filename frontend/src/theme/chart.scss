@@ -1,6 +1,23 @@
 
-.apexcharts-legend-text {
-	color: #fafafa !important;
+
+@media (prefers-color-scheme: dark) {
+	.apexcharts-legend-text {
+		opacity: 1 !important;
+		color: #fafafa !important;
+	}
+	.apexcharts-xaxis-label {
+		opacity: 1 !important;
+		color: #fafafa !important;
+	}
+}
+
+@media (prefers-color-scheme: light) {
+	.apexcharts-legend-text {
+		color: #1c1917 !important;
+	}
+	.apexcharts-xaxis-label {
+		color: #1c1917 !important;
+	}
 }
 
 .apexcharts-tooltip {

@@ -94,40 +94,43 @@ class HuginSyncer {
                         val isBoxObj = "box" in extraData
                         val isSealedBoxObj = "sb" in extraData
 
-                        // encrypted post
-                        if (isBoxObj) {
-                            logger.info("Running withContext, boxObj")
-                            val boxObj: Box = Json.decodeFromString(extraData)
+                        withContext(Dispatchers.Default) {
 
-                            //TODO: does not work since it seem to be blocking the thread
-                            val exists = withContext(Dispatchers.IO) {
-                                postEncryptedServiceImpl.existsByTxBox(boxObj.box)
-                            }
-                            logger.info(exists.toString())
+                            // encrypted post
+                            if (isBoxObj) {
+                                val boxObj: Box = Json.decodeFromString(extraData)
+                                logger.info("Box: ${boxObj.timestamp}")
 
-                            if (!exists) {
-                                logger.info("Box object does NOT exist: $boxObj")
-                                savePostEncrypted(boxObj)
+                                //TODO: does not work since it seem to be blocking the thread
+                                /*val exists = postEncryptedServiceImpl.existsByTxBox(boxObj.box)
+
+                                logger.info(exists.toString())
+
+                                if (!exists) {
+                                    logger.info("Box object does NOT exist: $boxObj")
+                                    savePostEncrypted(boxObj)
+                                }*/
                             }
+
+                            // encrypted group post
+                            if (isSealedBoxObj) {
+                                val sealedBoxObj: SealedBox = Json.decodeFromString(extraData)
+                                logger.info("SealedBox: ${sealedBoxObj.timestamp}")
+
+                                //TODO: does not work since it seem to be blocking the thread
+                                /*val exists = postEncryptedGroupServiceImpl.existsByTxSb(sealedBoxObj.secretBox)
+
+                                logger.info(exists.toString())
+
+                                if (!exists) {
+                                    logger.info("Secret Box object does NOT exist: $sealedBoxObj")
+                                    savePostEncryptedGroup(sealedBoxObj)
+                                }*/
+                            }
+
                         }
 
-                        // encrypted group post
-                        if (isSealedBoxObj) {
-                            logger.info("Running withContext, sealedBoxObj")
-                            val sealedBoxObj: SealedBox = Json.decodeFromString(extraData)
 
-                            //TODO: does not work since it seem to be blocking the thread
-                            val exists = withContext(Dispatchers.IO) {
-                                postEncryptedGroupServiceImpl.existsByTxSb(sealedBoxObj.secretBox)
-                            }
-
-                            logger.info(exists.toString())
-
-                            if (!exists) {
-                                logger.info("Secret Box object does NOT exist: $sealedBoxObj")
-                                savePostEncryptedGroup(sealedBoxObj)
-                            }
-                        }
 
 
                     } else {

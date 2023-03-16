@@ -64,7 +64,7 @@ fun Application.module() {
     }
 
     // initialize database connection pool
-    DatabaseFactory.init()
+    DatabaseFactory.db
 
     configureRouting()
     configureSyncers()

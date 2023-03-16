@@ -10,7 +10,6 @@ val ktorm_version: String by project
 val liquibase_core: String by project
 val ktorm_jackson_version: String by project
 val slf4j_version: String by project
-val exposed_version: String by project
 
 plugins {
     application
@@ -70,9 +69,6 @@ dependencies {
     implementation("javax.xml.bind:jaxb-api:2.3.1")
 
     // database
-    implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
-    implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
-    implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
     implementation("org.apache.commons:commons-dbcp2:2.9.0")
 
     // liquibase

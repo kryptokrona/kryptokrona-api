@@ -4,6 +4,7 @@ import org.kryptokrona.api.models.Output
 import org.kryptokrona.api.models.Outputs
 import org.kryptokrona.api.models.outputs
 import org.kryptokrona.api.plugins.DatabaseFactory
+import org.ktorm.database.Database
 import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.count
@@ -11,7 +12,9 @@ import org.ktorm.entity.find
 
 class OutputServiceImpl : OutputService {
 
-    private val db = DatabaseFactory.database
+    private val dataSource = DatabaseFactory.setupDataSource()
+
+    private val db = Database.connect(dataSource)
 
     override fun getAll(size: Int, page: Int): List<Output> {
         return db.from(Outputs)

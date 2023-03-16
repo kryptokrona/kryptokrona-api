@@ -40,6 +40,7 @@ import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.contentnegotiation.*
+import org.kryptokrona.api.plugins.DatabaseFactory
 import org.kryptokrona.api.plugins.configureRouting
 import org.kryptokrona.api.plugins.configureSyncers
 
@@ -61,6 +62,9 @@ fun Application.module() {
             configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
         }
     }
+
+    // initialize database connection pool
+    DatabaseFactory.init()
 
     configureRouting()
     configureSyncers()

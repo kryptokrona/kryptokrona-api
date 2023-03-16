@@ -4,6 +4,7 @@ import org.kryptokrona.api.models.Supplies
 import org.kryptokrona.api.models.Supply
 import org.kryptokrona.api.models.supplies
 import org.kryptokrona.api.plugins.DatabaseFactory
+import org.ktorm.database.Database
 import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.count
@@ -11,7 +12,9 @@ import org.ktorm.entity.find
 
 class SupplyServiceImpl : SupplyService {
 
-    private val db = DatabaseFactory.database
+    private val dataSource = DatabaseFactory.setupDataSource()
+
+    private val db = Database.connect(dataSource)
 
     override fun getAll(size: Int, page: Int): List<Supply> {
         return db.from(Supplies)

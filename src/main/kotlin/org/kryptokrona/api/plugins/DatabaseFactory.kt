@@ -31,10 +31,11 @@
 package org.kryptokrona.api.plugins
 
 import com.typesafe.config.ConfigFactory
-import io.ktor.network.sockets.*
 import io.ktor.server.config.*
 import org.apache.commons.dbcp2.BasicDataSource
-import org.ktorm.database.Database
+import org.jetbrains.exposed.sql.transactions.TransactionManager
+import org.jetbrains.exposed.sql.Database
+import java.sql.Connection
 
 /**
  * Database connection object.
@@ -45,25 +46,13 @@ object DatabaseFactory {
 
     private val config = HoconApplicationConfig(ConfigFactory.load())
 
-    val database = Database.connect(
-        url = config.property("db.url").getString(),
-        driver = config.property("db.driver").getString(),
-        user = config.property("db.user").getString(),
-        password = config.property("db.password").getString()
-    )
-
     fun init() {
         val dataSource = setupDataSource()
         Database.connect(dataSource)
         TransactionManager.manager.defaultIsolationLevel = Connection.TRANSACTION_SERIALIZABLE
-
-        // Set up your database schema and tables here
-        transaction {
-            SchemaUtils.create(/* your tables */)
-        }
     }
 
-    private fun setupDataSource(): BasicDataSource {
+    public fun setupDataSource(): BasicDataSource {
         return BasicDataSource().apply {
             driverClassName = config.property("db.driver").getString()
             url = config.property("db.url").getString()

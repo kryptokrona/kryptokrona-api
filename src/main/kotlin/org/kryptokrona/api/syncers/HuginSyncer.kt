@@ -37,9 +37,11 @@ import kotlinx.serialization.json.Json
 import org.kryptokrona.api.config.HuginConfig
 import org.kryptokrona.api.models.PostEncrypted
 import org.kryptokrona.api.models.PostEncryptedGroup
+import org.kryptokrona.api.models.PostsEncrypted
 import org.kryptokrona.api.services.PostEncryptedGroupServiceImpl
 import org.kryptokrona.api.services.PostEncryptedServiceImpl
 import org.kryptokrona.api.utils.Box
+import org.kryptokrona.api.utils.NewBox
 import org.kryptokrona.api.utils.SealedBox
 import org.kryptokrona.api.utils.trimExtra
 import org.kryptokrona.sdk.http.client.PoolChangesClient
@@ -48,7 +50,6 @@ import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
 import java.lang.System.getenv
 import java.time.LocalDateTime.now
-import java.util.concurrent.Executors
 
 
 class HuginSyncer {
@@ -90,9 +91,6 @@ class HuginSyncer {
                         if (extra.length > 200 && transactionHash !in knownPoolTxsList) {
                             knownPoolTxsList += transactionHash
                             val extraData = trimExtra(extra)
-                            logger.info("Extra data: $extraData")
-
-                            logger.info("box in extraData: ${"box" in extraData}")
 
                             if ("box" in extraData) savePostEncrypted(extraData, tx)
                             else if ("sb" in extraData) savePostEncryptedGroup(extraData, tx)
@@ -109,9 +107,18 @@ class HuginSyncer {
 
     private suspend fun savePostEncrypted(extraData: String, transaction: Transaction): Unit = coroutineScope {
         launch {
-            val boxObj: Box = Json.decodeFromString(extraData)
-            logger.info("AFTER")
-            postEncryptedServiceImpl.existsByTxBox(boxObj.box).let {
+            // check if the new viewKey and txKey is in the extra data
+            if ("vt" in extraData && "txKey" in extraData) {
+                val newBoxObj: NewBox = Json.decodeFromString(extraData)
+                val postEncrypted = PostEncrypted {
+                    txHash = transaction.transactionHash
+                    txBox = newBoxObj.box
+                    txTimestamp = newBoxObj.timestamp
+                    createdAt = now()
+                }
+                postEncryptedServiceImpl.save(postEncrypted)
+            } else {
+                val boxObj: Box = Json.decodeFromString(extraData)
                 val postEncrypted = PostEncrypted {
                     txHash = transaction.transactionHash
                     txBox = boxObj.box

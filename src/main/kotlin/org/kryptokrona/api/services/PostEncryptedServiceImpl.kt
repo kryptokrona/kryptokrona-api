@@ -40,6 +40,7 @@ import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.count
 import org.ktorm.entity.find
+import org.ktorm.entity.removeIf
 import org.slf4j.LoggerFactory
 
 class PostEncryptedServiceImpl : PostEncryptedService {
@@ -78,7 +79,7 @@ class PostEncryptedServiceImpl : PostEncryptedService {
 
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.postsencrypted.find { it.id eq id }
+            db.postsencrypted.removeIf { it.id eq 2 }
         }.onSuccess {
             logger.info("Encrypted post with id deleted: $id")
         }.onFailure {

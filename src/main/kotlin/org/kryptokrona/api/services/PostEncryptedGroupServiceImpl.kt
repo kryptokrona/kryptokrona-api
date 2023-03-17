@@ -56,7 +56,13 @@ class PostEncryptedGroupServiceImpl : PostEncryptedGroupService {
     }
 
     override suspend fun getById(id: Long): PostEncryptedGroup? = withContext(Dispatchers.IO) {
-        db.postencryptedgroups.find { it.id eq id }
+        this.runCatching {
+            db.postencryptedgroups.find { it.id eq id }
+        }.onSuccess {
+            logger.info("Getting encrypted group post by id: $id")
+        }.onFailure {
+            logger.error("Error getting encrypted group post by id: $id", it)
+        }.getOrNull()
     }
 
     override suspend fun save(postEncryptedGroup: PostEncryptedGroup): Unit = withContext(Dispatchers.IO)  {
@@ -70,15 +76,35 @@ class PostEncryptedGroupServiceImpl : PostEncryptedGroupService {
     }
 
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
-        db.postencryptedgroups.removeIf { it.id eq 2 } //TODO change this to all other services
+        this.runCatching {
+            db.postencryptedgroups.removeIf { it.id eq id }
+        }.onSuccess {
+            logger.info("Deleting encrypted group post: $id")
+        }.onFailure {
+            logger.error("Error deleting encrypted group post: $id", it)
+        }
     }
 
     override suspend fun existsByTxSb(txSb: String): Boolean = withContext(Dispatchers.IO) {
-        db.postencryptedgroups.find { it.txSb eq txSb } != null
+        this.runCatching {
+            db.postencryptedgroups.find { it.txSb eq txSb }
+        }.onSuccess {
+            logger.info("Checking if encrypted group post exists: $txSb")
+        }.onFailure {
+            logger.error("Error checking if encrypted group post exists: $txSb", it)
+        }.isSuccess
     }
 
     override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
-        db.postencryptedgroups.count()
+        this.runCatching {
+            db.postencryptedgroups.count()
+        }.onSuccess {
+            logger.info("Getting total count of encrypted group posts")
+        }.onFailure {
+            logger.error("Error getting total count of encrypted group posts", it)
+        }
+
+        0
     }
 
 }

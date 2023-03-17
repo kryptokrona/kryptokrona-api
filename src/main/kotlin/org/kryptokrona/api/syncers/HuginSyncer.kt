@@ -79,14 +79,14 @@ class HuginSyncer {
                     val transactionHash = it[0].transactionHash
                     logger.info("Incoming transaction $transactionHash")
 
-                    // check if we have a transaction in the list already and is known
-                    checkIfTxIsKnown(transactionHash)
+                    // add the transaction to the known list if it is not already known
+                    addTxIfNotKnown(transactionHash)
 
                     // validate that the extra data is longer than 200 characters
                     if (extra.length > 200) {
                         logger.info("Trimming extra data...")
                         val extraData = trimExtra(extra)
-                        if ("box" in extraData) savePostEncrypted(extraData)
+                        // if ("box" in extraData) savePostEncrypted(extraData)
                         if ("sb" in extraData) savePostEncryptedGroup(extraData)
                     } else {
                         logger.debug("Extra is less than 200 in length, skipping...")
@@ -98,7 +98,7 @@ class HuginSyncer {
         }
     }
 
-    private fun checkIfTxIsKnown(txHash: String) {
+    private fun addTxIfNotKnown(txHash: String) {
         knownPoolTxsList.contains(txHash).let { isKnown ->
             if (!isKnown) {
                 knownPoolTxsList += txHash
@@ -112,7 +112,7 @@ class HuginSyncer {
         val boxObj: Box = Json.decodeFromString(extraData)
         logger.info("Parsed box: ${boxObj.timestamp}")
 
-        withContext(Dispatchers.IO) {
+        launch {
             logger.info("Before!")
             val exists = postEncryptedServiceImpl.existsByTxBox(boxObj.box)
             logger.info("After!")
@@ -128,7 +128,7 @@ class HuginSyncer {
         val sealedBoxObj: SealedBox = Json.decodeFromString(extraData)
         logger.info("Parsed SealedBox: ${sealedBoxObj.timestamp}")
 
-        withContext(Dispatchers.IO) {
+        launch {
             logger.info("Before!")
             val exists = postEncryptedGroupServiceImpl.existsByTxSb(sealedBoxObj.secretBox)
             logger.info("After!")

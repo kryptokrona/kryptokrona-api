@@ -30,6 +30,8 @@
 
 package org.kryptokrona.api.services
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.kryptokrona.api.models.PostEncryptedGroup
 import org.kryptokrona.api.models.PostEncryptedGroups
 import org.kryptokrona.api.models.postencryptedgroups
@@ -61,12 +63,8 @@ class PostEncryptedGroupServiceImpl : PostEncryptedGroupService {
         db.delete(PostEncryptedGroups) { it.id eq id }
     }
 
-    override fun existsByTxSb(txSb: String): Boolean {
-        db.postencryptedgroups.find { it.txSb eq txSb }?.let {
-            return true
-        }
-
-        return false
+    override suspend fun existsByTxSb(txSb: String): Boolean = withContext(Dispatchers.IO) {
+        db.postencryptedgroups.find { it.txSb eq txSb } != null
     }
 
     override fun getTotalCount(): Int {

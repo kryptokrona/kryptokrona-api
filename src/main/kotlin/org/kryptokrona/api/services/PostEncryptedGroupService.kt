@@ -42,7 +42,7 @@ interface PostEncryptedGroupService {
 
     fun delete(id: Long)
 
-    fun existsByTxSb(txSb: String): Boolean
+    suspend fun existsByTxSb(txSb: String): Boolean
 
     fun getTotalCount(): Int
 

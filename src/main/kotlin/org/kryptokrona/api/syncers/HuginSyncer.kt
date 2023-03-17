@@ -86,6 +86,9 @@ class HuginSyncer {
                     // add the transaction to the known list if it is not already known
                     addTxIfNotKnown(transactionHash)
 
+                    logger.info("TransactionHash !in knownPoolTxsList: ${transactionHash !in knownPoolTxsList}")
+                    logger.info("Extra length: ${extra.length}")
+
                     // validate that the extra data is longer than 200 characters
                     if (extra.length > 200 && transactionHash !in knownPoolTxsList) {
                         logger.info("Trimming extra data for $transactionHash...")
@@ -106,6 +109,7 @@ class HuginSyncer {
         knownPoolTxsList.contains(txHash).let { isKnown ->
             if (!isKnown) {
                 knownPoolTxsList += txHash
+                logger.info("Added $txHash to known transactions list")
             } else {
                 logger.info("Transaction is known, skipping...")
             }

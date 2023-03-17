@@ -30,6 +30,8 @@
 
 package org.kryptokrona.api.services
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.kryptokrona.api.models.Node
 import org.kryptokrona.api.models.Nodes
 import org.kryptokrona.api.models.nodes
@@ -42,28 +44,28 @@ import org.ktorm.entity.removeIf
 
 class NodeServiceImpl : NodeService {
 
-    override fun getAll(size: Int, page: Int): List<Node> {
-        return db.from(Nodes)
+    override suspend fun getAll(size: Int, page: Int): List<Node> = withContext(Dispatchers.IO) {
+        db.from(Nodes)
             .select()
             .offset((page - 1) * size)
             .limit(size)
             .map { row -> Nodes.createEntity(row) }
     }
 
-    override fun getById(id: Long): Node? {
-        return db.nodes.find { it.id eq id }
+    override suspend fun getById(id: Long): Node? = withContext(Dispatchers.IO) {
+        db.nodes.find { it.id eq id }
     }
 
-    override fun save(node: Node) {
+    override suspend fun save(node: Node): Unit = withContext(Dispatchers.IO) {
         db.nodes.add(node)
     }
 
-    override fun delete(id: Long) {
+    override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         db.nodes.removeIf { it.id eq id }
     }
 
-    override fun getTotalCount(): Int {
-        return db.nodes.count()
+    override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
+        db.nodes.count()
     }
 
 }

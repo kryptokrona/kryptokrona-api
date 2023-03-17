@@ -34,14 +34,14 @@ import org.kryptokrona.api.models.Pool
 
 interface PoolService {
 
-    fun getAll(size: Int, page: Int): List<Pool>
+    suspend fun getAll(size: Int, page: Int): List<Pool>
 
-    fun getById(id: Long): Pool?
+    suspend fun getById(id: Long): Pool?
 
-    fun save(pool: Pool)
+    suspend fun save(pool: Pool)
 
-    fun delete(id: Long)
+    suspend fun delete(id: Long)
 
-    fun getTotalCount(): Int
+    suspend fun getTotalCount(): Int
 
 }

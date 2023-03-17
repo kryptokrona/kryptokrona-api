@@ -30,6 +30,8 @@
 
 package org.kryptokrona.api.services
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.kryptokrona.api.models.Hashrate
 import org.kryptokrona.api.models.Hashrates
 import org.kryptokrona.api.models.hashrates
@@ -42,28 +44,28 @@ import org.ktorm.entity.removeIf
 
 class HashrateServiceImpl : HashrateService {
 
-    override fun getAll(size: Int, page: Int): List<Hashrate> {
-        return db.from(Hashrates)
+    override suspend fun getAll(size: Int, page: Int): List<Hashrate> = withContext(Dispatchers.IO) {
+        db.from(Hashrates)
             .select()
             .offset((page - 1) * size)
             .limit(size)
             .map { row -> Hashrates.createEntity(row) }
     }
 
-    override fun getById(id: Long): Hashrate? {
-        return db.hashrates.find { it.id eq id }
+    override suspend fun getById(id: Long): Hashrate? = withContext(Dispatchers.IO) {
+        db.hashrates.find { it.id eq id }
     }
 
-    override fun save(hashrate: Hashrate) {
+    override suspend fun save(hashrate: Hashrate): Unit = withContext(Dispatchers.IO) {
         db.hashrates.add(hashrate)
     }
 
-    override fun delete(id: Long) {
+    override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         db.hashrates.removeIf { it.id eq id }
     }
 
-    override fun getTotalCount(): Int {
-        return db.hashrates.count()
+    override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
+        db.hashrates.count()
     }
 
 }

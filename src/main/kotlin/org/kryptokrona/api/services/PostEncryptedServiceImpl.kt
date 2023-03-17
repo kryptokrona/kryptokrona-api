@@ -104,9 +104,7 @@ class PostEncryptedServiceImpl : PostEncryptedService {
             logger.info("Total encrypted posts count: $it")
         }.onFailure {
             logger.error("Error getting total encrypted posts count", it)
-        }
-
-        0
+        }.getOrNull() ?: 0
     }
 
 }

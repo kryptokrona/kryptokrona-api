@@ -30,6 +30,8 @@
 
 package org.kryptokrona.api.services
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.kryptokrona.api.models.Pool
 import org.kryptokrona.api.models.Pools
 import org.kryptokrona.api.models.pools
@@ -42,28 +44,28 @@ import org.ktorm.entity.removeIf
 
 class PoolServiceImpl : PoolService {
 
-    override fun getAll(size: Int, page: Int): List<Pool> {
-        return db.from(Pools)
+    override suspend fun getAll(size: Int, page: Int): List<Pool> = withContext(Dispatchers.IO) {
+        db.from(Pools)
             .select()
             .offset((page - 1) * size)
             .limit(size)
             .map { row -> Pools.createEntity(row) }
     }
 
-    override fun getById(id: Long): Pool? {
-        return db.pools.find { it.id eq id }
+    override suspend fun getById(id: Long): Pool? = withContext(Dispatchers.IO) {
+        db.pools.find { it.id eq id }
     }
 
-    override fun save(pool: Pool) {
+    override suspend fun save(pool: Pool): Unit = withContext(Dispatchers.IO) {
         db.pools.add(pool)
     }
 
-    override fun delete(id: Long) {
+    override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         db.pools.removeIf { it.id eq id }
     }
 
-    override fun getTotalCount(): Int {
-        return db.pools.count()
+    override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
+        db.pools.count()
     }
 
 }

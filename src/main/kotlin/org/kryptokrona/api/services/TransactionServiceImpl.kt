@@ -30,6 +30,8 @@
 
 package org.kryptokrona.api.services
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.kryptokrona.api.models.Transaction
 import org.kryptokrona.api.models.Transactions
 import org.kryptokrona.api.models.transactions
@@ -42,28 +44,28 @@ import org.ktorm.entity.removeIf
 
 class TransactionServiceImpl : TransactionService {
 
-    override fun getAll(size: Int, page: Int): List<Transaction> {
-        return db.from(Transactions)
+    override suspend fun getAll(size: Int, page: Int): List<Transaction> = withContext(Dispatchers.IO) {
+        db.from(Transactions)
             .select()
             .offset((page - 1) * size)
             .limit(size)
             .map { row -> Transactions.createEntity(row) }
     }
 
-    override fun getById(id: Long): Transaction? {
-        return db.transactions.find { it.id eq id }
+    override suspend fun getById(id: Long): Transaction? = withContext(Dispatchers.IO) {
+        db.transactions.find { it.id eq id }
     }
 
-    override fun save(transaction: Transaction) {
+    override suspend fun save(transaction: Transaction): Unit = withContext(Dispatchers.IO) {
         db.transactions.add(transaction)
     }
 
-    override fun delete(id: Long) {
+    override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         db.transactions.removeIf { it.id eq id }
     }
 
-    override fun getTotalCount(): Int {
-        return db.transactions.count()
+    override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
+        db.transactions.count()
     }
 
 }

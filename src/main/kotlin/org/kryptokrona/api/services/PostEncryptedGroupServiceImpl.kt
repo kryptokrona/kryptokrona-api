@@ -102,9 +102,7 @@ class PostEncryptedGroupServiceImpl : PostEncryptedGroupService {
             logger.info("Getting total count of encrypted group posts")
         }.onFailure {
             logger.error("Error getting total count of encrypted group posts", it)
-        }
-
-        0
+        }.getOrNull() ?: 0
     }
 
 }

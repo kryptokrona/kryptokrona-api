@@ -30,6 +30,8 @@
 
 package org.kryptokrona.api.services
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.kryptokrona.api.models.Supplies
 import org.kryptokrona.api.models.Supply
 import org.kryptokrona.api.models.supplies
@@ -42,28 +44,28 @@ import org.ktorm.entity.removeIf
 
 class SupplyServiceImpl : SupplyService {
 
-    override fun getAll(size: Int, page: Int): List<Supply> {
-        return db.from(Supplies)
+    override suspend fun getAll(size: Int, page: Int): List<Supply> = withContext(Dispatchers.IO) {
+        db.from(Supplies)
             .select()
             .offset((page - 1) * size)
             .limit(size)
             .map { row -> Supplies.createEntity(row) }
     }
 
-    override fun getById(id: Long): Supply? {
-        return db.supplies.find { it.id eq id }
+    override suspend fun getById(id: Long): Supply? = withContext(Dispatchers.IO) {
+        db.supplies.find { it.id eq id }
     }
 
-    override fun save(supply: Supply) {
+    override suspend fun save(supply: Supply): Unit = withContext(Dispatchers.IO) {
         db.supplies.add(supply)
     }
 
-    override fun delete(id: Long) {
+    override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         db.supplies.removeIf { it.id eq id }
     }
 
-    override fun getTotalCount(): Int {
-        return db.supplies.count()
+    override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
+        db.supplies.count()
     }
 
 }

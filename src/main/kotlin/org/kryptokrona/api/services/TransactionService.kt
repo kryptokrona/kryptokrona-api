@@ -34,14 +34,14 @@ import org.kryptokrona.api.models.Transaction
 
 interface TransactionService {
 
-    fun getAll(size: Int, page: Int): List<Transaction>
+    suspend fun getAll(size: Int, page: Int): List<Transaction>
 
-    fun getById(id: Long): Transaction?
+    suspend fun getById(id: Long): Transaction?
 
-    fun save(transaction: Transaction)
+    suspend fun save(transaction: Transaction)
 
-    fun delete(id: Long)
+    suspend fun delete(id: Long)
 
-    fun getTotalCount(): Int
+    suspend fun getTotalCount(): Int
 
 }

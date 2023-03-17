@@ -60,9 +60,7 @@ class PostEncryptedServiceImpl : PostEncryptedService {
             db.postsencrypted.find { it.id eq id }
         }.onFailure {
             logger.error("Error finding encrypted post with hash: $id", it)
-        }
-
-        null
+        }.getOrNull()
     }
 
     override suspend fun save(postEncrypted: PostEncrypted): Unit = withContext(Dispatchers.IO) {

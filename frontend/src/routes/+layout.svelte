@@ -10,10 +10,10 @@
   onMount(() => {
     if (typeof window === undefined) return;
 
-    isPhone = window.innerWidth < 640;
+    isPhone = window.innerWidth < 1024;
 
     addEventListener("resize", () => {
-      isPhone = window.innerWidth < 640;
+      isPhone = window.innerWidth < 1024;
     });
   });
 </script>

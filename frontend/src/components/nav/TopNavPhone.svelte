@@ -2,13 +2,15 @@
   import { goto } from "$app/navigation";
 
   let phoneMenu;
+  let show = false;
 
   const toggleMenu = () => {
-    phoneMenu.classList.toggle("hidden");
+    phoneMenu.classList.toggle("phone-nav-show");
+    show = !show;
   };
 
   const navigate = (path) => {
-    phoneMenu.classList.toggle("hidden");
+    toggleMenu();
     goto(path);
   };
 </script>
@@ -31,29 +33,42 @@
                     rounded-md 
                     py-1.5 px-2
                     mr-1"
+        aria-label="toggle menu"
       >
-        <i class="fa-solid fa-bars w-5 h-5" />
+        {#if show}
+          <i class="fa-solid fa-xmark w-5 h-5" aria-hidden="true" />
+        {:else}
+          <i class="fa-solid fa-bars w-5 h-5" aria-hidden="true" />
+        {/if}
       </button>
     </div>
   </div>
+
   <div
     bind:this={phoneMenu}
-    class="phone-nav flex justify-center pt-4 pb-4 mt-4 hidden rounded-md bg-neutral-100 text-neutral-900 dark:text-neutral-100 dark:bg-neutral-700"
+    class="phone-nav mt-4 rounded-md bg-neutral-300 text-neutral-900 dark:text-neutral-100 dark:bg-neutral-800"
   >
     <div class="flex flex-col gap-4">
       <button
         on:click={() => {
           navigate("/nodes");
-        }}><i class="fa-solid fa-network-wired" /> nodes</button
+        }}
+        class="pt-4"><i class="fa-solid fa-network-wired" /> nodes</button
       >
       <button><i class="fa-solid fa-water-ladder" /> pools</button>
-      <button><i class="fa-solid fa-gear" /> settings</button>
+      <button class="pb-4"><i class="fa-solid fa-gear" /> settings</button>
     </div>
   </div>
 </nav>
 
 <style>
   .phone-nav {
-    animation: slide-in 1s ease-in;
+    -webkit-transition: max-height 0.2s ease-in-out;
+    -moz-transition: max-height 0.2s ease-in-out;
+    -ms-transition: max-height 0.2s ease-in-out;
+    -o-transition: max-height 0.2s ease-in-out;
+    transition: max-height 0.2s ease-in-out;
+    overflow: hidden;
+    max-height: 0;
   }
 </style>

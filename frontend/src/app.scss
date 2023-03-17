@@ -22,6 +22,10 @@
   display: none !important;
 }
 
+.phone-nav-show {
+  max-height: 500px !important;
+}
+
 @media (max-width: 640px) {
   body {
     font-size: 14px !important;

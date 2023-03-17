@@ -28,19 +28,41 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api.utils
+package org.kryptokrona.api.plugins
 
-import kotlinx.serialization.SerialName
-import kotlinx.serialization.Serializable
+import com.typesafe.config.ConfigFactory
+import io.ktor.server.config.*
+import org.apache.commons.dbcp2.BasicDataSource
+import org.ktorm.database.Database
 
 /**
- * Simple box object.
- * Will be removed here when we implement SDK v0.2.0
+ * Database connection object.
+ *
+ * Sets up database connection pooling.
  */
-@Serializable
-data class Box(
-    val box: String,
+object DatabaseFactory {
 
-    @SerialName("t")
-    val timestamp: Long = 0
-)
+    private val config = HoconApplicationConfig(ConfigFactory.load())
+
+    val db: Database
+
+    init {
+        val dataSource = setupDataSource()
+        db = Database.connect(dataSource)
+    }
+
+    private fun setupDataSource(): BasicDataSource {
+        return BasicDataSource().apply {
+            driverClassName = config.property("db.driver").getString()
+            url = config.property("db.url").getString()
+            username = config.property("db.user").getString()
+            password = config.property("db.password").getString()
+            minIdle = 5
+            maxTotal = 30
+            maxWaitMillis = 5_000
+            validationQuery = "SELECT 1"
+            testOnBorrow = true
+        }
+    }
+
+}

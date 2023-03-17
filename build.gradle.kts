@@ -68,6 +68,9 @@ dependencies {
     implementation("org.slf4j:slf4j-simple:$slf4j_version")
     implementation("javax.xml.bind:jaxb-api:2.3.1")
 
+    // database
+    implementation("org.apache.commons:commons-dbcp2:2.9.0")
+
     // liquibase
     liquibaseRuntime("org.liquibase:liquibase-core:$liquibase_core")
     liquibaseRuntime("org.postgresql:postgresql:$postgres_version")

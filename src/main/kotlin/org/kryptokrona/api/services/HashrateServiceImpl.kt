@@ -38,6 +38,7 @@ import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.count
 import org.ktorm.entity.find
+import org.ktorm.entity.removeIf
 
 class HashrateServiceImpl : HashrateService {
 
@@ -58,7 +59,7 @@ class HashrateServiceImpl : HashrateService {
     }
 
     override fun delete(id: Long) {
-        db.delete(Hashrates) { it.id eq id }
+        db.hashrates.removeIf { it.id eq id }
     }
 
     override fun getTotalCount(): Int {

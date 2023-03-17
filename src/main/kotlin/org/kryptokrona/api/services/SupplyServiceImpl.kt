@@ -38,6 +38,7 @@ import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.count
 import org.ktorm.entity.find
+import org.ktorm.entity.removeIf
 
 class SupplyServiceImpl : SupplyService {
 
@@ -58,7 +59,7 @@ class SupplyServiceImpl : SupplyService {
     }
 
     override fun delete(id: Long) {
-        db.delete(Supplies) { it.id eq id }
+        db.supplies.removeIf { it.id eq id }
     }
 
     override fun getTotalCount(): Int {

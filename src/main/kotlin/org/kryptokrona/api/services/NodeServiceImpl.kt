@@ -38,6 +38,7 @@ import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.count
 import org.ktorm.entity.find
+import org.ktorm.entity.removeIf
 
 class NodeServiceImpl : NodeService {
 
@@ -58,7 +59,7 @@ class NodeServiceImpl : NodeService {
     }
 
     override fun delete(id: Long) {
-        db.delete(Nodes) { it.id eq id }
+        db.nodes.removeIf { it.id eq id }
     }
 
     override fun getTotalCount(): Int {

@@ -55,8 +55,7 @@
         }}
         class="pt-4"><i class="fa-solid fa-network-wired" /> nodes</button
       >
-      <button><i class="fa-solid fa-water-ladder" /> pools</button>
-      <button class="pb-4"><i class="fa-solid fa-gear" /> settings</button>
+      <button><i class="fa-solid fa-water-ladder pb-4" /> pools</button>
     </div>
   </div>
 </nav>

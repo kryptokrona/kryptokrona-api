@@ -1,0 +1,46 @@
+<script>
+  import BlueButton from "../../components/buttons/BlueButton.svelte";
+  import GreenButton from "../../components/buttons/GreenButton.svelte";
+  import { login } from "../../api/login";
+  import { goto } from "$app/navigation";
+  import { user } from "../../stores/user";
+  let email;
+
+  function onLogin() {
+    $user = login(email);
+    goto("/");
+  }
+</script>
+
+<div class="flex justify-center">
+  <div class="w-full max-w-sm">
+    <h2 class="mb-8">Login</h2>
+    <div class="flex flex-col">
+      <label class="text-neutral-900 dark:text-neutral-100 mb-1" for="email"
+        >email</label
+      >
+      <input
+        class="rounded-md p-1 text-neutral-900"
+        type="email"
+        name="email"
+        bind:value={email}
+      />
+    </div>
+
+    <div class="flex flex-col mt-4 mb-4">
+      <label class="text-neutral-900 dark:text-neutral-100 mb-1" for="pw"
+        >password</label
+      >
+      <input
+        class="rounded-md p-1 text-neutral-900"
+        type="password"
+        name="pw"
+      />
+    </div>
+
+    <GreenButton text="Login" action={onLogin} />
+
+    <h2 class="mt-20 mb-4">Don't have an account? Create one for free</h2>
+    <BlueButton text="Register" />
+  </div>
+</div>

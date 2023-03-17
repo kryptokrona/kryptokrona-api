@@ -4,14 +4,15 @@
   import TopNav from "../components/nav/TopNav.svelte";
   import { onMount } from "svelte";
   import TopNavPhone from "../components/nav/TopNavPhone.svelte";
+  import { browser } from "$app/environment";
 
+  export let data;
   let isPhone = false;
 
   onMount(() => {
-    if (typeof window === undefined) return;
+    if (!browser) return;
 
     isPhone = window.innerWidth < 1024;
-
     addEventListener("resize", () => {
       isPhone = window.innerWidth < 1024;
     });
@@ -26,7 +27,7 @@
     {#if isPhone}
       <TopNavPhone />
     {:else}
-      <TopNav />
+      <TopNav repo={data.repo} />
     {/if}
     <div class={isPhone ? "mt-4" : "mt-10"}>
       <slot />

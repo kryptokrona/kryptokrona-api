@@ -20,7 +20,7 @@
         p-1.5
         mr-1"
 >
-  <i class={iconClass + " w-5 h-5"} aria-hidden="true" />
+  <i class={iconClass + " p-1"} aria-hidden="true" />
   <span
     class="tooltip 
         bg-neutral-100

@@ -41,8 +41,11 @@ import org.ktorm.entity.add
 import org.ktorm.entity.count
 import org.ktorm.entity.find
 import org.ktorm.entity.removeIf
+import org.slf4j.LoggerFactory
 
 class PoolServiceImpl : PoolService {
+
+    private val logger = LoggerFactory.getLogger("PoolServiceImpl")
 
     override suspend fun getAll(size: Int, page: Int): List<Pool> = withContext(Dispatchers.IO) {
         db.from(Pools)

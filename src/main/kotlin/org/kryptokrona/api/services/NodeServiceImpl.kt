@@ -41,8 +41,11 @@ import org.ktorm.entity.add
 import org.ktorm.entity.count
 import org.ktorm.entity.find
 import org.ktorm.entity.removeIf
+import org.slf4j.LoggerFactory
 
 class NodeServiceImpl : NodeService {
+
+    private val logger = LoggerFactory.getLogger("NodeServiceImpl")
 
     override suspend fun getAll(size: Int, page: Int): List<Node> = withContext(Dispatchers.IO) {
         db.from(Nodes)

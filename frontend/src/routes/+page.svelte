@@ -9,88 +9,71 @@
   import MultiItemsGridFullWidthTablet from "../components/grids/MultiItemsGridFullWidthTablet.svelte";
 </script>
 
-<div>
-  <ToggleBox title={"Quick overview"}>
-    <MultiItemsGrid columns={5}>
-      <TitleAndTextContainer title="Threads" text="14" />
-      <TitleAndTextContainer title="Uptime" text="4 days" />
-      <TitleAndTextContainer title="CPU total" text="30%">
-        <div
-          class="flex h-5/6 items-end justify-center absolute top-7 left-0 right-0"
-        >
-          <CircleChart data={[30]} id="id8" />
-        </div>
-      </TitleAndTextContainer>
-      <TitleAndTextContainer title="RAM total" text="50%">
-        <div
-          class="flex h-5/6 items-end justify-center absolute top-7 left-0 right-0"
-        >
-          <CircleChart data={[50]} id="id9" />
-        </div>
-      </TitleAndTextContainer>
-      <TitleAndTextContainer title="DISK total" text="40%">
-        <div
-          class="flex h-5/6 items-end justify-center absolute top-7 left-0 right-0"
-        >
-          <CircleChart data={[40]} id="id10" />
-        </div>
-      </TitleAndTextContainer>
-    </MultiItemsGrid>
-  </ToggleBox>
+<div id="main" />
+<ToggleBox title={"Quick overview"}>
+  <MultiItemsGrid columns={5}>
+    <TitleAndTextContainer title="Threads" text="14" />
+    <TitleAndTextContainer title="Uptime" text="4 days" />
+    <TitleAndTextContainer title="CPU total" text="30%">
+      <div
+        class="flex h-5/6 items-end justify-center absolute top-7 left-0 right-0"
+      >
+        <CircleChart data={[30]} id="id8" />
+      </div>
+    </TitleAndTextContainer>
+    <TitleAndTextContainer title="RAM total" text="50%">
+      <div
+        class="flex h-5/6 items-end justify-center absolute top-7 left-0 right-0"
+      >
+        <CircleChart data={[50]} id="id9" />
+      </div>
+    </TitleAndTextContainer>
+    <TitleAndTextContainer title="DISK total" text="40%">
+      <div
+        class="flex h-5/6 items-end justify-center absolute top-7 left-0 right-0"
+      >
+        <CircleChart data={[40]} id="id10" />
+      </div>
+    </TitleAndTextContainer>
+  </MultiItemsGrid>
+</ToggleBox>
 
-  <div class="mt-8" />
+<div class="mt-8" />
 
-  <ToggleBox title={"History"}>
-    <MultiItemsGridFullWidthTablet columns={3} fullWidthOnPhone={true}>
-      <ChartWithTimeButtonsContainer title="CPU usage" height={"h-80"}>
-        <AreaChartWithLabels data={chart4.data} id={chart4.name} />
-      </ChartWithTimeButtonsContainer>
+<ToggleBox title={"History"}>
+  <MultiItemsGridFullWidthTablet columns={3} fullWidthOnPhone={true}>
+    <ChartWithTimeButtonsContainer title="CPU usage" height={"h-80"}>
+      <AreaChartWithLabels data={chart4.data} id={chart4.name} />
+    </ChartWithTimeButtonsContainer>
 
-      <ChartWithTimeButtonsContainer title="RAM usage" height={"h-80"}>
-        <AreaChartWithLabels
-          data={chart5.data}
-          id={chart5.name}
-          colors={["#4c1d95"]}
-        />
-      </ChartWithTimeButtonsContainer>
-      <ChartWithTimeButtonsContainer title="DISK usage" height={"h-80"}>
-        <AreaChartWithLabels
-          data={chart1.data}
-          id={chart1.name}
-          colors={["#701a75"]}
-        />
-      </ChartWithTimeButtonsContainer>
-    </MultiItemsGridFullWidthTablet>
-  </ToggleBox>
-
-  <div class="mt-8" />
-
-  <ToggleBox title={"Status"}>
-    <MultiItemsGrid columns={6} fullWidthOnPhone={true}>
-      <TitleAndTextContainer
-        title="Something"
-        text="OK"
-        color={"bg-green-700"}
+    <ChartWithTimeButtonsContainer title="RAM usage" height={"h-80"}>
+      <AreaChartWithLabels
+        data={chart5.data}
+        id={chart5.name}
+        colors={["#4c1d95"]}
       />
-      <TitleAndTextContainer
-        title="Something"
-        text="OK"
-        color={"bg-green-700"}
+    </ChartWithTimeButtonsContainer>
+    <ChartWithTimeButtonsContainer title="DISK usage" height={"h-80"}>
+      <AreaChartWithLabels
+        data={chart1.data}
+        id={chart1.name}
+        colors={["#701a75"]}
       />
-      <TitleAndTextContainer
-        title="Something"
-        text="OK"
-        color={"bg-green-700"}
-      />
-      <TitleAndTextContainer title="Something" text="OFFLINE" />
-      <TitleAndTextContainer title="Something" text="OFFLINE" />
-      <TitleAndTextContainer
-        title="Something"
-        text="OK"
-        color={"bg-green-700"}
-      />
-    </MultiItemsGrid>
-  </ToggleBox>
+    </ChartWithTimeButtonsContainer>
+  </MultiItemsGridFullWidthTablet>
+</ToggleBox>
 
-  <div class="mt-8" />
-</div>
+<div class="mt-8" />
+
+<ToggleBox title={"Status"}>
+  <MultiItemsGrid columns={6} fullWidthOnPhone={true}>
+    <TitleAndTextContainer title="Something" text="OK" color={"bg-green-700"} />
+    <TitleAndTextContainer title="Something" text="OK" color={"bg-green-700"} />
+    <TitleAndTextContainer title="Something" text="OK" color={"bg-green-700"} />
+    <TitleAndTextContainer title="Something" text="OFFLINE" />
+    <TitleAndTextContainer title="Something" text="OFFLINE" />
+    <TitleAndTextContainer title="Something" text="OK" color={"bg-green-700"} />
+  </MultiItemsGrid>
+</ToggleBox>
+
+<div class="mt-8" />

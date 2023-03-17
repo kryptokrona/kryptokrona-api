@@ -86,7 +86,7 @@ class HuginSyncer {
                     if (extra.length > 200) {
                         logger.info("Trimming extra data...")
                         val extraData = trimExtra(extra)
-                        // if ("box" in extraData) savePostEncrypted(extraData)
+                        if ("box" in extraData) savePostEncrypted(extraData)
                         if ("sb" in extraData) savePostEncryptedGroup(extraData)
                     } else {
                         logger.debug("Extra is less than 200 in length, skipping...")
@@ -135,7 +135,7 @@ class HuginSyncer {
 
             if (!exists) {
                 logger.info("Secret Box object does NOT exist: $sealedBoxObj")
-                // postEncryptedGroupServiceImpl.save(sealedBoxObj)
+                postEncryptedGroupServiceImpl.save(sealedBoxObj)
             }
         }
 

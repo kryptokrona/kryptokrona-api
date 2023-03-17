@@ -68,7 +68,7 @@ class PostEncryptedServiceImpl : PostEncryptedService {
     }
 
     override fun getTotalCount(): Int {
-        return db.postsencrypted.count()
+        return db.from(PostsEncrypted).select().totalRecordsInAllPages
     }
 
 }

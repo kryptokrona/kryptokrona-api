@@ -60,13 +60,13 @@ class PostEncryptedGroupServiceImpl : PostEncryptedGroupService {
     }
 
     override suspend fun save(postEncryptedGroup: PostEncryptedGroup): Unit = withContext(Dispatchers.IO)  {
-        logger.info("Saving encrypted group post: ${postEncryptedGroup.txHash}")
-        // useTransaction here to
-        // ensures that the transaction is correctly started, committed, or rolled back
-        // based on the success or failure of the operations within the block.
-        // This provides better control over the transaction lifecycle and can help
-        // you identify any issues related to transactions or connection management.
-        db.postencryptedgroups.add(postEncryptedGroup)
+        this.runCatching {
+            db.postencryptedgroups.add(postEncryptedGroup)
+        }.onSuccess {
+            logger.info("Saving encrypted group post: ${postEncryptedGroup.txHash}")
+        }.onFailure {
+            logger.error("Error saving encrypted group post: ${postEncryptedGroup.txHash}", it)
+        }
     }
 
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {

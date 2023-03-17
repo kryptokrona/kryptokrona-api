@@ -6,7 +6,7 @@
 
     <changeSet id="0" author="mjovanc">
         <createTable tableName="blocks">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="hash" type="VARCHAR(255) NOT NULL"/>
@@ -17,7 +17,7 @@
         </createTable>
 
         <createTable tableName="transactions">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="hash" type="VARCHAR(255) NOT NULL"/>
@@ -35,7 +35,7 @@
         </createTable>
 
         <createTable tableName="hashrates">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="hashrate" type="VARCHAR(255) NOT NULL"/>
@@ -43,7 +43,7 @@
         </createTable>
 
         <createTable tableName="nodes">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="name" type="VARCHAR(255) NOT NULL"/>
@@ -59,7 +59,7 @@
         </createTable>
 
         <createTable tableName="outputs">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="amount" type="BIGINT NOT NULL"/>
@@ -72,7 +72,7 @@
         </createTable>
 
         <createTable tableName="pools">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="name" type="VARCHAR(255) NOT NULL"/>
@@ -87,27 +87,27 @@
         </createTable>
 
         <createTable tableName="postsencrypted">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="tx_hash" type="VARCHAR(255) NOT NULL"/>
-            <column name="tx_box" type="VARCHAR(255) NOT NULL"/>
+            <column name="tx_box" type="VARCHAR(5000) NOT NULL"/>
             <column name="tx_timestamp" type="BIGINT NOT NULL"/>
             <column name="created_at" type="TIMESTAMP WITH TIME ZONE NOT NULL"/>
         </createTable>
 
         <createTable tableName="postsencryptedgroup">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="tx_hash" type="VARCHAR(255) NOT NULL"/>
-            <column name="tx_sb" type="VARCHAR(255) NOT NULL"/>
+            <column name="tx_sb" type="VARCHAR(5000) NOT NULL"/>
             <column name="tx_timestamp" type="BIGINT NOT NULL"/>
             <column name="created_at" type="TIMESTAMP WITH TIME ZONE NOT NULL"/>
         </createTable>
 
         <createTable tableName="supplies">
-            <column name="id" type="BIGINT">
+            <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="supply" type="BIGINT NOT NULL"/>

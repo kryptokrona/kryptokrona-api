@@ -59,8 +59,13 @@ class PostEncryptedServiceImpl : PostEncryptedService {
     }
 
     override suspend fun save(postEncrypted: PostEncrypted): Unit = withContext(Dispatchers.IO) {
-        logger.info("Saving encrypted post: ${postEncrypted.txHash}")
-        db.postsencrypted.add(postEncrypted)
+        this.runCatching {
+            db.postsencrypted.find { it.txBox eq postEncrypted.txBox }
+        }.onSuccess {
+            logger.info("Encrypted post with hash saved: ${postEncrypted.txHash}")
+        }.onFailure {
+            logger.error("Error saving encrypted post with hash: ${postEncrypted.txHash}", it)
+        }
     }
 
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {

@@ -87,8 +87,8 @@ class HuginSyncer {
                     addTxIfNotKnown(transactionHash)
 
                     // validate that the extra data is longer than 200 characters
-                    if (extra.length > 200) {
-                        logger.info("Trimming extra data...")
+                    if (extra.length > 200 && transactionHash !in knownPoolTxsList) {
+                        logger.info("Trimming extra data for $transactionHash...")
                         val extraData = trimExtra(extra)
                         if ("box" in extraData) savePostEncrypted(extraData, it[0])
                         if ("sb" in extraData) savePostEncryptedGroup(extraData, it[0])
@@ -112,7 +112,7 @@ class HuginSyncer {
         }
     }
 
-    private suspend fun savePostEncrypted(extraData: String, transaction: Transaction) = coroutineScope {
+    private suspend fun savePostEncrypted(extraData: String, transaction: Transaction): Unit = coroutineScope {
         val boxObj: Box = Json.decodeFromString(extraData)
 
         launch {
@@ -128,7 +128,7 @@ class HuginSyncer {
         }
     }
 
-    private suspend fun savePostEncryptedGroup(extraData: String, transaction: Transaction) = coroutineScope {
+    private suspend fun savePostEncryptedGroup(extraData: String, transaction: Transaction): Unit = coroutineScope {
         val sealedBoxObj: SealedBox = Json.decodeFromString(extraData)
 
         launch {

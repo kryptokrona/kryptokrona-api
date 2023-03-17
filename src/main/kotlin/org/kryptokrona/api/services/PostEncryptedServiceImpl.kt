@@ -55,7 +55,15 @@ class PostEncryptedServiceImpl : PostEncryptedService {
     }
 
     override suspend fun getById(id: Long): PostEncrypted? = withContext(Dispatchers.IO) {
-        db.postsencrypted.find { it.id eq id }
+        this.runCatching {
+            db.postsencrypted.find { it.id eq id }
+        }.onSuccess {
+            logger.info("Encrypted post with id found: ${it?.txHash}")
+        }.onFailure {
+            logger.error("Error finding encrypted post with hash: $id", it)
+        }
+
+        null
     }
 
     override suspend fun save(postEncrypted: PostEncrypted): Unit = withContext(Dispatchers.IO) {
@@ -69,15 +77,35 @@ class PostEncryptedServiceImpl : PostEncryptedService {
     }
 
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
-        db.delete(PostsEncrypted) { it.id eq id }
+        this.runCatching {
+            db.postsencrypted.find { it.id eq id }
+        }.onSuccess {
+            logger.info("Encrypted post with id deleted: $id")
+        }.onFailure {
+            logger.error("Error deleting encrypted post with id: $id", it)
+        }
     }
 
     override suspend fun existsByTxBox(txBox: String): Boolean = withContext(Dispatchers.IO) {
-        db.postsencrypted.find { it.txBox eq txBox } != null
+        this.runCatching {
+            db.postsencrypted.find { it.txBox eq txBox }
+        }.onSuccess {
+            logger.info("Encrypted post with txBox found: $txBox")
+        }.onFailure {
+            logger.error("Error finding encrypted post with txBox: $txBox", it)
+        }.isSuccess
     }
 
     override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
-        db.postsencrypted.count()
+        this.runCatching {
+            db.postsencrypted.count()
+        }.onSuccess {
+            logger.info("Total encrypted posts count: $it")
+        }.onFailure {
+            logger.error("Error getting total encrypted posts count", it)
+        }
+
+        0
     }
 
 }

@@ -31,13 +31,15 @@
 package org.kryptokrona.api.syncers
 
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.api.config.HuginConfig
 import org.kryptokrona.api.models.PostEncrypted
 import org.kryptokrona.api.models.PostEncryptedGroup
-import org.kryptokrona.api.models.PostsEncrypted
 import org.kryptokrona.api.services.PostEncryptedGroupServiceImpl
 import org.kryptokrona.api.services.PostEncryptedServiceImpl
 import org.kryptokrona.api.utils.Box
@@ -73,7 +75,7 @@ class HuginSyncer {
     suspend fun sync() = coroutineScope {
         launch {
             while(isActive) {
-                logger.info("Fetching encrypted posts...")
+                logger.info("Synchronizing data...")
 
                 // get the data from the pool
                 val retrievedData = poolChangesClient.getPoolChangesLite()
@@ -82,13 +84,12 @@ class HuginSyncer {
                 // if transactions is not null
                 transactions?.let {
                     for (tx in it) {
-                        logger.info("Incoming transaction ${tx.transactionHash}")
-
                         val extra = tx.transactionPrefix.extra
                         val transactionHash = tx.transactionHash
 
                         // validate that the extra data is longer than 200 characters and that the transaction is not in the known pool txs list
                         if (extra.length > 200 && transactionHash !in knownPoolTxsList) {
+                            logger.info("Incoming transaction $transactionHash")
                             knownPoolTxsList += transactionHash
                             val extraData = trimExtra(extra)
 

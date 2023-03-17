@@ -40,8 +40,11 @@ import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.count
 import org.ktorm.entity.find
+import org.slf4j.LoggerFactory
 
 class PostEncryptedServiceImpl : PostEncryptedService {
+
+    private val logger = LoggerFactory.getLogger("PostEncryptedServiceImpl")
 
     override suspend fun getAll(size: Int, page: Int): List<PostEncrypted> = withContext(Dispatchers.IO) {
         db.from(PostsEncrypted)
@@ -56,6 +59,7 @@ class PostEncryptedServiceImpl : PostEncryptedService {
     }
 
     override suspend fun save(postEncrypted: PostEncrypted): Unit = withContext(Dispatchers.IO) {
+        logger.info("Saving encrypted post: ${postEncrypted.txHash}")
         db.postsencrypted.add(postEncrypted)
     }
 

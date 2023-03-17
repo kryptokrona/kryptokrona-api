@@ -47,6 +47,7 @@ import org.kryptokrona.sdk.http.model.transaction.Transaction
 import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
 import java.lang.System.getenv
+import java.time.LocalDateTime.now
 
 
 class HuginSyncer {
@@ -113,20 +114,14 @@ class HuginSyncer {
 
     private suspend fun savePostEncrypted(extraData: String, transaction: Transaction) = coroutineScope {
         val boxObj: Box = Json.decodeFromString(extraData)
-        logger.info("Parsed box: ${boxObj.timestamp}")
 
         launch {
-            val exists = postEncryptedServiceImpl.existsByTxBox(boxObj.box)
-
-            if (!exists) {
-                logger.info("Saving encrypted post...")
-
-                //TODO: this and the other savePostEncryptedGroup should perhaps include more fields???
-                // now it blocks the thread here for some reason. existsByTxBox() is not blocking anymore.
-                val postEncrypted = PostEncrypted().apply {
+            postEncryptedServiceImpl.existsByTxBox(boxObj.box).let {
+                val postEncrypted = PostEncrypted {
                     txHash = transaction.transactionHash
                     txBox = boxObj.box
                     txTimestamp = boxObj.timestamp
+                    createdAt = now()
                 }
                 postEncryptedServiceImpl.save(postEncrypted)
             }
@@ -135,17 +130,14 @@ class HuginSyncer {
 
     private suspend fun savePostEncryptedGroup(extraData: String, transaction: Transaction) = coroutineScope {
         val sealedBoxObj: SealedBox = Json.decodeFromString(extraData)
-        logger.info("Parsed SealedBox: ${sealedBoxObj.timestamp}")
 
         launch {
-            val exists = postEncryptedGroupServiceImpl.existsByTxSb(sealedBoxObj.secretBox)
-
-            if (!exists) {
-                logger.info("Saving encrypted group post...")
-                val postEncryptedGroup = PostEncryptedGroup().apply {
+            postEncryptedGroupServiceImpl.existsByTxSb(sealedBoxObj.secretBox).let {
+                val postEncryptedGroup = PostEncryptedGroup {
                     txHash = transaction.transactionHash
                     txSb = sealedBoxObj.secretBox
                     txTimestamp = sealedBoxObj.timestamp
+                    createdAt = now()
                 }
                 postEncryptedGroupServiceImpl.save(postEncryptedGroup)
             }

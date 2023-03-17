@@ -40,8 +40,12 @@ import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.count
 import org.ktorm.entity.find
+import org.ktorm.entity.removeIf
+import org.slf4j.LoggerFactory
 
 class PostEncryptedGroupServiceImpl : PostEncryptedGroupService {
+
+    private val logger = LoggerFactory.getLogger("PostEncryptedGroupServiceImpl")
 
     override suspend fun getAll(size: Int, page: Int): List<PostEncryptedGroup> = withContext(Dispatchers.IO) {
         db.from(PostEncryptedGroups)
@@ -56,11 +60,17 @@ class PostEncryptedGroupServiceImpl : PostEncryptedGroupService {
     }
 
     override suspend fun save(postEncryptedGroup: PostEncryptedGroup): Unit = withContext(Dispatchers.IO)  {
+        logger.info("Saving encrypted group post: ${postEncryptedGroup.txHash}")
+        // useTransaction here to
+        // ensures that the transaction is correctly started, committed, or rolled back
+        // based on the success or failure of the operations within the block.
+        // This provides better control over the transaction lifecycle and can help
+        // you identify any issues related to transactions or connection management.
         db.postencryptedgroups.add(postEncryptedGroup)
     }
 
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
-        db.delete(PostEncryptedGroups) { it.id eq id }
+        db.postencryptedgroups.removeIf { it.id eq 2 } //TODO change this to all other services
     }
 
     override suspend fun existsByTxSb(txSb: String): Boolean = withContext(Dispatchers.IO) {

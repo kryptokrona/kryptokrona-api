@@ -58,8 +58,6 @@ class PostEncryptedServiceImpl : PostEncryptedService {
     override suspend fun getById(id: Long): PostEncrypted? = withContext(Dispatchers.IO) {
         this.runCatching {
             db.postsencrypted.find { it.id eq id }
-        }.onSuccess {
-            logger.info("Encrypted post with id found: ${it?.txHash}")
         }.onFailure {
             logger.error("Error finding encrypted post with hash: $id", it)
         }
@@ -70,8 +68,6 @@ class PostEncryptedServiceImpl : PostEncryptedService {
     override suspend fun save(postEncrypted: PostEncrypted): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
             db.postsencrypted.add(postEncrypted)
-        }.onSuccess {
-            logger.info("Encrypted post with hash saved: ${postEncrypted.txHash}")
         }.onFailure {
             logger.error("Error saving encrypted post with hash: ${postEncrypted.txHash}", it)
         }
@@ -80,8 +76,6 @@ class PostEncryptedServiceImpl : PostEncryptedService {
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
             db.postsencrypted.removeIf { it.id eq 2 }
-        }.onSuccess {
-            logger.info("Encrypted post with id deleted: $id")
         }.onFailure {
             logger.error("Error deleting encrypted post with id: $id", it)
         }
@@ -90,8 +84,6 @@ class PostEncryptedServiceImpl : PostEncryptedService {
     override suspend fun existsByTxBox(txBox: String): Boolean = withContext(Dispatchers.IO) {
         this.runCatching {
             db.postsencrypted.find { it.txBox eq txBox }
-        }.onSuccess {
-            logger.info("Encrypted post with txBox found: $txBox")
         }.onFailure {
             logger.error("Error finding encrypted post with txBox: $txBox", it)
         }.isSuccess
@@ -100,8 +92,6 @@ class PostEncryptedServiceImpl : PostEncryptedService {
     override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
         this.runCatching {
             db.postsencrypted.count()
-        }.onSuccess {
-            logger.info("Total encrypted posts count: $it")
         }.onFailure {
             logger.error("Error getting total encrypted posts count", it)
         }.getOrNull() ?: 0

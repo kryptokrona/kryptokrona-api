@@ -56,19 +56,35 @@ class HashrateServiceImpl : HashrateService {
     }
 
     override suspend fun getById(id: Long): Hashrate? = withContext(Dispatchers.IO) {
-        db.hashrates.find { it.id eq id }
+        this.runCatching {
+            db.hashrates.find { it.id eq id }
+        }.onFailure {
+            logger.error("Error while getting hashrate by id: $id", it)
+        }.getOrNull()
     }
 
     override suspend fun save(hashrate: Hashrate): Unit = withContext(Dispatchers.IO) {
-        db.hashrates.add(hashrate)
+        this.runCatching {
+            db.hashrates.add(hashrate)
+        }.onFailure {
+            logger.error("Error while saving hashrate: $hashrate", it)
+        }.getOrNull()
     }
 
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
-        db.hashrates.removeIf { it.id eq id }
+        this.runCatching {
+            db.hashrates.removeIf { it.id eq id }
+        }.onFailure {
+            logger.error("Error while deleting hashrate by id: $id", it)
+        }.getOrNull()
     }
 
     override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
-        db.hashrates.count()
+        this.runCatching {
+            db.hashrates.count()
+        }.onFailure {
+            logger.error("Error while getting total count of hashrates", it)
+        }.getOrNull() ?: 0
     }
 
 }

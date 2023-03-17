@@ -56,19 +56,35 @@ class SupplyServiceImpl : SupplyService {
     }
 
     override suspend fun getById(id: Long): Supply? = withContext(Dispatchers.IO) {
-        db.supplies.find { it.id eq id }
+        this.runCatching {
+            db.supplies.find { it.id eq id }
+        }.onFailure {
+            logger.error("Error while getting supply by id: $id", it)
+        }.getOrNull()
     }
 
     override suspend fun save(supply: Supply): Unit = withContext(Dispatchers.IO) {
-        db.supplies.add(supply)
+        this.runCatching {
+            db.supplies.add(supply)
+        }.onFailure {
+            logger.error("Error while saving supply: $supply", it)
+        }.getOrNull()
     }
 
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
-        db.supplies.removeIf { it.id eq id }
+        this.runCatching {
+            db.supplies.removeIf { it.id eq id }
+        }.onFailure {
+            logger.error("Error while deleting supply by id: $id", it)
+        }.getOrNull()
     }
 
     override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
-        db.supplies.count()
+        this.runCatching {
+            db.supplies.count()
+        }.onFailure {
+            logger.error("Error while getting total count of supplies", it)
+        }.getOrNull() ?: 0
     }
 
 }

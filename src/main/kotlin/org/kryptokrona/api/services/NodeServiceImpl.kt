@@ -56,19 +56,35 @@ class NodeServiceImpl : NodeService {
     }
 
     override suspend fun getById(id: Long): Node? = withContext(Dispatchers.IO) {
-        db.nodes.find { it.id eq id }
+        this.runCatching {
+            db.nodes.find { it.id eq id }
+        }.onFailure {
+            logger.error("Error while getting node by id: $id", it)
+        }.getOrNull()
     }
 
     override suspend fun save(node: Node): Unit = withContext(Dispatchers.IO) {
-        db.nodes.add(node)
+        this.runCatching {
+            db.nodes.add(node)
+        }.onFailure {
+            logger.error("Error while saving node: $node", it)
+        }.getOrNull()
     }
 
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
-        db.nodes.removeIf { it.id eq id }
+        this.runCatching {
+            db.nodes.removeIf { it.id eq id }
+        }.onFailure {
+            logger.error("Error while deleting node by id: $id", it)
+        }.getOrNull()
     }
 
     override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
-        db.nodes.count()
+        this.runCatching {
+            db.nodes.count()
+        }.onFailure {
+            logger.error("Error while getting total count of nodes", it)
+        }.getOrNull() ?: 0
     }
 
 }

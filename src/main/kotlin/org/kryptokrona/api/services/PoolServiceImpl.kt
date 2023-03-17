@@ -56,19 +56,35 @@ class PoolServiceImpl : PoolService {
     }
 
     override suspend fun getById(id: Long): Pool? = withContext(Dispatchers.IO) {
-        db.pools.find { it.id eq id }
+        this.runCatching {
+            db.pools.find { it.id eq id }
+        }.onFailure {
+            logger.error("Error while getting pool by id: $id", it)
+        }.getOrNull()
     }
 
     override suspend fun save(pool: Pool): Unit = withContext(Dispatchers.IO) {
-        db.pools.add(pool)
+        this.runCatching {
+            db.pools.add(pool)
+        }.onFailure {
+            logger.error("Error while saving pool: $pool", it)
+        }.getOrNull()
     }
 
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
-        db.pools.removeIf { it.id eq id }
+        this.runCatching {
+            db.pools.removeIf { it.id eq id }
+        }.onFailure {
+            logger.error("Error while deleting pool by id: $id", it)
+        }.getOrNull()
     }
 
     override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
-        db.pools.count()
+        this.runCatching {
+            db.pools.count()
+        }.onFailure {
+            logger.error("Error while getting total count of pools", it)
+        }.getOrNull() ?: 0
     }
 
 }

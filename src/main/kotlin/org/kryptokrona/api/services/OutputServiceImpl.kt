@@ -56,19 +56,35 @@ class OutputServiceImpl : OutputService {
     }
 
     override suspend fun getById(id: Long): Output? = withContext(Dispatchers.IO) {
-        db.outputs.find { it.id eq id }
+        this.runCatching {
+            db.outputs.find { it.id eq id }
+        }.onFailure {
+            logger.error("Error while getting output by id: $id", it)
+        }.getOrNull()
     }
 
     override suspend fun save(output: Output): Unit = withContext(Dispatchers.IO) {
-        db.outputs.add(output)
+        this.runCatching {
+            db.outputs.add(output)
+        }.onFailure {
+            logger.error("Error while saving output: $output", it)
+        }.getOrNull()
     }
 
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
-        db.outputs.removeIf { it.id eq id }
+        this.runCatching {
+            db.outputs.removeIf { it.id eq id }
+        }.onFailure {
+            logger.error("Error while deleting output by id: $id", it)
+        }.getOrNull()
     }
 
     override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
-        db.outputs.count()
+        this.runCatching {
+            db.outputs.count()
+        }.onFailure {
+            logger.error("Error while getting total count of outputs", it)
+        }.getOrNull() ?: 0
     }
 
 }

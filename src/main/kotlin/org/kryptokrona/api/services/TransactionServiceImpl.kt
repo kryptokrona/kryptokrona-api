@@ -56,19 +56,35 @@ class TransactionServiceImpl : TransactionService {
     }
 
     override suspend fun getById(id: Long): Transaction? = withContext(Dispatchers.IO) {
-        db.transactions.find { it.id eq id }
+        this.runCatching {
+            db.transactions.find { it.id eq id }
+        }.onFailure {
+            logger.error("Error while getting transaction by id: $id", it)
+        }.getOrNull()
     }
 
     override suspend fun save(transaction: Transaction): Unit = withContext(Dispatchers.IO) {
-        db.transactions.add(transaction)
+        this.runCatching {
+            db.transactions.add(transaction)
+        }.onFailure {
+            logger.error("Error while saving transaction: $transaction", it)
+        }.getOrNull()
     }
 
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
-        db.transactions.removeIf { it.id eq id }
+        this.runCatching {
+            db.transactions.removeIf { it.id eq id }
+        }.onFailure {
+            logger.error("Error while deleting transaction by id: $id", it)
+        }.getOrNull()
     }
 
     override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
-        db.transactions.count()
+        this.runCatching {
+            db.transactions.count()
+        }.onFailure {
+            logger.error("Error while getting total count of transactions", it)
+        }.getOrNull() ?: 0
     }
 
 }

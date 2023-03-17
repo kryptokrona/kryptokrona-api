@@ -120,6 +120,9 @@ class HuginSyncer {
 
             if (!exists) {
                 logger.info("Saving encrypted post...")
+
+                //TODO: this and the other savePostEncryptedGroup should perhaps include more fields???
+                // now it blocks the thread here for some reason. existsByTxBox() is not blocking anymore.
                 val postEncrypted = PostEncrypted().apply {
                     txHash = transaction.transactionHash
                     txBox = boxObj.box

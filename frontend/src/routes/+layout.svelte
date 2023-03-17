@@ -28,7 +28,7 @@
     {:else}
       <TopNav />
     {/if}
-    <div class={isPhone ? "mt-4" : "mt-10"}>
+    <div class={isPhone ? "mt-4" : "mt-10"} id="main">
       <slot />
     </div>
   </div>

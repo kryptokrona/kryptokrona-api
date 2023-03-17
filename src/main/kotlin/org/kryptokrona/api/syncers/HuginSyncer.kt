@@ -71,7 +71,7 @@ class HuginSyncer {
     suspend fun sync() = coroutineScope {
         launch {
             while(isActive) {
-                logger.info("Fetching encrypted posts...")
+                logger.debug("Fetching encrypted posts...")
 
                 // get the data from the pool
                 val retrievedData = poolChangesClient.getPoolChangesLite()
@@ -79,39 +79,26 @@ class HuginSyncer {
 
                 // if transactions is not null
                 transactions?.let {
-                    val extra = it[0].transactionPrefix.extra
-                    val transactionHash = it[0].transactionHash
-                    logger.info("Incoming transaction $transactionHash")
+                    for (tx in it) {
+                        logger.info("Incoming transaction ${tx.transactionHash}")
 
-                    // add the transaction to the known list if it is not already known
-                    addTxIfNotKnown(transactionHash)
+                        val extra = tx.transactionPrefix.extra
+                        val transactionHash = tx.transactionHash
 
-                    logger.info("TransactionHash !in knownPoolTxsList: ${transactionHash !in knownPoolTxsList}")
-                    logger.info("Extra length: ${extra.length}")
+                        // validate that the extra data is longer than 200 characters and that the transaction is not in the known pool txs list
+                        if (extra.length > 200 && transactionHash !in knownPoolTxsList) {
+                            knownPoolTxsList += transactionHash
+                            val extraData = trimExtra(extra)
 
-                    // validate that the extra data is longer than 200 characters
-                    if (extra.length > 200 && transactionHash !in knownPoolTxsList) {
-                        logger.info("Trimming extra data for $transactionHash...")
-                        val extraData = trimExtra(extra)
-                        if ("box" in extraData) savePostEncrypted(extraData, it[0])
-                        if ("sb" in extraData) savePostEncryptedGroup(extraData, it[0])
-                    } else {
-                        logger.debug("Extra is less than 200 in length, skipping...")
+                            if ("box" in extraData) savePostEncrypted(extraData, tx)
+                            // if ("sb" in extraData) savePostEncryptedGroup(extraData, tx)
+                        } else {
+                            logger.debug("Extra is less than 200 in length, skipping...")
+                        }
                     }
                 }
 
                 delay(HuginConfig.SYNC_INTERVAL)
-            }
-        }
-    }
-
-    private fun addTxIfNotKnown(txHash: String) {
-        knownPoolTxsList.contains(txHash).let { isKnown ->
-            if (!isKnown) {
-                knownPoolTxsList += txHash
-                logger.info("Added $txHash to known transactions list")
-            } else {
-                logger.info("Transaction is known, skipping...")
             }
         }
     }

@@ -43,23 +43,23 @@ import org.ktorm.entity.find
 
 class PostEncryptedGroupServiceImpl : PostEncryptedGroupService {
 
-    override fun getAll(size: Int, page: Int): List<PostEncryptedGroup> {
-        return db.from(PostEncryptedGroups)
+    override suspend fun getAll(size: Int, page: Int): List<PostEncryptedGroup> = withContext(Dispatchers.IO) {
+        db.from(PostEncryptedGroups)
             .select()
             .offset((page - 1) * size)
             .limit(size)
             .map { row -> PostEncryptedGroups.createEntity(row) }
     }
 
-    override fun getById(id: Long): PostEncryptedGroup? {
-        return db.postencryptedgroups.find { it.id eq id }
+    override suspend fun getById(id: Long): PostEncryptedGroup? = withContext(Dispatchers.IO) {
+        db.postencryptedgroups.find { it.id eq id }
     }
 
-    override fun save(postEncryptedGroup: PostEncryptedGroup) {
+    override suspend fun save(postEncryptedGroup: PostEncryptedGroup): Unit = withContext(Dispatchers.IO)  {
         db.postencryptedgroups.add(postEncryptedGroup)
     }
 
-    override fun delete(id: Long) {
+    override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         db.delete(PostEncryptedGroups) { it.id eq id }
     }
 
@@ -67,8 +67,8 @@ class PostEncryptedGroupServiceImpl : PostEncryptedGroupService {
         db.postencryptedgroups.find { it.txSb eq txSb } != null
     }
 
-    override fun getTotalCount(): Int {
-        return db.postencryptedgroups.count()
+    override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
+        db.postencryptedgroups.count()
     }
 
 }

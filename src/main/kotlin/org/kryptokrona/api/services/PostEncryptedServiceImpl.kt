@@ -43,23 +43,23 @@ import org.ktorm.entity.find
 
 class PostEncryptedServiceImpl : PostEncryptedService {
 
-    override fun getAll(size: Int, page: Int): List<PostEncrypted> {
-        return db.from(PostsEncrypted)
+    override suspend fun getAll(size: Int, page: Int): List<PostEncrypted> = withContext(Dispatchers.IO) {
+        db.from(PostsEncrypted)
             .select()
             .offset((page - 1) * size)
             .limit(size)
             .map { row -> PostsEncrypted.createEntity(row) }
     }
 
-    override fun getById(id: Long): PostEncrypted? {
-        return db.postsencrypted.find { it.id eq id }
+    override suspend fun getById(id: Long): PostEncrypted? = withContext(Dispatchers.IO) {
+        db.postsencrypted.find { it.id eq id }
     }
 
-    override fun save(postEncrypted: PostEncrypted) {
+    override suspend fun save(postEncrypted: PostEncrypted): Unit = withContext(Dispatchers.IO) {
         db.postsencrypted.add(postEncrypted)
     }
 
-    override fun delete(id: Long) {
+    override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         db.delete(PostsEncrypted) { it.id eq id }
     }
 
@@ -67,8 +67,8 @@ class PostEncryptedServiceImpl : PostEncryptedService {
         db.postsencrypted.find { it.txBox eq txBox } != null
     }
 
-    override fun getTotalCount(): Int {
-        return db.from(PostsEncrypted).select().totalRecordsInAllPages
+    override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
+        db.postsencrypted.count()
     }
 
 }

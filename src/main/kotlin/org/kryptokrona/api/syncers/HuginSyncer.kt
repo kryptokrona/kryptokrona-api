@@ -35,12 +35,15 @@ import kotlinx.coroutines.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.api.config.HuginConfig
+import org.kryptokrona.api.models.PostEncrypted
+import org.kryptokrona.api.models.PostEncryptedGroup
 import org.kryptokrona.api.services.PostEncryptedGroupServiceImpl
 import org.kryptokrona.api.services.PostEncryptedServiceImpl
 import org.kryptokrona.api.utils.Box
 import org.kryptokrona.api.utils.SealedBox
 import org.kryptokrona.api.utils.trimExtra
 import org.kryptokrona.sdk.http.client.PoolChangesClient
+import org.kryptokrona.sdk.http.model.transaction.Transaction
 import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
 import java.lang.System.getenv
@@ -86,8 +89,8 @@ class HuginSyncer {
                     if (extra.length > 200) {
                         logger.info("Trimming extra data...")
                         val extraData = trimExtra(extra)
-                        if ("box" in extraData) savePostEncrypted(extraData)
-                        if ("sb" in extraData) savePostEncryptedGroup(extraData)
+                        if ("box" in extraData) savePostEncrypted(extraData, it[0])
+                        if ("sb" in extraData) savePostEncryptedGroup(extraData, it[0])
                     } else {
                         logger.debug("Extra is less than 200 in length, skipping...")
                     }
@@ -108,38 +111,42 @@ class HuginSyncer {
         }
     }
 
-    private suspend fun savePostEncrypted(extraData: String) = coroutineScope {
+    private suspend fun savePostEncrypted(extraData: String, transaction: Transaction) = coroutineScope {
         val boxObj: Box = Json.decodeFromString(extraData)
         logger.info("Parsed box: ${boxObj.timestamp}")
 
         launch {
-            logger.info("Before!")
             val exists = postEncryptedServiceImpl.existsByTxBox(boxObj.box)
-            logger.info("After!")
 
             if (!exists) {
-                logger.info("Box object does NOT exist: $boxObj")
-                // postEncryptedServiceImpl.save(boxObj)
+                logger.info("Saving encrypted post...")
+                val postEncrypted = PostEncrypted().apply {
+                    txHash = transaction.transactionHash
+                    txBox = boxObj.box
+                    txTimestamp = boxObj.timestamp
+                }
+                postEncryptedServiceImpl.save(postEncrypted)
             }
         }
     }
 
-    private suspend fun savePostEncryptedGroup(extraData: String) = coroutineScope {
+    private suspend fun savePostEncryptedGroup(extraData: String, transaction: Transaction) = coroutineScope {
         val sealedBoxObj: SealedBox = Json.decodeFromString(extraData)
         logger.info("Parsed SealedBox: ${sealedBoxObj.timestamp}")
 
         launch {
-            logger.info("Before!")
             val exists = postEncryptedGroupServiceImpl.existsByTxSb(sealedBoxObj.secretBox)
-            logger.info("After!")
 
             if (!exists) {
-                logger.info("Secret Box object does NOT exist: $sealedBoxObj")
-                postEncryptedGroupServiceImpl.save(sealedBoxObj)
+                logger.info("Saving encrypted group post...")
+                val postEncryptedGroup = PostEncryptedGroup().apply {
+                    txHash = transaction.transactionHash
+                    txSb = sealedBoxObj.secretBox
+                    txTimestamp = sealedBoxObj.timestamp
+                }
+                postEncryptedGroupServiceImpl.save(postEncryptedGroup)
             }
         }
-
-
     }
 
 }

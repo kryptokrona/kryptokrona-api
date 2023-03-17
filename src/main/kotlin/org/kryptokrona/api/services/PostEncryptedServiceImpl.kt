@@ -60,7 +60,7 @@ class PostEncryptedServiceImpl : PostEncryptedService {
 
     override suspend fun save(postEncrypted: PostEncrypted): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.postsencrypted.find { it.txBox eq postEncrypted.txBox }
+            db.postsencrypted.add(postEncrypted)
         }.onSuccess {
             logger.info("Encrypted post with hash saved: ${postEncrypted.txHash}")
         }.onFailure {

@@ -48,6 +48,7 @@ import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
 import java.lang.System.getenv
 import java.time.LocalDateTime.now
+import java.util.concurrent.Executors
 
 
 class HuginSyncer {
@@ -71,7 +72,7 @@ class HuginSyncer {
     suspend fun sync() = coroutineScope {
         launch {
             while(isActive) {
-                logger.debug("Fetching encrypted posts...")
+                logger.info("Fetching encrypted posts...")
 
                 // get the data from the pool
                 val retrievedData = poolChangesClient.getPoolChangesLite()
@@ -89,9 +90,12 @@ class HuginSyncer {
                         if (extra.length > 200 && transactionHash !in knownPoolTxsList) {
                             knownPoolTxsList += transactionHash
                             val extraData = trimExtra(extra)
+                            logger.info("Extra data: $extraData")
+
+                            logger.info("box in extraData: ${"box" in extraData}")
 
                             if ("box" in extraData) savePostEncrypted(extraData, tx)
-                            // if ("sb" in extraData) savePostEncryptedGroup(extraData, tx)
+                            else if ("sb" in extraData) savePostEncryptedGroup(extraData, tx)
                         } else {
                             logger.debug("Extra is less than 200 in length, skipping...")
                         }
@@ -104,9 +108,9 @@ class HuginSyncer {
     }
 
     private suspend fun savePostEncrypted(extraData: String, transaction: Transaction): Unit = coroutineScope {
-        val boxObj: Box = Json.decodeFromString(extraData)
-
         launch {
+            val boxObj: Box = Json.decodeFromString(extraData)
+            logger.info("AFTER")
             postEncryptedServiceImpl.existsByTxBox(boxObj.box).let {
                 val postEncrypted = PostEncrypted {
                     txHash = transaction.transactionHash
@@ -120,9 +124,8 @@ class HuginSyncer {
     }
 
     private suspend fun savePostEncryptedGroup(extraData: String, transaction: Transaction): Unit = coroutineScope {
-        val sealedBoxObj: SealedBox = Json.decodeFromString(extraData)
-
         launch {
+            val sealedBoxObj: SealedBox = Json.decodeFromString(extraData)
             postEncryptedGroupServiceImpl.existsByTxSb(sealedBoxObj.secretBox).let {
                 val postEncryptedGroup = PostEncryptedGroup {
                     txHash = transaction.transactionHash

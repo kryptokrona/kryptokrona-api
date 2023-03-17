@@ -3,7 +3,6 @@
   import AreaChart from "../../components/charts/AreaChart.svelte";
   import ColumnChart from "../../components/charts/ColumnChart.svelte";
   import AreaChartWithLabels from "../../components/charts/AreaChartWithLabels.svelte";
-  import ColumnChartWithLabels from "../../components/charts/ColumnChartWithLabels.svelte";
   import TwoItemsGrid from "../../components/grids/TwoItemsGrid.svelte";
   import TitleAndTextContainer from "../../components/containers/TitleAndTextContainer.svelte";
   import ToggleBox from "../../components/toggle-box/ToggleBox.svelte";
@@ -13,7 +12,6 @@
     chart3,
     chart4,
     chart5,
-    chart6,
     nodes,
     chart7,
     chart8,
@@ -44,11 +42,13 @@
       <div
         class="flex flex-row border-b p-2 dark:border-neutral-100 border-neutral-900"
       >
-        <h2 class="w-full text-center sm:text-left sm:w-1/3 lg:w-1/5">Name</h2>
-        <h2 class="hidden sm:inline-block sm:w-1/3 lg:w-1/5">Url</h2>
-        <h2 class="hidden sm:inline-block sm:w-1/3 lg:w-1/5">Port</h2>
-        <h2 class="hidden lg:inline-block lg:w-1/5">Data</h2>
-        <h2 class="hidden lg:inline-block lg:w-1/5">Data</h2>
+        <h2 class="text-left sm:text-center w-1/2 sm:w-1/3 lg:w-1/5">Name</h2>
+        <h2 class="text-right sm:text-center w-1/2 sm:w-1/3 lg:w-1/5">Url</h2>
+        <h2 class="hidden text-center sm:inline-block sm:w-1/3 lg:w-1/5">
+          Port
+        </h2>
+        <h2 class="hidden text-center lg:inline-block lg:w-1/5">Data</h2>
+        <h2 class="hidden text-center lg:inline-block lg:w-1/5">Data</h2>
       </div>
       {#each nodes.filter((n) => n.name
           .toLowerCase()
@@ -56,15 +56,19 @@
         <button
           on:click={goto(`/nodes/${node.name}`)}
           class={(i == nodes.length - 1 ? "rounded-md " : "") +
-            "flex text-left w-full border-b p-2 dark:border-neutral-100 border-neutral-900 hover:cursor-pointer hover:bg-neutral-200 dark:hover:bg-neutral-800"}
+            "flex text-left w-full border-b p-2 dark:border-neutral-100 border-neutral-900 lg:hover:cursor-pointer lg:hover:bg-neutral-200 dark:lg:hover:bg-neutral-800"}
         >
-          <p class="w-full text-center sm:text-left sm:w-1/3 lg:w-1/5">
+          <p class=" text-left sm:text-center w-1/2 sm:w-1/3 lg:w-1/5">
             {node.name}
           </p>
-          <p class="hidden sm:inline-block sm:w-1/3 lg:w-1/5">{node.url}</p>
-          <p class="hidden sm:inline-block sm:w-1/3 lg:w-1/5">{node.port}</p>
-          <p class="hidden lg:inline-block lg:w-1/5">data</p>
-          <p class="hidden lg:inline-block lg:w-1/5">data</p>
+          <p class="text-right sm:text-center w-1/2 sm:w-1/3 lg:w-1/5">
+            {node.url}
+          </p>
+          <p class="hidden text-center sm:inline-block sm:w-1/3 lg:w-1/5">
+            {node.port}
+          </p>
+          <p class="hidden text-center lg:inline-block lg:w-1/5">data</p>
+          <p class="hidden text-center lg:inline-block lg:w-1/5">data</p>
         </button>
       {/each}
     </div>

@@ -20,27 +20,28 @@
   import { goto } from "$app/navigation";
   import LineChartWithLabels from "../../components/charts/LineChartWithLabels.svelte";
   import MultiItemsGrid from "../../components/grids/MultiItemsGrid.svelte";
+  import TitleAndTextContainerGreen from "../../components/containers/TitleAndTextContainerGreen.svelte";
 
   let searchInput = "";
 </script>
 
 <div class="flex items-center justify-center">
   <div class="w-full">
-    <div class="relative text-neutral-900 ">
-      <i class="fa-solid fa-magnifying-glass search-icon" />
+    <div class="relative dark:text-neutral-900">
+      <i class="fa-solid fa-magnifying-glass search-icon " />
       <input
         bind:value={searchInput}
-        class="search-input rounded-md w-full text-neutral-900 border-neutral-900 border dark:border-none"
+        class="search-input rounded-md w-full border-neutral-700 border dark:border-none"
         type="text"
         aria-label="search for node"
         placeholder="search"
       />
     </div>
     <div
-      class="rounded-md border-t border-l border-r mt-4 dark:border-neutral-100 border-neutral-900"
+      class="rounded-md border-t border-l border-r mt-4 dark:border-neutral-100 border-neutral-700"
     >
       <div
-        class="flex flex-row border-b p-2 dark:border-neutral-100 border-neutral-900"
+        class="flex flex-row border-b p-2 dark:border-neutral-100 border-neutral-700"
       >
         <h2 class="text-left sm:text-center w-1/2 sm:w-1/3 lg:w-1/5">Name</h2>
         <h2 class="text-right sm:text-center w-1/2 sm:w-1/3 lg:w-1/5">Url</h2>
@@ -56,7 +57,7 @@
         <button
           on:click={goto(`/nodes/${node.name}`)}
           class={(i == nodes.length - 1 ? "rounded-md " : "") +
-            "flex text-left w-full border-b p-2 dark:border-neutral-100 border-neutral-900 lg:hover:cursor-pointer lg:hover:bg-neutral-200 dark:lg:hover:bg-neutral-800"}
+            "flex text-left w-full border-b p-2 dark:border-neutral-100 border-neutral-700 lg:hover:cursor-pointer lg:hover:bg-neutral-200 dark:lg:hover:bg-neutral-800"}
         >
           <p class=" text-left sm:text-center w-1/2 sm:w-1/3 lg:w-1/5">
             {node.name}
@@ -133,10 +134,10 @@
 
 <ToggleBox title={"Data"}>
   <MultiItemsGrid columns={4}>
-    <TitleAndTextContainer color="bg-green-700" title={"TITLE"} text="VALUE" />
-    <TitleAndTextContainer color="bg-green-700" title={"TITLE"} text="VALUE" />
     <TitleAndTextContainer title={"TITLE"} text="VALUE" />
     <TitleAndTextContainer title={"TITLE"} text="VALUE" />
+    <TitleAndTextContainerGreen title={"TITLE"} text="VALUE" />
+    <TitleAndTextContainerGreen title={"TITLE"} text="VALUE" />
   </MultiItemsGrid>
 </ToggleBox>
 

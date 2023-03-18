@@ -10,11 +10,9 @@
   class="tooltip-container
         text-center
         relative 
-        bg-neutral-400
-        text-neutral-900
-        hover:bg-neutral-500
+        bg-neutral-300
+        hover:bg-neutral-400
         dark:bg-neutral-700
-        dark:text-neutral-100 
         dark:hover:bg-neutral-500
         rounded-md 
         p-1.5
@@ -23,13 +21,11 @@
   <i class={iconClass + " p-1"} aria-hidden="true" />
   <span
     class="tooltip 
-        bg-neutral-100
-        text-neutral-900
-        border-neutral-900
+        bg-neutral-50
+        border-neutral-700
         dark:border-white
         border
         dark:bg-neutral-900 
-        dark:text-neutral-100
           rounded-md 
           p-1 
           flex 

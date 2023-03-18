@@ -4,6 +4,6 @@
 </script>
 
 <button
-  class="bg-green-700 py-1.5 px-2.5 rounded-md hover:bg-green-600"
+  class="bg-green-700 text-neutral-50 py-1.5 px-2.5 rounded-md hover:bg-green-600"
   on:click={action}>{text}</button
 >

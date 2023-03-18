@@ -7,6 +7,7 @@
   import AreaChartWithLabels from "../components/charts/AreaChartWithLabels.svelte";
   import ChartWithTimeButtonsContainer from "../components/containers/ChartWithTimeButtonsContainer.svelte";
   import MultiItemsGridFullWidthTablet from "../components/grids/MultiItemsGridFullWidthTablet.svelte";
+  import TitleAndTextContainerGreen from "../components/containers/TitleAndTextContainerGreen.svelte";
 </script>
 
 <div id="main" />
@@ -67,12 +68,12 @@
 
 <ToggleBox title={"Status"}>
   <MultiItemsGrid columns={6} fullWidthOnPhone={true}>
-    <TitleAndTextContainer title="Something" text="OK" color={"bg-green-700"} />
-    <TitleAndTextContainer title="Something" text="OK" color={"bg-green-700"} />
-    <TitleAndTextContainer title="Something" text="OK" color={"bg-green-700"} />
+    <TitleAndTextContainerGreen title="Something" text="OK" />
+    <TitleAndTextContainerGreen title="Something" text="OK" />
+    <TitleAndTextContainerGreen title="Something" text="OK" />
     <TitleAndTextContainer title="Something" text="OFFLINE" />
     <TitleAndTextContainer title="Something" text="OFFLINE" />
-    <TitleAndTextContainer title="Something" text="OK" color={"bg-green-700"} />
+    <TitleAndTextContainerGreen title="Something" text="OK" />
   </MultiItemsGrid>
 </ToggleBox>
 

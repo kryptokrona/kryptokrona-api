@@ -12,6 +12,7 @@
   onMount(() => {
     if (!browser) return;
 
+    console.log("data: " + data);
     isPhone = window.innerWidth < 1024;
     addEventListener("resize", () => {
       isPhone = window.innerWidth < 1024;
@@ -20,7 +21,7 @@
 </script>
 
 <div
-  class="w-full flex justify-center bg-neutral-100 text-neutral-900 dark:bg-neutral-900 dark:text-neutral-100 font-roboto"
+  class="w-full flex justify-center bg-neutral-50 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-100 font-roboto"
   style="min-height: 100vh;"
 >
   <div class="container pl-4 pr-4">

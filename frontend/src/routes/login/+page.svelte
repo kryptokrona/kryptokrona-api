@@ -16,11 +16,9 @@
   <div class="w-full max-w-sm">
     <h2 class="mb-8">Login</h2>
     <div class="flex flex-col">
-      <label class="text-neutral-900 dark:text-neutral-100 mb-1" for="email"
-        >email</label
-      >
+      <label class=" mb-1" for="email">email</label>
       <input
-        class="rounded-md p-1 text-neutral-900"
+        class="rounded-md p-1 border border-neutral-700 dark:border-neutral-100 dark:border-none dark:text-neutral-900"
         type="email"
         name="email"
         bind:value={email}
@@ -28,11 +26,9 @@
     </div>
 
     <div class="flex flex-col mt-4 mb-4">
-      <label class="text-neutral-900 dark:text-neutral-100 mb-1" for="pw"
-        >password</label
-      >
+      <label class=" mb-1" for="pw">password</label>
       <input
-        class="rounded-md p-1 text-neutral-900"
+        class="rounded-md p-1 border border-neutral-700 dark:border-neutral-100 dark:border-none dark:text-neutral-900"
         type="password"
         name="pw"
       />

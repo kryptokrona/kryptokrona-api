@@ -1,5 +1,6 @@
 <script>
   import TitleAndTextContainer from "../../../components/containers/TitleAndTextContainer.svelte";
+  import TitleAndTextContainerGreen from "../../../components/containers/TitleAndTextContainerGreen.svelte";
   import MultiItemsGrid from "../../../components/grids/MultiItemsGrid.svelte";
   import ToggleBox from "../../../components/toggle-box/ToggleBox.svelte";
 </script>
@@ -18,12 +19,12 @@
 
 <ToggleBox title={"Status"}>
   <MultiItemsGrid columns={6} fullWidthOnPhone={true}>
-    <TitleAndTextContainer title="Something" text="OK" color={"bg-green-700"} />
-    <TitleAndTextContainer title="Something" text="OK" color={"bg-green-700"} />
-    <TitleAndTextContainer title="Something" text="OK" color={"bg-green-700"} />
+    <TitleAndTextContainerGreen title="Something" text="OK" />
+    <TitleAndTextContainerGreen title="Something" text="OK" />
+    <TitleAndTextContainerGreen title="Something" text="OK" />
     <TitleAndTextContainer title="Something" text="OFFLINE" />
     <TitleAndTextContainer title="Something" text="OFFLINE" />
-    <TitleAndTextContainer title="Something" text="OK" color={"bg-green-700"} />
+    <TitleAndTextContainerGreen title="Something" text="OK" />
   </MultiItemsGrid>
 </ToggleBox>
 

@@ -23,13 +23,11 @@
     <div class="flex justify-end w-full items-center">
       <button
         on:click={toggleMenu}
-        class="tooltip-container
+        class="
                     text-center
                     relative 
                     bg-neutral-400
-                    text-neutral-900
                     dark:bg-neutral-700
-                    dark:text-neutral-100 
                     rounded-md 
                     py-1.5 px-2
                     mr-1"
@@ -46,7 +44,7 @@
 
   <div
     bind:this={phoneMenu}
-    class="phone-nav mt-4 rounded-md bg-neutral-300 text-neutral-900 dark:text-neutral-100 dark:bg-neutral-800"
+    class="phone-nav mt-4 rounded-md bg-neutral-300 dark:bg-neutral-800"
   >
     <div class="flex flex-col gap-4">
       <button

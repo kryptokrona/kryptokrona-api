@@ -1,6 +1,5 @@
 <script>
   import TopNavButton from "./TopNavButton.svelte";
-  import { formatDate } from "../../helpers/helpers";
   import { goto } from "$app/navigation";
   import GreenButton from "../buttons/GreenButton.svelte";
   import { user } from "../../stores/user";
@@ -14,48 +13,50 @@
     </a>
   </div>
   <div class="w-4/5 flex justify-center">
-    <div class="  flex items-center gap-6">
-      <div class="flex items-center">
-        <i class="fa-brands fa-github" aria-hidden="true" />
-        <p class="pl-1">version: {repo.version}</p>
-      </div>
-      <div class="flex items-center">
-        <i class="fa-solid fa-star" aria-hidden="true" />
-        <p class="pl-1">stars: {repo.stars}</p>
-      </div>
+    {#if repo.version != undefined}
+      <div class="  flex items-center gap-6">
+        <div class="flex items-center">
+          <i class="fa-brands fa-github" aria-hidden="true" />
+          <p class="pl-1">version: {repo.version}</p>
+        </div>
+        <div class="flex items-center">
+          <i class="fa-solid fa-star" aria-hidden="true" />
+          <p class="pl-1">stars: {repo.stars}</p>
+        </div>
 
-      <div class="flex items-center">
-        <i class="fa-solid fa-code-commit" aria-hidden="true" />
-        <p class="pl-1">commits: {repo.commitCount}</p>
+        <div class="flex items-center">
+          <i class="fa-solid fa-code-commit" aria-hidden="true" />
+          <p class="pl-1">commits: {repo.commitCount}</p>
+        </div>
+        <div class="flex items-center">
+          <i class="fa-solid fa-code-commit" aria-hidden="true" />
+          <p class="pl-1">
+            latest: <a
+              href={repo.latestCommit.path}
+              target="_blank"
+              rel="noreferrer"
+              class="hover:underline">{repo.latestCommit.date}</a
+            >
+          </p>
+        </div>
+        <div class="flex items-center">
+          <p class="pl-1">made by:</p>
+          {#each repo.contributors as contributor}
+            <a
+              href="https://github.com/{contributor.login}"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <img
+                src={contributor.avatar_url}
+                alt="contributor"
+                class="border-neutral-700 dark:border-neutral-100 hover:scale-125 border w-8 h-8 rounded-full ml-2"
+              />
+            </a>
+          {/each}
+        </div>
       </div>
-      <div class="flex items-center">
-        <i class="fa-solid fa-code-commit" aria-hidden="true" />
-        <p class="pl-1">
-          latest: <a
-            href={repo.latestCommit.path}
-            target="_blank"
-            rel="noreferrer"
-            class="hover:underline">{repo.latestCommit.date}</a
-          >
-        </p>
-      </div>
-      <div class="flex items-center">
-        <p class="pl-1">made by:</p>
-        {#each repo.contributors as contributor}
-          <a
-            href="https://github.com/{contributor.login}"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <img
-              src={contributor.avatar_url}
-              alt="contributor"
-              class="border-neutral-700 dark:border-neutral-100 hover:scale-125 border w-8 h-8 rounded-full ml-2"
-            />
-          </a>
-        {/each}
-      </div>
-    </div>
+    {/if}
   </div>
   <div class="flex justify-end w-1/6 items-center">
     <TopNavButton

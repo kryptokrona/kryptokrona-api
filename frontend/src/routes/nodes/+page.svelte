@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+  import { COLOR } from "../../helpers/colors";
   import AreaChart from "../../components/charts/AreaChart.svelte";
   import ColumnChart from "../../components/charts/ColumnChart.svelte";
   import AreaChartWithLabels from "../../components/charts/AreaChartWithLabels.svelte";
@@ -102,19 +102,19 @@
       title="TITLE"
       text={chart2.data[0].data[chart2.data[0].data.length - 1]}
     >
-      <AreaChart data={chart2.data} id={chart2.name} colors={["#4c1d95"]} />
+      <AreaChart data={chart2.data} id={chart2.name} colors={[COLOR.VIOLET]} />
     </TitleAndTextContainer>
     <TitleAndTextContainer
       title="TITLE"
       text={chart3.data[0].data[chart3.data[0].data.length - 1]}
     >
-      <AreaChart data={chart3.data} id={chart3.name} colors={["#701a75"]} />
+      <AreaChart data={chart3.data} id={chart3.name} colors={[COLOR.FUSCHIA]} />
     </TitleAndTextContainer>
     <TitleAndTextContainer
       title="TITLE"
       text={chart4.data[0].data[chart4.data[0].data.length - 1]}
     >
-      <ColumnChart data={chart4.data} id={chart4.name} colors={["#881337"]} />
+      <ColumnChart data={chart4.data} id={chart4.name} colors={[COLOR.ROSE]} />
     </TitleAndTextContainer>
     <TitleAndTextContainer
       title="TITLE"
@@ -123,7 +123,7 @@
       <ColumnChart
         data={chart5.data}
         id={chart5.name}
-        colors={["#4c1d95", "#701a75"]}
+        colors={[COLOR.VIOLET]}
         multipleDataSets={true}
       />
     </TitleAndTextContainer>

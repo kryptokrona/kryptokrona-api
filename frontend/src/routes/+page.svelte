@@ -1,4 +1,5 @@
 <script>
+  import { COLOR } from "../helpers/colors";
   import CircleChart from "../components/charts/CircleChart.svelte";
   import ToggleBox from "../components/toggle-box/ToggleBox.svelte";
   import { chart1, chart4, chart5 } from "../mock-data/data";
@@ -51,14 +52,14 @@
       <AreaChartWithLabels
         data={chart5.data}
         id={chart5.name}
-        colors={["#4c1d95"]}
+        colors={[COLOR.VIOLET]}
       />
     </ChartWithTimeButtonsContainer>
     <ChartWithTimeButtonsContainer title="DISK usage" height={"h-80"}>
       <AreaChartWithLabels
         data={chart1.data}
         id={chart1.name}
-        colors={["#701a75"]}
+        colors={[COLOR.FUSCHIA]}
       />
     </ChartWithTimeButtonsContainer>
   </MultiItemsGridFullWidthTablet>

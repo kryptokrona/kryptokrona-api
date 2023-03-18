@@ -34,14 +34,14 @@ import org.kryptokrona.api.models.Supply
 
 interface SupplyService {
 
-     fun getAll(size: Int, page: Int): List<Supply>
+     suspend fun getAll(size: Int, page: Int): List<Supply>
 
-    fun getById(id: Long): Supply?
+    suspend fun getById(id: Long): Supply?
 
-    fun save(supply: Supply)
+    suspend fun save(supply: Supply)
 
-    fun delete(id: Long)
+    suspend fun delete(id: Long)
 
-    fun getTotalCount(): Int
+    suspend fun getTotalCount(): Int
 
 }

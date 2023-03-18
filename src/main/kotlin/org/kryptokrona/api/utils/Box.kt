@@ -33,14 +33,9 @@ package org.kryptokrona.api.utils
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-/**
- * Simple box object.
- * Will be removed here when we implement SDK v0.2.0
- */
 @Serializable
 data class Box(
     val box: String,
 
-    @SerialName("t")
-    val timestamp: Long = 0
+    @SerialName("t") val timestamp: Long
 )

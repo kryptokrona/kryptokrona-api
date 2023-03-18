@@ -30,6 +30,8 @@
 
 package org.kryptokrona.api.services
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.kryptokrona.api.models.Output
 import org.kryptokrona.api.models.Outputs
 import org.kryptokrona.api.models.outputs
@@ -38,31 +40,51 @@ import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.count
 import org.ktorm.entity.find
+import org.ktorm.entity.removeIf
+import org.slf4j.LoggerFactory
 
 class OutputServiceImpl : OutputService {
 
-    override fun getAll(size: Int, page: Int): List<Output> {
-        return db.from(Outputs)
+    private val logger = LoggerFactory.getLogger("OutputServiceImpl")
+
+    override suspend fun getAll(size: Int, page: Int): List<Output> = withContext(Dispatchers.IO) {
+        db.from(Outputs)
             .select()
             .offset((page - 1) * size)
             .limit(size)
             .map { row -> Outputs.createEntity(row) }
     }
 
-    override fun getById(id: Long): Output? {
-        return db.outputs.find { it.id eq id }
+    override suspend fun getById(id: Long): Output? = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.outputs.find { it.id eq id }
+        }.onFailure {
+            logger.error("Error while getting output by id: $id", it)
+        }.getOrNull()
     }
 
-    override fun save(output: Output) {
-        db.outputs.add(output)
+    override suspend fun save(output: Output): Unit = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.outputs.add(output)
+        }.onFailure {
+            logger.error("Error while saving output: $output", it)
+        }.getOrNull()
     }
 
-    override fun delete(id: Long) {
-        db.delete(Outputs) { it.id eq id }
+    override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.outputs.removeIf { it.id eq id }
+        }.onFailure {
+            logger.error("Error while deleting output by id: $id", it)
+        }.getOrNull()
     }
 
-    override fun getTotalCount(): Int {
-        return db.outputs.count()
+    override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.outputs.count()
+        }.onFailure {
+            logger.error("Error while getting total count of outputs", it)
+        }.getOrNull() ?: 0
     }
 
 }

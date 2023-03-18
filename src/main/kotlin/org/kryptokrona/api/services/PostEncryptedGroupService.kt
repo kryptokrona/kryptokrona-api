@@ -34,16 +34,16 @@ import org.kryptokrona.api.models.PostEncryptedGroup
 
 interface PostEncryptedGroupService {
 
-    fun getAll(size: Int, page: Int): List<PostEncryptedGroup>
+    suspend fun getAll(size: Int, page: Int): List<PostEncryptedGroup>
 
-    fun getById(id: Long): PostEncryptedGroup?
+    suspend fun getById(id: Long): PostEncryptedGroup?
 
-    fun save(postEncryptedGroup: PostEncryptedGroup)
+    suspend fun save(postEncryptedGroup: PostEncryptedGroup)
 
-    fun delete(id: Long)
+    suspend fun delete(id: Long)
 
-    fun existsByTxSb(txSb: String): Boolean
+    suspend fun existsByTxSb(txSb: String): Boolean
 
-    fun getTotalCount(): Int
+    suspend fun getTotalCount(): Int
 
 }

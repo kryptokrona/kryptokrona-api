@@ -30,6 +30,8 @@
 
 package org.kryptokrona.api.services
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.kryptokrona.api.models.Hashrate
 import org.kryptokrona.api.models.Hashrates
 import org.kryptokrona.api.models.hashrates
@@ -38,31 +40,51 @@ import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.count
 import org.ktorm.entity.find
+import org.ktorm.entity.removeIf
+import org.slf4j.LoggerFactory
 
 class HashrateServiceImpl : HashrateService {
 
-    override fun getAll(size: Int, page: Int): List<Hashrate> {
-        return db.from(Hashrates)
+    private val logger = LoggerFactory.getLogger("HashrateServiceImpl")
+
+    override suspend fun getAll(size: Int, page: Int): List<Hashrate> = withContext(Dispatchers.IO) {
+        db.from(Hashrates)
             .select()
             .offset((page - 1) * size)
             .limit(size)
             .map { row -> Hashrates.createEntity(row) }
     }
 
-    override fun getById(id: Long): Hashrate? {
-        return db.hashrates.find { it.id eq id }
+    override suspend fun getById(id: Long): Hashrate? = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.hashrates.find { it.id eq id }
+        }.onFailure {
+            logger.error("Error while getting hashrate by id: $id", it)
+        }.getOrNull()
     }
 
-    override fun save(hashrate: Hashrate) {
-        db.hashrates.add(hashrate)
+    override suspend fun save(hashrate: Hashrate): Unit = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.hashrates.add(hashrate)
+        }.onFailure {
+            logger.error("Error while saving hashrate: $hashrate", it)
+        }.getOrNull()
     }
 
-    override fun delete(id: Long) {
-        db.delete(Hashrates) { it.id eq id }
+    override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.hashrates.removeIf { it.id eq id }
+        }.onFailure {
+            logger.error("Error while deleting hashrate by id: $id", it)
+        }.getOrNull()
     }
 
-    override fun getTotalCount(): Int {
-        return db.hashrates.count()
+    override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.hashrates.count()
+        }.onFailure {
+            logger.error("Error while getting total count of hashrates", it)
+        }.getOrNull() ?: 0
     }
 
 }

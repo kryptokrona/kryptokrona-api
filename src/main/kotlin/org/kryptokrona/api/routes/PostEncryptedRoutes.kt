@@ -55,6 +55,7 @@ fun Route.postsEncryptedRoute() {
         )
         val json = jsonObjectMapper().writeValueAsString(result)
 
+        call.respond(HttpStatusCode.OK, json)
     }
 }
 

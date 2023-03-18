@@ -34,14 +34,14 @@ import org.kryptokrona.api.models.Node
 
 interface NodeService {
 
-    fun getAll(size: Int, page: Int): List<Node>
+    suspend fun getAll(size: Int, page: Int): List<Node>
 
-    fun getById(id: Long): Node?
+    suspend fun getById(id: Long): Node?
 
-    fun save(node: Node)
+    suspend fun save(node: Node)
 
-    fun delete(id: Long)
+    suspend fun delete(id: Long)
 
-    fun getTotalCount(): Int
+    suspend fun getTotalCount(): Int
 
 }

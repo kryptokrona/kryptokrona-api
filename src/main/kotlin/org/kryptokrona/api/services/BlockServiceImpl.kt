@@ -30,6 +30,8 @@
 
 package org.kryptokrona.api.services
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.kryptokrona.api.models.Block
 import org.kryptokrona.api.models.Blocks
 import org.kryptokrona.api.models.blocks
@@ -38,31 +40,59 @@ import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.count
 import org.ktorm.entity.find
+import org.ktorm.entity.removeIf
+import org.slf4j.LoggerFactory
 
 class BlockServiceImpl : BlockService {
 
-    override fun getAll(size: Int, page: Int): List<Block> {
-        return db.from(Blocks)
+    private val logger = LoggerFactory.getLogger("BlockServiceImpl")
+
+    override suspend fun getAll(size: Int, page: Int): List<Block> = withContext(Dispatchers.IO) {
+        db.from(Blocks)
             .select()
             .offset((page - 1) * size)
             .limit(size)
             .map { row -> Blocks.createEntity(row) }
     }
 
-    override fun getById(id: Long): Block? {
-        return db.blocks.find { it.id eq id }
+    override suspend fun getById(id: Long): Block? = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.blocks.find { it.id eq id }
+        }.onSuccess {
+            logger.info("Getting block id: $id")
+        }.onFailure {
+            logger.error("Error getting block by id: $id", it)
+        }.getOrNull()
     }
 
-    override fun save(block: Block) {
-        db.blocks.add(block)
+    override suspend fun save(block: Block): Unit = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.blocks.add(block)
+        }.onSuccess {
+            logger.info("Saving block id: ${block.id}")
+        }.onFailure {
+            logger.error("Error saving block id: ${block.id}", it)
+        }.getOrNull()
     }
 
-    override fun delete(id: Long) {
-        db.delete(Blocks) { it.id eq id }
+    override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.blocks.removeIf { it.id eq id }
+        }.onSuccess {
+            logger.info("Deleting block id: $id")
+        }.onFailure {
+            logger.error("Error deleting block id: $id", it)
+        }.getOrNull()
     }
 
-    override fun getTotalCount(): Int {
-        return db.blocks.count()
+    override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.blocks.count()
+        }.onSuccess {
+            logger.info("Getting total count of blocks")
+        }.onFailure {
+            logger.error("Error getting total count of blocks", it)
+        }.getOrNull() ?: 0
     }
 
 }

@@ -30,6 +30,8 @@
 
 package org.kryptokrona.api.services
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.kryptokrona.api.models.Pool
 import org.kryptokrona.api.models.Pools
 import org.kryptokrona.api.models.pools
@@ -38,31 +40,51 @@ import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.count
 import org.ktorm.entity.find
+import org.ktorm.entity.removeIf
+import org.slf4j.LoggerFactory
 
 class PoolServiceImpl : PoolService {
 
-    override fun getAll(size: Int, page: Int): List<Pool> {
-        return db.from(Pools)
+    private val logger = LoggerFactory.getLogger("PoolServiceImpl")
+
+    override suspend fun getAll(size: Int, page: Int): List<Pool> = withContext(Dispatchers.IO) {
+        db.from(Pools)
             .select()
             .offset((page - 1) * size)
             .limit(size)
             .map { row -> Pools.createEntity(row) }
     }
 
-    override fun getById(id: Long): Pool? {
-        return db.pools.find { it.id eq id }
+    override suspend fun getById(id: Long): Pool? = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.pools.find { it.id eq id }
+        }.onFailure {
+            logger.error("Error while getting pool by id: $id", it)
+        }.getOrNull()
     }
 
-    override fun save(pool: Pool) {
-        db.pools.add(pool)
+    override suspend fun save(pool: Pool): Unit = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.pools.add(pool)
+        }.onFailure {
+            logger.error("Error while saving pool: $pool", it)
+        }.getOrNull()
     }
 
-    override fun delete(id: Long) {
-        db.delete(Pools) { it.id eq id }
+    override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.pools.removeIf { it.id eq id }
+        }.onFailure {
+            logger.error("Error while deleting pool by id: $id", it)
+        }.getOrNull()
     }
 
-    override fun getTotalCount(): Int {
-        return db.pools.count()
+    override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.pools.count()
+        }.onFailure {
+            logger.error("Error while getting total count of pools", it)
+        }.getOrNull() ?: 0
     }
 
 }

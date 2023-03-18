@@ -34,14 +34,14 @@ import org.kryptokrona.api.models.Output
 
 interface OutputService {
 
-    fun getAll(size: Int, page: Int): List<Output>
+    suspend fun getAll(size: Int, page: Int): List<Output>
 
-    fun getById(id: Long): Output?
+    suspend fun getById(id: Long): Output?
 
-    fun save(output: Output)
+    suspend fun save(output: Output)
 
-    fun delete(id: Long)
+    suspend fun delete(id: Long)
 
-    fun getTotalCount(): Int
+    suspend fun getTotalCount(): Int
 
 }

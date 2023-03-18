@@ -16,6 +16,18 @@ services:
     networks:
       - kryptokrona_api_net
 
+  liquibase:
+    image: liquibase/liquibase
+    container_name: liquibase
+    command: --defaults-file /liquibase/liquibase.properties update
+    volumes:
+      - ./src/main/resources/db/changelog:/changelog
+      - ./liquibase.properties:/liquibase/liquibase.properties
+    depends_on:
+      - db
+    networks:
+      - kryptokrona_api_net
+
   frontend:
     build: ./frontend
     container_name: kryptokrona_api_frontend

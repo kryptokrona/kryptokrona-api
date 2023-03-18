@@ -31,19 +31,27 @@
 package org.kryptokrona.api.syncers
 
 
-import kotlinx.coroutines.*
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.launch
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.api.config.HuginConfig
+import org.kryptokrona.api.models.PostEncrypted
+import org.kryptokrona.api.models.PostEncryptedGroup
 import org.kryptokrona.api.services.PostEncryptedGroupServiceImpl
 import org.kryptokrona.api.services.PostEncryptedServiceImpl
 import org.kryptokrona.api.utils.Box
+import org.kryptokrona.api.utils.NewBox
 import org.kryptokrona.api.utils.SealedBox
 import org.kryptokrona.api.utils.trimExtra
 import org.kryptokrona.sdk.http.client.PoolChangesClient
+import org.kryptokrona.sdk.http.model.transaction.Transaction
 import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
 import java.lang.System.getenv
+import java.time.LocalDateTime.now
 
 
 class HuginSyncer {
@@ -67,91 +75,75 @@ class HuginSyncer {
     suspend fun sync() = coroutineScope {
         launch {
             while(isActive) {
-                logger.info("Fetching encrypted posts...")
+                logger.info("Synchronizing data...")
 
                 // get the data from the pool
-                val data = poolChangesClient.getPoolChangesLite()
-                val transactions = data?.addedTxs
+                val retrievedData = poolChangesClient.getPoolChangesLite()
+                val transactions = retrievedData?.addedTxs
 
                 // if transactions is not null
                 transactions?.let {
-                    val extra = it[0].transactionPrefix.extra
-                    val transactionHash = it[0].transactionHash
+                    for (tx in it) {
+                        val extra = tx.transactionPrefix.extra
+                        val transactionHash = tx.transactionHash
 
-                    logger.info("Incoming transaction $transactionHash")
-
-                    // check if we have a transaction in the list already and is known
-                    knownPoolTxsList.contains(transactionHash).let { isKnown ->
-                        if (!isKnown) {
+                        // validate that the extra data is longer than 200 characters and that the transaction is not in the known pool txs list
+                        if (extra.length > 200 && transactionHash !in knownPoolTxsList) {
+                            logger.info("Incoming transaction $transactionHash")
                             knownPoolTxsList += transactionHash
+                            val extraData = trimExtra(extra)
+
+                            if ("box" in extraData) savePostEncrypted(extraData, tx)
+                            else if ("sb" in extraData) savePostEncryptedGroup(extraData, tx)
                         } else {
-                            logger.info("Transaction is known, skipping...")
+                            logger.debug("Extra is less than 200 in length, skipping...")
                         }
                     }
-
-                    // validate that the extra data is longer than 200 characters
-                    if (extra.length > 200) {
-                        logger.info("Extra is longer than 200 in length, parsing...")
-                        val extraData = trimExtra(extra)
-                        val isBoxObj = "box" in extraData
-                        val isSealedBoxObj = "sb" in extraData
-
-                        withContext(Dispatchers.Default) {
-
-                            // encrypted post
-                            if (isBoxObj) {
-                                val boxObj: Box = Json.decodeFromString(extraData)
-                                logger.info("Box: ${boxObj.timestamp}")
-
-                                //TODO: does not work since it seem to be blocking the thread
-                                /*val exists = postEncryptedServiceImpl.existsByTxBox(boxObj.box)
-
-                                logger.info(exists.toString())
-
-                                if (!exists) {
-                                    logger.info("Box object does NOT exist: $boxObj")
-                                    savePostEncrypted(boxObj)
-                                }*/
-                            }
-
-                            // encrypted group post
-                            if (isSealedBoxObj) {
-                                val sealedBoxObj: SealedBox = Json.decodeFromString(extraData)
-                                logger.info("SealedBox: ${sealedBoxObj.timestamp}")
-
-                                //TODO: does not work since it seem to be blocking the thread
-                                /*val exists = postEncryptedGroupServiceImpl.existsByTxSb(sealedBoxObj.secretBox)
-
-                                logger.info(exists.toString())
-
-                                if (!exists) {
-                                    logger.info("Secret Box object does NOT exist: $sealedBoxObj")
-                                    savePostEncryptedGroup(sealedBoxObj)
-                                }*/
-                            }
-
-                        }
-
-
-
-
-                    } else {
-                        logger.debug("Extra is less than 200 in length, skipping...")
-                    }
-
-                } ?: logger.debug("Fetched 0 transactions.")
+                }
 
                 delay(HuginConfig.SYNC_INTERVAL)
             }
         }
     }
 
-    private suspend fun savePostEncrypted(boxObj: Box) = coroutineScope {
-        logger.info("Saving encrypted post...")
+    private suspend fun savePostEncrypted(extraData: String, transaction: Transaction): Unit = coroutineScope {
+        launch {
+            // check if the new viewKey and txKey is in the extra data
+            if ("vt" in extraData && "txKey" in extraData) {
+                val newBoxObj: NewBox = Json.decodeFromString(extraData)
+                val postEncrypted = PostEncrypted {
+                    txHash = transaction.transactionHash
+                    txBox = newBoxObj.box
+                    txTimestamp = newBoxObj.timestamp
+                    createdAt = now()
+                }
+                postEncryptedServiceImpl.save(postEncrypted)
+            } else {
+                val boxObj: Box = Json.decodeFromString(extraData)
+                val postEncrypted = PostEncrypted {
+                    txHash = transaction.transactionHash
+                    txBox = boxObj.box
+                    txTimestamp = boxObj.timestamp
+                    createdAt = now()
+                }
+                postEncryptedServiceImpl.save(postEncrypted)
+            }
+        }
     }
 
-    private suspend fun savePostEncryptedGroup(sealedBox: SealedBox) = coroutineScope {
-        logger.info("Saving encrypted group post...")
+    private suspend fun savePostEncryptedGroup(extraData: String, transaction: Transaction): Unit = coroutineScope {
+        launch {
+            val sealedBoxObj: SealedBox = Json.decodeFromString(extraData)
+            postEncryptedGroupServiceImpl.existsByTxSb(sealedBoxObj.secretBox).let {
+                val postEncryptedGroup = PostEncryptedGroup {
+                    txHash = transaction.transactionHash
+                    txSb = sealedBoxObj.secretBox
+                    txTimestamp = sealedBoxObj.timestamp
+                    createdAt = now()
+                }
+                postEncryptedGroupServiceImpl.save(postEncryptedGroup)
+            }
+        }
     }
 
 }

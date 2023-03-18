@@ -28,20 +28,22 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api.services
+package org.kryptokrona.api.utils
 
-import org.kryptokrona.api.models.Pool
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-interface PoolService {
+/**
+ * Simple box object.
+ * Will be removed here when we implement SDK v0.2.0
+ */
+@Serializable
+data class NewBox(
+    val box: String,
 
-    suspend fun getAll(size: Int, page: Int): List<Pool>
+    @SerialName("t") val timestamp: Long,
 
-    suspend fun getById(id: Long): Pool?
+    val txKey: String,
 
-    suspend fun save(pool: Pool)
-
-    suspend fun delete(id: Long)
-
-    suspend fun getTotalCount(): Int
-
-}
+    @SerialName("vt") val viewTag: String
+)

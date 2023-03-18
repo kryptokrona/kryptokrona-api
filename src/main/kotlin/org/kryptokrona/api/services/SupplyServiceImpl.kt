@@ -30,6 +30,8 @@
 
 package org.kryptokrona.api.services
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.kryptokrona.api.models.Supplies
 import org.kryptokrona.api.models.Supply
 import org.kryptokrona.api.models.supplies
@@ -38,31 +40,51 @@ import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.count
 import org.ktorm.entity.find
+import org.ktorm.entity.removeIf
+import org.slf4j.LoggerFactory
 
 class SupplyServiceImpl : SupplyService {
 
-    override fun getAll(size: Int, page: Int): List<Supply> {
-        return db.from(Supplies)
+    private val logger = LoggerFactory.getLogger("SupplyServiceImpl")
+
+    override suspend fun getAll(size: Int, page: Int): List<Supply> = withContext(Dispatchers.IO) {
+        db.from(Supplies)
             .select()
             .offset((page - 1) * size)
             .limit(size)
             .map { row -> Supplies.createEntity(row) }
     }
 
-    override fun getById(id: Long): Supply? {
-        return db.supplies.find { it.id eq id }
+    override suspend fun getById(id: Long): Supply? = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.supplies.find { it.id eq id }
+        }.onFailure {
+            logger.error("Error while getting supply by id: $id", it)
+        }.getOrNull()
     }
 
-    override fun save(supply: Supply) {
-        db.supplies.add(supply)
+    override suspend fun save(supply: Supply): Unit = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.supplies.add(supply)
+        }.onFailure {
+            logger.error("Error while saving supply: $supply", it)
+        }.getOrNull()
     }
 
-    override fun delete(id: Long) {
-        db.delete(Supplies) { it.id eq id }
+    override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.supplies.removeIf { it.id eq id }
+        }.onFailure {
+            logger.error("Error while deleting supply by id: $id", it)
+        }.getOrNull()
     }
 
-    override fun getTotalCount(): Int {
-        return db.supplies.count()
+    override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.supplies.count()
+        }.onFailure {
+            logger.error("Error while getting total count of supplies", it)
+        }.getOrNull() ?: 0
     }
 
 }

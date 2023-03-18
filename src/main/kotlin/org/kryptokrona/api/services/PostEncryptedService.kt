@@ -34,16 +34,16 @@ import org.kryptokrona.api.models.PostEncrypted
 
 interface PostEncryptedService {
 
-    fun getAll(size: Int, page: Int): List<PostEncrypted>
+    suspend fun getAll(size: Int, page: Int): List<PostEncrypted>
 
-    fun getById(id: Long): PostEncrypted?
+    suspend fun getById(id: Long): PostEncrypted?
 
-    fun save(postEncrypted: PostEncrypted)
+    suspend fun save(postEncrypted: PostEncrypted)
 
-    fun delete(id: Long)
+    suspend fun delete(id: Long)
 
-    fun existsByTxBox(txBox: String): Boolean
+    suspend fun existsByTxBox(txBox: String): Boolean
 
-    fun getTotalCount(): Int
+    suspend fun getTotalCount(): Int
 
 }

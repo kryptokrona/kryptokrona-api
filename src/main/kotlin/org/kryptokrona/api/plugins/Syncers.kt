@@ -35,5 +35,10 @@ import kotlinx.coroutines.async
 import org.kryptokrona.api.syncers.HuginSyncer
 
 fun Application.configureSyncers() {
-    val deffered = async { HuginSyncer().sync() }
+
+    // async { IntialSyncer().sync() }
+
+    //TODO: we should start this sync process ONCE the IntialSyncer has finished
+    async { HuginSyncer().sync() }
+    // async { BlockSyncer().sync() }
 }

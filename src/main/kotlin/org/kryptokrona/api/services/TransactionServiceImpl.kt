@@ -30,6 +30,8 @@
 
 package org.kryptokrona.api.services
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.kryptokrona.api.models.Transaction
 import org.kryptokrona.api.models.Transactions
 import org.kryptokrona.api.models.transactions
@@ -38,31 +40,51 @@ import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.count
 import org.ktorm.entity.find
+import org.ktorm.entity.removeIf
+import org.slf4j.LoggerFactory
 
 class TransactionServiceImpl : TransactionService {
 
-    override fun getAll(size: Int, page: Int): List<Transaction> {
-        return db.from(Transactions)
+    private val logger = LoggerFactory.getLogger("TransactionServiceImpl")
+
+    override suspend fun getAll(size: Int, page: Int): List<Transaction> = withContext(Dispatchers.IO) {
+        db.from(Transactions)
             .select()
             .offset((page - 1) * size)
             .limit(size)
             .map { row -> Transactions.createEntity(row) }
     }
 
-    override fun getById(id: Long): Transaction? {
-        return db.transactions.find { it.id eq id }
+    override suspend fun getById(id: Long): Transaction? = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.transactions.find { it.id eq id }
+        }.onFailure {
+            logger.error("Error while getting transaction by id: $id", it)
+        }.getOrNull()
     }
 
-    override fun save(transaction: Transaction) {
-        db.transactions.add(transaction)
+    override suspend fun save(transaction: Transaction): Unit = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.transactions.add(transaction)
+        }.onFailure {
+            logger.error("Error while saving transaction: $transaction", it)
+        }.getOrNull()
     }
 
-    override fun delete(id: Long) {
-        db.delete(Transactions) { it.id eq id }
+    override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.transactions.removeIf { it.id eq id }
+        }.onFailure {
+            logger.error("Error while deleting transaction by id: $id", it)
+        }.getOrNull()
     }
 
-    override fun getTotalCount(): Int {
-        return db.transactions.count()
+    override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.transactions.count()
+        }.onFailure {
+            logger.error("Error while getting total count of transactions", it)
+        }.getOrNull() ?: 0
     }
 
 }

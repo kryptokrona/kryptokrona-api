@@ -30,6 +30,8 @@
 
 package org.kryptokrona.api.services
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.kryptokrona.api.models.Node
 import org.kryptokrona.api.models.Nodes
 import org.kryptokrona.api.models.nodes
@@ -38,31 +40,51 @@ import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.count
 import org.ktorm.entity.find
+import org.ktorm.entity.removeIf
+import org.slf4j.LoggerFactory
 
 class NodeServiceImpl : NodeService {
 
-    override fun getAll(size: Int, page: Int): List<Node> {
-        return db.from(Nodes)
+    private val logger = LoggerFactory.getLogger("NodeServiceImpl")
+
+    override suspend fun getAll(size: Int, page: Int): List<Node> = withContext(Dispatchers.IO) {
+        db.from(Nodes)
             .select()
             .offset((page - 1) * size)
             .limit(size)
             .map { row -> Nodes.createEntity(row) }
     }
 
-    override fun getById(id: Long): Node? {
-        return db.nodes.find { it.id eq id }
+    override suspend fun getById(id: Long): Node? = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.nodes.find { it.id eq id }
+        }.onFailure {
+            logger.error("Error while getting node by id: $id", it)
+        }.getOrNull()
     }
 
-    override fun save(node: Node) {
-        db.nodes.add(node)
+    override suspend fun save(node: Node): Unit = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.nodes.add(node)
+        }.onFailure {
+            logger.error("Error while saving node: $node", it)
+        }.getOrNull()
     }
 
-    override fun delete(id: Long) {
-        db.delete(Nodes) { it.id eq id }
+    override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.nodes.removeIf { it.id eq id }
+        }.onFailure {
+            logger.error("Error while deleting node by id: $id", it)
+        }.getOrNull()
     }
 
-    override fun getTotalCount(): Int {
-        return db.nodes.count()
+    override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.nodes.count()
+        }.onFailure {
+            logger.error("Error while getting total count of nodes", it)
+        }.getOrNull() ?: 0
     }
 
 }

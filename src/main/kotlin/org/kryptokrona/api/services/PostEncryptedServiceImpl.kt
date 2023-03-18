@@ -30,6 +30,8 @@
 
 package org.kryptokrona.api.services
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.kryptokrona.api.models.PostEncrypted
 import org.kryptokrona.api.models.PostsEncrypted
 import org.kryptokrona.api.models.postsencrypted
@@ -38,39 +40,59 @@ import org.ktorm.dsl.*
 import org.ktorm.entity.add
 import org.ktorm.entity.count
 import org.ktorm.entity.find
+import org.ktorm.entity.removeIf
+import org.slf4j.LoggerFactory
 
 class PostEncryptedServiceImpl : PostEncryptedService {
 
-    override fun getAll(size: Int, page: Int): List<PostEncrypted> {
-        return db.from(PostsEncrypted)
+    private val logger = LoggerFactory.getLogger("PostEncryptedServiceImpl")
+
+    override suspend fun getAll(size: Int, page: Int): List<PostEncrypted> = withContext(Dispatchers.IO) {
+        db.from(PostsEncrypted)
             .select()
             .offset((page - 1) * size)
             .limit(size)
             .map { row -> PostsEncrypted.createEntity(row) }
     }
 
-    override fun getById(id: Long): PostEncrypted? {
-        return db.postsencrypted.find { it.id eq id }
+    override suspend fun getById(id: Long): PostEncrypted? = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.postsencrypted.find { it.id eq id }
+        }.onFailure {
+            logger.error("Error finding encrypted post with hash: $id", it)
+        }.getOrNull()
     }
 
-    override fun save(postEncrypted: PostEncrypted) {
-        db.postsencrypted.add(postEncrypted)
-    }
-
-    override fun delete(id: Long) {
-        db.delete(PostsEncrypted) { it.id eq id }
-    }
-
-    override fun existsByTxBox(txBox: String): Boolean {
-        db.postsencrypted.find { it.txBox eq txBox }?.let {
-            return true
+    override suspend fun save(postEncrypted: PostEncrypted): Unit = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.postsencrypted.add(postEncrypted)
+        }.onFailure {
+            logger.error("Error saving encrypted post with hash: ${postEncrypted.txHash}", it)
         }
-
-        return false
     }
 
-    override fun getTotalCount(): Int {
-        return db.postsencrypted.count()
+    override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.postsencrypted.removeIf { it.id eq 2 }
+        }.onFailure {
+            logger.error("Error deleting encrypted post with id: $id", it)
+        }
+    }
+
+    override suspend fun existsByTxBox(txBox: String): Boolean = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.postsencrypted.find { it.txBox eq txBox }
+        }.onFailure {
+            logger.error("Error finding encrypted post with txBox: $txBox", it)
+        }.isSuccess
+    }
+
+    override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
+        this.runCatching {
+            db.postsencrypted.count()
+        }.onFailure {
+            logger.error("Error getting total encrypted posts count", it)
+        }.getOrNull() ?: 0
     }
 
 }

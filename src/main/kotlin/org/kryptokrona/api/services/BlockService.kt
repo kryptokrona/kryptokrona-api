@@ -34,14 +34,14 @@ import org.kryptokrona.api.models.Block
 
 interface BlockService {
 
-    fun getAll(size: Int, page: Int): List<Block>
+    suspend fun getAll(size: Int, page: Int): List<Block>
 
-    fun getById(id: Long): Block?
+    suspend fun getById(id: Long): Block?
 
-    fun save(block: Block)
+    suspend fun save(block: Block)
 
-    fun delete(id: Long)
+    suspend fun delete(id: Long)
 
-    fun getTotalCount(): Int
+    suspend fun getTotalCount(): Int
 
 }

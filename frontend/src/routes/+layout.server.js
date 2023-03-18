@@ -1,6 +1,6 @@
 export let ssr = true;
 
-import { getRepoStats } from "../api/github-api";
+import { getRepoStats } from "../server/github.server";
 
 export const load = async () => {
 	let repo = await getRepoStats();

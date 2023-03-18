@@ -28,6 +28,8 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"apexcharts": "^3.37.1"
+		"@octokit/rest": "^19.0.7",
+		"apexcharts": "^3.37.1",
+		"dotenv": "^16.0.3"
 	}
 }

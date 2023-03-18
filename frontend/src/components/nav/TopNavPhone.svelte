@@ -1,8 +1,11 @@
 <script>
   import { goto } from "$app/navigation";
+  import { user } from "../../stores/user";
+  import GreenButton from "../buttons/GreenButton.svelte";
 
   let phoneMenu;
   let show = false;
+  export let repo;
 
   const toggleMenu = () => {
     phoneMenu.classList.toggle("phone-nav-show");
@@ -15,7 +18,26 @@
   };
 </script>
 
-<nav class="top-nav  pt-4 pb-4" aria-label="main navigation">
+<div class="flex text-neutral-400 justify-center pt-2 pb-2">
+  {#if repo.version != undefined}
+    <div class="text-xs flex items-center gap-6">
+      <div class="flex items-center">
+        <i class="fa-brands fa-github" aria-hidden="true" />
+        <p class="pl-1">version: {repo.version}</p>
+      </div>
+      <div class="flex items-center">
+        <i class="fa-solid fa-star" aria-hidden="true" />
+        <p class="pl-1">stars: {repo.stars}</p>
+      </div>
+
+      <div class="flex items-center">
+        <i class="fa-solid fa-code-commit" aria-hidden="true" />
+        <p class="pl-1">commits: {repo.commitCount}</p>
+      </div>
+    </div>
+  {/if}
+</div>
+<nav class="top-nav pt-4 pb-4" aria-label="main navigation">
   <div class="flex">
     <a href="/">
       <img src="./logo.png" class="w-36" alt="kryptokrona api" />
@@ -53,7 +75,24 @@
         }}
         class="pt-4"><i class="fa-solid fa-network-wired" /> nodes</button
       >
-      <button><i class="fa-solid fa-water-ladder pb-4" /> pools</button>
+      <button><i class="fa-solid fa-water-ladder " /> pools</button>
+
+      {#if $user.email != null}
+        <button
+          on:click={() => {
+            navigate("/profile");
+          }}><i class="fa-solid fa-user pb-4" /> profile</button
+        >
+      {:else}
+        <div class="text-center pb-4">
+          <GreenButton
+            text="Login"
+            action={() => {
+              navigate("/login");
+            }}
+          />
+        </div>
+      {/if}
     </div>
   </div>
 </nav>

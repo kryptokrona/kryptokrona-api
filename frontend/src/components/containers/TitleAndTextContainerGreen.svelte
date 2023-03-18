@@ -1,7 +1,7 @@
 <script>
   export let title = "";
   export let text = "";
-  export let height = "h-64";
+  export let height = "h-52 sm:h-64";
 </script>
 
 <div

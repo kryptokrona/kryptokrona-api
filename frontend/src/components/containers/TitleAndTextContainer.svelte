@@ -2,7 +2,7 @@
   export let title = "";
   export let text = "";
   export let color = "bg-neutral-200 dark:bg-neutral-800"; // tailwind color only
-  export let height = "h-64";
+  export let height = "h-52 sm:h-64";
 </script>
 
 <div class={color + " w-full rounded-md overflow-hidden relative " + height}>

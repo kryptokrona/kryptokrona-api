@@ -26,7 +26,7 @@
 >
   <div class="container pl-4 pr-4">
     {#if isPhone}
-      <TopNavPhone />
+      <TopNavPhone repo={data.repo} />
     {:else}
       <TopNav repo={data.repo} />
     {/if}

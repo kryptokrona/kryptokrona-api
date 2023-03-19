@@ -23,11 +23,6 @@
           <i class="fa-solid fa-star" aria-hidden="true" />
           <p class="pl-1">stars: {repo.stars}</p>
         </div>
-
-        <div class="flex items-center">
-          <i class="fa-solid fa-code-commit" aria-hidden="true" />
-          <p class="pl-1">commits: {repo.commitCount}</p>
-        </div>
         <div class="flex items-center">
           <i class="fa-solid fa-code-commit" aria-hidden="true" />
           <p class="pl-1">

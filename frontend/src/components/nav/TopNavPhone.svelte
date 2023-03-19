@@ -20,7 +20,10 @@
 
 <div class="flex text-neutral-400 justify-center pt-2 pb-2">
   {#if repo.version != undefined}
-    <div class="text-xs flex items-center gap-6">
+    <div
+      class="flex items-center gap-6"
+      style="font-size: clamp(10px,2.5vw,13px)"
+    >
       <div class="flex items-center">
         <i class="fa-brands fa-github" aria-hidden="true" />
         <p class="pl-1">version: {repo.version}</p>
@@ -32,7 +35,14 @@
 
       <div class="flex items-center">
         <i class="fa-solid fa-code-commit" aria-hidden="true" />
-        <p class="pl-1">commits: {repo.commitCount}</p>
+        <p class="pl-1">
+          latest: <a
+            href={repo.latestCommit.path}
+            target="_blank"
+            rel="noreferrer"
+            class="underline">{repo.latestCommit.date}</a
+          >
+        </p>
       </div>
     </div>
   {/if}

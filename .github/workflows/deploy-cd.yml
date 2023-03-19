@@ -11,15 +11,15 @@ jobs:
     uses: ./.github/workflows/backend-ci.yml
     secrets: inherit
 
-  frontend:
-    name: Frontend
-    uses: ./.github/workflows/frontend-ci.yml
+  monitor:
+    name: Monitor
+    uses: ./.github/workflows/monitor-ci.yml
     secrets: inherit
 
   staging-deploy:
     name: Deploy Staging
     runs-on: ubuntu-latest
-    needs: [ frontend, backend ]
+    needs: [ monitor, backend ]
 
     steps:
       - name: Run playbook

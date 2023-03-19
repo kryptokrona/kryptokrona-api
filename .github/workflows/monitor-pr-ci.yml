@@ -1,4 +1,4 @@
-name: Kryptokrona API Frontend Pull Request Pipeline
+name: Kryptokrona API Monitor Pull Request Pipeline
 
 env:
   CI: false
@@ -6,7 +6,7 @@ env:
 on:
   pull_request:
     paths:
-      - 'frontend/**'
+      - 'monitor/**'
 
 jobs:
   build:
@@ -25,11 +25,11 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
-        working-directory: frontend
+        working-directory: monitor
 
       - name: Build
         run: npm run build
-        working-directory: frontend
+        working-directory: monitor
 
   docker:
     name: Build Docker Image
@@ -41,4 +41,4 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build ./frontend --no-cache
+          docker build ./monitor --no-cache

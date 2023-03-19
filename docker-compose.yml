@@ -28,11 +28,11 @@ services:
     networks:
       - kryptokrona_api_net
 
-  frontend:
-    build: ./frontend
-    container_name: kryptokrona_api_frontend
+  monitor:
+    build: monitor
+    container_name: kryptokrona_api_monitor
     environment:
-     PRIVATE_GITHUB_TOKEN: your-key-here
+     PRIVATE_GITHUB_TOKEN: change-me
     ports:
       - "3000:3000"
     networks:

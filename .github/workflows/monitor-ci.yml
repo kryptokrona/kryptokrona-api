@@ -1,9 +1,9 @@
-name: Kryptokrona API Frontend Pipeline
+name: Kryptokrona API Monitor Pipeline
 
 env:
   GITHUB_REGISTRY: "ghcr.io"
   GITHUB_OWNER: "kryptokrona"
-  GITHUB_DOCKER_IMAGE: "kryptokrona-api-frontend"
+  GITHUB_DOCKER_IMAGE: "kryptokrona-api-monitor"
 
 on:
   workflow_call:
@@ -25,11 +25,11 @@ jobs:
 
       - name: Install Dependencies
         run: npm install
-        working-directory: frontend
+        working-directory: monitor
 
       - name: Build
         run: npm run build
-        working-directory: frontend
+        working-directory: monitor
 
   docker:
     name: Build and Publish Docker Image
@@ -48,7 +48,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE:${{ env.SHA }} ./frontend --no-cache
+          docker build -t $GITHUB_REGISTRY/$GITHUB_OWNER/$GITHUB_DOCKER_IMAGE:${{ env.SHA }} ./monitor --no-cache
       
       - name: Tag Image
         run: |

@@ -39,7 +39,7 @@ services:
       - kryptokrona_api_net
 
   backend:
-    image: ghcr.io/kryptokrona/kryptokrona-api
+    build: .
     container_name: kryptokrona_api_backend
     ports:
       - "8080:8080"

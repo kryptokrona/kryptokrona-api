@@ -90,7 +90,7 @@ dependencies {
 
 tasks.war {
     archiveFileName.set("kryptokrona-api.war")
-    webXml = file("src/main/webapp/WEB-INF/web.xml")
+    webXml = file("src/main/resources/webapp/WEB-INF/web.xml")
 }
 
 // database migrations

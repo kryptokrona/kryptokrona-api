@@ -31,6 +31,8 @@ services:
   frontend:
     build: ./frontend
     container_name: kryptokrona_api_frontend
+    environment:
+      - PRIVATE_GITHUB_TOKEN=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
     ports:
       - "3000:3000"
     networks:

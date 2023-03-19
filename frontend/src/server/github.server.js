@@ -28,7 +28,7 @@ export async function getRepoStats() {
         let latestCommit = { path : repoPath + "/commit/" + commits[commits.length - 1].sha, date: formatDate(new Date(commits[commits.length - 1].commit.author.date))};
         return {stars, version: 0.1, commitCount: commits.length, latestCommit, contributors }; 
     } catch (error) {
-        console.error;
+        console.error(error);
     }   
     return {};
 }

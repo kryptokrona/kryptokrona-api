@@ -26,7 +26,7 @@ export async function getRepoStats() {
         let commits = await getCommits();
         let contributors = await getContributors();
         let latestCommit = { path : repoPath + "/commit/" + commits[0].sha, date: formatDate(new Date(commits[0].commit.author.date))};
-        return {stars, version: 0.1, latestCommit, contributors }; 
+        return {stars, version: "0.1.0", latestCommit, contributors }; //TODO: change version to the latest release with GitHub API later
     } catch (error) {
         console.error(error);
     }   

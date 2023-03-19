@@ -56,6 +56,7 @@ dependencies {
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
+    implementation("io.ktor:ktor-server-servlet:$ktor_version")
     implementation("org.ktorm:ktorm-support-postgresql:$ktorm_version")
     implementation("org.postgresql:postgresql:$postgres_version")
     implementation("io.ktor:ktor-serialization-jackson-jvm:$ktor_version")

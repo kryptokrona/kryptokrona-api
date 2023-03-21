@@ -18,7 +18,7 @@ services:
 
   liquibase:
     image: liquibase/liquibase
-    container_name: liquibase
+    container_name: kryptokrona_api_liquibase
     command: --defaults-file /liquibase/liquibase.properties --changeLogFile=db/changelog/master.xml update
     volumes:
       - ./src/main/resources/db/changelog:/liquibase/db/changelog
@@ -32,7 +32,7 @@ services:
     build: monitor
     container_name: kryptokrona_api_monitor
     environment:
-     PRIVATE_GITHUB_TOKEN: change-me
+     PRIVATE_GITHUB_TOKEN: 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
     ports:
       - "3000:3000"
     networks:
@@ -41,8 +41,12 @@ services:
   backend:
     build: .
     container_name: kryptokrona_api_backend
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/kryptokrona_api_dev
     ports:
       - "8080:8080"
+    depends_on:
+      - liquibase
     networks:
       - kryptokrona_api_net
 

@@ -13,15 +13,30 @@
     </a>
   </div>
   <div class="w-4/5 flex justify-center">
-    {#if repo.version != undefined}
+    {#if repo.latestVersion != undefined}
       <div class="  flex items-center gap-6">
         <div class="flex items-center">
           <i class="fa-brands fa-github" aria-hidden="true" />
-          <p class="pl-1">version: {repo.version}</p>
+          <p class="pl-1">
+            version: <a
+              href={repo.latestVersion.path}
+              target="_blank"
+              rel="noreferrer"
+              class="hover:underline">{repo.latestVersion.version}</a
+            >
+          </p>
         </div>
         <div class="flex items-center">
           <i class="fa-solid fa-star" aria-hidden="true" />
-          <p class="pl-1">stars: {repo.stars}</p>
+          <p class="pl-1">
+            stars:
+            <a
+              href={repo.stargazers.path}
+              target="_blank"
+              rel="noreferrer"
+              class="hover:underline">{repo.stargazers.stars}</a
+            >
+          </p>
         </div>
         <div class="flex items-center">
           <i class="fa-solid fa-code-commit" aria-hidden="true" />

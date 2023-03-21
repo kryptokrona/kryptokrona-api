@@ -25,8 +25,10 @@ export async function getRepoStats() {
         let stars = data.stargazers_count;
         let commits = await getCommits();
         let contributors = await getContributors();
+        let stargazers = { stars, path: repoPath + "/stargazers " };
+        let latestVersion = { version: "0.1.0", path: repoPath + "/releases" };
         let latestCommit = { path : repoPath + "/commit/" + commits[0].sha, date: formatDate(new Date(commits[0].commit.author.date))};
-        return {stars, version: "0.1.0", latestCommit, contributors }; //TODO: change version to the latest release with GitHub API later
+        return {stargazers, latestVersion, latestCommit, contributors }; //TODO: change version to the latest release with GitHub API later
     } catch (error) {
         console.error(error);
     }   

@@ -6,5 +6,5 @@ RUN gradle shadowJar --no-daemon
 FROM openjdk:17
 EXPOSE 8080:8080
 RUN mkdir /app
-COPY --from=build /home/gradle/src/build/libs/*.jar /app/ktor-docker-sample.jar
-ENTRYPOINT ["java","-jar","/app/ktor-docker-sample.jar"]
+COPY --from=build /home/gradle/src/build/libs/kryptokrona-api-shadow.jar /app/ktor.jar
+ENTRYPOINT ["java","-jar","/app/ktor.jar"]

@@ -1,4 +1,5 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import java.util.*
 
 val ktor_version: String by project
@@ -97,11 +98,15 @@ tasks.jar {
     // exclude("META-INF/*.RSA", "META-INF/*.SF", "META-INF/*.DSA")
 }
 
-tasks {
-    shadowJar {
-        configurations = listOf(project.configurations["compileClasspath"])
+tasks.withType<ShadowJar> {
+    manifest {
+        attributes["Main-Class"] = "org.kryptokrona.api.ApplicationKt"
     }
+    archiveFileName.set("kryptokrona-api-shadow.jar")
+    from(sourceSets["main"].output)
+    configurations = listOf(project.configurations["compileClasspath"])
 }
+
 
 // database migrations
 val dbEnv: String by project.extra

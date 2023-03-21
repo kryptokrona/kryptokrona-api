@@ -16,7 +16,7 @@ plugins {
     kotlin("jvm") version "1.8.10"
     id("io.ktor.plugin") version "2.2.3"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
-    id("war")
+    id("java")
     id("org.liquibase.gradle") version "2.1.1"
 }
 
@@ -32,6 +32,7 @@ application {
 
 repositories {
     mavenCentral()
+    // used for getting snapshots of kryptokrona kotlin sdk
     // maven("https://s01.oss.sonatype.org/content/repositories/snapshots")
 }
 
@@ -88,9 +89,18 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
 
-tasks.war {
-    archiveFileName.set("kryptokrona-api.war")
-    webXml = file("src/main/resources/webapp/WEB-INF/web.xml")
+tasks.jar {
+    archiveFileName.set("kryptokrona-api.jar")
+    manifest {
+        attributes["Main-Class"] = "org.kryptokrona.api.ApplicationKt"
+    }
+    // exclude("META-INF/*.RSA", "META-INF/*.SF", "META-INF/*.DSA")
+}
+
+tasks {
+    shadowJar {
+        configurations = listOf(project.configurations["compileClasspath"])
+    }
 }
 
 // database migrations

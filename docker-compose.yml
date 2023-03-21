@@ -32,7 +32,7 @@ services:
     build: monitor
     container_name: kryptokrona_api_monitor
     environment:
-     PRIVATE_GITHUB_TOKEN: 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
+     PRIVATE_GITHUB_TOKEN: change-me
     ports:
       - "3000:3000"
     networks:
@@ -43,6 +43,9 @@ services:
     container_name: kryptokrona_api_backend
     environment:
       DB_URL: jdbc:postgresql://db:5432/kryptokrona_api_dev
+      NODE_HOSTNAME: techy.ddns.net
+      NODE_PORT: 11898
+      NODE_SSL: false
     ports:
       - "8080:8080"
     depends_on:
@@ -56,8 +59,33 @@ services:
     ports:
       - "9090:9090"
 
+  keycloak:
+    image: jboss/keycloak
+    container_name: kryptokrona_api_keycloak
+    restart: always
+    environment:
+      DB_VENDOR: h2
+      KEYCLOAK_USER: admin
+      KEYCLOAK_PASSWORD: password
+      PROXY_ADDRESS_FORWARDING: "true"
+    volumes:
+      - keycloak:/var/lib/keycloak/data
+      - ./keycloak/realm-export.json:/opt/jboss/keycloak/realm-export.json
+    expose:
+      - 11111
+    ports:
+      - "11111:11111"
+    command:
+      - "-b 0.0.0.0"
+      - "-Djboss.http.port=11111"
+      - "-Dkeycloak.import=/opt/jboss/keycloak/realm-export.json"
+    networks:
+      - kryptokrona_api_net
+
+
 volumes:
   db:
+  keycloak:
 
 networks:
   kryptokrona_api_net:

@@ -133,3 +133,31 @@ export let nodes = [
     "proxy_url": "swepool",
 },
 ]
+
+export let pools = [
+  {
+    name: "Swepool",
+    url: "https://swepool.org",
+    graph: {data: getArrayData(10, 80)},
+  },
+  {
+    name: "Pool-pay",
+    url: "https://xkr.pool-pay.com",
+    graph: {data: getArrayData(10, 80)},
+  },
+  {
+    name: "Privacymine",
+      url: "https://privacymine.net",
+      graph: {data: getArrayData(10, 80)},
+  },
+  {
+    name: "TechyPool",
+    url: "https://techy.ddns.net",
+    graph: {data: getArrayData(10, 80)},
+  },
+  {
+    name: "Newpool",
+    url: "https://newpool.pw/xkr/",
+    graph: {data: getArrayData(10, 80)},
+  }
+]

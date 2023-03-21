@@ -16,7 +16,7 @@
   }
   @media (max-width: 640px) {
     .two-items-grid {
-      gap: 0.5em;
+      gap: 4em;
     }
   }
 </style>

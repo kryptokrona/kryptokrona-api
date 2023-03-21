@@ -74,7 +74,11 @@
       label="nodes"
       goTo="/nodes"
     />
-    <TopNavButton iconClass="fa-solid fa-water-ladder" label="pools" />
+    <TopNavButton
+      iconClass="fa-solid fa-water-ladder"
+      label="pools"
+      goTo="/pools"
+    />
     {#if $user.email != null}
       <TopNavButton
         iconClass="fa-solid fa-user"

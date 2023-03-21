@@ -19,18 +19,32 @@
 </script>
 
 <div class="flex text-neutral-400 justify-center pt-2 pb-2">
-  {#if repo.version != undefined}
+  {#if repo.latestVersion != undefined}
     <div
       class="flex items-center gap-6"
       style="font-size: clamp(10px,2.5vw,13px)"
     >
       <div class="flex items-center">
         <i class="fa-brands fa-github" aria-hidden="true" />
-        <p class="pl-1">version: {repo.version}</p>
+        <p class="pl-1">
+          version: <a
+            href={repo.latestVersion.path}
+            target="_blank"
+            rel="noreferrer"
+            class="underline">{repo.latestVersion.version}</a
+          >
+        </p>
       </div>
       <div class="flex items-center">
         <i class="fa-solid fa-star" aria-hidden="true" />
-        <p class="pl-1">stars: {repo.stars}</p>
+        <p class="pl-1">
+          stars: <a
+            href={repo.stargazers.path}
+            target="_blank"
+            rel="noreferrer"
+            class="underline">{repo.stargazers.stars}</a
+          >
+        </p>
       </div>
 
       <div class="flex items-center">
@@ -85,8 +99,11 @@
         }}
         class="pt-4"><i class="fa-solid fa-network-wired" /> nodes</button
       >
-      <button><i class="fa-solid fa-water-ladder " /> pools</button>
-
+      <button
+        on:click={() => {
+          navigate("/pools");
+        }}><i class="fa-solid fa-water-ladder " /> pools</button
+      >
       {#if $user.email != null}
         <button
           on:click={() => {

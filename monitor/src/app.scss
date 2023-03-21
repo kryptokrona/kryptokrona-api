@@ -1,21 +1,25 @@
-@layer base {
-  h1 {
-    font-weight: 700;
-    @apply text-3xl;
-  }
-  h2 {
-    font-weight: 700;
-    @apply text-2xl;
-  }
-  h3 {
-    font-weight: 700;
-    @apply text-xl;
-  }
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  h1 {
+    font-weight: 700;
+    font-size: 1.875em !important;
+
+  }
+  h2 {
+    font-weight: 700;
+    font-size: 1.4em !important;
+
+  }
+  h3 {
+    font-weight: 700;
+    font-size: 1.25em !important;
+  }
+}
+
+
 
 .togglebox-hidden {
   opacity: 0;

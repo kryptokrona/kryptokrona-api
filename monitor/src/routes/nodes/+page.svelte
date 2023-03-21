@@ -43,9 +43,11 @@
       <div
         class="flex flex-row border-b p-2 dark:border-neutral-100 border-neutral-700"
       >
-        <h2 class="text-left sm:text-center w-1/2 sm:w-1/3 lg:w-1/5">Name</h2>
+        <h2 class="text-left w-1/2 sm:w-1/3 lg:w-1/5">Name</h2>
         <h2 class="text-right sm:text-center w-1/2 sm:w-1/3 lg:w-1/5">Url</h2>
-        <h2 class="hidden text-center sm:inline-block sm:w-1/3 lg:w-1/5">
+        <h2
+          class="hidden text-right lg:text-center sm:inline-block sm:w-1/3 lg:w-1/5"
+        >
           Port
         </h2>
         <h2 class="hidden text-center lg:inline-block lg:w-1/5">Data</h2>
@@ -59,13 +61,15 @@
           class={(i == nodes.length - 1 ? "rounded-md " : "") +
             "flex text-left w-full border-b p-2 dark:border-neutral-100 border-neutral-700 lg:hover:cursor-pointer lg:hover:bg-neutral-200 dark:lg:hover:bg-neutral-800"}
         >
-          <p class=" text-left sm:text-center w-1/2 sm:w-1/3 lg:w-1/5">
+          <p class="text-left w-1/2 sm:w-1/3 lg:w-1/5">
             {node.name}
           </p>
           <p class="text-right sm:text-center w-1/2 sm:w-1/3 lg:w-1/5">
             {node.url}
           </p>
-          <p class="hidden text-center sm:inline-block sm:w-1/3 lg:w-1/5">
+          <p
+            class="hidden text-right lg:text-center sm:inline-block sm:w-1/3 lg:w-1/5"
+          >
             {node.port}
           </p>
           <p class="hidden text-center lg:inline-block lg:w-1/5">data</p>

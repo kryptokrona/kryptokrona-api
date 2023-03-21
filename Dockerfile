@@ -1,6 +1,10 @@
-# Using Tomcat 9.0 since the latest doesn't work
-FROM tomcat:9.0.68
+FROM gradle:7-jdk17 AS build
+COPY --chown=gradle:gradle . /home/gradle/src
+WORKDIR /home/gradle/src
+RUN gradle shadowJar --no-daemon
+
+FROM openjdk:17
 EXPOSE 8080:8080
-COPY ./build/libs/kryptokrona-api.war/ /usr/local/tomcat/webapps
-WORKDIR /usr/local/tomcat
-CMD ["catalina.sh", "run"]
+RUN mkdir /app
+COPY --from=build /home/gradle/src/build/libs/kryptokrona-api-shadow.jar /app/ktor.jar
+ENTRYPOINT ["sh", "-c", "sleep 15 && java -jar /app/ktor.jar"]

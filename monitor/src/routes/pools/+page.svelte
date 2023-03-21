@@ -125,11 +125,11 @@
 
 <TwoItemsGrid>
   <div class="w-full h-80">
-    <h2>Block distribution</h2>
+    <h2>Hashrate history</h2>
     <LineChartWithLabels data={chart8.data} labels={months} id={"line1"} />
   </div>
   <div class="w-full h-80">
-    <h2>Hashrate history</h2>
+    <h2>Block distribution</h2>
     <PieChartWithLabels
       data={[35, 40, 10, 5, 15, 10]}
       labels={pools.map((p) => p.name)}

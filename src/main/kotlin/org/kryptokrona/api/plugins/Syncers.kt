@@ -36,9 +36,10 @@ import org.kryptokrona.api.syncers.HuginSyncer
 
 fun Application.configureSyncers() {
 
-    // async { IntialSyncer().sync() }
-
     //TODO: we should start this sync process ONCE the IntialSyncer has finished
-    async { HuginSyncer().sync() }
-    // async { BlockSyncer().sync() }
+    async { HuginSyncer().sync() }.runCatching {
+        println("HuginSyncer finished with result: $this")
+    }.onFailure {
+        println("HuginSyncer failed with exception: $this")
+    }
 }

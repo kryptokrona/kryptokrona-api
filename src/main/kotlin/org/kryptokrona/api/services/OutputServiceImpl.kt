@@ -66,6 +66,8 @@ class OutputServiceImpl : OutputService {
     override suspend fun save(output: Output): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
             db.outputs.add(output)
+        }.onSuccess {
+            logger.info("Output saved: $output")
         }.onFailure {
             logger.error("Error while saving output: $output", it)
         }.getOrNull()
@@ -74,6 +76,8 @@ class OutputServiceImpl : OutputService {
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
             db.outputs.removeIf { it.id eq id }
+        }.onSuccess {
+            logger.info("Output deleted by id: $id")
         }.onFailure {
             logger.error("Error while deleting output by id: $id", it)
         }.getOrNull()

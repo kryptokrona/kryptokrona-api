@@ -66,6 +66,8 @@ class PostEncryptedGroupServiceImpl : PostEncryptedGroupService {
     override suspend fun save(postEncryptedGroup: PostEncryptedGroup): Unit = withContext(Dispatchers.IO)  {
         this.runCatching {
             db.postencryptedgroups.add(postEncryptedGroup)
+        }.onSuccess {
+            logger.info("Saved encrypted group post: ${postEncryptedGroup.txHash}")
         }.onFailure {
             logger.error("Error saving encrypted group post: ${postEncryptedGroup.txHash}", it)
         }
@@ -74,6 +76,8 @@ class PostEncryptedGroupServiceImpl : PostEncryptedGroupService {
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
             db.postencryptedgroups.removeIf { it.id eq id }
+        }.onSuccess {
+            logger.info("Deleted encrypted group post: $id")
         }.onFailure {
             logger.error("Error deleting encrypted group post: $id", it)
         }

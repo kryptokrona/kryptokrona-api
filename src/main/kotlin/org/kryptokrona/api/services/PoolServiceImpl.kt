@@ -66,6 +66,8 @@ class PoolServiceImpl : PoolService {
     override suspend fun save(pool: Pool): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
             db.pools.add(pool)
+        }.onSuccess {
+            logger.info("Pool saved: $pool")
         }.onFailure {
             logger.error("Error while saving pool: $pool", it)
         }.getOrNull()
@@ -74,6 +76,8 @@ class PoolServiceImpl : PoolService {
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
             db.pools.removeIf { it.id eq id }
+        }.onSuccess {
+            logger.info("Pool deleted by id: $id")
         }.onFailure {
             logger.error("Error while deleting pool by id: $id", it)
         }.getOrNull()

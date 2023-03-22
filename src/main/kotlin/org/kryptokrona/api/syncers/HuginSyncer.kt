@@ -75,8 +75,6 @@ class HuginSyncer {
     suspend fun sync() = coroutineScope {
         launch {
             while(isActive) {
-                logger.info("Synchronizing data...")
-
                 // get the data from the pool
                 val retrievedData = poolChangesClient.getPoolChangesLite()
                 val transactions = retrievedData?.addedTxs

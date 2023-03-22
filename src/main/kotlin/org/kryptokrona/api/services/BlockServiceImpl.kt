@@ -58,8 +58,6 @@ class BlockServiceImpl : BlockService {
     override suspend fun getById(id: Long): Block? = withContext(Dispatchers.IO) {
         this.runCatching {
             db.blocks.find { it.id eq id }
-        }.onSuccess {
-            logger.info("Getting block id: $id")
         }.onFailure {
             logger.error("Error getting block by id: $id", it)
         }.getOrNull()
@@ -88,8 +86,6 @@ class BlockServiceImpl : BlockService {
     override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
         this.runCatching {
             db.blocks.count()
-        }.onSuccess {
-            logger.info("Getting total count of blocks")
         }.onFailure {
             logger.error("Error getting total count of blocks", it)
         }.getOrNull() ?: 0

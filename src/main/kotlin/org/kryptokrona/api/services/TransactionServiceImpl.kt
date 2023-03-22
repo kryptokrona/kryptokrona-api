@@ -66,6 +66,8 @@ class TransactionServiceImpl : TransactionService {
     override suspend fun save(transaction: Transaction): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
             db.transactions.add(transaction)
+        }.onSuccess {
+            logger.info("Saved transaction: $transaction")
         }.onFailure {
             logger.error("Error while saving transaction: $transaction", it)
         }.getOrNull()
@@ -74,6 +76,8 @@ class TransactionServiceImpl : TransactionService {
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
             db.transactions.removeIf { it.id eq id }
+        }.onSuccess {
+            logger.info("Deleted transaction by id: $id")
         }.onFailure {
             logger.error("Error while deleting transaction by id: $id", it)
         }.getOrNull()

@@ -66,6 +66,8 @@ class NodeServiceImpl : NodeService {
     override suspend fun save(node: Node): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
             db.nodes.add(node)
+        }.onSuccess {
+            logger.info("Node saved: $node")
         }.onFailure {
             logger.error("Error while saving node: $node", it)
         }.getOrNull()
@@ -74,6 +76,8 @@ class NodeServiceImpl : NodeService {
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
             db.nodes.removeIf { it.id eq id }
+        }.onSuccess {
+            logger.info("Node deleted by id: $id")
         }.onFailure {
             logger.error("Error while deleting node by id: $id", it)
         }.getOrNull()

@@ -66,6 +66,8 @@ class SupplyServiceImpl : SupplyService {
     override suspend fun save(supply: Supply): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
             db.supplies.add(supply)
+        }.onSuccess {
+            logger.info("Saved supply: $supply")
         }.onFailure {
             logger.error("Error while saving supply: $supply", it)
         }.getOrNull()
@@ -74,6 +76,8 @@ class SupplyServiceImpl : SupplyService {
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
             db.supplies.removeIf { it.id eq id }
+        }.onSuccess {
+            logger.info("Deleted supply by id: $id")
         }.onFailure {
             logger.error("Error while deleting supply by id: $id", it)
         }.getOrNull()

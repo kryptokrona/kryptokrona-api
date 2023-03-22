@@ -66,6 +66,8 @@ class HashrateServiceImpl : HashrateService {
     override suspend fun save(hashrate: Hashrate): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
             db.hashrates.add(hashrate)
+        }.onSuccess {
+            logger.info("Hashrate saved: $hashrate")
         }.onFailure {
             logger.error("Error while saving hashrate: $hashrate", it)
         }.getOrNull()
@@ -74,6 +76,8 @@ class HashrateServiceImpl : HashrateService {
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
             db.hashrates.removeIf { it.id eq id }
+        }.onSuccess {
+            logger.info("Hashrate deleted: $id")
         }.onFailure {
             logger.error("Error while deleting hashrate by id: $id", it)
         }.getOrNull()

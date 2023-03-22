@@ -84,6 +84,8 @@ services:
       - "19990:9990"
     volumes:
       - keycloak:/data
+      - ./keycloak/providers:/opt/jboss/keycloak/providers
+      - ./keycloak/standalone/configuration:/opt/jboss/keycloak/standalone/configuration
     networks:
       - kryptokrona_api_net
 

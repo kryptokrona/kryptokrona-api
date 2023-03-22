@@ -75,6 +75,7 @@ class HuginSyncer {
     suspend fun sync() = coroutineScope {
         launch {
             while(isActive) {
+                logger.debug("Syncing Hugin...")
                 // get the data from the pool
                 val retrievedData = poolChangesClient.getPoolChangesLite()
                 val transactions = retrievedData?.addedTxs
@@ -87,7 +88,7 @@ class HuginSyncer {
 
                         // validate that the extra data is longer than 200 characters and that the transaction is not in the known pool txs list
                         if (extra.length > 200 && transactionHash !in knownPoolTxsList) {
-                            logger.info("Incoming transaction $transactionHash")
+                            logger.debug("Incoming transaction $transactionHash")
                             knownPoolTxsList += transactionHash
                             val extraData = trimExtra(extra)
 

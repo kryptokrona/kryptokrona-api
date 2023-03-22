@@ -50,8 +50,8 @@ services:
       NODE_SSL: false
     ports:
       - "8080:8080"
-    #depends_on:
-    #  - liquibase
+    depends_on:
+      - liquibase
     networks:
       - kryptokrona_api_net
 

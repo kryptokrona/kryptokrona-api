@@ -1,4 +1,4 @@
 #!/bin/sh
 
-# start docker compose with a database and monitor
-docker-compose -f ../docker-compose.yml up -d db liquibase monitor
+# start docker compose with monitor (used for developing the monitor)
+docker-compose -f ../docker-compose.yml up -d db liquibase monitor keycloak

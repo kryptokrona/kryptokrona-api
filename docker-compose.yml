@@ -66,17 +66,17 @@ services:
     container_name: kryptokrona_api_keycloak
     restart: always
     environment:
-      - KEYCLOAK_LOGLEVEL=DEBUG
-      - DB_VENDOR=postgres
-      - DB_USER=postgres
-      - DB_DATABASE=kryptokrona_api_dev
-      - DB_PASSWORD=test1234
-      - DB_PORT=5432
-      - DB_ADDR=db
+      KEYCLOAK_LOGLEVEL: DEBUG
+      DB_VENDOR: postgres
+      DB_USER: postgres
+      DB_DATABASE: kryptokrona_api_dev
+      DB_PASSWORD: test1234
+      DB_PORT: 5432
+      DB_ADDR: db
       # comment these two lines below when starting it up second time (only for setting config)
-      - KEYCLOAK_ADMIN=admin
-      - KEYCLOAK_ADMIN_PASSWORD=test1234
-      - KEYCLOAK_STATISTICS=all
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: test1234
+      KEYCLOAK_STATISTICS: all
     links:
       - db:postgres
     ports:
@@ -84,9 +84,8 @@ services:
       - "19990:9990"
     command:
       - start-dev
-      - --import-realm
     volumes:
-      - ./keyclock/realm-export.json:/opt/keycloak/data/import/realm.json
+      - ./keyclock/realms:/opt/jboss/keycloak/imports
     networks:
       - kryptokrona_api_net
 

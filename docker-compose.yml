@@ -62,7 +62,7 @@ services:
       - kryptokrona_api_net
 
   keycloak:
-    image: jboss/keycloak
+    image: quay.io/keycloak/keycloak:latest
     container_name: kryptokrona_api_keycloak
     restart: always
     environment:
@@ -74,24 +74,24 @@ services:
       - DB_PORT=5432
       - DB_ADDR=db
       # comment these two lines below when starting it up second time (only for setting config)
-      #- KEYCLOAK_USER=admin
-      #- KEYCLOAK_PASSWORD=test1234
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=test1234
       - KEYCLOAK_STATISTICS=all
     links:
       - db:postgres
     ports:
       - "18080:8080"
       - "19990:9990"
+    command:
+      - start-dev
+      - --import-realm
     volumes:
-      - keycloak:/data
-      - ./keycloak/providers:/opt/jboss/keycloak/providers
-      - ./keycloak/standalone/configuration:/opt/jboss/keycloak/standalone/configuration
+      - ./keyclock/realm-export.json:/opt/keycloak/data/import/realm.json
     networks:
       - kryptokrona_api_net
 
 volumes:
   db:
-  keycloak:
 
 networks:
   kryptokrona_api_net:

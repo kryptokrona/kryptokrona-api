@@ -31,9 +31,7 @@
     grid: {
       show: false,
     },
-    dataLabels: {
-      enabled: false,
-    },
+
     labels: labels,
   };
 

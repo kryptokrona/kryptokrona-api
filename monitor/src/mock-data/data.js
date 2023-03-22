@@ -88,11 +88,55 @@ export let chart8 = {
     },
     {
       data: getArrayData(10, 80),
-      name: "Göta Pool"
+      name: "Blocksum"
     }
   ],
   name: "chart8"
 }
+
+export let poolChart = {
+  data: [
+    {
+      data: getArrayData(12, 80),
+      name: "Swepool"
+    },
+    {
+      data: getArrayData(12, 80),
+      name: "Pool-pay"
+    },
+    {
+      data: getArrayData(12, 80),
+      name: "Privacymine"
+    },
+  ],
+  name: "chart8"
+}
+
+export let difficultyVsPriceChart = {
+  data: [{
+    name: 'Blocktime',
+    type: 'column',
+    data: getArrayData(40, 30)
+  }, {
+    name: 'Price',
+    type: 'line',
+    data: getArrayData(40, 100)
+  },
+  {
+    name: 'Difficulty',
+    type: 'line',
+    data: getArrayData(40, 100)
+  }],
+}
+
+export let earningsChart = {
+  data: [
+    {
+      data: getArrayData(12, 50)
+    }
+  ],
+  name: "earnings1",
+};
 
 export let semiCircle = {
   data: [76],

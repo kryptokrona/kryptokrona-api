@@ -1,11 +1,21 @@
 <script>
   import { COLOR } from "../../helpers/colors";
   import AreaChart from "../../components/charts/AreaChart.svelte";
-  import { pools, chart8, months } from "../../mock-data/data";
+  import {
+    pools,
+    poolChart,
+    difficultyVsPriceChart,
+    earningsChart,
+    months,
+  } from "../../mock-data/data";
   import PercentageBar from "../../components/PercentageBar.svelte";
   import TwoItemsGrid from "../../components/grids/TwoItemsGrid.svelte";
   import PieChartWithLabels from "../../components/charts/PieChartWithLabels.svelte";
   import LineChartWithLabels from "../../components/charts/LineChartWithLabels.svelte";
+  import LineColumnChartWithLabels from "../../components/charts/LineColumnChartWithLabels.svelte";
+  import AreaChartWithLabels from "../../components/charts/AreaChartWithLabels.svelte";
+  import ToggleBox from "../../components/toggle-box/ToggleBox.svelte";
+  import GrayButton from "../../components/buttons/GrayButton.svelte";
 
   let searchInput = "";
 </script>
@@ -124,19 +134,58 @@
 <div class="mt-16" />
 
 <TwoItemsGrid>
-  <div class="w-full h-80">
+  <div>
     <h2>Hashrate history</h2>
-    <LineChartWithLabels data={chart8.data} labels={months} id={"line1"} />
+    <div class="w-full h-80">
+      <LineChartWithLabels data={poolChart.data} labels={months} id={"line1"} />
+    </div>
   </div>
-  <div class="w-full h-80">
+  <div>
     <h2>Block distribution</h2>
-    <PieChartWithLabels
-      data={[35, 40, 10, 5, 15, 10]}
-      labels={pools.map((p) => p.name)}
-      id="pie1"
-    />
+    <div class="w-full h-80">
+      <PieChartWithLabels
+        data={[35, 40, 10, 5, 15, 10]}
+        labels={pools.map((p) => p.name)}
+        id="pie1"
+      />
+    </div>
   </div>
 </TwoItemsGrid>
+
+<div class="mt-16" />
+
+<ToggleBox title="Difficulty vs price">
+  <div class="text-center">
+    <GrayButton text="1h" />
+    <GrayButton text="24h" />
+    <GrayButton text="Weeks" />
+    <GrayButton text="Months" />
+  </div>
+  <div class="w-full h-96">
+    <LineColumnChartWithLabels
+      data={difficultyVsPriceChart.data}
+      id={"linecolumn1"}
+    />
+  </div>
+</ToggleBox>
+
+<div class="mt-16" />
+
+<ToggleBox title="Earnings">
+  <div class="text-center">
+    <GrayButton text="1h" />
+    <GrayButton text="24h" />
+    <GrayButton text="Weeks" />
+    <GrayButton text="Months" />
+  </div>
+  <div class="w-full h-96">
+    <AreaChartWithLabels
+      data={earningsChart.data}
+      labels={months}
+      id={"dfsf"}
+    />
+  </div>
+</ToggleBox>
 
 <div class="mt-16" />
 

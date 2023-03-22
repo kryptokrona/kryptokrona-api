@@ -43,13 +43,15 @@ services:
     container_name: kryptokrona_api_backend
     environment:
       DB_URL: jdbc:postgresql://db:5432/kryptokrona_api_dev
+      DB_USERNAME: postgres
+      DB_PASSWORD: test1234
       NODE_HOSTNAME: techy.ddns.net
       NODE_PORT: 11898
       NODE_SSL: false
     ports:
       - "8080:8080"
-    depends_on:
-      - liquibase
+    #depends_on:
+    #  - liquibase
     networks:
       - kryptokrona_api_net
 

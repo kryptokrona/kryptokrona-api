@@ -36,5 +36,25 @@ import org.kryptokrona.api.services.PostEncryptedGroupServiceImpl
 private val service = PostEncryptedGroupServiceImpl()
 
 fun Route.postsEncryptedGroupStatisticsRoute() {
+    route("/v1/statistics/post-encrypted-group") {
+        get("/1h") {
+            println("1h")
+        }
 
+        get("/24h") {
+            println("1h")
+        }
+
+        get("/1w") {
+            println("1h")
+        }
+
+        get("/1m") {
+            println("1h")
+        }
+
+        get("/1y") {
+            println("1h")
+        }
+    }
 }

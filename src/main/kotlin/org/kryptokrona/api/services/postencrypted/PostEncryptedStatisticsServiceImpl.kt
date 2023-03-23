@@ -30,27 +30,36 @@
 
 package org.kryptokrona.api.services.postencrypted
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import org.kryptokrona.api.models.PostEncrypted
+import org.kryptokrona.api.models.statistics.postencrypted.*
+import org.kryptokrona.api.plugins.DatabaseFactory.db
 import org.kryptokrona.api.services.postencryptedgroup.PostEncryptedGroupStatisticsService
+import org.ktorm.dsl.*
+import org.slf4j.LoggerFactory
 
 class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {
 
-    override suspend fun get1h(): List<PostEncryptedGroupStatisticsService> {
+    private val logger = LoggerFactory.getLogger("PostEncryptedStatisticsServiceImpl")
+
+    override suspend fun get1h(): List<PostEncryptedStatistics1h> = withContext(Dispatchers.IO) {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get24h(): List<PostEncryptedGroupStatisticsService> {
+    override suspend fun get24h(): List<PostEncryptedStatistics24h> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get1w(): List<PostEncryptedGroupStatisticsService> {
+    override suspend fun get1w(): List<PostEncryptedStatistics1w> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get1m(): List<PostEncryptedGroupStatisticsService> {
+    override suspend fun get1m(): List<PostEncryptedStatistics1m> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get1y(): List<PostEncryptedGroupStatisticsService> {
+    override suspend fun get1y(): List<PostEncryptedStatistics1y> {
         TODO("Not yet implemented")
     }
 

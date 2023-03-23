@@ -34,7 +34,7 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import org.kryptokrona.api.services.SupplyServiceImpl
+import org.kryptokrona.api.services.supply.SupplyServiceImpl
 import org.kryptokrona.api.utils.jsonObjectMapper
 
 private val service = SupplyServiceImpl()

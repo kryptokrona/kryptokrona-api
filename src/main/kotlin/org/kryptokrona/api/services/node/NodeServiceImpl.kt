@@ -28,13 +28,13 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api.services
+package org.kryptokrona.api.services.node
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.kryptokrona.api.models.Output
-import org.kryptokrona.api.models.Outputs
-import org.kryptokrona.api.models.outputs
+import org.kryptokrona.api.models.Node
+import org.kryptokrona.api.models.Nodes
+import org.kryptokrona.api.models.nodes
 import org.kryptokrona.api.plugins.DatabaseFactory.db
 import org.ktorm.dsl.*
 import org.ktorm.entity.add
@@ -43,51 +43,51 @@ import org.ktorm.entity.find
 import org.ktorm.entity.removeIf
 import org.slf4j.LoggerFactory
 
-class OutputServiceImpl : OutputService {
+class NodeServiceImpl : NodeService {
 
-    private val logger = LoggerFactory.getLogger("OutputServiceImpl")
+    private val logger = LoggerFactory.getLogger("NodeServiceImpl")
 
-    override suspend fun getAll(size: Int, page: Int): List<Output> = withContext(Dispatchers.IO) {
-        db.from(Outputs)
+    override suspend fun getAll(size: Int, page: Int): List<Node> = withContext(Dispatchers.IO) {
+        db.from(Nodes)
             .select()
             .offset((page - 1) * size)
             .limit(size)
-            .map { row -> Outputs.createEntity(row) }
+            .map { row -> Nodes.createEntity(row) }
     }
 
-    override suspend fun getById(id: Long): Output? = withContext(Dispatchers.IO) {
+    override suspend fun getById(id: Long): Node? = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.outputs.find { it.id eq id }
+            db.nodes.find { it.id eq id }
         }.onFailure {
-            logger.error("Error while getting output by id: $id", it)
+            logger.error("Error while getting node by id: $id", it)
         }.getOrNull()
     }
 
-    override suspend fun save(output: Output): Unit = withContext(Dispatchers.IO) {
+    override suspend fun save(node: Node): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.outputs.add(output)
+            db.nodes.add(node)
         }.onSuccess {
-            logger.info("Output saved: $output")
+            logger.info("Node saved: $node")
         }.onFailure {
-            logger.error("Error while saving output: $output", it)
+            logger.error("Error while saving node: $node", it)
         }.getOrNull()
     }
 
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.outputs.removeIf { it.id eq id }
+            db.nodes.removeIf { it.id eq id }
         }.onSuccess {
-            logger.info("Output deleted by id: $id")
+            logger.info("Node deleted by id: $id")
         }.onFailure {
-            logger.error("Error while deleting output by id: $id", it)
+            logger.error("Error while deleting node by id: $id", it)
         }.getOrNull()
     }
 
     override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.outputs.count()
+            db.nodes.count()
         }.onFailure {
-            logger.error("Error while getting total count of outputs", it)
+            logger.error("Error while getting total count of nodes", it)
         }.getOrNull() ?: 0
     }
 

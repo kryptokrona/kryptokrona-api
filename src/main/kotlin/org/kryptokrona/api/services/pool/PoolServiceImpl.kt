@@ -28,13 +28,13 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api.services
+package org.kryptokrona.api.services.pool
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.kryptokrona.api.models.Block
-import org.kryptokrona.api.models.Blocks
-import org.kryptokrona.api.models.blocks
+import org.kryptokrona.api.models.Pool
+import org.kryptokrona.api.models.Pools
+import org.kryptokrona.api.models.pools
 import org.kryptokrona.api.plugins.DatabaseFactory.db
 import org.ktorm.dsl.*
 import org.ktorm.entity.add
@@ -43,51 +43,51 @@ import org.ktorm.entity.find
 import org.ktorm.entity.removeIf
 import org.slf4j.LoggerFactory
 
-class BlockServiceImpl : BlockService {
+class PoolServiceImpl : PoolService {
 
-    private val logger = LoggerFactory.getLogger("BlockServiceImpl")
+    private val logger = LoggerFactory.getLogger("PoolServiceImpl")
 
-    override suspend fun getAll(size: Int, page: Int): List<Block> = withContext(Dispatchers.IO) {
-        db.from(Blocks)
+    override suspend fun getAll(size: Int, page: Int): List<Pool> = withContext(Dispatchers.IO) {
+        db.from(Pools)
             .select()
             .offset((page - 1) * size)
             .limit(size)
-            .map { row -> Blocks.createEntity(row) }
+            .map { row -> Pools.createEntity(row) }
     }
 
-    override suspend fun getById(id: Long): Block? = withContext(Dispatchers.IO) {
+    override suspend fun getById(id: Long): Pool? = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.blocks.find { it.id eq id }
+            db.pools.find { it.id eq id }
         }.onFailure {
-            logger.error("Error getting block by id: $id", it)
+            logger.error("Error while getting pool by id: $id", it)
         }.getOrNull()
     }
 
-    override suspend fun save(block: Block): Unit = withContext(Dispatchers.IO) {
+    override suspend fun save(pool: Pool): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.blocks.add(block)
+            db.pools.add(pool)
         }.onSuccess {
-            logger.info("Saving block id: ${block.id}")
+            logger.info("Pool saved: $pool")
         }.onFailure {
-            logger.error("Error saving block id: ${block.id}", it)
+            logger.error("Error while saving pool: $pool", it)
         }.getOrNull()
     }
 
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.blocks.removeIf { it.id eq id }
+            db.pools.removeIf { it.id eq id }
         }.onSuccess {
-            logger.info("Deleting block id: $id")
+            logger.info("Pool deleted by id: $id")
         }.onFailure {
-            logger.error("Error deleting block id: $id", it)
+            logger.error("Error while deleting pool by id: $id", it)
         }.getOrNull()
     }
 
     override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.blocks.count()
+            db.pools.count()
         }.onFailure {
-            logger.error("Error getting total count of blocks", it)
+            logger.error("Error while getting total count of pools", it)
         }.getOrNull() ?: 0
     }
 

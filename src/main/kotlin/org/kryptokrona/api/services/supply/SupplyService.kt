@@ -28,17 +28,17 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api.services
+package org.kryptokrona.api.services.supply
 
-import org.kryptokrona.api.models.Block
+import org.kryptokrona.api.models.Supply
 
-interface BlockService {
+interface SupplyService {
 
-    suspend fun getAll(size: Int, page: Int): List<Block>
+     suspend fun getAll(size: Int, page: Int): List<Supply>
 
-    suspend fun getById(id: Long): Block?
+    suspend fun getById(id: Long): Supply?
 
-    suspend fun save(block: Block)
+    suspend fun save(supply: Supply)
 
     suspend fun delete(id: Long)
 

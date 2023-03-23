@@ -28,13 +28,13 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api.services
+package org.kryptokrona.api.services.output
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.kryptokrona.api.models.Pool
-import org.kryptokrona.api.models.Pools
-import org.kryptokrona.api.models.pools
+import org.kryptokrona.api.models.Output
+import org.kryptokrona.api.models.Outputs
+import org.kryptokrona.api.models.outputs
 import org.kryptokrona.api.plugins.DatabaseFactory.db
 import org.ktorm.dsl.*
 import org.ktorm.entity.add
@@ -43,51 +43,51 @@ import org.ktorm.entity.find
 import org.ktorm.entity.removeIf
 import org.slf4j.LoggerFactory
 
-class PoolServiceImpl : PoolService {
+class OutputServiceImpl : OutputService {
 
-    private val logger = LoggerFactory.getLogger("PoolServiceImpl")
+    private val logger = LoggerFactory.getLogger("OutputServiceImpl")
 
-    override suspend fun getAll(size: Int, page: Int): List<Pool> = withContext(Dispatchers.IO) {
-        db.from(Pools)
+    override suspend fun getAll(size: Int, page: Int): List<Output> = withContext(Dispatchers.IO) {
+        db.from(Outputs)
             .select()
             .offset((page - 1) * size)
             .limit(size)
-            .map { row -> Pools.createEntity(row) }
+            .map { row -> Outputs.createEntity(row) }
     }
 
-    override suspend fun getById(id: Long): Pool? = withContext(Dispatchers.IO) {
+    override suspend fun getById(id: Long): Output? = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.pools.find { it.id eq id }
+            db.outputs.find { it.id eq id }
         }.onFailure {
-            logger.error("Error while getting pool by id: $id", it)
+            logger.error("Error while getting output by id: $id", it)
         }.getOrNull()
     }
 
-    override suspend fun save(pool: Pool): Unit = withContext(Dispatchers.IO) {
+    override suspend fun save(output: Output): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.pools.add(pool)
+            db.outputs.add(output)
         }.onSuccess {
-            logger.info("Pool saved: $pool")
+            logger.info("Output saved: $output")
         }.onFailure {
-            logger.error("Error while saving pool: $pool", it)
+            logger.error("Error while saving output: $output", it)
         }.getOrNull()
     }
 
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.pools.removeIf { it.id eq id }
+            db.outputs.removeIf { it.id eq id }
         }.onSuccess {
-            logger.info("Pool deleted by id: $id")
+            logger.info("Output deleted by id: $id")
         }.onFailure {
-            logger.error("Error while deleting pool by id: $id", it)
+            logger.error("Error while deleting output by id: $id", it)
         }.getOrNull()
     }
 
     override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.pools.count()
+            db.outputs.count()
         }.onFailure {
-            logger.error("Error while getting total count of pools", it)
+            logger.error("Error while getting total count of outputs", it)
         }.getOrNull() ?: 0
     }
 

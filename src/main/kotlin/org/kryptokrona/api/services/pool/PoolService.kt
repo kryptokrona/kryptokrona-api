@@ -28,17 +28,17 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api.services
+package org.kryptokrona.api.services.pool
 
-import org.kryptokrona.api.models.Hashrate
+import org.kryptokrona.api.models.Pool
 
-interface HashrateService {
+interface PoolService {
 
-    suspend fun getAll(size: Int, page: Int): List<Hashrate>
+    suspend fun getAll(size: Int, page: Int): List<Pool>
 
-    suspend fun getById(id: Long): Hashrate?
+    suspend fun getById(id: Long): Pool?
 
-    suspend fun save(hashrate: Hashrate)
+    suspend fun save(pool: Pool)
 
     suspend fun delete(id: Long)
 

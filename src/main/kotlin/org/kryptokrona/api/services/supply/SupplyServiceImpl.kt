@@ -28,13 +28,13 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api.services
+package org.kryptokrona.api.services.supply
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.kryptokrona.api.models.Transaction
-import org.kryptokrona.api.models.Transactions
-import org.kryptokrona.api.models.transactions
+import org.kryptokrona.api.models.Supplies
+import org.kryptokrona.api.models.Supply
+import org.kryptokrona.api.models.supplies
 import org.kryptokrona.api.plugins.DatabaseFactory.db
 import org.ktorm.dsl.*
 import org.ktorm.entity.add
@@ -43,51 +43,51 @@ import org.ktorm.entity.find
 import org.ktorm.entity.removeIf
 import org.slf4j.LoggerFactory
 
-class TransactionServiceImpl : TransactionService {
+class SupplyServiceImpl : SupplyService {
 
-    private val logger = LoggerFactory.getLogger("TransactionServiceImpl")
+    private val logger = LoggerFactory.getLogger("SupplyServiceImpl")
 
-    override suspend fun getAll(size: Int, page: Int): List<Transaction> = withContext(Dispatchers.IO) {
-        db.from(Transactions)
+    override suspend fun getAll(size: Int, page: Int): List<Supply> = withContext(Dispatchers.IO) {
+        db.from(Supplies)
             .select()
             .offset((page - 1) * size)
             .limit(size)
-            .map { row -> Transactions.createEntity(row) }
+            .map { row -> Supplies.createEntity(row) }
     }
 
-    override suspend fun getById(id: Long): Transaction? = withContext(Dispatchers.IO) {
+    override suspend fun getById(id: Long): Supply? = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.transactions.find { it.id eq id }
+            db.supplies.find { it.id eq id }
         }.onFailure {
-            logger.error("Error while getting transaction by id: $id", it)
+            logger.error("Error while getting supply by id: $id", it)
         }.getOrNull()
     }
 
-    override suspend fun save(transaction: Transaction): Unit = withContext(Dispatchers.IO) {
+    override suspend fun save(supply: Supply): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.transactions.add(transaction)
+            db.supplies.add(supply)
         }.onSuccess {
-            logger.info("Saved transaction: $transaction")
+            logger.info("Saved supply: $supply")
         }.onFailure {
-            logger.error("Error while saving transaction: $transaction", it)
+            logger.error("Error while saving supply: $supply", it)
         }.getOrNull()
     }
 
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.transactions.removeIf { it.id eq id }
+            db.supplies.removeIf { it.id eq id }
         }.onSuccess {
-            logger.info("Deleted transaction by id: $id")
+            logger.info("Deleted supply by id: $id")
         }.onFailure {
-            logger.error("Error while deleting transaction by id: $id", it)
+            logger.error("Error while deleting supply by id: $id", it)
         }.getOrNull()
     }
 
     override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.transactions.count()
+            db.supplies.count()
         }.onFailure {
-            logger.error("Error while getting total count of transactions", it)
+            logger.error("Error while getting total count of supplies", it)
         }.getOrNull() ?: 0
     }
 

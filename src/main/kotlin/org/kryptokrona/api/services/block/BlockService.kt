@@ -28,17 +28,17 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api.services
+package org.kryptokrona.api.services.block
 
-import org.kryptokrona.api.models.Pool
+import org.kryptokrona.api.models.Block
 
-interface PoolService {
+interface BlockService {
 
-    suspend fun getAll(size: Int, page: Int): List<Pool>
+    suspend fun getAll(size: Int, page: Int): List<Block>
 
-    suspend fun getById(id: Long): Pool?
+    suspend fun getById(id: Long): Block?
 
-    suspend fun save(pool: Pool)
+    suspend fun save(block: Block)
 
     suspend fun delete(id: Long)
 

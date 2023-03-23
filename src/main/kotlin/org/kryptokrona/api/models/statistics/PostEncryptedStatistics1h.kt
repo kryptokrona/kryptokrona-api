@@ -38,18 +38,18 @@ import org.ktorm.schema.datetime
 import org.ktorm.schema.long
 import java.time.LocalDateTime
 
-interface PostEncryptedStatistics : Entity<PostEncryptedStatistics> {
-    companion object : Entity.Factory<PostEncryptedStatistics>()
+interface PostEncryptedStatistics1h : Entity<PostEncryptedStatistics1h> {
+    companion object : Entity.Factory<PostEncryptedStatistics1h>()
 
     val id: Long
     var amount: Long
     var createdAt: LocalDateTime
 }
 
-object PostsEncryptedStatistics : Table<PostEncryptedStatistics>("statistics_postsencrypted") {
+object PostsEncryptedStatistics1h : Table<PostEncryptedStatistics1h>("statistics_postsencrypted_1h") {
     val id = long("id").primaryKey().bindTo { it.id }
     val amount = long("amount").bindTo { it.amount }
     val createdAt = datetime("created_at").bindTo { it.createdAt }
 }
 
-val Database.statistics_postsencrypted get() = this.sequenceOf(PostsEncryptedStatistics)
+val Database.statistics_postsencrypted_1h get() = this.sequenceOf(PostsEncryptedStatistics1h)

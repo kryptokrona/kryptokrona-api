@@ -30,4 +30,8 @@
 
 package org.kryptokrona.api.routes.statistics
 
+import org.kryptokrona.api.services.PostEncryptedGroupServiceImpl
+
 //TODO: add 1h, 24h, 1w, 1m, 1y
+
+private val service = PostEncryptedGroupServiceImpl()

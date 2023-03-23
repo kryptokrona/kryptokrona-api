@@ -40,37 +40,39 @@ import org.kryptokrona.api.utils.jsonObjectMapper
 private val service = PostEncryptedServiceImpl()
 
 fun Route.postsEncryptedRoute() {
-    get("/v1/posts-encrypted") {
-        val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
-        val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+    route("/v1/posts-encrypted") {
+        get("/") {
+            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
 
-        val items = service.getAll(size, page)
-        val totalCount = service.getTotalCount()
+            val items = service.getAll(size, page)
+            val totalCount = service.getTotalCount()
 
-        val result = mapOf(
-            "items" to items,
-            "page" to page,
-            "size" to size,
-            "total" to totalCount
-        )
-        val json = jsonObjectMapper().writeValueAsString(result)
+            val result = mapOf(
+                "items" to items,
+                "page" to page,
+                "size" to size,
+                "total" to totalCount
+            )
+            val json = jsonObjectMapper().writeValueAsString(result)
 
-        call.respond(HttpStatusCode.OK, json)
+            call.respond(HttpStatusCode.OK, json)
+        }
+
+        get("/{id}") {
+            val id = call.parameters["id"]?.toLongOrNull()
+
+            id?.let {
+                val item = service.getById(id)
+
+                item?.let {
+                    val json = jsonObjectMapper().writeValueAsString(item)
+
+                    call.respond(HttpStatusCode.Found, json)
+                } ?: call.respond(HttpStatusCode.NotFound, "No block found with id $id")
+            } ?: call.respond(HttpStatusCode.BadRequest)
+        }
+
     }
-}
 
-fun Route.postsEncryptedByIdRoute() {
-    get("/v1/posts-encrypted/{id}") {
-        val id = call.parameters["id"]?.toLongOrNull()
-
-        id?.let {
-            val item = service.getById(id)
-
-            item?.let {
-                val json = jsonObjectMapper().writeValueAsString(item)
-
-                call.respond(HttpStatusCode.Found, json)
-            } ?: call.respond(HttpStatusCode.NotFound, "No block found with id $id")
-        } ?: call.respond(HttpStatusCode.BadRequest)
-    }
 }

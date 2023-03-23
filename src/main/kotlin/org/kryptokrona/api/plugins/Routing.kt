@@ -63,10 +63,7 @@ fun Application.configureRouting() {
         poolsByIdRoute()
 
         postsEncryptedRoute()
-        postsEncryptedByIdRoute()
-
         postsEncryptedGroupRoute()
-        postsEncryptedGroupByIdRoute()
 
         statisticsRoute()
         statisticsByIdRoute()

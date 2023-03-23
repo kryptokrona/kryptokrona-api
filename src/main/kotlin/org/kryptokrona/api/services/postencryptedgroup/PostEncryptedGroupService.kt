@@ -46,14 +46,4 @@ interface PostEncryptedGroupService {
 
     suspend fun getTotalCount(): Int
 
-    suspend fun getCountLast1h(): List<PostEncryptedGroup>
-
-    suspend fun getCountLast24h(): List<PostEncryptedGroup>
-
-    suspend fun getCountLast1w(): List<PostEncryptedGroup>
-
-    suspend fun getCountLast1m(): List<PostEncryptedGroup>
-
-    suspend fun getCountLast1y(): List<PostEncryptedGroup>
-
 }

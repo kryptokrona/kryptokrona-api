@@ -30,3 +30,28 @@
 
 package org.kryptokrona.api.models.statistics
 
+import org.kryptokrona.api.models.statistics.PostsEncryptedStatistics.bindTo
+import org.kryptokrona.api.models.statistics.PostsEncryptedStatistics.primaryKey
+import org.ktorm.database.Database
+import org.ktorm.entity.Entity
+import org.ktorm.entity.sequenceOf
+import org.ktorm.schema.Table
+import org.ktorm.schema.datetime
+import org.ktorm.schema.long
+import java.time.LocalDateTime
+
+interface PostEncryptedGroupStatistics : Entity<PostEncryptedGroupStatistics> {
+    companion object : Entity.Factory<PostEncryptedGroupStatistics>()
+
+    val id: Long
+    var amount: Long
+    var createdAt: LocalDateTime
+}
+
+object PostsEncryptedGroupStatistics : Table<PostEncryptedGroupStatistics>("statistics_postsencryptedgroup") {
+    val id = long("id").primaryKey().bindTo { it.id }
+    val amount = long("amount").bindTo { it.amount }
+    val createdAt = datetime("created_at").bindTo { it.createdAt }
+}
+
+val Database.statistics_postsencryptedgroup get() = this.sequenceOf(PostsEncryptedGroupStatistics)

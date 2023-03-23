@@ -41,7 +41,7 @@ private val service = NodeServiceImpl()
 
 fun Route.nodesRoute() {
     route("/v1/nodes") {
-        get("/") {
+        get("") {
             val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
             val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
 

@@ -41,7 +41,7 @@ private val service = BlockServiceImpl()
 
 fun Route.blocksRoute() {
     route("/v1/blocks") {
-        get("/") {
+        get("") {
             val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
             val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
 

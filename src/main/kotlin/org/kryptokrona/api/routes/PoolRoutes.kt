@@ -41,7 +41,7 @@ private val service = PoolServiceImpl()
 
 fun Route.poolsRoute() {
     route("/v1/pools") {
-        get("/") {
+        get("") {
             val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
             val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
 

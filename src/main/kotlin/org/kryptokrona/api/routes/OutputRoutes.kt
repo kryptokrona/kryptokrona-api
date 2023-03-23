@@ -41,7 +41,7 @@ private val service = OutputServiceImpl()
 
 fun Route.outputsRoute() {
     route("/v1/outputs") {
-        get("/") {
+        get("") {
             val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
             val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
 

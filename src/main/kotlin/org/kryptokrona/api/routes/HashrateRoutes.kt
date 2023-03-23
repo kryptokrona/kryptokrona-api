@@ -41,7 +41,7 @@ private val service = HashrateServiceImpl()
 
 fun Route.hashratesRoute() {
     route("/v1/hashrates") {
-        get("/") {
+        get("") {
             val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
             val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
 

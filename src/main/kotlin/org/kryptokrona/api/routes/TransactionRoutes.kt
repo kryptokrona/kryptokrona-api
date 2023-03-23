@@ -41,7 +41,7 @@ private val service = TransactionServiceImpl()
 
 fun Route.transactionsRoute() {
     route("/v1/transactions") {
-        get("/") {
+        get("") {
             val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
             val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
 

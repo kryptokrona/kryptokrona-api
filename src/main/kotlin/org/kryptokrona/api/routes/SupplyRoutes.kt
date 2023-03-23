@@ -41,7 +41,7 @@ private val service = SupplyServiceImpl()
 
 fun Route.suppliesRoute() {
     route("/v1/supplies") {
-        get("/") {
+        get("") {
             val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
             val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
 

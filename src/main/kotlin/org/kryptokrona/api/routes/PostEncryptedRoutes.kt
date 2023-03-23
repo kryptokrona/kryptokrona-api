@@ -41,7 +41,7 @@ private val service = PostEncryptedServiceImpl()
 
 fun Route.postsEncryptedRoute() {
     route("/v1/posts-encrypted") {
-        get("/") {
+        get("") {
             val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
             val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
 

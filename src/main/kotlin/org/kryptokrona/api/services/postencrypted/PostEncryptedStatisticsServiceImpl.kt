@@ -44,6 +44,7 @@ class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {
     private val logger = LoggerFactory.getLogger("PostEncryptedStatisticsServiceImpl")
 
     override suspend fun get1h(): List<PostEncryptedStatistics1h> = withContext(Dispatchers.IO) {
+        //TODO: we will just gather data with COUNT() and GROUP_BY() etc to obtain this information - possibly using JOINS
         TODO("Not yet implemented")
     }
 

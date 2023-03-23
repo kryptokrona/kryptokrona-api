@@ -30,3 +30,4 @@
 
 package org.kryptokrona.api.routes.statistics
 
+//TODO: add 1h, 24h, 1w, 1m, 1y

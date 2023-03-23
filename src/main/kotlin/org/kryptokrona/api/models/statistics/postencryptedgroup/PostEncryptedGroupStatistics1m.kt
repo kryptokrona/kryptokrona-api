@@ -28,7 +28,7 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api.models.statistics
+package org.kryptokrona.api.models.statistics.postencryptedgroup
 
 import org.ktorm.database.Database
 import org.ktorm.entity.Entity
@@ -38,18 +38,18 @@ import org.ktorm.schema.datetime
 import org.ktorm.schema.long
 import java.time.LocalDateTime
 
-interface PostEncryptedStatistics1h : Entity<PostEncryptedStatistics1h> {
-    companion object : Entity.Factory<PostEncryptedStatistics1h>()
+interface PostEncryptedGroupStatistics1m : Entity<PostEncryptedGroupStatistics1m> {
+    companion object : Entity.Factory<PostEncryptedGroupStatistics1m>()
 
     val id: Long
     var amount: Long
     var createdAt: LocalDateTime
 }
 
-object PostsEncryptedStatistics1h : Table<PostEncryptedStatistics1h>("statistics_postsencrypted_1h") {
+object PostsEncryptedGroupStatistics1m : Table<PostEncryptedGroupStatistics1m>("statistics_postsencryptedgroup_1m") {
     val id = long("id").primaryKey().bindTo { it.id }
     val amount = long("amount").bindTo { it.amount }
     val createdAt = datetime("created_at").bindTo { it.createdAt }
 }
 
-val Database.statistics_postsencrypted_1h get() = this.sequenceOf(PostsEncryptedStatistics1h)
+val Database.statistics_postsencryptedgroup_1m get() = this.sequenceOf(PostsEncryptedGroupStatistics1m)

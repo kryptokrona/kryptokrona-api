@@ -28,6 +28,28 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api.routes.statistics
+package org.kryptokrona.api.models.statistics.postencrypted
 
-//TODO: add 1h, 24h, 1w, 1m, 1y
+import org.ktorm.database.Database
+import org.ktorm.entity.Entity
+import org.ktorm.entity.sequenceOf
+import org.ktorm.schema.Table
+import org.ktorm.schema.datetime
+import org.ktorm.schema.long
+import java.time.LocalDateTime
+
+interface PostEncryptedStatistics1m : Entity<PostEncryptedStatistics1m> {
+    companion object : Entity.Factory<PostEncryptedStatistics1m>()
+
+    val id: Long
+    var amount: Long
+    var createdAt: LocalDateTime
+}
+
+object PostsEncryptedStatistics1m : Table<PostEncryptedStatistics1m>("statistics_postsencrypted_1m") {
+    val id = long("id").primaryKey().bindTo { it.id }
+    val amount = long("amount").bindTo { it.amount }
+    val createdAt = datetime("created_at").bindTo { it.createdAt }
+}
+
+val Database.statistics_postsencrypted_1m get() = this.sequenceOf(PostsEncryptedStatistics1m)

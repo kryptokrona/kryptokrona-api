@@ -99,23 +99,4 @@ class PostEncryptedGroupServiceImpl : PostEncryptedGroupService {
         }.getOrNull() ?: 0
     }
 
-    override suspend fun getCountLast1h(): List<PostEncryptedGroup> = withContext(Dispatchers.IO) {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getCountLast24h(): List<PostEncryptedGroup> = withContext(Dispatchers.IO) {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getCountLast1w(): List<PostEncryptedGroup> = withContext(Dispatchers.IO) {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getCountLast1m(): List<PostEncryptedGroup> = withContext(Dispatchers.IO) {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun getCountLast1y(): List<PostEncryptedGroup> = withContext(Dispatchers.IO) {
-        TODO("Not yet implemented")
-    }
 }

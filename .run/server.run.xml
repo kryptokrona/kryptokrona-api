@@ -1,7 +1,7 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="server" type="JetRunConfigurationType">
     <envs>
-      <env name="NODE_HOSTNAME" value="privacymine.net" />
+      <env name="NODE_HOSTNAME" value="techy.ddns.net" />
       <env name="NODE_PORT" value="11898" />
       <env name="NODE_SSL" value="false" />
     </envs>
@@ -9,6 +9,16 @@
     <module name="kryptokrona-api.main" />
     <shortenClasspath name="NONE" />
     <option name="VM_PARAMETERS" value="-DDB_URL=jdbc:postgresql://127.0.0.1:5432/kryptokrona_api_dev -DDB_USER=postgres -DDB_PASSWORD=test1234" />
+    <extension name="net.ashald.envfile">
+      <option name="IS_ENABLED" value="false" />
+      <option name="IS_SUBST" value="false" />
+      <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+      <option name="IS_IGNORE_MISSING_FILES" value="false" />
+      <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+      <ENTRIES>
+        <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+      </ENTRIES>
+    </extension>
     <method v="2">
       <option name="Make" enabled="true" />
     </method>

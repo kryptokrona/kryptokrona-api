@@ -40,37 +40,37 @@ import org.kryptokrona.api.utils.jsonObjectMapper
 private val service = HashrateServiceImpl()
 
 fun Route.hashratesRoute() {
-    get("/v1/hashrates") {
-        val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
-        val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+    route("/v1/hashrates") {
+        get("/") {
+            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
 
-        val items = service.getAll(size, page)
-        val totalCount = service.getTotalCount()
+            val items = service.getAll(size, page)
+            val totalCount = service.getTotalCount()
 
-        val result = mapOf(
-            "items" to items,
-            "page" to page,
-            "size" to size,
-            "total" to totalCount
-        )
-        val json = jsonObjectMapper().writeValueAsString(result)
+            val result = mapOf(
+                "items" to items,
+                "page" to page,
+                "size" to size,
+                "total" to totalCount
+            )
+            val json = jsonObjectMapper().writeValueAsString(result)
 
-        call.respond(HttpStatusCode.OK, json)
-    }
-}
+            call.respond(HttpStatusCode.OK, json)
+        }
 
-fun Route.hashratesByIdRoute() {
-    get("/v1/hashrates/{id}") {
-        val id = call.parameters["id"]?.toLongOrNull()
+        get("/{id}") {
+            val id = call.parameters["id"]?.toLongOrNull()
 
-        id?.let {
-            val item = service.getById(id)
+            id?.let {
+                val item = service.getById(id)
 
-            item?.let {
-                val json = jsonObjectMapper().writeValueAsString(item)
+                item?.let {
+                    val json = jsonObjectMapper().writeValueAsString(item)
 
-                call.respond(HttpStatusCode.Found, json)
-            } ?: call.respond(HttpStatusCode.NotFound, "No hashrate found with id $id")
-        } ?: call.respond(HttpStatusCode.BadRequest)
+                    call.respond(HttpStatusCode.Found, json)
+                } ?: call.respond(HttpStatusCode.NotFound, "No node found with id $id")
+            } ?: call.respond(HttpStatusCode.BadRequest)
+        }
     }
 }

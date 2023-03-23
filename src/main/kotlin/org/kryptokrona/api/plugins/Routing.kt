@@ -40,24 +40,11 @@ fun Application.configureRouting() {
         get("/v1/test") {
             call.respondText("Hello World!")
         }
-
         blocksRoute()
-        blocksByIdRoute()
-
         hashratesRoute()
-        hashratesByIdRoute()
-
         outputsRoute()
-        outputsByIdRoute()
-
         transactionsRoute()
-
-        infoRoute()
-        infoByIdRoute()
-
         nodesRoute()
-        nodesByIdRoute()
-
         poolsRoute()
         postsEncryptedRoute()
         postsEncryptedGroupRoute()

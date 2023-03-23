@@ -115,5 +115,21 @@
             <column name="created_at" type="TIMESTAMP WITH TIME ZONE NOT NULL"/>
         </createTable>
 
+        <createTable tableName="statistics_postencrypted">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+            <column name="amount" type="BIGINT NOT NULL"/>
+            <column name="created_at" type="TIMESTAMP WITH TIME ZONE NOT NULL"/>
+        </createTable>
+
+        <createTable tableName="statistics_postencryptedgroup">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true" unique="true"/>
+            </column>
+            <column name="amount" type="BIGINT NOT NULL"/>
+            <column name="created_at" type="TIMESTAMP WITH TIME ZONE NOT NULL"/>
+        </createTable>
+
     </changeSet>
 </databaseChangeLog>

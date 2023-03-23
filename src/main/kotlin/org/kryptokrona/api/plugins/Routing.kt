@@ -65,9 +65,6 @@ fun Application.configureRouting() {
         postsEncryptedRoute()
         postsEncryptedGroupRoute()
 
-        statisticsRoute()
-        statisticsByIdRoute()
-
         suppliesRoute()
         suppliesByIdRoute()
     }

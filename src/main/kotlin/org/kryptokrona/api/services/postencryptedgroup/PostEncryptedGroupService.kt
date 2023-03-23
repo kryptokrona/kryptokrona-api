@@ -28,51 +28,32 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api.routes
+package org.kryptokrona.api.services.postencryptedgroup
 
-import io.ktor.http.*
-import io.ktor.server.application.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
-import org.kryptokrona.api.services.postencrypted.PostEncryptedServiceImpl
-import org.kryptokrona.api.utils.jsonObjectMapper
+import org.kryptokrona.api.models.PostEncryptedGroup
 
-private val service = PostEncryptedServiceImpl()
+interface PostEncryptedGroupService {
 
-fun Route.postsEncryptedRoute() {
-    route("/v1/posts-encrypted") {
-        get("") {
-            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
-            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+    suspend fun getAll(size: Int, page: Int): List<PostEncryptedGroup>
 
-            val items = service.getAll(size, page)
-            val totalCount = service.getTotalCount()
+    suspend fun getById(id: Long): PostEncryptedGroup?
 
-            val result = mapOf(
-                "items" to items,
-                "page" to page,
-                "size" to size,
-                "total" to totalCount
-            )
-            val json = jsonObjectMapper().writeValueAsString(result)
+    suspend fun save(postEncryptedGroup: PostEncryptedGroup)
 
-            call.respond(HttpStatusCode.OK, json)
-        }
+    suspend fun delete(id: Long)
 
-        get("/{id}") {
-            val id = call.parameters["id"]?.toLongOrNull()
+    suspend fun existsByTxSb(txSb: String): Boolean
 
-            id?.let {
-                val item = service.getById(id)
+    suspend fun getTotalCount(): Int
 
-                item?.let {
-                    val json = jsonObjectMapper().writeValueAsString(item)
+    suspend fun getCountLast1h(): List<PostEncryptedGroup>
 
-                    call.respond(HttpStatusCode.Found, json)
-                } ?: call.respond(HttpStatusCode.NotFound, "No block found with id $id")
-            } ?: call.respond(HttpStatusCode.BadRequest)
-        }
+    suspend fun getCountLast24h(): List<PostEncryptedGroup>
 
-    }
+    suspend fun getCountLast1w(): List<PostEncryptedGroup>
+
+    suspend fun getCountLast1m(): List<PostEncryptedGroup>
+
+    suspend fun getCountLast1y(): List<PostEncryptedGroup>
 
 }

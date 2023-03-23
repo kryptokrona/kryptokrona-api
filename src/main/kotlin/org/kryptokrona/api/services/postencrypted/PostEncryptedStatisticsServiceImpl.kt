@@ -28,32 +28,30 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api.services
+package org.kryptokrona.api.services.postencrypted
 
-import org.kryptokrona.api.models.PostEncryptedGroup
+import org.kryptokrona.api.services.postencryptedgroup.PostEncryptedGroupStatisticsService
 
-interface PostEncryptedGroupService {
+class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {
 
-    suspend fun getAll(size: Int, page: Int): List<PostEncryptedGroup>
+    override suspend fun get1h(): List<PostEncryptedGroupStatisticsService> {
+        TODO("Not yet implemented")
+    }
 
-    suspend fun getById(id: Long): PostEncryptedGroup?
+    override suspend fun get24h(): List<PostEncryptedGroupStatisticsService> {
+        TODO("Not yet implemented")
+    }
 
-    suspend fun save(postEncryptedGroup: PostEncryptedGroup)
+    override suspend fun get1w(): List<PostEncryptedGroupStatisticsService> {
+        TODO("Not yet implemented")
+    }
 
-    suspend fun delete(id: Long)
+    override suspend fun get1m(): List<PostEncryptedGroupStatisticsService> {
+        TODO("Not yet implemented")
+    }
 
-    suspend fun existsByTxSb(txSb: String): Boolean
-
-    suspend fun getTotalCount(): Int
-
-    suspend fun getCountLast1h(): List<PostEncryptedGroup>
-
-    suspend fun getCountLast24h(): List<PostEncryptedGroup>
-
-    suspend fun getCountLast1w(): List<PostEncryptedGroup>
-
-    suspend fun getCountLast1m(): List<PostEncryptedGroup>
-
-    suspend fun getCountLast1y(): List<PostEncryptedGroup>
+    override suspend fun get1y(): List<PostEncryptedGroupStatisticsService> {
+        TODO("Not yet implemented")
+    }
 
 }

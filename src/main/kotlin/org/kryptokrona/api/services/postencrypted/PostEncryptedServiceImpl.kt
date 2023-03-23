@@ -28,13 +28,13 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api.services
+package org.kryptokrona.api.services.postencrypted
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.kryptokrona.api.models.PostEncryptedGroup
-import org.kryptokrona.api.models.PostEncryptedGroups
-import org.kryptokrona.api.models.postencryptedgroups
+import org.kryptokrona.api.models.PostEncrypted
+import org.kryptokrona.api.models.PostsEncrypted
+import org.kryptokrona.api.models.postsencrypted
 import org.kryptokrona.api.plugins.DatabaseFactory.db
 import org.ktorm.dsl.*
 import org.ktorm.entity.add
@@ -43,79 +43,77 @@ import org.ktorm.entity.find
 import org.ktorm.entity.removeIf
 import org.slf4j.LoggerFactory
 
-class PostEncryptedGroupServiceImpl : PostEncryptedGroupService {
+class PostEncryptedServiceImpl : PostEncryptedService {
 
-    private val logger = LoggerFactory.getLogger("PostEncryptedGroupServiceImpl")
+    private val logger = LoggerFactory.getLogger("PostEncryptedServiceImpl")
 
-    override suspend fun getAll(size: Int, page: Int): List<PostEncryptedGroup> = withContext(Dispatchers.IO) {
-        db.from(PostEncryptedGroups)
+    override suspend fun getAll(size: Int, page: Int): List<PostEncrypted> = withContext(Dispatchers.IO) {
+        db.from(PostsEncrypted)
             .select()
             .offset((page - 1) * size)
             .limit(size)
-            .map { row -> PostEncryptedGroups.createEntity(row) }
+            .map { row -> PostsEncrypted.createEntity(row) }
     }
 
-    override suspend fun getById(id: Long): PostEncryptedGroup? = withContext(Dispatchers.IO) {
+    override suspend fun getById(id: Long): PostEncrypted? = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.postencryptedgroups.find { it.id eq id }
+            db.postsencrypted.find { it.id eq id }
         }.onFailure {
-            logger.error("Error getting encrypted group post by id: $id", it)
+            logger.error("Error finding encrypted post with hash: $id", it)
         }.getOrNull()
     }
 
-    override suspend fun save(postEncryptedGroup: PostEncryptedGroup): Unit = withContext(Dispatchers.IO)  {
+    override suspend fun save(postEncrypted: PostEncrypted): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.postencryptedgroups.add(postEncryptedGroup)
+            db.postsencrypted.add(postEncrypted)
         }.onSuccess {
-            logger.info("Saved encrypted group post: ${postEncryptedGroup.txHash}")
+            logger.info("Saved encrypted post with hash: ${postEncrypted.txHash}")
         }.onFailure {
-            logger.error("Error saving encrypted group post: ${postEncryptedGroup.txHash}", it)
+            logger.error("Error saving encrypted post with hash: ${postEncrypted.txHash}", it)
         }
     }
 
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.postencryptedgroups.removeIf { it.id eq id }
-        }.onSuccess {
-            logger.info("Deleted encrypted group post: $id")
+            db.postsencrypted.removeIf { it.id eq 2 }
         }.onFailure {
-            logger.error("Error deleting encrypted group post: $id", it)
+            logger.error("Error deleting encrypted post with id: $id", it)
         }
     }
 
-    override suspend fun existsByTxSb(txSb: String): Boolean = withContext(Dispatchers.IO) {
+    override suspend fun existsByTxBox(txBox: String): Boolean = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.postencryptedgroups.find { it.txSb eq txSb }
+            db.postsencrypted.find { it.txBox eq txBox }
         }.onFailure {
-            logger.error("Error checking if encrypted group post exists: $txSb", it)
+            logger.error("Error finding encrypted post with txBox: $txBox", it)
         }.isSuccess
     }
 
     override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {
         this.runCatching {
-            db.postencryptedgroups.count()
+            db.postsencrypted.count()
         }.onFailure {
-            logger.error("Error getting total count of encrypted group posts", it)
+            logger.error("Error getting total encrypted posts count", it)
         }.getOrNull() ?: 0
     }
 
-    override suspend fun getCountLast1h(): List<PostEncryptedGroup> = withContext(Dispatchers.IO) {
+    override suspend fun getCountLast1h(): List<PostEncrypted> = withContext(Dispatchers.IO) {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getCountLast24h(): List<PostEncryptedGroup> = withContext(Dispatchers.IO) {
+    override suspend fun getCountLast24h(): List<PostEncrypted> = withContext(Dispatchers.IO) {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getCountLast1w(): List<PostEncryptedGroup> = withContext(Dispatchers.IO) {
+    override suspend fun getCountLast1w(): List<PostEncrypted> = withContext(Dispatchers.IO) {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getCountLast1m(): List<PostEncryptedGroup> = withContext(Dispatchers.IO) {
+    override suspend fun getCountLast1m(): List<PostEncrypted> = withContext(Dispatchers.IO) {
         TODO("Not yet implemented")
     }
 
-    override suspend fun getCountLast1y(): List<PostEncryptedGroup> = withContext(Dispatchers.IO) {
+    override suspend fun getCountLast1y(): List<PostEncrypted> = withContext(Dispatchers.IO) {
         TODO("Not yet implemented")
     }
 }

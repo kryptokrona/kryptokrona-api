@@ -28,51 +28,18 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api.routes
+package org.kryptokrona.api.services.postencryptedgroup
 
-import io.ktor.http.*
-import io.ktor.server.application.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
-import org.kryptokrona.api.services.postencrypted.PostEncryptedServiceImpl
-import org.kryptokrona.api.utils.jsonObjectMapper
+interface PostEncryptedGroupStatisticsService {
 
-private val service = PostEncryptedServiceImpl()
+    suspend fun get1h(): List<PostEncryptedGroupStatisticsService>
 
-fun Route.postsEncryptedRoute() {
-    route("/v1/posts-encrypted") {
-        get("") {
-            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
-            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+    suspend fun get24h(): List<PostEncryptedGroupStatisticsService>
 
-            val items = service.getAll(size, page)
-            val totalCount = service.getTotalCount()
+    suspend fun get1w(): List<PostEncryptedGroupStatisticsService>
 
-            val result = mapOf(
-                "items" to items,
-                "page" to page,
-                "size" to size,
-                "total" to totalCount
-            )
-            val json = jsonObjectMapper().writeValueAsString(result)
+    suspend fun get1m(): List<PostEncryptedGroupStatisticsService>
 
-            call.respond(HttpStatusCode.OK, json)
-        }
-
-        get("/{id}") {
-            val id = call.parameters["id"]?.toLongOrNull()
-
-            id?.let {
-                val item = service.getById(id)
-
-                item?.let {
-                    val json = jsonObjectMapper().writeValueAsString(item)
-
-                    call.respond(HttpStatusCode.Found, json)
-                } ?: call.respond(HttpStatusCode.NotFound, "No block found with id $id")
-            } ?: call.respond(HttpStatusCode.BadRequest)
-        }
-
-    }
+    suspend fun get1y(): List<PostEncryptedGroupStatisticsService>
 
 }

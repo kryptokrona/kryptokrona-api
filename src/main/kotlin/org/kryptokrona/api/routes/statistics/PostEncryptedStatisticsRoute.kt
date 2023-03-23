@@ -31,7 +31,7 @@
 package org.kryptokrona.api.routes.statistics
 
 import io.ktor.server.routing.*
-import org.kryptokrona.api.services.PostEncryptedServiceImpl
+import org.kryptokrona.api.services.postencrypted.PostEncryptedServiceImpl
 
 private val service = PostEncryptedServiceImpl()
 

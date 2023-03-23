@@ -34,6 +34,8 @@ import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.kryptokrona.api.routes.*
+import org.kryptokrona.api.routes.statistics.postsEncryptedGroupStatisticsRoute
+import org.kryptokrona.api.routes.statistics.postsEncryptedStatisticsRoute
 
 fun Application.configureRouting() {
     routing {
@@ -48,6 +50,8 @@ fun Application.configureRouting() {
         poolsRoute()
         postsEncryptedRoute()
         postsEncryptedGroupRoute()
+        postsEncryptedStatisticsRoute()
+        postsEncryptedGroupStatisticsRoute()
         suppliesRoute()
     }
 }

@@ -30,16 +30,12 @@
 
 package org.kryptokrona.api.models.statistics
 
-import org.kryptokrona.api.models.PostEncrypted
-import org.kryptokrona.api.models.PostsEncrypted.bindTo
-import org.kryptokrona.api.models.PostsEncrypted.primaryKey
 import org.ktorm.database.Database
 import org.ktorm.entity.Entity
 import org.ktorm.entity.sequenceOf
 import org.ktorm.schema.Table
 import org.ktorm.schema.datetime
 import org.ktorm.schema.long
-import org.ktorm.schema.varchar
 import java.time.LocalDateTime
 
 interface PostEncryptedStatistics : Entity<PostEncryptedStatistics> {

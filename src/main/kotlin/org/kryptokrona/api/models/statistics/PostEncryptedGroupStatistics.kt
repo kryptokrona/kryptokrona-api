@@ -30,8 +30,6 @@
 
 package org.kryptokrona.api.models.statistics
 
-import org.kryptokrona.api.models.statistics.PostsEncryptedStatistics.bindTo
-import org.kryptokrona.api.models.statistics.PostsEncryptedStatistics.primaryKey
 import org.ktorm.database.Database
 import org.ktorm.entity.Entity
 import org.ktorm.entity.sequenceOf

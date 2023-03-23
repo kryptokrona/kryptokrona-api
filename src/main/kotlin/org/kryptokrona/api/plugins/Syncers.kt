@@ -31,7 +31,6 @@
 package org.kryptokrona.api.plugins
 
 import io.ktor.server.application.*
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.kryptokrona.api.syncers.HuginSyncer
 

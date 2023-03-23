@@ -11,9 +11,6 @@ class BlockRoutesTest {
 
     @Test
     fun blockRouteTest() = testApplication {
-        application {
-            module()
-        }
         client.get("/v1/blocks").apply {
             assertEquals(HttpStatusCode.OK, status)
         }

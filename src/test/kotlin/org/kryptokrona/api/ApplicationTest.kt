@@ -10,9 +10,6 @@ class ApplicationTest {
 
     @Test
     fun testRoot() = testApplication {
-        application {
-            module()
-        }
         client.get("/v1/test").apply {
             assertEquals(HttpStatusCode.OK, status)
         }

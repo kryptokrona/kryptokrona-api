@@ -40,37 +40,38 @@ import org.kryptokrona.api.utils.jsonObjectMapper
 private val service = OutputServiceImpl()
 
 fun Route.outputsRoute() {
-    get("/v1/outputs") {
-        val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
-        val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+    route("/v1/outputs") {
+        get("/") {
+            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
 
-        val items = service.getAll(size, page)
-        val totalCount = service.getTotalCount()
+            val items = service.getAll(size, page)
+            val totalCount = service.getTotalCount()
 
-        val result = mapOf(
-            "items" to items,
-            "page" to page,
-            "size" to size,
-            "total" to totalCount
-        )
-        val json = jsonObjectMapper().writeValueAsString(result)
+            val result = mapOf(
+                "items" to items,
+                "page" to page,
+                "size" to size,
+                "total" to totalCount
+            )
+            val json = jsonObjectMapper().writeValueAsString(result)
 
-        call.respond(HttpStatusCode.OK, json)
-    }
-}
+            call.respond(HttpStatusCode.OK, json)
+        }
 
-fun Route.outputsByIdRoute() {
-    get("/v1/outputs/{id}") {
-        val id = call.parameters["id"]?.toLongOrNull()
+        get("/{id}") {
+            val id = call.parameters["id"]?.toLongOrNull()
 
-        id?.let {
-            val item = service.getById(id)
+            id?.let {
+                val item = service.getById(id)
 
-            item?.let {
-                val json = jsonObjectMapper().writeValueAsString(item)
+                item?.let {
+                    val json = jsonObjectMapper().writeValueAsString(item)
 
-                call.respond(HttpStatusCode.Found, json)
-            } ?: call.respond(HttpStatusCode.NotFound, "No output found with id $id")
-        } ?: call.respond(HttpStatusCode.BadRequest)
+                    call.respond(HttpStatusCode.Found, json)
+                } ?: call.respond(HttpStatusCode.NotFound, "No output found with id $id")
+            } ?: call.respond(HttpStatusCode.BadRequest)
+        }
+
     }
 }

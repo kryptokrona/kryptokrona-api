@@ -51,7 +51,6 @@ fun Application.configureRouting() {
         outputsByIdRoute()
 
         transactionsRoute()
-        transactionsByIdRoute()
 
         infoRoute()
         infoByIdRoute()
@@ -60,12 +59,8 @@ fun Application.configureRouting() {
         nodesByIdRoute()
 
         poolsRoute()
-        poolsByIdRoute()
-
         postsEncryptedRoute()
         postsEncryptedGroupRoute()
-
         suppliesRoute()
-        suppliesByIdRoute()
     }
 }

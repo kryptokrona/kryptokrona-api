@@ -30,6 +30,7 @@
 
 package org.kryptokrona.api.services
 
+import org.kryptokrona.api.models.PostEncrypted
 import org.kryptokrona.api.models.PostEncryptedGroup
 
 interface PostEncryptedGroupService {
@@ -45,5 +46,15 @@ interface PostEncryptedGroupService {
     suspend fun existsByTxSb(txSb: String): Boolean
 
     suspend fun getTotalCount(): Int
+
+    suspend fun getCountLast1h(): List<PostEncryptedGroup>
+
+    suspend fun getCountLast24h(): List<PostEncryptedGroup>
+
+    suspend fun getCountLast1w(): List<PostEncryptedGroup>
+
+    suspend fun getCountLast1m(): List<PostEncryptedGroup>
+
+    suspend fun getCountLast1y(): List<PostEncryptedGroup>
 
 }

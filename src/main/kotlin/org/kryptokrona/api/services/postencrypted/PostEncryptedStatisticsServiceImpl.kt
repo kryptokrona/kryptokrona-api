@@ -30,16 +30,11 @@
 
 package org.kryptokrona.api.services.postencrypted
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import org.kryptokrona.api.models.PostEncrypted
-import org.slf4j.LoggerFactory
 import org.kryptokrona.api.models.PostsEncrypted
-import org.kryptokrona.api.models.blocks
-import org.kryptokrona.api.models.postsencrypted
 import org.kryptokrona.api.plugins.DatabaseFactory.db
 import org.ktorm.dsl.*
-import org.ktorm.entity.count
+import org.slf4j.LoggerFactory
 import java.time.LocalDateTime.now
 
 class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {

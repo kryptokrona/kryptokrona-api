@@ -34,8 +34,6 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import org.kryptokrona.api.services.postencrypted.PostEncryptedServiceImpl
-import org.kryptokrona.api.services.postencrypted.PostEncryptedStatisticsService
 import org.kryptokrona.api.services.postencrypted.PostEncryptedStatisticsServiceImpl
 import org.kryptokrona.api.utils.jsonObjectMapper
 

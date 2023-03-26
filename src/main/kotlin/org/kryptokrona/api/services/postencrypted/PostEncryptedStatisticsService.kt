@@ -31,17 +31,19 @@
 package org.kryptokrona.api.services.postencrypted
 
 import org.kryptokrona.api.models.statistics.postencrypted.*
+import org.ktorm.dsl.Query
 
 interface PostEncryptedStatisticsService {
 
-    suspend fun get1h(): List<PostEncryptedStatistics1h>
+    // List<PostEncryptedStatistics1h>
+    suspend fun get1h(): List<PostEncryptedStatistics>
 
-    suspend fun get24h(): List<PostEncryptedStatistics24h>
+    suspend fun get24h(): List<PostEncryptedStatistics>
 
-    suspend fun get1w(): List<PostEncryptedStatistics1w>
+    suspend fun get1w(): List<PostEncryptedStatistics>
 
-    suspend fun get1m(): List<PostEncryptedStatistics1m>
+    suspend fun get1m(): List<PostEncryptedStatistics>
 
-    suspend fun get1y(): List<PostEncryptedStatistics1y>
+    suspend fun get1y(): List<PostEncryptedStatistics>
 
 }

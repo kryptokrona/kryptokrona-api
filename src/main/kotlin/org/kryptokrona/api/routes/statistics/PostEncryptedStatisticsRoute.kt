@@ -32,13 +32,19 @@ package org.kryptokrona.api.routes.statistics
 
 import io.ktor.server.routing.*
 import org.kryptokrona.api.services.postencrypted.PostEncryptedServiceImpl
+import org.kryptokrona.api.services.postencrypted.PostEncryptedStatisticsService
+import org.kryptokrona.api.services.postencrypted.PostEncryptedStatisticsServiceImpl
 
-private val service = PostEncryptedServiceImpl()
+private val service = PostEncryptedStatisticsServiceImpl()
 
 fun Route.postsEncryptedStatisticsRoute() {
     route("/v1/statistics/post-encrypted") {
         get("/1h") {
             println("1h")
+            val obj = service.get1h()
+            obj.forEach {
+                println(it.id)
+            }
         }
 
         get("/24h") {

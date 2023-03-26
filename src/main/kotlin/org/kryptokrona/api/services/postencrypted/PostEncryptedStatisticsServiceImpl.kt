@@ -30,33 +30,45 @@
 
 package org.kryptokrona.api.services.postencrypted
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import org.kryptokrona.api.models.Blocks.createEntity
+import org.kryptokrona.api.models.PostEncrypted
+import org.kryptokrona.api.models.PostsEncrypted
+import org.kryptokrona.api.models.postsencrypted
+import org.kryptokrona.api.plugins.DatabaseFactory.db
 import org.kryptokrona.api.models.statistics.postencrypted.*
+import org.ktorm.dsl.*
+import org.ktorm.schema.*
+import org.ktorm.support.postgresql.*
 import org.slf4j.LoggerFactory
+import java.sql.Timestamp
+import java.time.Duration
+import java.time.LocalDateTime
+import java.time.LocalDateTime.now
+import java.time.ZoneOffset
 
 class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {
 
     private val logger = LoggerFactory.getLogger("PostEncryptedStatisticsServiceImpl")
 
-    override suspend fun get1h(): List<PostEncryptedStatistics1h> = withContext(Dispatchers.IO) {
-        //TODO: we will just gather data with COUNT() and GROUP_BY() etc to obtain this information - possibly using JOINS
+    // List<PostEncryptedStatistics1h>
+    //TODO: should probably have the same entity model for 1h, 24h etc since they contain the same data back
+    override suspend fun get1h(): List<PostEncryptedStatistics> {
+        TODO()
+    }
+
+    override suspend fun get24h(): List<PostEncryptedStatistics> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get24h(): List<PostEncryptedStatistics24h> {
+    override suspend fun get1w(): List<PostEncryptedStatistics> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get1w(): List<PostEncryptedStatistics1w> {
+    override suspend fun get1m(): List<PostEncryptedStatistics> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get1m(): List<PostEncryptedStatistics1m> {
-        TODO("Not yet implemented")
-    }
-
-    override suspend fun get1y(): List<PostEncryptedStatistics1y> {
+    override suspend fun get1y(): List<PostEncryptedStatistics> {
         TODO("Not yet implemented")
     }
 

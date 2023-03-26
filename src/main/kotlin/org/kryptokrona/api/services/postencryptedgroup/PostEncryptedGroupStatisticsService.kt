@@ -30,18 +30,19 @@
 
 package org.kryptokrona.api.services.postencryptedgroup
 
+import org.kryptokrona.api.models.PostEncryptedGroup
 import org.kryptokrona.api.models.statistics.PostEncryptedGroupStatistics
 
 interface PostEncryptedGroupStatisticsService {
 
-    suspend fun get1h(): List<PostEncryptedGroupStatistics>
+    suspend fun get1h(): List<PostEncryptedGroup>
 
-    suspend fun get24h(): List<PostEncryptedGroupStatistics>
+    suspend fun get24h(): List<PostEncryptedGroup>
 
-    suspend fun get1w(): List<PostEncryptedGroupStatistics>
+    suspend fun get1w(): List<PostEncryptedGroup>
 
-    suspend fun get1m(): List<PostEncryptedGroupStatistics>
+    suspend fun get1m(): List<PostEncryptedGroup>
 
-    suspend fun get1y(): List<PostEncryptedGroupStatistics>
+    suspend fun get1y(): List<PostEncryptedGroup>
 
 }

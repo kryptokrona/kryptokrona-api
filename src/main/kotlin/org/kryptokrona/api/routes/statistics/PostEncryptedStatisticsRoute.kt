@@ -30,21 +30,34 @@
 
 package org.kryptokrona.api.routes.statistics
 
+import io.ktor.http.*
+import io.ktor.server.application.*
+import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.kryptokrona.api.services.postencrypted.PostEncryptedServiceImpl
 import org.kryptokrona.api.services.postencrypted.PostEncryptedStatisticsService
 import org.kryptokrona.api.services.postencrypted.PostEncryptedStatisticsServiceImpl
+import org.kryptokrona.api.utils.jsonObjectMapper
 
 private val service = PostEncryptedStatisticsServiceImpl()
 
 fun Route.postsEncryptedStatisticsRoute() {
     route("/v1/statistics/post-encrypted") {
         get("/1h") {
-            println("1h")
-            val obj = service.get1h()
-            obj.forEach {
-                println(it.id)
-            }
+            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+            val items = service.get1h(page, size)
+            val totalItems = service.getTotal1h()
+
+            val result = mapOf(
+                "items" to items,
+                "page" to page,
+                "size" to size,
+                "total" to totalItems
+            )
+            val json = jsonObjectMapper().writeValueAsString(result)
+
+            call.respond(HttpStatusCode.OK, json)
         }
 
         get("/24h") {

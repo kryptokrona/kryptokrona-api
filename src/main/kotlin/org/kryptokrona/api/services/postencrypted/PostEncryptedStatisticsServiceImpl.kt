@@ -30,33 +30,77 @@
 
 package org.kryptokrona.api.services.postencrypted
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import org.kryptokrona.api.models.PostEncrypted
 import org.kryptokrona.api.models.statistics.PostEncryptedStatistics
 import org.slf4j.LoggerFactory
+import org.kryptokrona.api.models.PostsEncrypted
+import org.kryptokrona.api.models.blocks
+import org.kryptokrona.api.models.postsencrypted
+import org.kryptokrona.api.plugins.DatabaseFactory.db
+import org.ktorm.dsl.*
+import org.ktorm.entity.count
+import java.time.LocalDateTime.now
 
 class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {
 
     private val logger = LoggerFactory.getLogger("PostEncryptedStatisticsServiceImpl")
 
-    // List<PostEncryptedStatistics1h>
-    //TODO: should probably have the same entity model for 1h, 24h etc since they contain the same data back
-    override suspend fun get1h(): List<PostEncryptedStatistics> {
-        TODO()
+    override suspend fun get1h(size: Int, page: Int): List<Map<String, Any>> {
+        val now = now()
+        val oneHourAgo = now.minusHours(1)
+
+        return db.from(PostsEncrypted)
+            .select()
+            .where { PostsEncrypted.createdAt greaterEq oneHourAgo }
+            .having { PostsEncrypted.createdAt lessEq now }
+            .orderBy(PostsEncrypted.createdAt.asc())
+            .groupBy(
+                PostsEncrypted.id,
+                PostsEncrypted.txHash,
+                PostsEncrypted.createdAt
+            )
+            .offset((page - 1) * size)
+            .map { row ->
+                mapOf(
+                    "id" to row[PostsEncrypted.id]!!,
+                    "txHash" to row[PostsEncrypted.txHash]!!
+                )
+            }
+            .toList()
     }
 
-    override suspend fun get24h(): List<PostEncryptedStatistics> {
+    override suspend fun get24h(): List<PostEncrypted> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get1w(): List<PostEncryptedStatistics> {
+    override suspend fun get1w(): List<PostEncrypted> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get1m(): List<PostEncryptedStatistics> {
+    override suspend fun get1m(): List<PostEncrypted> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get1y(): List<PostEncryptedStatistics> {
+    override suspend fun get1y(): List<PostEncrypted> {
         TODO("Not yet implemented")
+    }
+
+    override suspend fun getTotal1h(): Int {
+        val now = now()
+        val oneHourAgo = now.minusHours(1)
+
+        return db.from(PostsEncrypted)
+                .select()
+                .where { PostsEncrypted.createdAt greaterEq oneHourAgo }
+                .having { PostsEncrypted.createdAt lessEq now }
+                .groupBy(
+                    PostsEncrypted.id,
+                    PostsEncrypted.txHash,
+                    PostsEncrypted.createdAt
+                )
+                .totalRecordsInAllPages
     }
 
 }

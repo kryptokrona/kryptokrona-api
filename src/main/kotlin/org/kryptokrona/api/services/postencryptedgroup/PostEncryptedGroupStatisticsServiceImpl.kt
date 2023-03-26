@@ -30,6 +30,7 @@
 
 package org.kryptokrona.api.services.postencryptedgroup
 
+import org.kryptokrona.api.models.PostEncryptedGroup
 import org.kryptokrona.api.models.statistics.PostEncryptedGroupStatistics
 import org.slf4j.LoggerFactory
 
@@ -37,23 +38,23 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
 
     private val logger = LoggerFactory.getLogger("PostEncryptedGroupStatisticsServiceImpl")
 
-    override suspend fun get1h(): List<PostEncryptedGroupStatistics> {
+    override suspend fun get1h(): List<PostEncryptedGroup> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get24h(): List<PostEncryptedGroupStatistics> {
+    override suspend fun get24h(): List<PostEncryptedGroup> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get1w(): List<PostEncryptedGroupStatistics> {
+    override suspend fun get1w(): List<PostEncryptedGroup> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get1m(): List<PostEncryptedGroupStatistics> {
+    override suspend fun get1m(): List<PostEncryptedGroup> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get1y(): List<PostEncryptedGroupStatistics> {
+    override suspend fun get1y(): List<PostEncryptedGroup> {
         TODO("Not yet implemented")
     }
 

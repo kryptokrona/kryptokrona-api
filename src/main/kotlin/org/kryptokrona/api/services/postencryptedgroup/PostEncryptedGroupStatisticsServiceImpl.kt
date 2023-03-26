@@ -37,24 +37,43 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
 
     private val logger = LoggerFactory.getLogger("PostEncryptedGroupStatisticsServiceImpl")
 
-    override suspend fun get1h(): List<PostEncryptedGroup> {
+    override suspend fun get1h(): List<Map<String, Any>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get24h(): List<PostEncryptedGroup> {
+    override suspend fun get24h(): List<Map<String, Any>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get1w(): List<PostEncryptedGroup> {
+    override suspend fun get1w(): List<Map<String, Any>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get1m(): List<PostEncryptedGroup> {
+    override suspend fun get1m(): List<Map<String, Any>> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get1y(): List<PostEncryptedGroup> {
+    override suspend fun get1y(): List<Map<String, Any>> {
         TODO("Not yet implemented")
     }
 
+    override suspend fun getTotal1h(): Int {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getTotal24h(): Int {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getTotal1w(): Int {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getTotal1m(): Int {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getTotal1y(): Int {
+        TODO("Not yet implemented")
+    }
 }

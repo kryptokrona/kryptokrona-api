@@ -33,7 +33,6 @@ package org.kryptokrona.api.services.postencrypted
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.kryptokrona.api.models.PostEncrypted
-import org.kryptokrona.api.models.statistics.PostEncryptedStatistics
 import org.slf4j.LoggerFactory
 import org.kryptokrona.api.models.PostsEncrypted
 import org.kryptokrona.api.models.blocks
@@ -71,19 +70,19 @@ class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {
             .toList()
     }
 
-    override suspend fun get24h(): List<PostEncrypted> {
+    override suspend fun get24h(size: Int, page: Int): List<PostEncrypted> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get1w(): List<PostEncrypted> {
+    override suspend fun get1w(size: Int, page: Int): List<PostEncrypted> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get1m(): List<PostEncrypted> {
+    override suspend fun get1m(size: Int, page: Int): List<PostEncrypted> {
         TODO("Not yet implemented")
     }
 
-    override suspend fun get1y(): List<PostEncrypted> {
+    override suspend fun get1y(size: Int, page: Int): List<PostEncrypted> {
         TODO("Not yet implemented")
     }
 
@@ -103,4 +102,19 @@ class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {
                 .totalRecordsInAllPages
     }
 
+    override suspend fun getTotal24h(): Int {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getTotal1w(): Int {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getTotal1m(): Int {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getTotal1y(): Int {
+        TODO("Not yet implemented")
+    }
 }

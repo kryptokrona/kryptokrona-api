@@ -59,19 +59,71 @@ fun Route.postsEncryptedStatisticsRoute() {
         }
 
         get("/24h") {
-            println("1h")
+            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+            val items = service.get24h(page, size)
+            val totalItems = service.getTotal24h()
+
+            val result = mapOf(
+                "items" to items,
+                "page" to page,
+                "size" to size,
+                "total" to totalItems
+            )
+            val json = jsonObjectMapper().writeValueAsString(result)
+
+            call.respond(HttpStatusCode.OK, json)
         }
 
         get("/1w") {
-            println("1h")
+            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+            val items = service.get1w(page, size)
+            val totalItems = service.getTotal1w()
+
+            val result = mapOf(
+                "items" to items,
+                "page" to page,
+                "size" to size,
+                "total" to totalItems
+            )
+            val json = jsonObjectMapper().writeValueAsString(result)
+
+            call.respond(HttpStatusCode.OK, json)
         }
 
         get("/1m") {
-            println("1h")
+            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+            val items = service.get1m(page, size)
+            val totalItems = service.getTotal1m()
+
+            val result = mapOf(
+                "items" to items,
+                "page" to page,
+                "size" to size,
+                "total" to totalItems
+            )
+            val json = jsonObjectMapper().writeValueAsString(result)
+
+            call.respond(HttpStatusCode.OK, json)
         }
 
         get("/1y") {
-            println("1h")
+            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+            val items = service.get1y(page, size)
+            val totalItems = service.getTotal1y()
+
+            val result = mapOf(
+                "items" to items,
+                "page" to page,
+                "size" to size,
+                "total" to totalItems
+            )
+            val json = jsonObjectMapper().writeValueAsString(result)
+
+            call.respond(HttpStatusCode.OK, json)
         }
     }
 }

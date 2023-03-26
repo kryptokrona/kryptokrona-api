@@ -30,31 +30,103 @@
 
 package org.kryptokrona.api.routes.statistics
 
+import io.ktor.http.*
+import io.ktor.server.application.*
+import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.kryptokrona.api.models.PostEncryptedGroup
+import org.kryptokrona.api.services.postencrypted.PostEncryptedStatisticsServiceImpl
 import org.kryptokrona.api.services.postencryptedgroup.PostEncryptedGroupServiceImpl
+import org.kryptokrona.api.services.postencryptedgroup.PostEncryptedGroupStatisticsServiceImpl
+import org.kryptokrona.api.utils.jsonObjectMapper
 
-private val service = PostEncryptedGroupServiceImpl()
+private val service = PostEncryptedGroupStatisticsServiceImpl()
 
 fun Route.postsEncryptedGroupStatisticsRoute() {
     route("/v1/statistics/post-encrypted-group") {
         get("/1h") {
-            println("1h")
+            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+            val items = service.get1h(page, size)
+            val totalItems = service.getTotal1h()
+
+            val result = mapOf(
+                "items" to items,
+                "page" to page,
+                "size" to size,
+                "total" to totalItems
+            )
+            val json = jsonObjectMapper().writeValueAsString(result)
+
+            call.respond(HttpStatusCode.OK, json)
         }
 
         get("/24h") {
-            println("1h")
+            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+            val items = service.get24h(page, size)
+            val totalItems = service.getTotal24h()
+
+            val result = mapOf(
+                "items" to items,
+                "page" to page,
+                "size" to size,
+                "total" to totalItems
+            )
+            val json = jsonObjectMapper().writeValueAsString(result)
+
+            call.respond(HttpStatusCode.OK, json)
         }
 
         get("/1w") {
-            println("1h")
+            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+            val items = service.get1w(page, size)
+            val totalItems = service.getTotal1w()
+
+            val result = mapOf(
+                "items" to items,
+                "page" to page,
+                "size" to size,
+                "total" to totalItems
+            )
+            val json = jsonObjectMapper().writeValueAsString(result)
+
+            call.respond(HttpStatusCode.OK, json)
         }
 
         get("/1m") {
-            println("1h")
+            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+            val items = service.get1m(page, size)
+            val totalItems = service.getTotal1m()
+
+            val result = mapOf(
+                "items" to items,
+                "page" to page,
+                "size" to size,
+                "total" to totalItems
+            )
+            val json = jsonObjectMapper().writeValueAsString(result)
+
+            call.respond(HttpStatusCode.OK, json)
         }
 
         get("/1y") {
-            println("1h")
+            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+            val items = service.get1y(page, size)
+            val totalItems = service.getTotal1y()
+
+            val result = mapOf(
+                "items" to items,
+                "page" to page,
+                "size" to size,
+                "total" to totalItems
+            )
+            val json = jsonObjectMapper().writeValueAsString(result)
+
+            call.respond(HttpStatusCode.OK, json)
         }
     }
 }

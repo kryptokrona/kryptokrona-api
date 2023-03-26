@@ -30,21 +30,8 @@
 
 package org.kryptokrona.api.services.postencrypted
 
-import org.kryptokrona.api.models.Blocks.createEntity
-import org.kryptokrona.api.models.PostEncrypted
-import org.kryptokrona.api.models.PostsEncrypted
-import org.kryptokrona.api.models.postsencrypted
-import org.kryptokrona.api.plugins.DatabaseFactory.db
-import org.kryptokrona.api.models.statistics.postencrypted.*
-import org.ktorm.dsl.*
-import org.ktorm.schema.*
-import org.ktorm.support.postgresql.*
+import org.kryptokrona.api.models.statistics.PostEncryptedStatistics
 import org.slf4j.LoggerFactory
-import java.sql.Timestamp
-import java.time.Duration
-import java.time.LocalDateTime
-import java.time.LocalDateTime.now
-import java.time.ZoneOffset
 
 class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {
 

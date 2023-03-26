@@ -28,15 +28,15 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api.models.statistics.postencryptedgroup
+package org.kryptokrona.api.models.statistics
 
 import org.ktorm.entity.Entity
 import java.time.LocalDateTime
 
-interface PostEncryptedGroupStatistics : Entity<PostEncryptedGroupStatistics> {
-    companion object : Entity.Factory<PostEncryptedGroupStatistics>()
+interface PostEncryptedStatistics : Entity<PostEncryptedStatistics> {
+    companion object : Entity.Factory<PostEncryptedStatistics>()
 
-    val id: Long
+    var id: Long
     var amount: Long
     var fromDate: LocalDateTime
     var toDate: LocalDateTime

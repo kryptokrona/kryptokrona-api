@@ -30,8 +30,7 @@
 
 package org.kryptokrona.api.services.postencrypted
 
-import org.kryptokrona.api.models.statistics.postencrypted.*
-import org.ktorm.dsl.Query
+import org.kryptokrona.api.models.statistics.PostEncryptedStatistics
 
 interface PostEncryptedStatisticsService {
 

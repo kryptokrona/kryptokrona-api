@@ -30,8 +30,7 @@
 
 package org.kryptokrona.api.services.postencryptedgroup
 
-import org.kryptokrona.api.models.statistics.postencryptedgroup.*
-import org.kryptokrona.api.plugins.DatabaseFactory.db
+import org.kryptokrona.api.models.statistics.PostEncryptedGroupStatistics
 import org.slf4j.LoggerFactory
 
 class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsService {

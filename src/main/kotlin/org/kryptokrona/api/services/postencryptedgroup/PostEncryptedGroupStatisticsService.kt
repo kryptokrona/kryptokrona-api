@@ -30,7 +30,7 @@
 
 package org.kryptokrona.api.services.postencryptedgroup
 
-import org.kryptokrona.api.models.statistics.postencryptedgroup.*
+import org.kryptokrona.api.models.statistics.PostEncryptedGroupStatistics
 
 interface PostEncryptedGroupStatisticsService {
 

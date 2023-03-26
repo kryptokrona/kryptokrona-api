@@ -37,13 +37,13 @@ interface PostEncryptedStatisticsService {
     // List<PostEncryptedStatistics1h>
     suspend fun get1h(size: Int, page: Int): List<Map<String, Any>>
 
-    suspend fun get24h(size: Int, page: Int): List<PostEncrypted>
+    suspend fun get24h(size: Int, page: Int): List<Map<String, Any>>
 
-    suspend fun get1w(size: Int, page: Int): List<PostEncrypted>
+    suspend fun get1w(size: Int, page: Int): List<Map<String, Any>>
 
-    suspend fun get1m(size: Int, page: Int): List<PostEncrypted>
+    suspend fun get1m(size: Int, page: Int): List<Map<String, Any>>
 
-    suspend fun get1y(size: Int, page: Int): List<PostEncrypted>
+    suspend fun get1y(size: Int, page: Int): List<Map<String, Any>>
 
     suspend fun getTotal1h(): Int
 

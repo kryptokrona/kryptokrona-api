@@ -44,7 +44,7 @@ fun Route.postsEncryptedStatisticsRoute() {
         get("/1h") {
             val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
             val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
-            val items = service.get1h(page, size)
+            val items = service.get1h(size, page)
             val totalItems = service.getTotal1h()
 
             val result = mapOf(
@@ -61,7 +61,7 @@ fun Route.postsEncryptedStatisticsRoute() {
         get("/24h") {
             val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
             val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
-            val items = service.get24h(page, size)
+            val items = service.get24h(size, page)
             val totalItems = service.getTotal24h()
 
             val result = mapOf(
@@ -78,7 +78,7 @@ fun Route.postsEncryptedStatisticsRoute() {
         get("/1w") {
             val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
             val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
-            val items = service.get1w(page, size)
+            val items = service.get1w(size, page)
             val totalItems = service.getTotal1w()
 
             val result = mapOf(
@@ -95,7 +95,7 @@ fun Route.postsEncryptedStatisticsRoute() {
         get("/1m") {
             val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
             val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
-            val items = service.get1m(page, size)
+            val items = service.get1m(size, page)
             val totalItems = service.getTotal1m()
 
             val result = mapOf(
@@ -112,7 +112,7 @@ fun Route.postsEncryptedStatisticsRoute() {
         get("/1y") {
             val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
             val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
-            val items = service.get1y(page, size)
+            val items = service.get1y(size, page)
             val totalItems = service.getTotal1y()
 
             val result = mapOf(

@@ -56,6 +56,7 @@ class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {
                 PostsEncrypted.createdAt
             )
             .offset((page - 1) * size)
+            .limit(size)
             .map { row ->
                 mapOf(
                     "id" to row[PostsEncrypted.id]!!,
@@ -80,6 +81,7 @@ class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {
                 PostsEncrypted.createdAt
             )
             .offset((page - 1) * size)
+            .limit(size)
             .map { row ->
                 mapOf(
                     "id" to row[PostsEncrypted.id]!!,
@@ -104,6 +106,7 @@ class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {
                 PostsEncrypted.createdAt
             )
             .offset((page - 1) * size)
+            .limit(size)
             .map { row ->
                 mapOf(
                     "id" to row[PostsEncrypted.id]!!,
@@ -128,6 +131,7 @@ class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {
                 PostsEncrypted.createdAt
             )
             .offset((page - 1) * size)
+            .limit(size)
             .map { row ->
                 mapOf(
                     "id" to row[PostsEncrypted.id]!!,
@@ -152,6 +156,7 @@ class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {
                 PostsEncrypted.createdAt
             )
             .offset((page - 1) * size)
+            .limit(size)
             .map { row ->
                 mapOf(
                     "id" to row[PostsEncrypted.id]!!,

@@ -57,6 +57,7 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
                 PostEncryptedGroups.createdAt
             )
             .offset((page - 1) * size)
+            .limit(size)
             .map { row ->
                 mapOf(
                     "id" to row[PostEncryptedGroups.id]!!,
@@ -81,6 +82,7 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
                 PostEncryptedGroups.createdAt
             )
             .offset((page - 1) * size)
+            .limit(size)
             .map { row ->
                 mapOf(
                     "id" to row[PostEncryptedGroups.id]!!,
@@ -105,6 +107,7 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
                 PostEncryptedGroups.createdAt
             )
             .offset((page - 1) * size)
+            .limit(size)
             .map { row ->
                 mapOf(
                     "id" to row[PostEncryptedGroups.id]!!,
@@ -129,6 +132,7 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
                 PostEncryptedGroups.createdAt
             )
             .offset((page - 1) * size)
+            .limit(size)
             .map { row ->
                 mapOf(
                     "id" to row[PostEncryptedGroups.id]!!,
@@ -153,6 +157,7 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
                 PostEncryptedGroups.createdAt
             )
             .offset((page - 1) * size)
+            .limit(size)
             .map { row ->
                 mapOf(
                     "id" to row[PostEncryptedGroups.id]!!,

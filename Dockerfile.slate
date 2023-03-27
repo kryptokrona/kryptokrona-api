@@ -4,19 +4,18 @@ FROM slatedocs/slate
 COPY openapi/*.yaml /srv/slate/source/
 
 # installing node for converting openapi to markdown
-RUN apt-get update && apt-get install -y git build-essential openssl libssl-dev python3 python3 python3-pip
-RUN git clone https://github.com/nodejs/node.git
-RUN cd node && ./configure && make && make install
+RUN apt-get update && apt-get install -y git curl build-essential openssl libssl-dev python3 python3 python3-pip
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash -
+RUN apt-get install -y nodejs
 
 # installing swagger-to-slate
 RUN npm install -g swagger-to-slate
 
 # openapi to slate
-#WORKDIR /srv/slate/source
-#TODO: this builds for a huge amount of time for some reason
-#RUN swagger-to-slate -i documentation.yaml -o api
+WORKDIR /srv/slate/source
+RUN swagger-to-slate -i documentation.yaml -o api
 
-#RUN ls -la
+RUN ls -la
 
 # copying all markdown files
 COPY openapi/*.md /srv/slate/source/

@@ -30,18 +30,29 @@
 
 package org.kryptokrona.api.services.postencrypted
 
-import org.kryptokrona.api.models.statistics.postencrypted.*
+import org.kryptokrona.api.models.PostEncrypted
 
 interface PostEncryptedStatisticsService {
 
-    suspend fun get1h(): List<PostEncryptedStatistics1h>
+    // List<PostEncryptedStatistics1h>
+    suspend fun get1h(size: Int, page: Int): List<Map<String, Any>>
 
-    suspend fun get24h(): List<PostEncryptedStatistics24h>
+    suspend fun get24h(size: Int, page: Int): List<Map<String, Any>>
 
-    suspend fun get1w(): List<PostEncryptedStatistics1w>
+    suspend fun get1w(size: Int, page: Int): List<Map<String, Any>>
 
-    suspend fun get1m(): List<PostEncryptedStatistics1m>
+    suspend fun get1m(size: Int, page: Int): List<Map<String, Any>>
 
-    suspend fun get1y(): List<PostEncryptedStatistics1y>
+    suspend fun get1y(size: Int, page: Int): List<Map<String, Any>>
+
+    suspend fun getTotal1h(): Int
+
+    suspend fun getTotal24h(): Int
+
+    suspend fun getTotal1w(): Int
+
+    suspend fun getTotal1m(): Int
+
+    suspend fun getTotal1y(): Int
 
 }

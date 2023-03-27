@@ -30,34 +30,219 @@
 
 package org.kryptokrona.api.services.postencrypted
 
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import org.kryptokrona.api.models.statistics.postencrypted.*
+import org.kryptokrona.api.models.PostEncrypted
+import org.kryptokrona.api.models.PostsEncrypted
+import org.kryptokrona.api.plugins.DatabaseFactory.db
+import org.ktorm.dsl.*
 import org.slf4j.LoggerFactory
+import java.time.LocalDateTime.now
 
 class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {
 
     private val logger = LoggerFactory.getLogger("PostEncryptedStatisticsServiceImpl")
 
-    override suspend fun get1h(): List<PostEncryptedStatistics1h> = withContext(Dispatchers.IO) {
-        //TODO: we will just gather data with COUNT() and GROUP_BY() etc to obtain this information - possibly using JOINS
-        TODO("Not yet implemented")
+    override suspend fun get1h(size: Int, page: Int): List<Map<String, Any>> {
+        val now = now()
+        val oneHourAgo = now.minusHours(1)
+
+        return db.from(PostsEncrypted)
+            .select()
+            .where { PostsEncrypted.createdAt greaterEq oneHourAgo }
+            .having { PostsEncrypted.createdAt lessEq now }
+            .orderBy(PostsEncrypted.createdAt.asc())
+            .groupBy(
+                PostsEncrypted.id,
+                PostsEncrypted.txHash,
+                PostsEncrypted.createdAt
+            )
+            .offset((page - 1) * size)
+            .limit(size)
+            .map { row ->
+                mapOf(
+                    "id" to row[PostsEncrypted.id]!!,
+                    "txHash" to row[PostsEncrypted.txHash]!!
+                )
+            }
+            .toList()
     }
 
-    override suspend fun get24h(): List<PostEncryptedStatistics24h> {
-        TODO("Not yet implemented")
+    override suspend fun get24h(size: Int, page: Int): List<Map<String, Any>> {
+        val now = now()
+        val oneHourAgo = now.minusHours(24)
+
+        return db.from(PostsEncrypted)
+            .select()
+            .where { PostsEncrypted.createdAt greaterEq oneHourAgo }
+            .having { PostsEncrypted.createdAt lessEq now }
+            .orderBy(PostsEncrypted.createdAt.asc())
+            .groupBy(
+                PostsEncrypted.id,
+                PostsEncrypted.txHash,
+                PostsEncrypted.createdAt
+            )
+            .offset((page - 1) * size)
+            .limit(size)
+            .map { row ->
+                mapOf(
+                    "id" to row[PostsEncrypted.id]!!,
+                    "txHash" to row[PostsEncrypted.txHash]!!
+                )
+            }
+            .toList()
     }
 
-    override suspend fun get1w(): List<PostEncryptedStatistics1w> {
-        TODO("Not yet implemented")
+    override suspend fun get1w(size: Int, page: Int): List<Map<String, Any>> {
+        val now = now()
+        val oneHourAgo = now.minusHours(24 * 7)
+
+        return db.from(PostsEncrypted)
+            .select()
+            .where { PostsEncrypted.createdAt greaterEq oneHourAgo }
+            .having { PostsEncrypted.createdAt lessEq now }
+            .orderBy(PostsEncrypted.createdAt.asc())
+            .groupBy(
+                PostsEncrypted.id,
+                PostsEncrypted.txHash,
+                PostsEncrypted.createdAt
+            )
+            .offset((page - 1) * size)
+            .limit(size)
+            .map { row ->
+                mapOf(
+                    "id" to row[PostsEncrypted.id]!!,
+                    "txHash" to row[PostsEncrypted.txHash]!!
+                )
+            }
+            .toList()
     }
 
-    override suspend fun get1m(): List<PostEncryptedStatistics1m> {
-        TODO("Not yet implemented")
+    override suspend fun get1m(size: Int, page: Int): List<Map<String, Any>> {
+        val now = now()
+        val oneHourAgo = now.minusHours(24 * 7 * 4)
+
+        return db.from(PostsEncrypted)
+            .select()
+            .where { PostsEncrypted.createdAt greaterEq oneHourAgo }
+            .having { PostsEncrypted.createdAt lessEq now }
+            .orderBy(PostsEncrypted.createdAt.asc())
+            .groupBy(
+                PostsEncrypted.id,
+                PostsEncrypted.txHash,
+                PostsEncrypted.createdAt
+            )
+            .offset((page - 1) * size)
+            .limit(size)
+            .map { row ->
+                mapOf(
+                    "id" to row[PostsEncrypted.id]!!,
+                    "txHash" to row[PostsEncrypted.txHash]!!
+                )
+            }
+            .toList()
     }
 
-    override suspend fun get1y(): List<PostEncryptedStatistics1y> {
-        TODO("Not yet implemented")
+    override suspend fun get1y(size: Int, page: Int): List<Map<String, Any>> {
+        val now = now()
+        val oneHourAgo = now.minusHours(24 * 7 * 4 * 12)
+
+        return db.from(PostsEncrypted)
+            .select()
+            .where { PostsEncrypted.createdAt greaterEq oneHourAgo }
+            .having { PostsEncrypted.createdAt lessEq now }
+            .orderBy(PostsEncrypted.createdAt.asc())
+            .groupBy(
+                PostsEncrypted.id,
+                PostsEncrypted.txHash,
+                PostsEncrypted.createdAt
+            )
+            .offset((page - 1) * size)
+            .limit(size)
+            .map { row ->
+                mapOf(
+                    "id" to row[PostsEncrypted.id]!!,
+                    "txHash" to row[PostsEncrypted.txHash]!!
+                )
+            }
+            .toList()
     }
 
+    override suspend fun getTotal1h(): Int {
+        val now = now()
+        val oneHourAgo = now.minusHours(1)
+
+        return db.from(PostsEncrypted)
+                .select()
+                .where { PostsEncrypted.createdAt greaterEq oneHourAgo }
+                .having { PostsEncrypted.createdAt lessEq now }
+                .groupBy(
+                    PostsEncrypted.id,
+                    PostsEncrypted.txHash,
+                    PostsEncrypted.createdAt
+                )
+                .totalRecordsInAllPages
+    }
+
+    override suspend fun getTotal24h(): Int {
+        val now = now()
+        val oneHourAgo = now.minusHours(24)
+
+        return db.from(PostsEncrypted)
+                .select()
+                .where { PostsEncrypted.createdAt greaterEq oneHourAgo }
+                .having { PostsEncrypted.createdAt lessEq now }
+                .groupBy(
+                    PostsEncrypted.id,
+                    PostsEncrypted.txHash,
+                    PostsEncrypted.createdAt
+                )
+                .totalRecordsInAllPages
+    }
+
+    override suspend fun getTotal1w(): Int {
+        val now = now()
+        val oneHourAgo = now.minusHours(24 * 7)
+
+        return db.from(PostsEncrypted)
+                .select()
+                .where { PostsEncrypted.createdAt greaterEq oneHourAgo }
+                .having { PostsEncrypted.createdAt lessEq now }
+                .groupBy(
+                    PostsEncrypted.id,
+                    PostsEncrypted.txHash,
+                    PostsEncrypted.createdAt
+                )
+                .totalRecordsInAllPages
+    }
+
+    override suspend fun getTotal1m(): Int {
+        val now = now()
+        val oneHourAgo = now.minusHours(24 * 7 * 4)
+
+        return db.from(PostsEncrypted)
+                .select()
+                .where { PostsEncrypted.createdAt greaterEq oneHourAgo }
+                .having { PostsEncrypted.createdAt lessEq now }
+                .groupBy(
+                    PostsEncrypted.id,
+                    PostsEncrypted.txHash,
+                    PostsEncrypted.createdAt
+                )
+                .totalRecordsInAllPages
+    }
+
+    override suspend fun getTotal1y(): Int {
+        val now = now()
+        val oneHourAgo = now.minusHours(24 * 7 * 4 * 12)
+
+        return db.from(PostsEncrypted)
+                .select()
+                .where { PostsEncrypted.createdAt greaterEq oneHourAgo }
+                .having { PostsEncrypted.createdAt lessEq now }
+                .groupBy(
+                    PostsEncrypted.id,
+                    PostsEncrypted.txHash,
+                    PostsEncrypted.createdAt
+                )
+                .totalRecordsInAllPages
+    }
 }

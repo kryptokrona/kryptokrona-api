@@ -1,5 +1,20 @@
 FROM slatedocs/slate
 
-COPY openapi/*.md openapi/*.yaml /srv/slate/source/
+# copying specification file
+COPY openapi/*.yaml /srv/slate/source/
 
-COPY resources/logo_github.png /srv/slate/source/images/logo.png
+# installing node for converting openapi to markdown
+RUN apt-get update && apt-get install -y git build-essential openssl libssl-dev
+RUN git clone https://github.com/nodejs/node.git
+RUN cd node && ./configure && make && make install
+
+# installing swagger-to-slate
+RUN npm install -g swagger-to-slate
+
+# openapi to slate
+RUN swagger-to-slate -i openapi/documentation.yaml -o api.md
+
+# copying all markdown files
+COPY openapi/*.md /srv/slate/source/
+
+COPY resources/logo_slate.png /srv/slate/source/images/logo.png

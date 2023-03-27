@@ -92,7 +92,9 @@ services:
       - kryptokrona_api_net
 
   slate:
-    build: openapi
+    build:
+      context: .
+      dockerfile: Dockerfile.slate
     container_name: kryptokrona_api_slate
     command: ["serve"]
     ports:

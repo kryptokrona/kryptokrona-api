@@ -1,0 +1,5 @@
+FROM slatedocs/slate
+
+COPY openapi/*.md openapi/*.yaml /srv/slate/source/
+
+COPY resources/logo_github.png /srv/slate/source/images/logo.png

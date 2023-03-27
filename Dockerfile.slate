@@ -4,7 +4,7 @@ FROM slatedocs/slate
 COPY openapi/*.yaml /srv/slate/source/
 
 # installing node for converting openapi to markdown
-RUN apt-get update && apt-get install -y git build-essential openssl libssl-dev
+RUN apt-get update && apt-get install -y git build-essential openssl libssl-dev python3 python3 python3-pip
 RUN git clone https://github.com/nodejs/node.git
 RUN cd node && ./configure && make && make install
 

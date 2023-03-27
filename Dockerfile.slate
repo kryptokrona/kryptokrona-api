@@ -12,12 +12,13 @@ RUN cd node && ./configure && make && make install
 RUN npm install -g swagger-to-slate
 
 # openapi to slate
-WORKDIR /srv/slate/source
-RUN swagger-to-slate -i documentation.yaml -o api
+#WORKDIR /srv/slate/source
+#TODO: this builds for a huge amount of time for some reason
+#RUN swagger-to-slate -i documentation.yaml -o api
 
-RUN ls -la
+#RUN ls -la
 
 # copying all markdown files
-#COPY openapi/*.md /srv/slate/source/
+COPY openapi/*.md /srv/slate/source/
 
 COPY resources/logo_slate.png /srv/slate/source/images/logo.png

@@ -33,6 +33,9 @@
     dataLabels: {
       enabled: false,
     },
+    yaxis: {
+      opposite: true,
+    },
     labels: labels,
   };
 

@@ -6,9 +6,10 @@
   import { user } from "../../stores/user";
   let email;
 
-  function onLogin() {
-    $user = login(email);
-    goto("/");
+  async function onLogin() {
+    $user = await login(email);
+    console.log("fsfdsf" + $user);
+    //goto("/");
   }
 </script>
 

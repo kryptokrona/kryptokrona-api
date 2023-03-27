@@ -3,7 +3,6 @@
   import AreaChart from "../../components/charts/AreaChart.svelte";
   import ColumnChart from "../../components/charts/ColumnChart.svelte";
   import AreaChartWithLabels from "../../components/charts/AreaChartWithLabels.svelte";
-  import TwoItemsGrid from "../../components/grids/TwoItemsGrid.svelte";
   import TitleAndTextContainer from "../../components/containers/TitleAndTextContainer.svelte";
   import ToggleBox from "../../components/toggle-box/ToggleBox.svelte";
   import {
@@ -19,8 +18,8 @@
   } from "../../mock-data/data";
   import { goto } from "$app/navigation";
   import LineChartWithLabels from "../../components/charts/LineChartWithLabels.svelte";
-  import MultiItemsGrid from "../../components/grids/MultiItemsGrid.svelte";
   import TitleAndTextContainerGreen from "../../components/containers/TitleAndTextContainerGreen.svelte";
+  import Grid from "../../components/grids/Grid.svelte";
 
   let searchInput = "";
 </script>
@@ -82,20 +81,20 @@
 
 <div class="mt-8" />
 
-<TwoItemsGrid>
-  <div class="w-full h-80">
+<Grid columns={2} gridClass="md-grid">
+  <div class="w-full h-60 md:h-80">
     <AreaChartWithLabels data={chart7.data} labels={months} id={chart7.name} />
   </div>
 
-  <div class="w-full h-80">
+  <div class="w-full h-60 md:h-80">
     <LineChartWithLabels data={chart8.data} labels={months} id={chart8.name} />
   </div>
-</TwoItemsGrid>
+</Grid>
 
 <div class="mt-8" />
 
 <ToggleBox title={"Data"}>
-  <MultiItemsGrid columns={5}>
+  <Grid columns={5}>
     <TitleAndTextContainer
       title="TITLE"
       text={chart1.data[0].data[chart1.data[0].data.length - 1]}
@@ -131,18 +130,18 @@
         multipleDataSets={true}
       />
     </TitleAndTextContainer>
-  </MultiItemsGrid>
+  </Grid>
 </ToggleBox>
 
 <div class="mt-8" />
 
 <ToggleBox title={"Data"}>
-  <MultiItemsGrid columns={4}>
+  <Grid columns={4}>
     <TitleAndTextContainer title={"TITLE"} text="VALUE" />
     <TitleAndTextContainer title={"TITLE"} text="VALUE" />
     <TitleAndTextContainerGreen title={"TITLE"} text="VALUE" />
     <TitleAndTextContainerGreen title={"TITLE"} text="VALUE" />
-  </MultiItemsGrid>
+  </Grid>
 </ToggleBox>
 
 <div class="mt-8" />

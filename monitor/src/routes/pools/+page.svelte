@@ -9,13 +9,13 @@
     months,
   } from "../../mock-data/data";
   import PercentageBar from "../../components/PercentageBar.svelte";
-  import TwoItemsGrid from "../../components/grids/TwoItemsGrid.svelte";
   import PieChartWithLabels from "../../components/charts/PieChartWithLabels.svelte";
   import LineChartWithLabels from "../../components/charts/LineChartWithLabels.svelte";
   import LineColumnChartWithLabels from "../../components/charts/LineColumnChartWithLabels.svelte";
   import AreaChartWithLabels from "../../components/charts/AreaChartWithLabels.svelte";
   import ToggleBox from "../../components/toggle-box/ToggleBox.svelte";
   import GrayButton from "../../components/buttons/GrayButton.svelte";
+  import Grid from "../../components/grids/Grid.svelte";
 
   let searchInput = "";
 </script>
@@ -131,18 +131,18 @@
   </div>
 </div>
 
-<div class="mt-16" />
+<div class="mt-8" />
 
-<TwoItemsGrid>
+<Grid columns={2} gridClass="md-grid">
   <div>
     <h2>Hashrate history</h2>
-    <div class="w-full h-80">
+    <div class="w-full h-60 md:h-80">
       <LineChartWithLabels data={poolChart.data} labels={months} id={"line1"} />
     </div>
   </div>
   <div>
     <h2>Block distribution</h2>
-    <div class="w-full h-80">
+    <div class="w-full h-60 md:h-80">
       <PieChartWithLabels
         data={[35, 40, 10, 5, 15, 10]}
         labels={pools.map((p) => p.name)}
@@ -150,9 +150,9 @@
       />
     </div>
   </div>
-</TwoItemsGrid>
+</Grid>
 
-<div class="mt-16" />
+<div class="mt-8" />
 
 <ToggleBox title="Difficulty vs price">
   <div class="text-center">
@@ -161,7 +161,7 @@
     <GrayButton text="Weeks" />
     <GrayButton text="Months" />
   </div>
-  <div class="w-full h-96">
+  <div class="w-full h-60 md:h-96">
     <LineColumnChartWithLabels
       data={difficultyVsPriceChart.data}
       id={"linecolumn1"}
@@ -169,7 +169,7 @@
   </div>
 </ToggleBox>
 
-<div class="mt-16" />
+<div class="mt-8" />
 
 <ToggleBox title="Earnings">
   <div class="text-center">
@@ -178,7 +178,7 @@
     <GrayButton text="Weeks" />
     <GrayButton text="Months" />
   </div>
-  <div class="w-full h-96">
+  <div class="w-full h-60 md:h-96">
     <AreaChartWithLabels
       data={earningsChart.data}
       labels={months}
@@ -187,7 +187,7 @@
   </div>
 </ToggleBox>
 
-<div class="mt-16" />
+<div class="mt-8" />
 
 <style>
   .search-icon {

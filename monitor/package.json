@@ -30,6 +30,7 @@
 	"dependencies": {
 		"@octokit/rest": "^19.0.7",
 		"apexcharts": "^3.37.1",
-		"dotenv": "^16.0.3"
+		"dotenv": "^16.0.3",
+		"keycloak-js": "^21.0.1"
 	}
 }

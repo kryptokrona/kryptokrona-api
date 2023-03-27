@@ -1,7 +1,7 @@
 <script>
   import TopNavButton from "./TopNavButton.svelte";
-  import { goto } from "$app/navigation";
   import GreenButton from "../buttons/GreenButton.svelte";
+  import { login } from "../../api/login";
   import { user } from "../../stores/user";
   export let repo;
 </script>
@@ -79,19 +79,14 @@
       label="pools"
       goTo="/pools"
     />
-    {#if $user.email != null}
+    {#if $user.username != null}
       <TopNavButton
         iconClass="fa-solid fa-user"
         label="profile"
         goTo="/profile"
       />
     {:else}
-      <GreenButton
-        text="Login"
-        action={() => {
-          goto("/login");
-        }}
-      />
+      <GreenButton text="Login" action={login} />
     {/if}
   </div>
 </nav>

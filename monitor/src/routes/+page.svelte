@@ -3,17 +3,16 @@
   import CircleChart from "../components/charts/CircleChart.svelte";
   import ToggleBox from "../components/toggle-box/ToggleBox.svelte";
   import { chart1, chart4, chart5 } from "../mock-data/data";
-  import MultiItemsGrid from "../components/grids/MultiItemsGrid.svelte";
   import TitleAndTextContainer from "../components/containers/TitleAndTextContainer.svelte";
   import AreaChartWithLabels from "../components/charts/AreaChartWithLabels.svelte";
   import ChartWithTimeButtonsContainer from "../components/containers/ChartWithTimeButtonsContainer.svelte";
-  import MultiItemsGridFullWidthTablet from "../components/grids/MultiItemsGridFullWidthTablet.svelte";
   import TitleAndTextContainerGreen from "../components/containers/TitleAndTextContainerGreen.svelte";
+  import Grid from "../components/grids/Grid.svelte";
 </script>
 
 <div id="main" />
 <ToggleBox title={"Quick overview"}>
-  <MultiItemsGrid columns={5}>
+  <Grid columns={5}>
     <TitleAndTextContainer title="Threads" text="14" />
     <TitleAndTextContainer title="Uptime" text="4 days" />
     <TitleAndTextContainer title="CPU total" text="30%">
@@ -37,13 +36,13 @@
         <CircleChart data={[40]} id="id10" />
       </div>
     </TitleAndTextContainer>
-  </MultiItemsGrid>
+  </Grid>
 </ToggleBox>
 
 <div class="mt-8" />
 
 <ToggleBox title={"History"}>
-  <MultiItemsGridFullWidthTablet columns={3} fullWidthOnPhone={true}>
+  <Grid columns={3} gridClass="md-grid">
     <ChartWithTimeButtonsContainer title="CPU usage" height={"h-80"}>
       <AreaChartWithLabels data={chart4.data} id={chart4.name} />
     </ChartWithTimeButtonsContainer>
@@ -62,20 +61,20 @@
         colors={[COLOR.FUSCHIA]}
       />
     </ChartWithTimeButtonsContainer>
-  </MultiItemsGridFullWidthTablet>
+  </Grid>
 </ToggleBox>
 
 <div class="mt-8" />
 
 <ToggleBox title={"Status"}>
-  <MultiItemsGrid columns={6} fullWidthOnPhone={true}>
+  <Grid columns={6}>
     <TitleAndTextContainerGreen title="Something" text="OK" />
     <TitleAndTextContainerGreen title="Something" text="OK" />
     <TitleAndTextContainerGreen title="Something" text="OK" />
     <TitleAndTextContainer title="Something" text="OFFLINE" />
     <TitleAndTextContainer title="Something" text="OFFLINE" />
     <TitleAndTextContainerGreen title="Something" text="OK" />
-  </MultiItemsGrid>
+  </Grid>
 </ToggleBox>
 
 <div class="mt-8" />

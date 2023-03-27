@@ -1,7 +1,11 @@
 
 import Keycloak from "keycloak-js";
-import { PUBLIC_KEYCLOAK_URL, PUBLIC_KEYCLOAK_REALM,PUBLIC_KEYCLOAK_CLIENT } from '$env/static/public'
 import { setUser } from "../stores/user";
+
+// temporary
+const PUBLIC_KEYCLOAK_URL="http://localhost:18080/"
+const PUBLIC_KEYCLOAK_REALM="KryptokronaAPIKeycloak"
+const PUBLIC_KEYCLOAK_CLIENT="login-app"
 
 let keycloak;
 

@@ -87,7 +87,7 @@ services:
     command:
       - start-dev
     volumes:
-      - ./keyclock/realms:/opt/jboss/keycloak/imports
+      - ./keycloak/realms:/opt/jboss/keycloak/imports
     networks:
       - kryptokrona_api_net
 

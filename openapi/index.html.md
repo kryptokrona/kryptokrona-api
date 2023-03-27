@@ -1,9 +1,7 @@
 ---
-title: My Slate Documentation
+title: Kryptokrona API Documentation
 ---
 
 # Introduction
 
-This is my Slate documentation.
-
-<!-- include(api.md) -->
+Info coming soon.

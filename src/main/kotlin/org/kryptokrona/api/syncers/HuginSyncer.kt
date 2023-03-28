@@ -70,7 +70,7 @@ class HuginSyncer {
 
     private var knownPoolTxsList: List<String> = listOf()
 
-    suspend fun sync() = coroutineScope {
+    suspend fun sync(): Unit = coroutineScope {
         launch {
             while(isActive) {
                 logger.debug("Syncing Hugin...")

@@ -30,9 +30,7 @@
 
 package org.kryptokrona.api.services.postencryptedgroup
 
-import org.kryptokrona.api.models.PostEncryptedGroup
-import org.kryptokrona.api.models.PostEncryptedGroups
-import org.kryptokrona.api.models.PostsEncrypted
+import org.kryptokrona.api.models.PostsEncryptedGroup
 import org.kryptokrona.api.plugins.DatabaseFactory.db
 import org.ktorm.dsl.*
 import org.slf4j.LoggerFactory
@@ -46,22 +44,22 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
         val now = LocalDateTime.now()
         val oneHourAgo = now.minusHours(1)
 
-        return db.from(PostEncryptedGroups)
+        return db.from(PostsEncryptedGroup)
             .select()
-            .where { PostEncryptedGroups.createdAt greaterEq oneHourAgo }
-            .having { PostEncryptedGroups.createdAt lessEq now }
-            .orderBy(PostEncryptedGroups.createdAt.asc())
+            .where { PostsEncryptedGroup.createdAt greaterEq oneHourAgo }
+            .having { PostsEncryptedGroup.createdAt lessEq now }
+            .orderBy(PostsEncryptedGroup.createdAt.asc())
             .groupBy(
-                PostEncryptedGroups.id,
-                PostEncryptedGroups.txHash,
-                PostEncryptedGroups.createdAt
+                PostsEncryptedGroup.id,
+                PostsEncryptedGroup.txHash,
+                PostsEncryptedGroup.createdAt
             )
             .offset((page - 1) * size)
             .limit(size)
             .map { row ->
                 mapOf(
-                    "id" to row[PostEncryptedGroups.id]!!,
-                    "txHash" to row[PostEncryptedGroups.txHash]!!
+                    "id" to row[PostsEncryptedGroup.id]!!,
+                    "txHash" to row[PostsEncryptedGroup.txHash]!!
                 )
             }
             .toList()
@@ -71,22 +69,22 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
         val now = LocalDateTime.now()
         val oneHourAgo = now.minusHours(24)
 
-        return db.from(PostEncryptedGroups)
+        return db.from(PostsEncryptedGroup)
             .select()
-            .where { PostEncryptedGroups.createdAt greaterEq oneHourAgo }
-            .having { PostEncryptedGroups.createdAt lessEq now }
-            .orderBy(PostEncryptedGroups.createdAt.asc())
+            .where { PostsEncryptedGroup.createdAt greaterEq oneHourAgo }
+            .having { PostsEncryptedGroup.createdAt lessEq now }
+            .orderBy(PostsEncryptedGroup.createdAt.asc())
             .groupBy(
-                PostEncryptedGroups.id,
-                PostEncryptedGroups.txHash,
-                PostEncryptedGroups.createdAt
+                PostsEncryptedGroup.id,
+                PostsEncryptedGroup.txHash,
+                PostsEncryptedGroup.createdAt
             )
             .offset((page - 1) * size)
             .limit(size)
             .map { row ->
                 mapOf(
-                    "id" to row[PostEncryptedGroups.id]!!,
-                    "txHash" to row[PostEncryptedGroups.txHash]!!
+                    "id" to row[PostsEncryptedGroup.id]!!,
+                    "txHash" to row[PostsEncryptedGroup.txHash]!!
                 )
             }
             .toList()
@@ -96,22 +94,22 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
         val now = LocalDateTime.now()
         val oneHourAgo = now.minusHours(24 * 7)
 
-        return db.from(PostEncryptedGroups)
+        return db.from(PostsEncryptedGroup)
             .select()
-            .where { PostEncryptedGroups.createdAt greaterEq oneHourAgo }
-            .having { PostEncryptedGroups.createdAt lessEq now }
-            .orderBy(PostEncryptedGroups.createdAt.asc())
+            .where { PostsEncryptedGroup.createdAt greaterEq oneHourAgo }
+            .having { PostsEncryptedGroup.createdAt lessEq now }
+            .orderBy(PostsEncryptedGroup.createdAt.asc())
             .groupBy(
-                PostEncryptedGroups.id,
-                PostEncryptedGroups.txHash,
-                PostEncryptedGroups.createdAt
+                PostsEncryptedGroup.id,
+                PostsEncryptedGroup.txHash,
+                PostsEncryptedGroup.createdAt
             )
             .offset((page - 1) * size)
             .limit(size)
             .map { row ->
                 mapOf(
-                    "id" to row[PostEncryptedGroups.id]!!,
-                    "txHash" to row[PostEncryptedGroups.txHash]!!
+                    "id" to row[PostsEncryptedGroup.id]!!,
+                    "txHash" to row[PostsEncryptedGroup.txHash]!!
                 )
             }
             .toList()
@@ -121,22 +119,22 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
         val now = LocalDateTime.now()
         val oneHourAgo = now.minusHours(24 * 7 * 4)
 
-        return db.from(PostEncryptedGroups)
+        return db.from(PostsEncryptedGroup)
             .select()
-            .where { PostEncryptedGroups.createdAt greaterEq oneHourAgo }
-            .having { PostEncryptedGroups.createdAt lessEq now }
-            .orderBy(PostEncryptedGroups.createdAt.asc())
+            .where { PostsEncryptedGroup.createdAt greaterEq oneHourAgo }
+            .having { PostsEncryptedGroup.createdAt lessEq now }
+            .orderBy(PostsEncryptedGroup.createdAt.asc())
             .groupBy(
-                PostEncryptedGroups.id,
-                PostEncryptedGroups.txHash,
-                PostEncryptedGroups.createdAt
+                PostsEncryptedGroup.id,
+                PostsEncryptedGroup.txHash,
+                PostsEncryptedGroup.createdAt
             )
             .offset((page - 1) * size)
             .limit(size)
             .map { row ->
                 mapOf(
-                    "id" to row[PostEncryptedGroups.id]!!,
-                    "txHash" to row[PostEncryptedGroups.txHash]!!
+                    "id" to row[PostsEncryptedGroup.id]!!,
+                    "txHash" to row[PostsEncryptedGroup.txHash]!!
                 )
             }
             .toList()
@@ -146,22 +144,22 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
         val now = LocalDateTime.now()
         val oneHourAgo = now.minusHours(24 * 7 * 4 * 12)
 
-        return db.from(PostEncryptedGroups)
+        return db.from(PostsEncryptedGroup)
             .select()
-            .where { PostEncryptedGroups.createdAt greaterEq oneHourAgo }
-            .having { PostEncryptedGroups.createdAt lessEq now }
-            .orderBy(PostEncryptedGroups.createdAt.asc())
+            .where { PostsEncryptedGroup.createdAt greaterEq oneHourAgo }
+            .having { PostsEncryptedGroup.createdAt lessEq now }
+            .orderBy(PostsEncryptedGroup.createdAt.asc())
             .groupBy(
-                PostEncryptedGroups.id,
-                PostEncryptedGroups.txHash,
-                PostEncryptedGroups.createdAt
+                PostsEncryptedGroup.id,
+                PostsEncryptedGroup.txHash,
+                PostsEncryptedGroup.createdAt
             )
             .offset((page - 1) * size)
             .limit(size)
             .map { row ->
                 mapOf(
-                    "id" to row[PostEncryptedGroups.id]!!,
-                    "txHash" to row[PostEncryptedGroups.txHash]!!
+                    "id" to row[PostsEncryptedGroup.id]!!,
+                    "txHash" to row[PostsEncryptedGroup.txHash]!!
                 )
             }
             .toList()
@@ -171,14 +169,14 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
         val now = LocalDateTime.now()
         val oneHourAgo = now.minusHours(1)
 
-        return db.from(PostEncryptedGroups)
+        return db.from(PostsEncryptedGroup)
                 .select()
-                .where { PostEncryptedGroups.createdAt greaterEq oneHourAgo }
-                .having { PostEncryptedGroups.createdAt lessEq now }
+                .where { PostsEncryptedGroup.createdAt greaterEq oneHourAgo }
+                .having { PostsEncryptedGroup.createdAt lessEq now }
                 .groupBy(
-                    PostEncryptedGroups.id,
-                    PostEncryptedGroups.txHash,
-                    PostEncryptedGroups.createdAt
+                    PostsEncryptedGroup.id,
+                    PostsEncryptedGroup.txHash,
+                    PostsEncryptedGroup.createdAt
                 )
                 .totalRecordsInAllPages
     }
@@ -187,14 +185,14 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
         val now = LocalDateTime.now()
         val oneHourAgo = now.minusHours(24)
 
-        return db.from(PostEncryptedGroups)
+        return db.from(PostsEncryptedGroup)
                 .select()
-                .where { PostEncryptedGroups.createdAt greaterEq oneHourAgo }
-                .having { PostEncryptedGroups.createdAt lessEq now }
+                .where { PostsEncryptedGroup.createdAt greaterEq oneHourAgo }
+                .having { PostsEncryptedGroup.createdAt lessEq now }
                 .groupBy(
-                    PostEncryptedGroups.id,
-                    PostEncryptedGroups.txHash,
-                    PostEncryptedGroups.createdAt
+                    PostsEncryptedGroup.id,
+                    PostsEncryptedGroup.txHash,
+                    PostsEncryptedGroup.createdAt
                 )
                 .totalRecordsInAllPages
     }
@@ -203,14 +201,14 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
         val now = LocalDateTime.now()
         val oneHourAgo = now.minusHours(24 * 7)
 
-        return db.from(PostEncryptedGroups)
+        return db.from(PostsEncryptedGroup)
                 .select()
-                .where { PostEncryptedGroups.createdAt greaterEq oneHourAgo }
-                .having { PostEncryptedGroups.createdAt lessEq now }
+                .where { PostsEncryptedGroup.createdAt greaterEq oneHourAgo }
+                .having { PostsEncryptedGroup.createdAt lessEq now }
                 .groupBy(
-                    PostEncryptedGroups.id,
-                    PostEncryptedGroups.txHash,
-                    PostEncryptedGroups.createdAt
+                    PostsEncryptedGroup.id,
+                    PostsEncryptedGroup.txHash,
+                    PostsEncryptedGroup.createdAt
                 )
                 .totalRecordsInAllPages
     }
@@ -219,14 +217,14 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
         val now = LocalDateTime.now()
         val oneHourAgo = now.minusHours(24 * 7 * 4)
 
-        return db.from(PostEncryptedGroups)
+        return db.from(PostsEncryptedGroup)
                 .select()
-                .where { PostEncryptedGroups.createdAt greaterEq oneHourAgo }
-                .having { PostEncryptedGroups.createdAt lessEq now }
+                .where { PostsEncryptedGroup.createdAt greaterEq oneHourAgo }
+                .having { PostsEncryptedGroup.createdAt lessEq now }
                 .groupBy(
-                    PostEncryptedGroups.id,
-                    PostEncryptedGroups.txHash,
-                    PostEncryptedGroups.createdAt
+                    PostsEncryptedGroup.id,
+                    PostsEncryptedGroup.txHash,
+                    PostsEncryptedGroup.createdAt
                 )
                 .totalRecordsInAllPages
     }
@@ -235,14 +233,14 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
         val now = LocalDateTime.now()
         val oneHourAgo = now.minusHours(24 * 7 * 4 * 12)
 
-        return db.from(PostEncryptedGroups)
+        return db.from(PostsEncryptedGroup)
                 .select()
-                .where { PostEncryptedGroups.createdAt greaterEq oneHourAgo }
-                .having { PostEncryptedGroups.createdAt lessEq now }
+                .where { PostsEncryptedGroup.createdAt greaterEq oneHourAgo }
+                .having { PostsEncryptedGroup.createdAt lessEq now }
                 .groupBy(
-                    PostEncryptedGroups.id,
-                    PostEncryptedGroups.txHash,
-                    PostEncryptedGroups.createdAt
+                    PostsEncryptedGroup.id,
+                    PostsEncryptedGroup.txHash,
+                    PostsEncryptedGroup.createdAt
                 )
                 .totalRecordsInAllPages
     }

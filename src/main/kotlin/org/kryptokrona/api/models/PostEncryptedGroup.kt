@@ -49,7 +49,7 @@ interface PostEncryptedGroup : Entity<PostEncryptedGroup> {
     var createdAt: LocalDateTime
 }
 
-object PostEncryptedGroups : Table<PostEncryptedGroup>("postsencryptedgroup") {
+object PostsEncryptedGroup : Table<PostEncryptedGroup>("postsencryptedgroup") {
     val id = long("id").primaryKey().bindTo { it.id }
     val txHash = varchar("tx_hash").bindTo { it.txHash }
     val txSb = varchar("tx_sb").bindTo { it.txSb }
@@ -57,4 +57,4 @@ object PostEncryptedGroups : Table<PostEncryptedGroup>("postsencryptedgroup") {
     val createdAt = datetime("created_at").bindTo { it.createdAt }
 }
 
-val Database.postencryptedgroups get() = this.sequenceOf(PostEncryptedGroups)
+val Database.postsencryptedgroup get() = this.sequenceOf(PostsEncryptedGroup)

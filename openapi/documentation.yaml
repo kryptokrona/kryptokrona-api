@@ -15,5 +15,7 @@ servers:
   description: Kryptokrona API Main Server
 - url: https://test-api.mjovanc.com
   description: Kryptokrona API Staging Server
+- url: http://localhost:8080
+  description: Kryptokrona API Development Server
 paths:
   

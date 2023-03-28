@@ -55,7 +55,7 @@ tasks.withType<KotlinCompile>().all {
 }
 
 dependencies {
-    // kryptokrona sdk
+    // kryptokrona kotlin sdk
     implementation("org.kryptokrona.sdk:kryptokrona-core:0.1.1")
     implementation("org.kryptokrona.sdk:kryptokrona-http:0.1.1")
     implementation("org.kryptokrona.sdk:kryptokrona-util:0.1.1")
@@ -74,6 +74,7 @@ dependencies {
     implementation("io.ktor:ktor-serialization-jackson-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-swagger:$ktor_version")
+    implementation("io.ktor:ktor-server-cors:$ktor_version")
     implementation("org.ktorm:ktorm-core:$ktorm_version")
     implementation("io.ktor:ktor-server-config-yaml-jvm:2.2.3")
     implementation("ch.qos.logback:logback-classic:$logback_version")

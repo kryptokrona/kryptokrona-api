@@ -91,15 +91,6 @@ services:
     networks:
       - kryptokrona_api_net
 
-  slate:
-    build:
-      context: .
-      dockerfile: Dockerfile.slate
-    container_name: kryptokrona_api_slate
-    command: ["serve"]
-    ports:
-      - "4567:4567"
-
 volumes:
   db:
 

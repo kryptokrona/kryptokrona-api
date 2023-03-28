@@ -100,4 +100,3 @@ jobs:
       - name: Build Docker
         run: |
           docker build . --no-cache
-          docker build -f Dockerfile.slate . --no-cache

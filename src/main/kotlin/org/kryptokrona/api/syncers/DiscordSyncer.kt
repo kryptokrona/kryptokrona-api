@@ -52,7 +52,7 @@ class DiscordSyncer {
     suspend fun sync(): Unit = coroutineScope {
         launch {
             while(isActive) {
-                logger.info("Starting Discord syncer...")
+                logger.info("Running Discord syncer...")
                 delay(DELAY_MS)
             }
         }
@@ -73,7 +73,7 @@ class DiscordSyncer {
         bot(TOKEN) {
             classicCommands {
                 command("shutdown") { message ->
-                    message.reply("Stopping bot.")
+                    message.reply("Stopping Discord syncer.")
                     shutdown()
 
                     // stop the coroutine

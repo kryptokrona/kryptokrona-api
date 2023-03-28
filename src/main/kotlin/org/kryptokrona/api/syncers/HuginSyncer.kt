@@ -30,7 +30,6 @@
 
 package org.kryptokrona.api.syncers
 
-
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -52,7 +51,6 @@ import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
 import java.lang.System.getenv
 import java.time.LocalDateTime.now
-
 
 class HuginSyncer {
 
@@ -76,17 +74,14 @@ class HuginSyncer {
         launch {
             while(isActive) {
                 logger.debug("Syncing Hugin...")
-                // get the data from the pool
                 val retrievedData = poolChangesClient.getPoolChangesLite()
                 val transactions = retrievedData?.addedTxs
 
-                // if transactions is not null
                 transactions?.let {
                     for (tx in it) {
                         val extra = tx.transactionPrefix.extra
                         val transactionHash = tx.transactionHash
 
-                        // validate that the extra data is longer than 200 characters and that the transaction is not in the known pool txs list
                         if (extra.length > 200 && transactionHash !in knownPoolTxsList) {
                             logger.debug("Incoming transaction $transactionHash")
                             knownPoolTxsList += transactionHash

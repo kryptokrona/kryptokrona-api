@@ -39,17 +39,15 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import org.kryptokrona.api.config.DiscordConfig.CHANNEL_ID
+import org.kryptokrona.api.config.DiscordConfig.DELAY_MS
+import org.kryptokrona.api.config.DiscordConfig.MESSAGE_COUNT
+import org.kryptokrona.api.config.DiscordConfig.TOKEN
 import org.slf4j.LoggerFactory
 
 class DiscordSyncer {
 
     private val logger = LoggerFactory.getLogger("DiscordSyncer")
-
-    private val TOKEN: String = System.getenv("XKR_DISCORD_TOKEN") ?: "some-token"
-    private val CHANNEL_ID = System.getenv("XKR_DISCORD_CHANNEL_ID") ?: "some-token"
-
-    private val MESSAGE_COUNT = 3
-    private val DELAY_MS = 60_000L
 
     suspend fun sync(): Unit = coroutineScope {
         launch {

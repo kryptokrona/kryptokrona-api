@@ -56,7 +56,6 @@ fun Route.blocksRoute() {
                 val totalCount = service.getTotalCount()
 
                 val result = ResultResponse(items, page, size, totalCount)
-
                 val json = jsonObjectMapper().writeValueAsString(result)
 
                 call.respond(HttpStatusCode.OK, json)

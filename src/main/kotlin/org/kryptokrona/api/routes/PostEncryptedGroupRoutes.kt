@@ -30,10 +30,16 @@
 
 package org.kryptokrona.api.routes
 
+import io.bkbn.kompendium.core.metadata.GetInfo
+import io.bkbn.kompendium.core.plugin.NotarizedRoute
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.kryptokrona.api.models.Block
+import org.kryptokrona.api.models.PostEncryptedGroup
+import org.kryptokrona.api.models.response.ExceptionResponse
+import org.kryptokrona.api.models.response.ResultResponse
 import org.kryptokrona.api.services.postencryptedgroup.PostEncryptedGroupServiceImpl
 import org.kryptokrona.api.utils.jsonObjectMapper
 
@@ -41,37 +47,87 @@ private val service = PostEncryptedGroupServiceImpl()
 
 fun Route.postsEncryptedGroupRoute() {
     route("/v1/posts-encrypted-group") {
-        get("") {
-            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
-            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+        route("") {
+            allPostEncryptedGroupDocumentation()
 
-            val items = service.getAll(size, page)
-            val totalCount = service.getTotalCount()
+            get {
+                val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+                val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
 
-            val result = mapOf(
-                "items" to items,
-                "page" to page,
-                "size" to size,
-                "total" to totalCount
-            )
-            val json = jsonObjectMapper().writeValueAsString(result)
+                val items = service.getAll(size, page)
+                val totalCount = service.getTotalCount()
 
-            call.respond(HttpStatusCode.OK, json)
+                val result = ResultResponse(items, page, size, totalCount)
+                val json = jsonObjectMapper().writeValueAsString(result)
+
+                call.respond(HttpStatusCode.OK, json)
+            }
         }
 
-        get("/{id}") {
-            val id = call.parameters["id"]?.toLongOrNull()
+        route("/{id}") {
+            getPostEncryptedGroupByIdDocumentation()
 
-            id?.let {
-                val item = service.getById(id)
+            get("/{id}") {
+                val id = call.parameters["id"]?.toLongOrNull()
 
-                item?.let {
-                    val json = jsonObjectMapper().writeValueAsString(item)
+                id?.let {
+                    val item = service.getById(id)
 
-                    call.respond(HttpStatusCode.Found, json)
-                } ?: call.respond(HttpStatusCode.NotFound, "No block found with id $id")
-            } ?: call.respond(HttpStatusCode.BadRequest)
+                    item?.let {
+                        val json = jsonObjectMapper().writeValueAsString(item)
+
+                        call.respond(HttpStatusCode.Found, json)
+                    } ?: call.respond(HttpStatusCode.NotFound, "No encrypted group post found with id $id")
+                } ?: call.respond(HttpStatusCode.BadRequest)
+            }
         }
-
     }
+}
+
+private fun Route.allPostEncryptedGroupDocumentation() {
+  install(NotarizedRoute()) {
+    get = GetInfo.builder {
+      summary("Get all encrypted group posts")
+      description("Gets all encrypted group posts stored in the database.")
+      response {
+        responseCode(HttpStatusCode.OK)
+        responseType<ResultResponse>()
+        description("Will return all encrypted group posts.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.BadRequest)
+        description("Could not handle the request.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.InternalServerError)
+        description("Some serious trouble is going on.")
+      }
+    }
+  }
+}
+
+private fun Route.getPostEncryptedGroupByIdDocumentation() {
+  install(NotarizedRoute()) {
+    get = GetInfo.builder {
+      summary("Get a specific encrypted group post by ID")
+      description("Get a specific encrypted group post by ID stored in the database.")
+      response {
+        responseCode(HttpStatusCode.OK)
+        responseType<PostEncryptedGroup>()
+        description("Will return an encrypted group post.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.BadRequest)
+        description("Could not handle the request.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.InternalServerError)
+        description("Some serious trouble is going on.")
+      }
+    }
+  }
 }

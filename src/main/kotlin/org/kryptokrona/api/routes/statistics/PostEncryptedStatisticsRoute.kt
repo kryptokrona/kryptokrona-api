@@ -30,10 +30,13 @@
 
 package org.kryptokrona.api.routes.statistics
 
+import io.bkbn.kompendium.core.metadata.GetInfo
+import io.bkbn.kompendium.core.plugin.NotarizedRoute
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.kryptokrona.api.models.response.ExceptionResponse
 import org.kryptokrona.api.models.response.ResultResponse
 import org.kryptokrona.api.services.postencrypted.PostEncryptedStatisticsServiceImpl
 import org.kryptokrona.api.utils.jsonObjectMapper
@@ -102,4 +105,124 @@ fun Route.postsEncryptedStatisticsRoute() {
             call.respond(HttpStatusCode.OK, json)
         }
     }
+}
+
+private fun Route.allPostEncryptedStatistic1hDocumentation() {
+  install(NotarizedRoute()) {
+    get = GetInfo.builder {
+      summary("Get all encrypted posts for the last hour")
+      description("Gets all encrypted posts stored in the database for the last hour.")
+      response {
+        responseCode(HttpStatusCode.OK)
+        responseType<ResultResponse>()
+        description("Will return all encrypted posts for the last hour.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.BadRequest)
+        description("Could not handle the request.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.InternalServerError)
+        description("Some serious trouble is going on.")
+      }
+    }
+  }
+}
+
+private fun Route.allPostEncryptedStatistic24hDocumentation() {
+  install(NotarizedRoute()) {
+    get = GetInfo.builder {
+      summary("Get all encrypted posts for the last 24 hours")
+      description("Gets all encrypted posts stored in the database for the last 24 hours.")
+      response {
+        responseCode(HttpStatusCode.OK)
+        responseType<ResultResponse>()
+        description("Will return all encrypted posts for the last 24 hours.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.BadRequest)
+        description("Could not handle the request.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.InternalServerError)
+        description("Some serious trouble is going on.")
+      }
+    }
+  }
+}
+
+private fun Route.allPostEncryptedStatistic1wDocumentation() {
+  install(NotarizedRoute()) {
+    get = GetInfo.builder {
+      summary("Get all encrypted posts for the last week")
+      description("Gets all encrypted posts stored in the database for the last week.")
+      response {
+        responseCode(HttpStatusCode.OK)
+        responseType<ResultResponse>()
+        description("Will return all encrypted posts for the last week.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.BadRequest)
+        description("Could not handle the request.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.InternalServerError)
+        description("Some serious trouble is going on.")
+      }
+    }
+  }
+}
+
+private fun Route.allPostEncryptedStatistic1mDocumentation() {
+  install(NotarizedRoute()) {
+    get = GetInfo.builder {
+      summary("Get all encrypted posts for the last month")
+      description("Gets all encrypted posts stored in the database for the last month.")
+      response {
+        responseCode(HttpStatusCode.OK)
+        responseType<ResultResponse>()
+        description("Will return all encrypted posts for the last month.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.BadRequest)
+        description("Could not handle the request.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.InternalServerError)
+        description("Some serious trouble is going on.")
+      }
+    }
+  }
+}
+
+private fun Route.allPostEncryptedStatistic1yDocumentation() {
+  install(NotarizedRoute()) {
+    get = GetInfo.builder {
+      summary("Get all encrypted posts for the last year")
+      description("Gets all encrypted posts stored in the database for the last year.")
+      response {
+        responseCode(HttpStatusCode.OK)
+        responseType<ResultResponse>()
+        description("Will return all encrypted posts for the last year.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.BadRequest)
+        description("Could not handle the request.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.InternalServerError)
+        description("Some serious trouble is going on.")
+      }
+    }
+  }
 }

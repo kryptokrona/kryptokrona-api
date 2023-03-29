@@ -48,64 +48,84 @@ private val service = PostEncryptedGroupStatisticsServiceImpl()
 
 fun Route.postsEncryptedGroupStatisticsRoute() {
     route("/v1/statistics/post-encrypted-group") {
-        get("/1h") {
-            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
-            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
-            val items = service.get1h(size, page)
-            val totalCount = service.getTotal1h()
+        route("/1h") {
+            allPostEncryptedGroupStatistic1hDocumentation()
 
-            val result = ResultResponse(items, page, size, totalCount)
-            val json = jsonObjectMapper().writeValueAsString(result)
+            get {
+                val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+                val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+                val items = service.get1h(size, page)
+                val totalCount = service.getTotal1h()
 
-            call.respond(HttpStatusCode.OK, json)
+                val result = ResultResponse(items, page, size, totalCount)
+                val json = jsonObjectMapper().writeValueAsString(result)
+
+                call.respond(HttpStatusCode.OK, json)
+            }
         }
 
-        get("/24h") {
-            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
-            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
-            val items = service.get24h(size, page)
-            val totalCount = service.getTotal24h()
+        route("/24h") {
+            allPostEncryptedGroupStatistic24hDocumentation()
 
-            val result = ResultResponse(items, page, size, totalCount)
-            val json = jsonObjectMapper().writeValueAsString(result)
+            get {
+                val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+                val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+                val items = service.get24h(size, page)
+                val totalCount = service.getTotal24h()
 
-            call.respond(HttpStatusCode.OK, json)
+                val result = ResultResponse(items, page, size, totalCount)
+                val json = jsonObjectMapper().writeValueAsString(result)
+
+                call.respond(HttpStatusCode.OK, json)
+            }
         }
 
-        get("/1w") {
-            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
-            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
-            val items = service.get1w(size, page)
-            val totalCount = service.getTotal1w()
+        route("/1w") {
+            allPostEncryptedGroupStatistic1wDocumentation()
 
-            val result = ResultResponse(items, page, size, totalCount)
-            val json = jsonObjectMapper().writeValueAsString(result)
+            get {
+                val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+                val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+                val items = service.get1w(size, page)
+                val totalCount = service.getTotal1w()
 
-            call.respond(HttpStatusCode.OK, json)
+                val result = ResultResponse(items, page, size, totalCount)
+                val json = jsonObjectMapper().writeValueAsString(result)
+
+                call.respond(HttpStatusCode.OK, json)
+            }
         }
 
-        get("/1m") {
-            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
-            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
-            val items = service.get1m(size, page)
-            val totalCount = service.getTotal1m()
+        route("/1m") {
+            allPostEncryptedGroupStatistic1mDocumentation()
 
-            val result = ResultResponse(items, page, size, totalCount)
-            val json = jsonObjectMapper().writeValueAsString(result)
+            get {
+                val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+                val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+                val items = service.get1m(size, page)
+                val totalCount = service.getTotal1m()
 
-            call.respond(HttpStatusCode.OK, json)
+                val result = ResultResponse(items, page, size, totalCount)
+                val json = jsonObjectMapper().writeValueAsString(result)
+
+                call.respond(HttpStatusCode.OK, json)
+            }
         }
 
-        get("/1y") {
-            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
-            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
-            val items = service.get1y(size, page)
-            val totalCount = service.getTotal1y()
+        route("/1y") {
+            allPostEncryptedGroupStatistic1yDocumentation()
 
-            val result = ResultResponse(items, page, size, totalCount)
-            val json = jsonObjectMapper().writeValueAsString(result)
+            get {
+                val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+                val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+                val items = service.get1y(size, page)
+                val totalCount = service.getTotal1y()
 
-            call.respond(HttpStatusCode.OK, json)
+                val result = ResultResponse(items, page, size, totalCount)
+                val json = jsonObjectMapper().writeValueAsString(result)
+
+                call.respond(HttpStatusCode.OK, json)
+            }
         }
     }
 }

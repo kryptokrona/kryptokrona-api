@@ -30,10 +30,16 @@
 
 package org.kryptokrona.api.routes
 
+import io.bkbn.kompendium.core.metadata.GetInfo
+import io.bkbn.kompendium.core.plugin.NotarizedRoute
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.kryptokrona.api.models.Hashrate
+import org.kryptokrona.api.models.PostEncryptedGroup
+import org.kryptokrona.api.models.response.ExceptionResponse
+import org.kryptokrona.api.models.response.ResultResponse
 import org.kryptokrona.api.services.hashrate.HashrateServiceImpl
 import org.kryptokrona.api.utils.jsonObjectMapper
 
@@ -41,36 +47,87 @@ private val service = HashrateServiceImpl()
 
 fun Route.hashratesRoute() {
     route("/v1/hashrates") {
-        get("") {
-            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
-            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+        route("") {
+            allHashrateDocumentation()
 
-            val items = service.getAll(size, page)
-            val totalCount = service.getTotalCount()
+            get {
+                val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+                val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
 
-            val result = mapOf(
-                "items" to items,
-                "page" to page,
-                "size" to size,
-                "total" to totalCount
-            )
-            val json = jsonObjectMapper().writeValueAsString(result)
+                val items = service.getAll(size, page)
+                val totalCount = service.getTotalCount()
 
-            call.respond(HttpStatusCode.OK, json)
+                val result = ResultResponse(items, page, size, totalCount)
+                val json = jsonObjectMapper().writeValueAsString(result)
+
+                call.respond(HttpStatusCode.OK, json)
+            }
         }
 
-        get("/{id}") {
-            val id = call.parameters["id"]?.toLongOrNull()
+        route("/{id}") {
+            getHashrateByIdDocumentation()
 
-            id?.let {
-                val item = service.getById(id)
+            get {
+                val id = call.parameters["id"]?.toLongOrNull()
 
-                item?.let {
-                    val json = jsonObjectMapper().writeValueAsString(item)
+                id?.let {
+                    val item = service.getById(id)
 
-                    call.respond(HttpStatusCode.Found, json)
-                } ?: call.respond(HttpStatusCode.NotFound, "No node found with id $id")
-            } ?: call.respond(HttpStatusCode.BadRequest)
+                    item?.let {
+                        val json = jsonObjectMapper().writeValueAsString(item)
+
+                        call.respond(HttpStatusCode.Found, json)
+                    } ?: call.respond(HttpStatusCode.NotFound, "No node found with id $id")
+                } ?: call.respond(HttpStatusCode.BadRequest)
+            }
         }
     }
+}
+
+private fun Route.allHashrateDocumentation() {
+  install(NotarizedRoute()) {
+    get = GetInfo.builder {
+      summary("Get all hashrates")
+      description("Gets all hashrates stored in the database.")
+      response {
+        responseCode(HttpStatusCode.OK)
+        responseType<ResultResponse>()
+        description("Will return all hashrates.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.BadRequest)
+        description("Could not handle the request.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.InternalServerError)
+        description("Some serious trouble is going on.")
+      }
+    }
+  }
+}
+
+private fun Route.getHashrateByIdDocumentation() {
+  install(NotarizedRoute()) {
+    get = GetInfo.builder {
+      summary("Get a specific hashrate by ID")
+      description("Get a specific hashrate by ID stored in the database.")
+      response {
+        responseCode(HttpStatusCode.OK)
+        responseType<Hashrate>()
+        description("Will return a hashrate.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.BadRequest)
+        description("Could not handle the request.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.InternalServerError)
+        description("Some serious trouble is going on.")
+      }
+    }
+  }
 }

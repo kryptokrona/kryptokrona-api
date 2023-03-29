@@ -39,5 +39,5 @@ fun Application.configureSyncers() {
 
     //TODO: we should start this sync process ONCE the IntialSyncer has finished
     launch { HuginSyncer().sync() }
-    launch { DiscordSyncer().sync() }
+    launch { DiscordSyncer().sync() } //TODO: should only be launched when on PROD
 }

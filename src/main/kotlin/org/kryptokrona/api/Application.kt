@@ -81,6 +81,7 @@ fun Application.module() {
     }
     install(NotarizedApplication()) {
         spec = OpenApiSpec(
+            openapi = "3.0.0",
             info = Info(
                 "Kryptokrona API",
                 "0.1.0",

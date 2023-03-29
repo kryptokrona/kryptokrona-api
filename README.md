@@ -34,6 +34,7 @@ Kryptokrona API in Kotlin, Ktor and Kryptokrona SDK for caching and processing d
 - Slack: https://join.slack.com/t/kryptokrona/shared_invite/zt-1qmt8cz9j-s~2RKYtFfshqeLC1dhU5aA
 - Discord: https://discord.gg/VTgsTGS9b7
 - Twitter: https://twitter.com/mjovanc
+- OpenAPI Specification (Dev): https://petstore.swagger.io/?url=http://localhost:8080/openapi.json#/
 
 ## Getting Help
 

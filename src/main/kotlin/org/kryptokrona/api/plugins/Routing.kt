@@ -39,7 +39,6 @@ import org.kryptokrona.api.routes.statistics.postsEncryptedStatisticsRoute
 
 fun Application.configureRouting() {
     routing {
-        // swaggerUI(path = "docs", )
         get("/v1/test") {
             call.respondText("Hello World!")
         }

@@ -58,7 +58,6 @@ import org.kryptokrona.api.plugins.DatabaseFactory
 import org.kryptokrona.api.plugins.configureRouting
 import org.kryptokrona.api.plugins.configureSyncers
 import java.net.URI
-import kotlin.text.get
 
 fun main() {
     embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)

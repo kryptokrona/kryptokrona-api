@@ -6,6 +6,5 @@ RUN gradle shadowJar --no-daemon
 FROM openjdk:17
 EXPOSE 8080:8080
 RUN mkdir /app
-COPY openapi/documentation.yaml /openapi/documentation.yaml
 COPY --from=build /home/gradle/src/build/libs/kryptokrona-api-shadow.jar /app/ktor.jar
 ENTRYPOINT ["sh", "-c", "sleep 15 && java -jar /app/ktor.jar"]

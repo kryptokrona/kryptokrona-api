@@ -47,31 +47,39 @@ private val service = TransactionServiceImpl()
 
 fun Route.transactionsRoute() {
     route("/v1/transactions") {
-        get("") {
-            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
-            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+        allTransactionDocumentation()
 
-            val items = service.getAll(size, page)
-            val totalCount = service.getTotalCount()
+        route("") {
+            get {
+                val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+                val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
 
-            val result = ResultResponse(items, page, size, totalCount)
-            val json = jsonObjectMapper().writeValueAsString(result)
+                val items = service.getAll(size, page)
+                val totalCount = service.getTotalCount()
 
-            call.respond(HttpStatusCode.OK, json)
+                val result = ResultResponse(items, page, size, totalCount)
+                val json = jsonObjectMapper().writeValueAsString(result)
+
+                call.respond(HttpStatusCode.OK, json)
+            }
         }
 
-        get("/{id}") {
-            val id = call.parameters["id"]?.toLongOrNull()
+        route("/{id}") {
+            getTransactionByIdDocumentation()
 
-            id?.let {
-                val item = service.getById(id)
+            get {
+                val id = call.parameters["id"]?.toLongOrNull()
 
-                item?.let {
-                    val json = jsonObjectMapper().writeValueAsString(item)
+                id?.let {
+                    val item = service.getById(id)
 
-                    call.respond(HttpStatusCode.Found, json)
-                } ?: call.respond(HttpStatusCode.NotFound, "No block found with id $id")
-            } ?: call.respond(HttpStatusCode.BadRequest)
+                    item?.let {
+                        val json = jsonObjectMapper().writeValueAsString(item)
+
+                        call.respond(HttpStatusCode.Found, json)
+                    } ?: call.respond(HttpStatusCode.NotFound, "No block found with id $id")
+                } ?: call.respond(HttpStatusCode.BadRequest)
+            }
         }
     }
 }

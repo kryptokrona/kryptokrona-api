@@ -46,31 +46,39 @@ private val service = NodeServiceImpl()
 
 fun Route.nodesRoute() {
     route("/v1/nodes") {
-        get("") {
-            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
-            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+        route("") {
+            allNodeDocumentation()
 
-            val items = service.getAll(size, page)
-            val totalCount = service.getTotalCount()
+            get {
+                val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+                val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
 
-            val result = ResultResponse(items, page, size, totalCount)
-            val json = jsonObjectMapper().writeValueAsString(result)
+                val items = service.getAll(size, page)
+                val totalCount = service.getTotalCount()
 
-            call.respond(HttpStatusCode.OK, json)
+                val result = ResultResponse(items, page, size, totalCount)
+                val json = jsonObjectMapper().writeValueAsString(result)
+
+                call.respond(HttpStatusCode.OK, json)
+            }
         }
 
-        get("/{id}") {
-            val id = call.parameters["id"]?.toLongOrNull()
+        route("/{id}") {
+            getNodeByIdDocumentation()
 
-            id?.let {
-                val item = service.getById(id)
+            get {
+                val id = call.parameters["id"]?.toLongOrNull()
 
-                item?.let {
-                    val json = jsonObjectMapper().writeValueAsString(item)
+                id?.let {
+                    val item = service.getById(id)
 
-                    call.respond(HttpStatusCode.Found, json)
-                } ?: call.respond(HttpStatusCode.NotFound, "No node found with id $id")
-            } ?: call.respond(HttpStatusCode.BadRequest)
+                    item?.let {
+                        val json = jsonObjectMapper().writeValueAsString(item)
+
+                        call.respond(HttpStatusCode.Found, json)
+                    } ?: call.respond(HttpStatusCode.NotFound, "No node found with id $id")
+                } ?: call.respond(HttpStatusCode.BadRequest)
+            }
         }
     }
 }

@@ -47,44 +47,52 @@ private val service = SupplyServiceImpl()
 
 fun Route.suppliesRoute() {
     route("/v1/supplies") {
-        get("") {
-            val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
-            val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
+        route("") {
+            allSupplyDocumentation()
 
-            val items = service.getAll(size, page)
-            val totalCount = service.getTotalCount()
+            get {
+                val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
+                val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
 
-            val result = ResultResponse(items, page, size, totalCount)
-            val json = jsonObjectMapper().writeValueAsString(result)
+                val items = service.getAll(size, page)
+                val totalCount = service.getTotalCount()
 
-            call.respond(HttpStatusCode.OK, json)
+                val result = ResultResponse(items, page, size, totalCount)
+                val json = jsonObjectMapper().writeValueAsString(result)
+
+                call.respond(HttpStatusCode.OK, json)
+            }
         }
 
-        get("/{id}") {
-            val id = call.parameters["id"]?.toLongOrNull()
+        route("/{id}") {
+            getSupplyByIdDocumentation()
 
-            id?.let {
-                val item = service.getById(id)
+            get {
+                val id = call.parameters["id"]?.toLongOrNull()
 
-                item?.let {
-                    val json = jsonObjectMapper().writeValueAsString(item)
+                id?.let {
+                    val item = service.getById(id)
 
-                    call.respond(HttpStatusCode.Found, json)
-                } ?: call.respond(HttpStatusCode.NotFound, "No supply found with id $id")
-            } ?: call.respond(HttpStatusCode.BadRequest)
+                    item?.let {
+                        val json = jsonObjectMapper().writeValueAsString(item)
+
+                        call.respond(HttpStatusCode.Found, json)
+                    } ?: call.respond(HttpStatusCode.NotFound, "No supply found with id $id")
+                } ?: call.respond(HttpStatusCode.BadRequest)
+            }
         }
     }
 }
 
-private fun Route.allHashrateDocumentation() {
+private fun Route.allSupplyDocumentation() {
   install(NotarizedRoute()) {
     get = GetInfo.builder {
-      summary("Get all hashrates")
-      description("Gets all hashrates stored in the database.")
+      summary("Get all supplies")
+      description("Gets all supplies stored in the database.")
       response {
         responseCode(HttpStatusCode.OK)
         responseType<ResultResponse>()
-        description("Will return all hashrates.")
+        description("Will return all supplies.")
       }
       canRespond {
         responseType<ExceptionResponse>()

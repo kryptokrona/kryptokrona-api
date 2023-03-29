@@ -67,7 +67,7 @@ fun Route.postsEncryptedGroupRoute() {
         route("/{id}") {
             getPostEncryptedGroupByIdDocumentation()
 
-            get("/{id}") {
+            get {
                 val id = call.parameters["id"]?.toLongOrNull()
 
                 id?.let {

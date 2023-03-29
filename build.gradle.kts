@@ -11,6 +11,7 @@ val ktorm_version: String by project
 val liquibase_core: String by project
 val ktorm_jackson_version: String by project
 val slf4j_version: String by project
+val kryptokrona_version: String by project
 
 plugins {
     application
@@ -56,9 +57,9 @@ tasks.withType<KotlinCompile>().all {
 
 dependencies {
     // kryptokrona kotlin sdk
-    implementation("org.kryptokrona.sdk:kryptokrona-core:0.1.1")
-    implementation("org.kryptokrona.sdk:kryptokrona-http:0.1.1")
-    implementation("org.kryptokrona.sdk:kryptokrona-util:0.1.1")
+    implementation("org.kryptokrona.sdk:kryptokrona-core:$kryptokrona_version")
+    implementation("org.kryptokrona.sdk:kryptokrona-http:$kryptokrona_version")
+    implementation("org.kryptokrona.sdk:kryptokrona-util:$kryptokrona_version")
 
     // various
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
@@ -83,6 +84,7 @@ dependencies {
     implementation("org.slf4j:slf4j-simple:$slf4j_version")
     implementation("javax.xml.bind:jaxb-api:2.3.1")
     implementation("com.jessecorbett:diskord-bot:3.0.0")
+    implementation("io.bkbn:kompendium-core:3.13.0")
 
     // database
     implementation("org.apache.commons:commons-dbcp2:2.9.0")

@@ -131,121 +131,121 @@ fun Route.postsEncryptedGroupStatisticsRoute() {
 }
 
 private fun Route.allPostEncryptedGroupStatistic1hDocumentation() {
-  install(NotarizedRoute()) {
-    get = GetInfo.builder {
-      summary("Get all encrypted group posts for the last hour")
-      description("Gets all encrypted group posts stored in the database for the last hour.")
-      response {
-        responseCode(HttpStatusCode.OK)
-        responseType<ResultResponse>()
-        description("Will return all encrypted group posts for the last hour.")
-      }
-      canRespond {
-        responseType<ExceptionResponse>()
-        responseCode(HttpStatusCode.BadRequest)
-        description("Could not handle the request.")
-      }
-      canRespond {
-        responseType<ExceptionResponse>()
-        responseCode(HttpStatusCode.InternalServerError)
-        description("Some serious trouble is going on.")
-      }
+    install(NotarizedRoute()) {
+        get = GetInfo.builder {
+            summary("Get all encrypted group posts for the last hour")
+            description("Gets all encrypted group posts stored in the database for the last hour.")
+            response {
+                responseCode(HttpStatusCode.OK)
+                responseType<ResultResponse>()
+                description("Will return all encrypted group posts for the last hour.")
+            }
+            canRespond {
+                responseType<ExceptionResponse>()
+                responseCode(HttpStatusCode.BadRequest)
+                description("Could not handle the request.")
+            }
+            canRespond {
+                responseType<ExceptionResponse>()
+                responseCode(HttpStatusCode.InternalServerError)
+                description("Some serious trouble is going on.")
+            }
+        }
     }
-  }
 }
 
 private fun Route.allPostEncryptedGroupStatistic24hDocumentation() {
-  install(NotarizedRoute()) {
-    get = GetInfo.builder {
-      summary("Get all encrypted group posts for the last 24 hours")
-      description("Gets all encrypted group posts stored in the database for the last 24 hours.")
-      response {
-        responseCode(HttpStatusCode.OK)
-        responseType<ResultResponse>()
-        description("Will return all encrypted group posts for the last 24 hours.")
-      }
-      canRespond {
-        responseType<ExceptionResponse>()
-        responseCode(HttpStatusCode.BadRequest)
-        description("Could not handle the request.")
-      }
-      canRespond {
-        responseType<ExceptionResponse>()
-        responseCode(HttpStatusCode.InternalServerError)
-        description("Some serious trouble is going on.")
-      }
+    install(NotarizedRoute()) {
+        get = GetInfo.builder {
+            summary("Get all encrypted group posts for the last 24 hours")
+            description("Gets all encrypted group posts stored in the database for the last 24 hours.")
+            response {
+                responseCode(HttpStatusCode.OK)
+                responseType<ResultResponse>()
+                description("Will return all encrypted group posts for the last 24 hours.")
+            }
+            canRespond {
+                responseType<ExceptionResponse>()
+                responseCode(HttpStatusCode.BadRequest)
+                description("Could not handle the request.")
+            }
+            canRespond {
+                responseType<ExceptionResponse>()
+                responseCode(HttpStatusCode.InternalServerError)
+                description("Some serious trouble is going on.")
+            }
+        }
     }
-  }
 }
 
 private fun Route.allPostEncryptedGroupStatistic1wDocumentation() {
-  install(NotarizedRoute()) {
-    get = GetInfo.builder {
-      summary("Get all encrypted group posts for the last week")
-      description("Gets all encrypted group posts stored in the database for the last week.")
-      response {
-        responseCode(HttpStatusCode.OK)
-        responseType<ResultResponse>()
-        description("Will return all encrypted group posts for the last week.")
-      }
-      canRespond {
-        responseType<ExceptionResponse>()
-        responseCode(HttpStatusCode.BadRequest)
-        description("Could not handle the request.")
-      }
-      canRespond {
-        responseType<ExceptionResponse>()
-        responseCode(HttpStatusCode.InternalServerError)
-        description("Some serious trouble is going on.")
-      }
+    install(NotarizedRoute()) {
+        get = GetInfo.builder {
+            summary("Get all encrypted group posts for the last week")
+            description("Gets all encrypted group posts stored in the database for the last week.")
+            response {
+                responseCode(HttpStatusCode.OK)
+                responseType<ResultResponse>()
+                description("Will return all encrypted group posts for the last week.")
+            }
+            canRespond {
+                responseType<ExceptionResponse>()
+                responseCode(HttpStatusCode.BadRequest)
+                description("Could not handle the request.")
+            }
+            canRespond {
+                responseType<ExceptionResponse>()
+                responseCode(HttpStatusCode.InternalServerError)
+                description("Some serious trouble is going on.")
+            }
+        }
     }
-  }
 }
 
 private fun Route.allPostEncryptedGroupStatistic1mDocumentation() {
-  install(NotarizedRoute()) {
-    get = GetInfo.builder {
-      summary("Get all encrypted group posts for the last month")
-      description("Gets all encrypted group posts stored in the database for the last month.")
-      response {
-        responseCode(HttpStatusCode.OK)
-        responseType<ResultResponse>()
-        description("Will return all encrypted group posts for the last month.")
-      }
-      canRespond {
-        responseType<ExceptionResponse>()
-        responseCode(HttpStatusCode.BadRequest)
-        description("Could not handle the request.")
-      }
-      canRespond {
-        responseType<ExceptionResponse>()
-        responseCode(HttpStatusCode.InternalServerError)
-        description("Some serious trouble is going on.")
-      }
+    install(NotarizedRoute()) {
+        get = GetInfo.builder {
+            summary("Get all encrypted group posts for the last month")
+            description("Gets all encrypted group posts stored in the database for the last month.")
+            response {
+                responseCode(HttpStatusCode.OK)
+                responseType<ResultResponse>()
+                description("Will return all encrypted group posts for the last month.")
+            }
+            canRespond {
+                responseType<ExceptionResponse>()
+                responseCode(HttpStatusCode.BadRequest)
+                description("Could not handle the request.")
+            }
+            canRespond {
+                responseType<ExceptionResponse>()
+                responseCode(HttpStatusCode.InternalServerError)
+                description("Some serious trouble is going on.")
+            }
+        }
     }
-  }
 }
 
 private fun Route.allPostEncryptedGroupStatistic1yDocumentation() {
-  install(NotarizedRoute()) {
-    get = GetInfo.builder {
-      summary("Get all encrypted group posts for the last year")
-      description("Gets all encrypted group posts stored in the database for the last year.")
-      response {
-        responseCode(HttpStatusCode.OK)
-        responseType<ResultResponse>()
-        description("Will return all encrypted group posts for the last year.")
-      }
-      canRespond {
-        responseType<ExceptionResponse>()
-        responseCode(HttpStatusCode.BadRequest)
-        description("Could not handle the request.")
-      }
-      canRespond {
-        responseType<ExceptionResponse>()
-        responseCode(HttpStatusCode.InternalServerError)
-        description("Some serious trouble is going on.")
-      }
+    install(NotarizedRoute()) {
+        get = GetInfo.builder {
+            summary("Get all encrypted group posts for the last year")
+            description("Gets all encrypted group posts stored in the database for the last year.")
+            response {
+                responseCode(HttpStatusCode.OK)
+                responseType<ResultResponse>()
+                description("Will return all encrypted group posts for the last year.")
+            }
+            canRespond {
+                responseType<ExceptionResponse>()
+                responseCode(HttpStatusCode.BadRequest)
+                description("Could not handle the request.")
+            }
+            canRespond {
+                responseType<ExceptionResponse>()
+                responseCode(HttpStatusCode.InternalServerError)
+                description("Some serious trouble is going on.")
+            }
+        }
     }
-  }
 }

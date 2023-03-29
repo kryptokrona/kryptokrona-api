@@ -32,6 +32,8 @@ package org.kryptokrona.api.routes
 
 import io.bkbn.kompendium.core.metadata.GetInfo
 import io.bkbn.kompendium.core.plugin.NotarizedRoute
+import io.bkbn.kompendium.json.schema.definition.TypeDefinition
+import io.bkbn.kompendium.oas.payload.Parameter
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
@@ -85,49 +87,56 @@ fun Route.suppliesRoute() {
 }
 
 private fun Route.allSupplyDocumentation() {
-  install(NotarizedRoute()) {
-    get = GetInfo.builder {
-      summary("Get all supplies")
-      description("Gets all supplies stored in the database.")
-      response {
-        responseCode(HttpStatusCode.OK)
-        responseType<ResultResponse>()
-        description("Will return all supplies.")
-      }
-      canRespond {
-        responseType<ExceptionResponse>()
-        responseCode(HttpStatusCode.BadRequest)
-        description("Could not handle the request.")
-      }
-      canRespond {
-        responseType<ExceptionResponse>()
-        responseCode(HttpStatusCode.InternalServerError)
-        description("Some serious trouble is going on.")
-      }
+    install(NotarizedRoute()) {
+        get = GetInfo.builder {
+            summary("Get all supplies")
+            description("Gets all supplies stored in the database.")
+            response {
+                responseCode(HttpStatusCode.OK)
+                responseType<ResultResponse>()
+                description("Will return all supplies.")
+            }
+            canRespond {
+                responseType<ExceptionResponse>()
+                responseCode(HttpStatusCode.BadRequest)
+                description("Could not handle the request.")
+            }
+            canRespond {
+                responseType<ExceptionResponse>()
+                responseCode(HttpStatusCode.InternalServerError)
+                description("Some serious trouble is going on.")
+            }
+        }
     }
-  }
 }
 
 private fun Route.getSupplyByIdDocumentation() {
-  install(NotarizedRoute()) {
-    get = GetInfo.builder {
-      summary("Get a specific supply by ID")
-      description("Get a specific supply by ID stored in the database.")
-      response {
-        responseCode(HttpStatusCode.OK)
-        responseType<Supply>()
-        description("Will return a supply.")
-      }
-      canRespond {
-        responseType<ExceptionResponse>()
-        responseCode(HttpStatusCode.BadRequest)
-        description("Could not handle the request.")
-      }
-      canRespond {
-        responseType<ExceptionResponse>()
-        responseCode(HttpStatusCode.InternalServerError)
-        description("Some serious trouble is going on.")
-      }
+    install(NotarizedRoute()) {
+        parameters = listOf(
+            Parameter(
+                name = "id",
+                `in` = Parameter.Location.path,
+                schema = TypeDefinition.STRING
+            )
+        )
+        get = GetInfo.builder {
+            summary("Get a specific supply by ID")
+            description("Get a specific supply by ID stored in the database.")
+            response {
+                responseCode(HttpStatusCode.OK)
+                responseType<Supply>()
+                description("Will return a supply.")
+            }
+            canRespond {
+                responseType<ExceptionResponse>()
+                responseCode(HttpStatusCode.BadRequest)
+                description("Could not handle the request.")
+            }
+            canRespond {
+                responseType<ExceptionResponse>()
+                responseCode(HttpStatusCode.InternalServerError)
+                description("Some serious trouble is going on.")
+            }
+        }
     }
-  }
 }

@@ -36,6 +36,7 @@ import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import io.bkbn.kompendium.core.attribute.KompendiumAttributes
 import io.bkbn.kompendium.core.plugin.NotarizedApplication
+import io.bkbn.kompendium.core.plugin.NotarizedRoute
 import io.bkbn.kompendium.oas.OpenApiSpec
 import io.bkbn.kompendium.oas.common.ExternalDocumentation
 import io.bkbn.kompendium.oas.component.Components

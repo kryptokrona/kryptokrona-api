@@ -54,12 +54,7 @@ fun Route.poolsRoute() {
             val items = service.getAll(size, page)
             val totalCount = service.getTotalCount()
 
-            val result = mapOf(
-                "items" to items,
-                "page" to page,
-                "size" to size,
-                "total" to totalCount
-            )
+            val result = ResultResponse(items, page, size, totalCount)
             val json = jsonObjectMapper().writeValueAsString(result)
 
             call.respond(HttpStatusCode.OK, json)

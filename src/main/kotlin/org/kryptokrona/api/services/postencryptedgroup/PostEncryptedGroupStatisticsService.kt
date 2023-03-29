@@ -30,8 +30,6 @@
 
 package org.kryptokrona.api.services.postencryptedgroup
 
-import org.kryptokrona.api.models.PostEncryptedGroup
-
 interface PostEncryptedGroupStatisticsService {
 
     suspend fun get1h(size: Int, page: Int): List<Map<String, Any>>

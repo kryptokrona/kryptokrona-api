@@ -38,8 +38,6 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import org.kryptokrona.api.models.Block
-import org.kryptokrona.api.models.Blocks
 import org.kryptokrona.api.models.PostEncrypted
 import org.kryptokrona.api.models.response.ExceptionResponse
 import org.kryptokrona.api.models.response.ResultResponse

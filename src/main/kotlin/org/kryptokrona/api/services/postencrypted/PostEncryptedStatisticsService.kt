@@ -30,8 +30,6 @@
 
 package org.kryptokrona.api.services.postencrypted
 
-import org.kryptokrona.api.models.PostEncrypted
-
 interface PostEncryptedStatisticsService {
 
     // List<PostEncryptedStatistics1h>

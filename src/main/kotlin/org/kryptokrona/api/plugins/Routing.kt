@@ -30,9 +30,6 @@
 
 package org.kryptokrona.api.plugins
 
-import io.bkbn.kompendium.core.plugin.NotarizedRoute
-import io.bkbn.kompendium.json.schema.definition.TypeDefinition
-import io.bkbn.kompendium.oas.payload.Parameter
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -42,6 +39,7 @@ import org.kryptokrona.api.routes.statistics.postsEncryptedStatisticsRoute
 
 fun Application.configureRouting() {
     routing {
+        // swaggerUI(path = "docs", )
         get("/v1/test") {
             call.respondText("Hello World!")
         }

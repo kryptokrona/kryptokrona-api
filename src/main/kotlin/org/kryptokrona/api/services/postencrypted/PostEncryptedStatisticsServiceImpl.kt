@@ -30,7 +30,6 @@
 
 package org.kryptokrona.api.services.postencrypted
 
-import org.kryptokrona.api.models.PostEncrypted
 import org.kryptokrona.api.models.PostsEncrypted
 import org.kryptokrona.api.plugins.DatabaseFactory.db
 import org.ktorm.dsl.*

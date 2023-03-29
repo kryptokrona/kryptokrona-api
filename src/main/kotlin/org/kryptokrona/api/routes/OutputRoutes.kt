@@ -39,7 +39,7 @@ import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.utils.io.core.*
-import org.kryptokrona.api.models.Hashrate
+import org.kryptokrona.api.models.Output
 import org.kryptokrona.api.models.response.ExceptionResponse
 import org.kryptokrona.api.models.response.ResultResponse
 import org.kryptokrona.api.services.output.OutputServiceImpl
@@ -67,7 +67,7 @@ fun Route.outputsRoute() {
         }
 
         route("/{id}") {
-            getHashrateByIdDocumentation()
+            getOutputByIdDocumentation()
 
             get {
                 val id = call.parameters["id"]?.toLongOrNull()
@@ -110,7 +110,7 @@ private fun Route.allOutputDocumentation() {
     }
 }
 
-private fun Route.getHashrateByIdDocumentation() {
+private fun Route.getOutputByIdDocumentation() {
     install(NotarizedRoute()) {
         parameters = listOf(
             Parameter(

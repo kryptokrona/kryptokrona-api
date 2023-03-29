@@ -30,10 +30,15 @@
 
 package org.kryptokrona.api.routes
 
+import io.bkbn.kompendium.core.metadata.GetInfo
+import io.bkbn.kompendium.core.plugin.NotarizedRoute
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.kryptokrona.api.models.Hashrate
+import org.kryptokrona.api.models.response.ExceptionResponse
+import org.kryptokrona.api.models.response.ResultResponse
 import org.kryptokrona.api.services.node.NodeServiceImpl
 import org.kryptokrona.api.utils.jsonObjectMapper
 
@@ -72,6 +77,53 @@ fun Route.nodesRoute() {
                 } ?: call.respond(HttpStatusCode.NotFound, "No node found with id $id")
             } ?: call.respond(HttpStatusCode.BadRequest)
         }
-
     }
+}
+
+private fun Route.allNodeDocumentation() {
+  install(NotarizedRoute()) {
+    get = GetInfo.builder {
+      summary("Get all nodes")
+      description("Gets all nodes stored in the database.")
+      response {
+        responseCode(HttpStatusCode.OK)
+        responseType<ResultResponse>()
+        description("Will return all nodes.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.BadRequest)
+        description("Could not handle the request.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.InternalServerError)
+        description("Some serious trouble is going on.")
+      }
+    }
+  }
+}
+
+private fun Route.getNodeByIdDocumentation() {
+  install(NotarizedRoute()) {
+    get = GetInfo.builder {
+      summary("Get a specific node by ID")
+      description("Get a specific node by ID stored in the database.")
+      response {
+        responseCode(HttpStatusCode.OK)
+        responseType<Hashrate>()
+        description("Will return a node.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.BadRequest)
+        description("Could not handle the request.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.InternalServerError)
+        description("Some serious trouble is going on.")
+      }
+    }
+  }
 }

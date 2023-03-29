@@ -30,10 +30,16 @@
 
 package org.kryptokrona.api.routes
 
+import io.bkbn.kompendium.core.metadata.GetInfo
+import io.bkbn.kompendium.core.plugin.NotarizedRoute
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.utils.io.core.*
+import org.kryptokrona.api.models.Hashrate
+import org.kryptokrona.api.models.response.ExceptionResponse
+import org.kryptokrona.api.models.response.ResultResponse
 import org.kryptokrona.api.services.output.OutputServiceImpl
 import org.kryptokrona.api.utils.jsonObjectMapper
 
@@ -72,6 +78,53 @@ fun Route.outputsRoute() {
                 } ?: call.respond(HttpStatusCode.NotFound, "No output found with id $id")
             } ?: call.respond(HttpStatusCode.BadRequest)
         }
-
     }
+}
+
+private fun Route.allOutputDocumentation() {
+  install(NotarizedRoute()) {
+    get = GetInfo.builder {
+      summary("Get all outputs")
+      description("Gets all outputs stored in the database.")
+      response {
+        responseCode(HttpStatusCode.OK)
+        responseType<ResultResponse>()
+        description("Will return all outputs.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.BadRequest)
+        description("Could not handle the request.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.InternalServerError)
+        description("Some serious trouble is going on.")
+      }
+    }
+  }
+}
+
+private fun Route.getHashrateByIdDocumentation() {
+  install(NotarizedRoute()) {
+    get = GetInfo.builder {
+      summary("Get a specific output by ID")
+      description("Get a specific output by ID stored in the database.")
+      response {
+        responseCode(HttpStatusCode.OK)
+        responseType<Output>()
+        description("Will return an output.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.BadRequest)
+        description("Could not handle the request.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.InternalServerError)
+        description("Some serious trouble is going on.")
+      }
+    }
+  }
 }

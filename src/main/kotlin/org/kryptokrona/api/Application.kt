@@ -34,6 +34,15 @@ import com.fasterxml.jackson.core.util.DefaultIndenter
 import com.fasterxml.jackson.core.util.DefaultPrettyPrinter
 import com.fasterxml.jackson.databind.SerializationFeature
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
+import io.bkbn.kompendium.core.attribute.KompendiumAttributes
+import io.bkbn.kompendium.core.plugin.NotarizedApplication
+import io.bkbn.kompendium.oas.OpenApiSpec
+import io.bkbn.kompendium.oas.common.ExternalDocumentation
+import io.bkbn.kompendium.oas.component.Components
+import io.bkbn.kompendium.oas.info.Contact
+import io.bkbn.kompendium.oas.info.Info
+import io.bkbn.kompendium.oas.info.License
+import io.bkbn.kompendium.oas.server.Server
 import io.ktor.http.*
 import io.ktor.serialization.jackson.*
 import io.ktor.serialization.kotlinx.json.*
@@ -42,9 +51,14 @@ import io.ktor.server.engine.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.*
+import io.ktor.server.response.*
+import io.ktor.server.routing.*
+import io.ktor.server.plugins.openapi.*
 import org.kryptokrona.api.plugins.DatabaseFactory
 import org.kryptokrona.api.plugins.configureRouting
 import org.kryptokrona.api.plugins.configureSyncers
+import java.net.URI
+import kotlin.text.get
 
 fun main() {
     embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
@@ -67,6 +81,43 @@ fun Application.module() {
     install(CORS) {
         anyHost()
         allowHeader(HttpHeaders.ContentType)
+    }
+    install(NotarizedApplication()) {
+        spec = OpenApiSpec(
+            info = Info(
+                "Kryptokrona API",
+                "0.1.0",
+                "Kryptokrona API for the Kryptokrona Network.",
+                "Kryptokrona API in Kotlin, Ktor and Kryptokrona Kotlin SDK for caching and processing data from the blockchain.",
+                URI("https://github.com/kryptokrona/kryptokrona-api"),
+                Contact(
+                    "Marcus Cvjeticanin",
+                    URI("https://twitter.com/mjovanc"),
+                    "mjovanc@icloud.com"
+                ),
+                License("BSD-3-Clause", "https://github.com/kryptokrona/kryptokrona-api/blob/master/LICENSE", URI("https://github.com/kryptokrona/kryptokrona-api/blob/master/LICENSE"))
+            ),
+            servers = mutableListOf(
+                Server(
+                    URI("http://localhost:8080"),
+                    "Kryptokrona API Development Server"
+                )
+            ),
+            externalDocs = ExternalDocumentation(
+                URI("https://github.com/kryptokrona/kryptokrona-api"),
+                "Kryptokrona API Documentation"
+            )
+        )
+        openApiJson = {
+            route("/openapi.json") {
+                get {
+                    call.respond(
+                        HttpStatusCode.OK,
+                        this@route.application.attributes[KompendiumAttributes.openApiSpec]
+                    )
+                }
+            }
+        }
     }
 
     // initialize database connection pool

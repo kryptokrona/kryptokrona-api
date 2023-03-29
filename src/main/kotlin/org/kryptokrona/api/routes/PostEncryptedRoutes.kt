@@ -117,7 +117,7 @@ private fun Route.getPostEncryptedByIdDocumentation() {
             Parameter(
                 name = "id",
                 `in` = Parameter.Location.path,
-                schema = TypeDefinition.STRING
+                schema = TypeDefinition.LONG
             )
         )
         get = GetInfo.builder {

@@ -36,6 +36,8 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.kryptokrona.api.models.Block
+import org.kryptokrona.api.models.Hashrate
 import org.kryptokrona.api.models.response.ExceptionResponse
 import org.kryptokrona.api.models.response.ResultResponse
 import org.kryptokrona.api.services.block.BlockServiceImpl
@@ -63,6 +65,8 @@ fun Route.blocksRoute() {
         }
 
         route("/{id}") {
+            getBlockByIdDocumentation()
+
             get {
                 val id = call.parameters["id"]?.toLongOrNull()
 
@@ -89,6 +93,30 @@ private fun Route.allBlocksDocumentation() {
         responseCode(HttpStatusCode.OK)
         responseType<ResultResponse>()
         description("Will return all blocks.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.BadRequest)
+        description("Could not handle the request.")
+      }
+      canRespond {
+        responseType<ExceptionResponse>()
+        responseCode(HttpStatusCode.InternalServerError)
+        description("Some serious trouble is going on.")
+      }
+    }
+  }
+}
+
+private fun Route.getBlockByIdDocumentation() {
+  install(NotarizedRoute()) {
+    get = GetInfo.builder {
+      summary("Get a specific block by ID")
+      description("Get a specific block by ID stored in the database.")
+      response {
+        responseCode(HttpStatusCode.OK)
+        responseType<Block>()
+        description("Will return a block.")
       }
       canRespond {
         responseType<ExceptionResponse>()

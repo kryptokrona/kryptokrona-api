@@ -35,6 +35,7 @@ import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.kryptokrona.api.models.PostEncryptedGroup
+import org.kryptokrona.api.models.response.ResultResponse
 import org.kryptokrona.api.services.postencrypted.PostEncryptedStatisticsServiceImpl
 import org.kryptokrona.api.services.postencryptedgroup.PostEncryptedGroupServiceImpl
 import org.kryptokrona.api.services.postencryptedgroup.PostEncryptedGroupStatisticsServiceImpl
@@ -48,14 +49,9 @@ fun Route.postsEncryptedGroupStatisticsRoute() {
             val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
             val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
             val items = service.get1h(size, page)
-            val totalItems = service.getTotal1h()
+            val totalCount = service.getTotal1h()
 
-            val result = mapOf(
-                "items" to items,
-                "page" to page,
-                "size" to size,
-                "total" to totalItems
-            )
+            val result = ResultResponse(items, page, size, totalCount)
             val json = jsonObjectMapper().writeValueAsString(result)
 
             call.respond(HttpStatusCode.OK, json)
@@ -65,14 +61,9 @@ fun Route.postsEncryptedGroupStatisticsRoute() {
             val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
             val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
             val items = service.get24h(size, page)
-            val totalItems = service.getTotal24h()
+            val totalCount = service.getTotal24h()
 
-            val result = mapOf(
-                "items" to items,
-                "page" to page,
-                "size" to size,
-                "total" to totalItems
-            )
+            val result = ResultResponse(items, page, size, totalCount)
             val json = jsonObjectMapper().writeValueAsString(result)
 
             call.respond(HttpStatusCode.OK, json)
@@ -82,14 +73,9 @@ fun Route.postsEncryptedGroupStatisticsRoute() {
             val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
             val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
             val items = service.get1w(size, page)
-            val totalItems = service.getTotal1w()
+            val totalCount = service.getTotal1w()
 
-            val result = mapOf(
-                "items" to items,
-                "page" to page,
-                "size" to size,
-                "total" to totalItems
-            )
+            val result = ResultResponse(items, page, size, totalCount)
             val json = jsonObjectMapper().writeValueAsString(result)
 
             call.respond(HttpStatusCode.OK, json)
@@ -99,14 +85,9 @@ fun Route.postsEncryptedGroupStatisticsRoute() {
             val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
             val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
             val items = service.get1m(size, page)
-            val totalItems = service.getTotal1m()
+            val totalCount = service.getTotal1m()
 
-            val result = mapOf(
-                "items" to items,
-                "page" to page,
-                "size" to size,
-                "total" to totalItems
-            )
+            val result = ResultResponse(items, page, size, totalCount)
             val json = jsonObjectMapper().writeValueAsString(result)
 
             call.respond(HttpStatusCode.OK, json)
@@ -116,14 +97,9 @@ fun Route.postsEncryptedGroupStatisticsRoute() {
             val page = call.request.queryParameters["page"]?.toIntOrNull() ?: 1
             val size = call.request.queryParameters["size"]?.toIntOrNull() ?: 10
             val items = service.get1y(size, page)
-            val totalItems = service.getTotal1y()
+            val totalCount = service.getTotal1y()
 
-            val result = mapOf(
-                "items" to items,
-                "page" to page,
-                "size" to size,
-                "total" to totalItems
-            )
+            val result = ResultResponse(items, page, size, totalCount)
             val json = jsonObjectMapper().writeValueAsString(result)
 
             call.respond(HttpStatusCode.OK, json)

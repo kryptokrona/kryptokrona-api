@@ -87,6 +87,7 @@ fun Route.postsEncryptedRoute() {
 
 private fun Route.allPostEncryptedDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("encrypted posts")
         get = GetInfo.builder {
             summary("Get all encrypted posts")
             description("Gets all encrypted posts stored in the database.")
@@ -111,6 +112,7 @@ private fun Route.allPostEncryptedDocumentation() {
 
 private fun Route.getPostEncryptedByIdDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("encrypted posts")
         parameters = listOf(
             Parameter(
                 name = "id",

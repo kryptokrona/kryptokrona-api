@@ -87,6 +87,7 @@ fun Route.postsEncryptedGroupRoute() {
 
 private fun Route.allPostEncryptedGroupDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("encrypted group posts")
         get = GetInfo.builder {
             summary("Get all encrypted group posts")
             description("Gets all encrypted group posts stored in the database.")
@@ -111,6 +112,7 @@ private fun Route.allPostEncryptedGroupDocumentation() {
 
 private fun Route.getPostEncryptedGroupByIdDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("encrypted group posts")
         parameters = listOf(
             Parameter(
                 name = "id",

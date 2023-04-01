@@ -77,7 +77,7 @@ dependencies {
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-cors:$ktor_version")
     implementation("org.ktorm:ktorm-core:$ktorm_version")
-    implementation("io.ktor:ktor-server-config-yaml-jvm:2.2.3")
+    implementation("io.ktor:ktor-server-config-yaml-jvm:2.2.4")
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("org.ktorm:ktorm-jackson:$ktorm_jackson_version")
     implementation("org.slf4j:slf4j-api:$slf4j_version")

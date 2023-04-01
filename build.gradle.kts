@@ -83,7 +83,7 @@ dependencies {
     implementation("org.slf4j:slf4j-api:$slf4j_version")
     implementation("org.slf4j:slf4j-simple:$slf4j_version")
     implementation("javax.xml.bind:jaxb-api:2.3.1")
-    implementation("com.jessecorbett:diskord-bot:3.0.0")
+    implementation("com.jessecorbett:diskord-bot:3.0.2")
     implementation("io.bkbn:kompendium-core:3.13.0")
 
     // database

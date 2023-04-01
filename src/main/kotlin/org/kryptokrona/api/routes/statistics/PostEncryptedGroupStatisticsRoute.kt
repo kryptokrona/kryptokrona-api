@@ -129,6 +129,7 @@ fun Route.postsEncryptedGroupStatisticsRoute() {
 
 private fun Route.allPostEncryptedGroupStatistic1hDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("statistics")
         get = GetInfo.builder {
             summary("Get all encrypted group posts for the last hour")
             description("Gets all encrypted group posts stored in the database for the last hour.")
@@ -153,6 +154,7 @@ private fun Route.allPostEncryptedGroupStatistic1hDocumentation() {
 
 private fun Route.allPostEncryptedGroupStatistic24hDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("statistics")
         get = GetInfo.builder {
             summary("Get all encrypted group posts for the last 24 hours")
             description("Gets all encrypted group posts stored in the database for the last 24 hours.")
@@ -177,6 +179,7 @@ private fun Route.allPostEncryptedGroupStatistic24hDocumentation() {
 
 private fun Route.allPostEncryptedGroupStatistic1wDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("statistics")
         get = GetInfo.builder {
             summary("Get all encrypted group posts for the last week")
             description("Gets all encrypted group posts stored in the database for the last week.")
@@ -201,6 +204,7 @@ private fun Route.allPostEncryptedGroupStatistic1wDocumentation() {
 
 private fun Route.allPostEncryptedGroupStatistic1mDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("statistics")
         get = GetInfo.builder {
             summary("Get all encrypted group posts for the last month")
             description("Gets all encrypted group posts stored in the database for the last month.")
@@ -225,6 +229,7 @@ private fun Route.allPostEncryptedGroupStatistic1mDocumentation() {
 
 private fun Route.allPostEncryptedGroupStatistic1yDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("statistics")
         get = GetInfo.builder {
             summary("Get all encrypted group posts for the last year")
             description("Gets all encrypted group posts stored in the database for the last year.")

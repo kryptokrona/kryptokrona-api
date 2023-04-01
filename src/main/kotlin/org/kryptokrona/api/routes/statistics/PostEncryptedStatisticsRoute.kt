@@ -129,6 +129,7 @@ fun Route.postsEncryptedStatisticsRoute() {
 
 private fun Route.allPostEncryptedStatistic1hDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("statistics")
         get = GetInfo.builder {
             summary("Get all encrypted posts for the last hour")
             description("Gets all encrypted posts stored in the database for the last hour.")
@@ -153,6 +154,7 @@ private fun Route.allPostEncryptedStatistic1hDocumentation() {
 
 private fun Route.allPostEncryptedStatistic24hDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("statistics")
         get = GetInfo.builder {
             summary("Get all encrypted posts for the last 24 hours")
             description("Gets all encrypted posts stored in the database for the last 24 hours.")
@@ -177,6 +179,7 @@ private fun Route.allPostEncryptedStatistic24hDocumentation() {
 
 private fun Route.allPostEncryptedStatistic1wDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("statistics")
         get = GetInfo.builder {
             summary("Get all encrypted posts for the last week")
             description("Gets all encrypted posts stored in the database for the last week.")
@@ -201,6 +204,7 @@ private fun Route.allPostEncryptedStatistic1wDocumentation() {
 
 private fun Route.allPostEncryptedStatistic1mDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("statistics")
         get = GetInfo.builder {
             summary("Get all encrypted posts for the last month")
             description("Gets all encrypted posts stored in the database for the last month.")
@@ -225,6 +229,7 @@ private fun Route.allPostEncryptedStatistic1mDocumentation() {
 
 private fun Route.allPostEncryptedStatistic1yDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("statistics")
         get = GetInfo.builder {
             summary("Get all encrypted posts for the last year")
             description("Gets all encrypted posts stored in the database for the last year.")

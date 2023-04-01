@@ -87,6 +87,7 @@ fun Route.poolsRoute() {
 
 private fun Route.allPoolDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("pools")
         get = GetInfo.builder {
             summary("Get all pools")
             description("Gets all pools stored in the database.")
@@ -111,6 +112,7 @@ private fun Route.allPoolDocumentation() {
 
 private fun Route.getPoolByIdDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("pools")
         parameters = listOf(
             Parameter(
                 name = "id",

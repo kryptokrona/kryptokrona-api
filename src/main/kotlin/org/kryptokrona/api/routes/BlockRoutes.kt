@@ -87,6 +87,7 @@ fun Route.blocksRoute() {
 
 private fun Route.allBlocksDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("blocks")
         get = GetInfo.builder {
             summary("Get all blocks")
             description("Gets all blocks stored in the database.")
@@ -111,6 +112,7 @@ private fun Route.allBlocksDocumentation() {
 
 private fun Route.getBlockByIdDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("blocks")
         parameters = listOf(
             Parameter(
                 name = "id",

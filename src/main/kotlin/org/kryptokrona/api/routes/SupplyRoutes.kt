@@ -87,6 +87,7 @@ fun Route.suppliesRoute() {
 
 private fun Route.allSupplyDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("supplies")
         get = GetInfo.builder {
             summary("Get all supplies")
             description("Gets all supplies stored in the database.")
@@ -111,6 +112,7 @@ private fun Route.allSupplyDocumentation() {
 
 private fun Route.getSupplyByIdDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("supplies")
         parameters = listOf(
             Parameter(
                 name = "id",

@@ -87,6 +87,7 @@ fun Route.nodesRoute() {
 
 private fun Route.allNodeDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("nodes")
         get = GetInfo.builder {
             summary("Get all nodes")
             description("Gets all nodes stored in the database.")
@@ -111,6 +112,7 @@ private fun Route.allNodeDocumentation() {
 
 private fun Route.getNodeByIdDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("nodes")
         parameters = listOf(
             Parameter(
                 name = "id",

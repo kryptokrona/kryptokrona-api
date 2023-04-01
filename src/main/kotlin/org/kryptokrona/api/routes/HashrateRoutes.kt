@@ -87,6 +87,7 @@ fun Route.hashratesRoute() {
 
 private fun Route.allHashrateDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("hashrates")
         get = GetInfo.builder {
             summary("Get all hashrates")
             description("Gets all hashrates stored in the database.")
@@ -111,6 +112,7 @@ private fun Route.allHashrateDocumentation() {
 
 private fun Route.getHashrateByIdDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("hashrates")
         parameters = listOf(
             Parameter(
                 name = "id",

@@ -87,6 +87,7 @@ fun Route.transactionsRoute() {
 
 private fun Route.allTransactionDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("transactions")
         get = GetInfo.builder {
             summary("Get all transactions")
             description("Gets all transactions stored in the database.")
@@ -111,6 +112,7 @@ private fun Route.allTransactionDocumentation() {
 
 private fun Route.getTransactionByIdDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("transactions")
         parameters = listOf(
             Parameter(
                 name = "id",

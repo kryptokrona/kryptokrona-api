@@ -87,6 +87,7 @@ fun Route.outputsRoute() {
 
 private fun Route.allOutputDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("outputs")
         get = GetInfo.builder {
             summary("Get all outputs")
             description("Gets all outputs stored in the database.")
@@ -111,6 +112,7 @@ private fun Route.allOutputDocumentation() {
 
 private fun Route.getOutputByIdDocumentation() {
     install(NotarizedRoute()) {
+        tags = setOf("outputs")
         parameters = listOf(
             Parameter(
                 name = "id",

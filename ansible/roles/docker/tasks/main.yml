@@ -1,16 +1,4 @@
 ---
-# - name: Ansible delete files .list
-#   find:
-#     paths: /etc/apt/sources.list.d
-#     patterns: "*.list"
-#   register: files_to_delete
-
-# - name: Ansible remove file list
-#   file:
-#     path: "{{ item.path }}"
-#     state: absent
-#   with_items: "{{ files_to_delete.files }}"
-
 - name: Install Docker prerequisites
   apt:
     name: "{{ item }}"
@@ -75,52 +63,18 @@
   args:
     executable: /bin/bash
 
-- name: Checkout Repo
-  git:
-    repo=https://github.com/mjovanc/kryptokrona-api.git
-    dest=/root/tmp/checkout
-    update=yes
-    accept_hostkey=yes
-    clone=false
-    update=false
-  register: gitresult
-
-- name: Create Hugin API Container
-  docker_container:
-    name: "{{ docker_container_name }}"
-    image: "{{ docker_image }}:{{ gitresult.after[:7] }}"
-    command: /bin/echo success
-    state: present
-    force_kill: yes
-    recreate: yes
-    networks:
-      - name: "host"
-
 - name: Start Kryptokrona API Container
   docker_container:
     name: "{{ docker_container_name }}"
     image: "{{ docker_image }}:latest"
+    state: started
+    pull: true
+    force_kill: yes
+    recreate: yes
     env: {
-      SYS_API_SERVER_URL: "https://{{ domain_name }}",
-      SYS_API_TITLE: "{{ sys_api_title }}",
-      SYS_API_DESCRIPTION: "{{ sys_api_description }}",
-      SYS_API_CONTACT_NAME: "{{ sys_api_contact_name }}",
-      SYS_API_CONTACT_EMAIL: "{{ sys_api_contact_email }}",
-      SYS_API_CONTACT_URL: "{{ sys_api_contact_url }}",
-      SYS_NODE_HOSTNAME: "{{ sys_node_hostname }}",
-      POSTGRESQL_HOSTNAME: "127.0.0.1",
-      POSTGRESQL_PORT: "5432",
-      POSTGRESQL_DB_NAME: "{{ vault_postgres_db_name }}",
-      POSTGRESQL_DB_USER: "{{ vault_postgres_db_user }}",
-      POSTGRESQL_DB_PASSWORD: "{{ vault_postgres_db_password }}",
-      SPRING_PROFILES_ACTIVE: prod
+      DB_URL: "jdbc:postgresql://127.0.0.1:5432/kryptokrona_api_dev",
+      DB_USER: "{{ vault_postgres_db_user }}",
+      DB_PASSWORD: "{{ vault_postgres_db_password }}",
     }
     networks:
       - name: "host"
-- name: Add docker cronjob to remove old images
-  cron:
-    name: docker_image_removal
-    special_time: weekly
-    job: docker images prune -a --filter "until=7d"
-- include_tasks: docker-users.yml
-  when: docker_users | length > 0

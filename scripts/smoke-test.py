@@ -31,14 +31,12 @@ try:
     prometheus_metrics = requests.get(base_url.format(domain, 'metrics'))
     assert prometheus_metrics.status_code == requests.codes.ok
 
-    # trying hugin api dashboard
-    print('GET ' + base_url.format(domain, 'dashboard'))
-    dashboard = requests.get(base_url.format(domain, 'dashboard'))
+    print('GET ' + base_url.format(domain, 'monitor'))
+    dashboard = requests.get(base_url.format(domain, 'monitor'))
     assert dashboard.status_code == requests.codes.ok
 
-    # trying hugin api api docs
-    print('GET ' + base_url.format(domain, 'api/docs'))
-    api_docs = requests.get(base_url.format(domain, 'api/docs'))
+    print('GET ' + base_url.format(domain, 'openapi.json'))
+    api_docs = requests.get(base_url.format(domain, 'openapi.json'))
     assert api_docs.status_code == requests.codes.ok
 
     print('\nSMOKE TEST PASSED!')

@@ -1,13 +1,13 @@
 ---
 - hosts: vps
-  remote_user: root
+  remote_user: mjovanc
   become: true
   gather_facts: yes
   vars:
     kryptokrona_api_name: kryptokrona_api
 
     # Docker GitHub Container Registry
-    docker_image: "ghcr.io/mjovanc/kryptokrona-api"
+    docker_image: "ghcr.io/kryptokrona/kryptokrona-api"
 
     # A list of users who will be added to the docker group.
     docker_users: [
@@ -35,17 +35,11 @@
     web_server_port: "443"
     hidden_service_port: "443"
 
-    # DO NOT CONFIGURE THE ABOVE YOURSELF
-    sys_api_title: "Kryptokrona API"
-    sys_api_description: "Kryptokrona API in Java for obtaining cached data from the Kryptokrona Blockchain."
-    sys_api_contact_name: "Marcus Cvjeticanin"
-    sys_api_contact_email: "mjovanc@icloud.com"
-    sys_api_contact_url: "https://github.com/mjovanc/kryptokrona-api"
-
   roles:
   #- base
   - postgres
   - docker
+  - liquibase
   - nginx
   - prometheus
   - onion

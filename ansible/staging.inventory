@@ -2,7 +2,7 @@
 # add hostname or IP under vps
 
 [vps]
-test-api.mjovanc.com letsencrypt_email=mjovanc@icloud.com domain_name=test-api.mjovanc.com exporter_version=1.3.1
+stage.xkr.mjovanc.com letsencrypt_email=mjovanc@icloud.com domain_name=stage.xkr.mjovanc.com exporter_version=1.3.1
 
 [server]
 localhost ansible_connection=local

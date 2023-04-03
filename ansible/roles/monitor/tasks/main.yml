@@ -1,0 +1,14 @@
+---
+- name: Start Kryptokrona Monitor Container
+  docker_container:
+    name: "{{ docker_container_name_monitor }}"
+    image: "{{ docker_image_monitor }}:latest"
+    state: started
+    pull: true
+    force_kill: yes
+    recreate: yes
+    env: {
+      XX: "jdbc:postgresql://127.0.0.1:5432/kryptokrona_api_dev"
+    }
+    networks:
+      - name: "host"

@@ -8,6 +8,7 @@
 
     # Docker GitHub Container Registry
     docker_image: "ghcr.io/kryptokrona/kryptokrona-api"
+    docker_image_monitor: "ghcr.io/kryptokrona/kryptokrona-monitor"
 
     # A list of users who will be added to the docker group.
     docker_users: [
@@ -15,6 +16,7 @@
     ]
 
     docker_container_name: kryptokrona-api
+    docker_container_name_monitor: kryptokrona-monitor
     docker_network_name: kryptokrona
 
     # Docker daemon options as a dict
@@ -39,7 +41,9 @@
   #- base
   - postgres
   - docker
-  - liquibase
+  #- liquibase
+  #- backend
+  #- monitor
   - nginx
-  - prometheus
-  - onion
+  #- prometheus
+  #- onion

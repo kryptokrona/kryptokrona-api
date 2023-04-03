@@ -1,4 +1,13 @@
 ---
+- name: Checkout Repo
+  git: repo=https://github.com/kryptokrona/kryptokrona-api.git
+    dest=/root/tmp/checkout
+    update=yes
+    accept_hostkey=yes
+    clone=true
+    update=false
+  register: gitresult
+
 - name: Create Liquibase Container
   docker_container:
     name: "kryptokrona_api_liquibase"
@@ -8,5 +17,8 @@
     pull: true
     force_kill: yes
     recreate: yes
+    volumes:
+      - "/root/tmp/checkout/kryptokrona-api/src/main/resources/db/changelog:/liquibase/db/changelog"
+      - "/root/tmp/checkout/kryptokrona-api/liquibase.properties:/liquibase/liquibase.properties"
     networks:
       - name: "host"

@@ -67,18 +67,3 @@
 
 - name: Remove default NGINX page
   shell: rm -rf /var/www/html/*
-
-- name: Add graphs page
-  template:
-    src: templates/graphs.html.j2
-    dest: /var/www/html/graphs.html
-
-- name: Add graphs CSS
-  template:
-    src: templates/style.css
-    dest: /var/www/html/style.css
-
-- name: Add favicon 
-  template:
-    src: templates/favicon.ico
-    dest: /var/www/html/favicon.ico

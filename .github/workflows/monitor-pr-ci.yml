@@ -37,7 +37,7 @@ jobs:
     needs: [ build ]
     steps:
       - uses: actions/checkout@v3
-      - uses: benjlevesque/short-sha@v1.2
+      - uses: benjlevesque/short-sha@v2.2
 
       - name: Build Docker Image
         run: |

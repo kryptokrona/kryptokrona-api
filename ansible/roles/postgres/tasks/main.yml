@@ -21,14 +21,14 @@
     - libpq-dev
     - python3-psycopg2
 
-- name: Create the Hugin API DB
+- name: Create the Kryptokrona API DB
   become_user: postgres
   postgresql_db:
     name: "{{ vault_postgres_db_name }}"
     template: "template0"
     state: present
 
-- name: Ensure User has access to the new Hugin API DB
+- name: Ensure User has access to the new Kryptokrona API DB
   become_user: postgres
   postgresql_user:
     db: "{{ vault_postgres_db_name }}"

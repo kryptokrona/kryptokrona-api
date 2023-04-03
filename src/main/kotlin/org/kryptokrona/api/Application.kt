@@ -115,7 +115,7 @@ fun Application.module() {
         )
         schemaConfigurator = KotlinXSchemaConfigurator()
         openApiJson = {
-            route("/openapi.json") {
+            route("/api/openapi.json") {
                 get {
                     call.respond(
                         HttpStatusCode.OK,

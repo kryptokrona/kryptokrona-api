@@ -39,19 +39,21 @@ import org.kryptokrona.api.routes.statistics.postsEncryptedStatisticsRoute
 
 fun Application.configureRouting() {
     routing {
-        get("/v1/test") {
-            call.respondText("Hello World!")
+        route("/api") {
+            get("/v1/test") {
+                call.respondText("Hello World!")
+            }
+            blocksRoute()
+            hashratesRoute()
+            outputsRoute()
+            transactionsRoute()
+            nodesRoute()
+            poolsRoute()
+            postsEncryptedRoute()
+            postsEncryptedGroupRoute()
+            postsEncryptedStatisticsRoute()
+            postsEncryptedGroupStatisticsRoute()
+            suppliesRoute()
         }
-        blocksRoute()
-        hashratesRoute()
-        outputsRoute()
-        transactionsRoute()
-        nodesRoute()
-        poolsRoute()
-        postsEncryptedRoute()
-        postsEncryptedGroupRoute()
-        postsEncryptedStatisticsRoute()
-        postsEncryptedGroupStatisticsRoute()
-        suppliesRoute()
     }
 }

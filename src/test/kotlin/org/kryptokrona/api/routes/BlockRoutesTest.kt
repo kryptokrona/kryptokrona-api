@@ -10,7 +10,7 @@ class BlockRoutesTest {
 
     @Test
     fun blockRouteTest() = testApplication {
-        client.get("/v1/blocks").apply {
+        client.get("/api/v1/blocks").apply {
             assertEquals(HttpStatusCode.OK, status)
         }
     }

@@ -10,7 +10,7 @@ class ApplicationTest {
 
     @Test
     fun testRoot() = testApplication {
-        client.get("/v1/test").apply {
+        client.get("/api/v1/test").apply {
             assertEquals(HttpStatusCode.OK, status)
         }
     }

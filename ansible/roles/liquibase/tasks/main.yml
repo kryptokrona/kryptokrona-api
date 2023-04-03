@@ -16,7 +16,7 @@
 
 - name: Create Liquibase Container
   docker_container:
-    name: "kryptokrona_api_liquibase"
+    name: "kryptokrona-api-liquibase"
     image: "liquibase/liquibase"
     state: started
     command: "--defaults-file /liquibase/liquibase.properties --changeLogFile=db/changelog/master.xml update"

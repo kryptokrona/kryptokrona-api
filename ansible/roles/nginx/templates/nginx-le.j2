@@ -58,12 +58,6 @@ server {
 
     location /monitor {
         proxy_pass http://{{ kryptokrona_api_name }}_monitor;
-
-        location /static/ {
-            alias /app/build/client/;
-            expires 7d;
-            add_header Cache-Control "public";
-        }
     }
 
     location /monitoring {

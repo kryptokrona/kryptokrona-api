@@ -2,8 +2,7 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 COPY package*.json ./
 RUN npm install --frozen-lockfile
-COPY src/ src/
-COPY public/ public/
+COPY . .
 RUN npm run build
 
 FROM node:18-alpine

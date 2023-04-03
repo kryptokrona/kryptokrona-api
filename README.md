@@ -17,7 +17,6 @@ Kryptokrona API in Kotlin, Ktor and Kryptokrona SDK for caching and processing d
 - [Development Resources](#development-resources)
 - [Getting Help](#getting-help)
 - [Reporting Issues](#reporting-issues)
-- [Guides](#guides)
 - [Contribute](#contribute)
   - [Pull Request](#pull-request)
   - [Donate](#donate)
@@ -59,12 +58,6 @@ Kryptokrona API uses GitHub’s integrated issue tracking system to record bugs 
 - If you need to paste code or include a stack trace, use Markdown. ``` escapes before and after your text.
 
 - If possible, try to create a test case or project that replicates the problem and attach it to the issue.
-
-## Guides
-
-If you have made a guide of how to use the Kryptokrona API feel free to send a PR and add your link to a list below.
-
-Official guide is coming soon.
 
 ## Contribute
 

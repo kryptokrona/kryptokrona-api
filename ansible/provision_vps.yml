@@ -42,8 +42,8 @@
   - postgres
   - docker
   #- liquibase
-  #- backend
-  #- monitor
+  - backend
+  - monitor
   - nginx
-  #- prometheus
-  #- onion
+  - prometheus
+  - onion

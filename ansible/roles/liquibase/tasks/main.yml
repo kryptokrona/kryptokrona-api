@@ -8,6 +8,11 @@
     update=false
   register: gitresult
 
+- name: Install NGINX Site For Specified Site
+  template:
+    src: templates/liquibase.properties.j2
+    dest: /root/tmp/checkout
+
 - name: Create Liquibase Container
   docker_container:
     name: "kryptokrona_api_liquibase"

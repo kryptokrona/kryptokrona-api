@@ -1,0 +1,5 @@
+url=jdbc:postgresql://127.0.0.1:5432/{{ vault_postgres_db_name }}
+username={{ vault_postgres_db_user }}
+password={{ vault_postgres_db_password }}
+changeLogFile=/db/changelog/master.xml
+driver=org.postgresql.Driver

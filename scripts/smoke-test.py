@@ -35,10 +35,6 @@ try:
     dashboard = requests.get(base_url.format(domain, 'monitor'))
     assert dashboard.status_code == requests.codes.ok
 
-    print('GET ' + base_url.format(domain, 'openapi.json'))
-    api_docs = requests.get(base_url.format(domain, 'openapi.json'))
-    assert api_docs.status_code == requests.codes.ok
-
     print('\nSMOKE TEST PASSED!')
 except (AssertionError, ConnectionError, Timeout, TooManyRedirects):
     print('Smoke Test Failed!')

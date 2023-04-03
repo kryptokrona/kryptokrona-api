@@ -42,19 +42,3 @@
     name: postgresql
     state: started
     enabled: yes
-
-- name: Copy SQL Delete Posts Query
-  template:
-    src: templates/remove_data.sql.j2
-    dest: /home/{{ vault_vps_user }}/remove_data.sql
-    mode: 0755
-
-# TASK [postgres : Remove Data] ******************************************************************************************************************************************************************************************************************************************************************
-# fatal: [cache.hugin.chat]: FAILED! => {"changed": false, "msg": "missing required arguments: name"}
-# - name: "Remove Data"
-#   cron:
-#     state: present
-#     user: "root"
-#     minute: "*"
-#     hour: "24"
-#     job: "psql {{ vault_postgres_db_user }} -h 127.0.0.1 -d {{ vault_postgres_db_name }} -f /home/{{ vault_vps_user }}/remove_data.sql"

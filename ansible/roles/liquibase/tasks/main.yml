@@ -8,10 +8,11 @@
     update=false
   register: gitresult
 
-- name: Install NGINX Site For Specified Site
+- name: Copy liquibase.properties file
   template:
     src: templates/liquibase.properties.j2
-    dest: /root/tmp/checkout
+    dest: /root/tmp/checkout/liquibase.properties
+    force: yes
 
 - name: Create Liquibase Container
   docker_container:
@@ -24,6 +25,6 @@
     recreate: yes
     volumes:
       - "/root/tmp/checkout/kryptokrona-api/src/main/resources/db/changelog:/liquibase/db/changelog"
-      - "/root/tmp/checkout/kryptokrona-api/liquibase.properties:/liquibase/liquibase.properties"
+      - "/root/tmp/checkout/liquibase.properties:/liquibase/liquibase.properties"
     networks:
       - name: "host"

@@ -2,7 +2,7 @@
 - name: Start Kryptokrona API Container
   docker_container:
     name: "{{ docker_container_name }}"
-    image: "{{ docker_image }}:latest"
+    image: "{{ docker_image_backend }}:latest"
     state: started
     pull: true
     force_kill: yes

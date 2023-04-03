@@ -6,7 +6,7 @@ if [ ! -f ~/.ssh/id_mjovanc ]; then
     ssh-keygen -t rsa -N "" -f ~/.ssh/id_mjovanc
     eval "$(ssh-agent -s)" &>/dev/null
     ssh-add ~/.ssh/id_mjovanc &>/dev/null
-    ssh-copy-id -i ~/.ssh/id_mjovanc.pub root@api.hugin.chat
+    ssh-copy-id -i ~/.ssh/id_mjovanc.pub root@xkr.mjovanc.com
 fi
 
-ansible-playbook provision_vps.yml -i prod.inventory --ask-vault-pass
+ansible-playbook provision_vps.yml -i staging.inventory --ask-vault-pass

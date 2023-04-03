@@ -1,14 +1,14 @@
 ---
 - hosts: vps
-  remote_user: mjovanc
+  remote_user: root
   become: true
   gather_facts: yes
   vars:
     kryptokrona_api_name: kryptokrona_api
 
     # Docker GitHub Container Registry
-    docker_image: "ghcr.io/kryptokrona/kryptokrona-api"
-    docker_image_monitor: "ghcr.io/kryptokrona/kryptokrona-monitor"
+    docker_image_backend: "ghcr.io/kryptokrona/kryptokrona-api"
+    docker_image_monitor: "ghcr.io/kryptokrona/kryptokrona-api-monitor"
 
     # A list of users who will be added to the docker group.
     docker_users: [
@@ -41,7 +41,7 @@
   #- base
   - postgres
   - docker
-  #- liquibase
+  - liquibase
   - backend
   - monitor
   - nginx

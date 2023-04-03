@@ -19,7 +19,7 @@ jobs:
   staging-deploy:
     name: Deploy Staging
     runs-on: ubuntu-latest
-    needs: docker
+    needs: [ backend, monitor ]
 
     steps:
       - name: Check out the codebase.

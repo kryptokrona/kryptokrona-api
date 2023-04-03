@@ -4,6 +4,8 @@
   become: true
   gather_facts: yes
   vars:
+    ansible_forks: 1
+    ansible_python_interpreter: /usr/bin/python3
     kryptokrona_api_name: kryptokrona_api
 
     # Docker GitHub Container Registry

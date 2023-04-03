@@ -8,7 +8,7 @@
     force_kill: yes
     recreate: yes
     env: {
-      DB_URL: "jdbc:postgresql://127.0.0.1:5432/kryptokrona_api_dev",
+      DB_URL: "jdbc:postgresql://127.0.0.1:5432/kryptokrona_api_prod",
       DB_USER: "{{ vault_postgres_db_user }}",
       DB_PASSWORD: "{{ vault_postgres_db_password }}",
     }

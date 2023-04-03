@@ -21,7 +21,7 @@ jobs:
 
       # If `roles` folder exists, create a playbook_repo.yml playbook to perform the syntax check
       - name: Creating playbook_repo.yml from roles folder (if exists)
-        run: test -d "hugin-api/ansible/roles" || exit 0 && echo $LINE1 > playbook_repo.yml && echo $LINE2 >> playbook_repo.yml && printf "  roles:\n" >> playbook_repo.yml &&  for i in `ls hugin-api/ansible/roles`; do echo "  - $i" >> playbook_repo.yml; done
+        run: test -d "kryptokrona-api/ansible/roles" || exit 0 && echo $LINE1 > playbook_repo.yml && echo $LINE2 >> playbook_repo.yml && printf "  roles:\n" >> playbook_repo.yml &&  for i in `ls kryptokrona-api/ansible/roles`; do echo "  - $i" >> playbook_repo.yml; done
         env:
           LINE1: "---"
           LINE2: "- hosts: localhost"

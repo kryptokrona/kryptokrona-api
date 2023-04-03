@@ -59,7 +59,7 @@
 
     - name: Test your web server.
       uri:
-        url: "https://{{ domain_name }}/api/v1/posts"
+        url: "https://{{ domain_name }}/api/v1/blocks"
 
     - name: Configure your Tor Onion Service (HiddenServiceDir).
       become: yes

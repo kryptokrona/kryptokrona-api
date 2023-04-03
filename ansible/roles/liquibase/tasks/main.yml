@@ -24,7 +24,7 @@
     force_kill: yes
     recreate: yes
     volumes:
-      - "/root/tmp/checkout/kryptokrona-api/src/main/resources/db/changelog:/liquibase/db/changelog"
+      - "/root/tmp/checkout/src/main/resources/db/changelog:/liquibase/db/changelog"
       - "/root/tmp/checkout/liquibase.properties:/liquibase/liquibase.properties"
     networks:
       - name: "host"

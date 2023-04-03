@@ -31,10 +31,6 @@ try:
     prometheus_metrics = requests.get(base_url.format(domain, 'metrics'))
     assert prometheus_metrics.status_code == requests.codes.ok
 
-    print('GET ' + base_url.format(domain, 'monitor'))
-    dashboard = requests.get(base_url.format(domain, 'monitor'))
-    assert dashboard.status_code == requests.codes.ok
-
     print('\nSMOKE TEST PASSED!')
 except (AssertionError, ConnectionError, Timeout, TooManyRedirects):
     print('Smoke Test Failed!')

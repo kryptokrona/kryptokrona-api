@@ -95,7 +95,7 @@ dependencies {
     liquibaseRuntime("info.picocli:picocli:4.6.3")
     liquibaseRuntime("ch.qos.logback:logback-core:1.4.6")
     liquibaseRuntime("ch.qos.logback:logback-classic:1.4.6")
-    liquibaseRuntime("javax.xml.bind:jaxb-api:2.2.4")
+    liquibaseRuntime("javax.xml.bind:jaxb-api:2.3.1")
 
     runtimeOnly("com.squareup:kotlinpoet:0.7.0")
 

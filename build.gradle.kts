@@ -19,7 +19,7 @@ plugins {
     id("io.ktor.plugin") version "2.2.4"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.20"
     id("java")
-    id("org.liquibase.gradle") version "2.1.1"
+    id("org.liquibase.gradle") version "2.2.0"
 }
 
 group = "org.kryptokrona.api"

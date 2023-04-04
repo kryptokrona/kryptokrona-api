@@ -8,6 +8,7 @@
   import { initKeycloak } from "../api/login";
   export let data;
   let isPhone = false;
+  export const trailingSlash = 'always';
 
   onMount(async () => {
     if (!browser) return;

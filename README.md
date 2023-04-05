@@ -5,7 +5,6 @@
 [![kotlin](https://img.shields.io/badge/kotlin-1.8.10-blue.svg?logo=kotlin)](http://kotlinlang.org)
 [![release](https://img.shields.io/github/v/release/kryptokrona/kryptokrona-api)](https://img.shields.io/github/v/release/kryptokrona/kryptokrona-api)
 [![license](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
-[![slack](https://badgen.net/badge/icon/slack?icon=slack&label)](https://join.slack.com/t/kryptokrona/shared_invite/zt-1qmt8cz9j-s~2RKYtFfshqeLC1dhU5aA)
 [![discord](https://img.shields.io/discord/562673808582901793?label=discord)](https://discord.gg/VTgsTGS9b7)
 
 Kryptokrona is a decentralized blockchain from the Nordic based on CryptoNote, which forms the basis for Monero, among others. CryptoNote is a so-called “application layer” protocol further developed by TurtleCoin that enables things like: private transactions, messages and arbitrary data storage, completely decentralized.
@@ -30,7 +29,6 @@ Kryptokrona API in Kotlin, Ktor and Kryptokrona SDK for caching and processing d
 - Docs: https://docs.kryptokrona.org
 - Mail: mjovanc@icloud.com
 - GitHub: https://github.com/kryptokrona/kryptokrona-api
-- Slack: https://join.slack.com/t/kryptokrona/shared_invite/zt-1qmt8cz9j-s~2RKYtFfshqeLC1dhU5aA
 - Discord: https://discord.gg/VTgsTGS9b7
 - Twitter: https://twitter.com/mjovanc
 - OpenAPI Specification (Dev): https://petstore.swagger.io/?url=http://localhost:8080/openapi.json#/

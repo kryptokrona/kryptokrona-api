@@ -13,14 +13,16 @@ Kryptokrona API in Kotlin, Ktor and Kryptokrona SDK for caching and processing d
 
 ## Table of Contents
 
-- [Development Resources](#development-resources)
-- [Getting Help](#getting-help)
-- [Reporting Issues](#reporting-issues)
-- [Contribute](#contribute)
-  - [Pull Request](#pull-request)
-  - [Donate](#donate)
-- [Contributors](#contributors)
-- [License](#license)
+- [Kryptokrona API](#kryptokrona-api)
+  - [Table of Contents](#table-of-contents)
+  - [Development Resources](#development-resources)
+  - [Getting Help](#getting-help)
+  - [Reporting Issues](#reporting-issues)
+  - [Contribute](#contribute)
+    - [Pull Request](#pull-request)
+    - [Donate](#donate)
+  - [Contributors](#contributors)
+  - [License](#license)
 
 
 ## Development Resources
@@ -98,7 +100,7 @@ being awesome contributors to this project. **We'd like to take a moment to reco
 [<img src="https://github.com/mjovanc.png?size=72" alt="mjovanc" width="72">](https://github.com/mjovanc)
 [<img src="https://github.com/appelskrutt34.png?size=72" alt="appelskrutt34" width="72">](https://github.com/appelskrutt34)
 [<img src="https://github.com/renovatebot.png?size=72" alt="mjovanc" width="72">](https://github.com/renovatebot)
-
+[<img src="https://github.com/TechyGuy17.png?size=72" alt="TechyGuy" width="72">](https://github.com/TechyGuy17)
 ## License
 
 The 3-Clause BSD License.

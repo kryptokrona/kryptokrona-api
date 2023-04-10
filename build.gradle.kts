@@ -84,7 +84,7 @@ dependencies {
     implementation("org.slf4j:slf4j-simple:$slf4j_version")
     implementation("javax.xml.bind:jaxb-api:2.3.1")
     implementation("com.jessecorbett:diskord-bot:4.0.0")
-    implementation("io.bkbn:kompendium-core:3.13.0")
+    implementation("io.bkbn:kompendium-core:3.14.0")
 
     // database
     implementation("org.apache.commons:commons-dbcp2:2.9.0")
@@ -92,12 +92,12 @@ dependencies {
     // liquibase
     liquibaseRuntime("org.liquibase:liquibase-core:$liquibase_core")
     liquibaseRuntime("org.postgresql:postgresql:$postgres_version")
-    liquibaseRuntime("info.picocli:picocli:4.7.1")
+    liquibaseRuntime("info.picocli:picocli:4.7.2")
     liquibaseRuntime("ch.qos.logback:logback-core:1.4.6")
     liquibaseRuntime("ch.qos.logback:logback-classic:1.4.6")
     liquibaseRuntime("javax.xml.bind:jaxb-api:2.3.1")
 
-    runtimeOnly("com.squareup:kotlinpoet:1.12.0")
+    runtimeOnly("com.squareup:kotlinpoet:1.13.0")
 
     // testing
     testImplementation("io.ktor:ktor-server-test-host-jvm:2.2.4")

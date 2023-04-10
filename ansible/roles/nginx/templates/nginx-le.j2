@@ -62,6 +62,9 @@ server {
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "Upgrade";
         proxy_set_header Host $host;
+
+        # Add a rewrite rule to prepend "/monitor" to the URLs of the static assets
+        rewrite ^/(_app/.*)$ /monitor/$1 break;
     }
 
     location /monitoring {

@@ -68,7 +68,7 @@ server {
     }
 
     # SvelteKit asset configuration
-    location /_app/ {
+    location /monitor/_app/ {
         root /app/build;
         expires 1y;
         add_header Cache-Control "public";
@@ -77,20 +77,20 @@ server {
         add_header Last-Modified "";
         add_header ETag "";
         types {
-          application/javascript js;
-          application/json json;
-          image/svg+xml svg;
-          image/png png;
-          image/webp webp;
-          text/css css;
-          text/plain txt;
-          text/xml xml;
-       }
+            application/javascript js;
+            application/json json;
+            image/svg+xml svg;
+            image/png png;
+            image/webp webp;
+            text/css css;
+            text/plain txt;
+            text/xml xml;
+        }
     }
 
     # SvelteKit app configuration
-    location / {
-        try_files $uri @svelte;
+    location /monitor {
+        try_files $uri /monitor/index.html @svelte;
     }
 
     location @svelte {

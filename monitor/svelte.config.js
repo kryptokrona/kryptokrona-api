@@ -1,11 +1,7 @@
 import adapter from "@sveltejs/adapter-node";
 import preprocess from "svelte-preprocess";
-const path = require('path');
 
-/** @type {import('@sveltejs/kit').Config} */
 const config = {
-  // Consult https://kit.svelte.dev/docs/integrations#preprocessors
-  // for more information about preprocessors
   preprocess: preprocess({
     postcss: true,
     scss: {
@@ -24,7 +20,7 @@ const config = {
   },
   kit: {
     paths: {
-      assets: path.resolve(__dirname, 'build/client/_app/')
+      base: '/monitor',
     },
     adapter: adapter(),
   },

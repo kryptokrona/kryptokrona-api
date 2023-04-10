@@ -8,8 +8,7 @@
     force_kill: yes
     recreate: yes
     env: {
-      PRIVATE_GITHUB_TOKEN: "{{ vault_github_token }}",
-      ORIGIN: "https://{{ domain_name }}/monitor"
+      PRIVATE_GITHUB_TOKEN: "{{ vault_github_token }}"
     }
     networks:
       - name: "host"

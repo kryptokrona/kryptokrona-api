@@ -5,5 +5,8 @@ export default defineConfig({
 	plugins: [sveltekit()],
 	build: {
 		outDir: "./build"
-	}
+	},
+	server: {
+    	origin: 'http://127.0.0.1:3000/monitor',
+  	},
 });

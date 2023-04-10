@@ -14,15 +14,15 @@ Kryptokrona API in Kotlin, Ktor and Kryptokrona SDK for caching and processing d
 ## Table of Contents
 
 - [Kryptokrona API](#kryptokrona-api)
-  - [Table of Contents](#table-of-contents)
-  - [Development Resources](#development-resources)
-  - [Getting Help](#getting-help)
-  - [Reporting Issues](#reporting-issues)
-  - [Contribute](#contribute)
-    - [Pull Request](#pull-request)
-    - [Donate](#donate)
-  - [Contributors](#contributors)
-  - [License](#license)
+- [Table of Contents](#table-of-contents)
+- [Development Resources](#development-resources)
+- [Getting Help](#getting-help)
+- [Reporting Issues](#reporting-issues)
+- [Contribute](#contribute)
+- [Pull Request](#pull-request)
+- [Donate](#donate)
+- [Contributors](#contributors)
+- [License](#license)
 
 
 ## Development Resources

@@ -1,3 +1,3 @@
 ### get all info
-GET http://localhost:8080/v1/info
+GET http://localhost:8080/api/v1/info
 Accept: application/json

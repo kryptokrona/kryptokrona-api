@@ -67,6 +67,40 @@ server {
         rewrite ^/(_app/.*)$ /monitor/$1 break;
     }
 
+    # SvelteKit asset configuration
+    location /_app/ {
+        root /app/build;
+        expires 1y;
+        add_header Cache-Control "public";
+        add_header Vary "Accept-Encoding";
+        add_header Pragma "public";
+        add_header Last-Modified "";
+        add_header ETag "";
+        types {
+          application/javascript js;
+          application/json json;
+          image/svg+xml svg;
+          image/png png;
+          image/webp webp;
+          text/css css;
+          text/plain txt;
+          text/xml xml;
+       }
+    }
+
+    # SvelteKit app configuration
+    location / {
+        try_files $uri @svelte;
+    }
+
+    location @svelte {
+        proxy_pass http://{{ kryptokrona_api_name }}_monitor;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "Upgrade";
+        proxy_set_header Host $host;
+    }
+
     location /monitoring {
       set $prometheusUrl {{ kryptokrona_api_name }}_monitoring;
 

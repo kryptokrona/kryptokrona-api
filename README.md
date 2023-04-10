@@ -16,6 +16,9 @@ Kryptokrona API in Kotlin, Ktor and Kryptokrona SDK for caching and processing d
 - [Development Resources](#development-resources)
 - [Getting Help](#getting-help)
 - [Reporting Issues](#reporting-issues)
+- [Deployment](#deployment)
+  - [Staging](#staging)
+  - [Production](#production)
 - [Contribute](#contribute)
   - [Pull Request](#pull-request)
   - [Donate](#donate)
@@ -27,7 +30,7 @@ Kryptokrona API in Kotlin, Ktor and Kryptokrona SDK for caching and processing d
 
 - Web: https://kryptokrona.org
 - Docs: https://docs.kryptokrona.org
-- Mail: mjovanc@icloud.com
+- Mail: [mjovanc@icloud.com](mailto:mjovanc@icloud.com)
 - GitHub: https://github.com/kryptokrona/kryptokrona-api
 - Discord: https://discord.gg/VTgsTGS9b7
 - Twitter: https://twitter.com/mjovanc
@@ -56,6 +59,31 @@ Kryptokrona API uses GitHub’s integrated issue tracking system to record bugs 
 - If you need to paste code or include a stack trace, use Markdown. ``` escapes before and after your text.
 
 - If possible, try to create a test case or project that replicates the problem and attach it to the issue.
+
+## Deployment
+
+Currently, we deploy to two servers, one for staging and one for production. The staging server is used for testing and replicating the production environment
+and the production server is obviously used for production.
+
+All endpoints are available on both servers. Check out the OpenAPI Specification for more information on how to use the API.
+
+If you want to deploy the API yourself you can checkout the ansible directory for how to run the Ansible playbook.
+
+### Staging
+
+To use the staging server you have three options:
+
+- Access the API: `https://stage.xkr.mjovanc.com/api/v{number}/{endppoint}`
+- Access the OpenAPI Specification: https://petstore.swagger.io/?url=https://stage.xkr.mjovanc.com/openapi.json#/
+- Access the monitor view: https://stage.xkr.mjovanc.com/monitor
+
+### Production
+
+To use the production server you have three options:
+
+- Access the API: `https://xkr.mjovanc.com/api/v{number}/{endppoint}`
+- Access the OpenAPI Specification: https://petstore.swagger.io/?url=https://xkr.mjovanc.com/openapi.json#/
+- Access the monitor view: https://xkr.mjovanc.com/monitor
 
 ## Contribute
 

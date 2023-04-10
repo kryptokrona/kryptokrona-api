@@ -1,8 +1,13 @@
-export let ssr = true;
-
+import { getPosts } from "../api/hugin";
 import { getRepoStats } from "../server/github.server";
 
 export const load = async () => {
-	let repo = await getRepoStats();
-	return { repo };
+  async function fetchRepo() {
+    return await getRepoStats();
+  }
+  /*
+	async function fetchPosts()  {
+		return await getPosts("1m");
+	}*/
+  return { repo: fetchRepo() /* huginStats: fetchPosts() */ };
 };

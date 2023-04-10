@@ -29,6 +29,7 @@
 	"type": "module",
 	"dependencies": {
 		"@octokit/rest": "^19.0.7",
+		"@sveltejs/adapter-static": "^2.0.1",
 		"apexcharts": "^3.37.1",
 		"dotenv": "^16.0.3",
 		"keycloak-js": "^21.0.1"

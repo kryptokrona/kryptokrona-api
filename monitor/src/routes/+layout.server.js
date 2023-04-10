@@ -1,4 +1,5 @@
 export const prerender = true;
+export const ssr = false;
 
 import { getPosts } from "../api/hugin";
 import { getRepoStats } from "../server/github.server";

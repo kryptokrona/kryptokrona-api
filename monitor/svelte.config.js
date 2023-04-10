@@ -1,5 +1,6 @@
 import adapter from "@sveltejs/adapter-node";
 import preprocess from "svelte-preprocess";
+const path = require('path');
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -23,7 +24,7 @@ const config = {
   },
   kit: {
     paths: {
-      assets: '/monitor/_app/'
+      assets: path.resolve(__dirname, 'build/client/_app/')
     },
     adapter: adapter(),
   },

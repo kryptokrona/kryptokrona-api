@@ -5,6 +5,7 @@
   import AreaChartWithLabels from "../../components/charts/AreaChartWithLabels.svelte";
   import TitleAndTextContainer from "../../components/containers/TitleAndTextContainer.svelte";
   import ToggleBox from "../../components/toggle-box/ToggleBox.svelte";
+  import { base } from "$app/paths";
   import {
     chart1,
     chart2,
@@ -27,7 +28,7 @@
 <div class="flex items-center justify-center">
   <div class="w-full">
     <div class="relative dark:text-neutral-900">
-      <i class="fa-solid fa-magnifying-glass search-icon " />
+      <i class="fa-solid fa-magnifying-glass search-icon" />
       <input
         bind:value={searchInput}
         class="search-input rounded-md w-full border-neutral-700 border dark:border-none"
@@ -56,7 +57,7 @@
           .toLowerCase()
           .includes(searchInput.toLowerCase())) as node, i}
         <button
-          on:click={goto(`/nodes/${node.name}`)}
+          on:click={goto(`${base}/nodes/${node.name}`)}
           class={(i == nodes.length - 1 ? "rounded-md " : "") +
             "flex text-left w-full border-b p-2 dark:border-neutral-100 border-neutral-700 lg:hover:cursor-pointer lg:hover:bg-neutral-200 dark:lg:hover:bg-neutral-800"}
         >

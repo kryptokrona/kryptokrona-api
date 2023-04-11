@@ -28,33 +28,13 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api.plugins
+package org.kryptokrona.api.models.request
 
-import io.ktor.server.application.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
-import org.kryptokrona.api.routes.*
-import org.kryptokrona.api.routes.statistics.postsEncryptedGroupStatisticsRoute
-import org.kryptokrona.api.routes.statistics.postsEncryptedStatisticsRoute
+import kotlinx.serialization.Serializable
 
-fun Application.configureRouting() {
-    routing {
-        route("/api") {
-            get("/v1/test") {
-                call.respondText("Hello World!")
-            }
-            infoRoute()
-            blocksRoute()
-            hashratesRoute()
-            outputsRoute()
-            transactionsRoute()
-            nodesRoute()
-            poolsRoute()
-            postsEncryptedRoute()
-            postsEncryptedGroupRoute()
-            postsEncryptedStatisticsRoute()
-            postsEncryptedGroupStatisticsRoute()
-            suppliesRoute()
-        }
-    }
-}
+@Serializable
+data class NodeRequest(
+    var hostName: String,
+    var port: Int,
+    var ssl: Boolean
+)

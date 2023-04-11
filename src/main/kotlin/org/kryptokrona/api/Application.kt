@@ -104,6 +104,14 @@ fun Application.module() {
             ),
             servers = mutableListOf(
                 Server(
+                    URI("https://xkr.mjovanc.com"),
+                    "Kryptokrona API Production Server"
+                ),
+                Server(
+                    URI("https://stage.xkr.mjovanc.com"),
+                    "Kryptokrona API Staging Server"
+                ),
+                Server(
                     URI("http://localhost:8080"),
                     "Kryptokrona API Development Server"
                 )

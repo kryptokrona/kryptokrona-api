@@ -16,9 +16,6 @@
       toolbar: {
         show: false,
       },
-      animations: {
-        enabled: false,
-      },
     },
     stroke: {
       curse: "smooth",

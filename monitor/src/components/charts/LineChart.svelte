@@ -2,34 +2,42 @@
   import { COLORS } from "../../helpers/colors";
   import { onMount } from "svelte";
   export let data = [];
-  export let labels = [];
   export let id = "";
   export let colors = COLORS;
 
   var options = {
     series: data,
     chart: {
-      type: "pie",
+      type: "line",
       height: "100%",
       width: "100%",
-      fontFamily: "Roboto mono, sans-serif",
-      toolbar: {
-        show: false,
+      sparkline: {
+        enabled: true,
+      },
+      animations: {
+        enabled: false,
       },
     },
     stroke: {
       curse: "smooth",
-      width: 1,
+      width: 2,
     },
     colors: colors,
     fill: {
       type: "solid",
     },
+    tooltip: {
+      enabled: false,
+    },
     grid: {
       show: false,
     },
-
-    labels: labels,
+    dataLabels: {
+      enabled: false,
+    },
+    legend: {
+      show: false,
+    },
   };
 
   onMount(async () => {

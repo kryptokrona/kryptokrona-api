@@ -1,6 +1,6 @@
 <footer class="border-t border-neutral-50 flex justify-center mt-8">
   <div class="flex flex-row p-4" style="font-size: clamp(10px,2.5vw,16px)">
-    <p class="mr-4">Powdered by:</p>
+    <p class="mr-4">Powered by:</p>
     <img
       src="./svelte_logo.png"
       alt="svelte logo"

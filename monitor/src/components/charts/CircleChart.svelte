@@ -9,8 +9,9 @@
 
   onMount(async () => {
     if (data[0] <= warningPoint) color = "#15803d";
-    else if (data[0] > warningPoint && data < criticalPoint) color = "#c2410c";
-    else color = "#b91c1c";
+    else if (data[0] > warningPoint && data < criticalPoint)
+      color = COLOR.ORANGE;
+    else color = COLOR.RED;
 
     var options = {
       series: [data],

@@ -2,12 +2,19 @@
   import { COLOR } from "../helpers/colors";
   import CircleChart from "../components/charts/CircleChart.svelte";
   import ToggleBox from "../components/toggle-box/ToggleBox.svelte";
-  import { chart1, chart4, chart5 } from "../mock-data/data";
+  import {
+    chart1,
+    chart4,
+    chart5,
+    requestsChart,
+    SuccessfulRequestsChart,
+    badRequestsChart,
+  } from "../mock-data/data";
   import TitleAndTextContainer from "../components/containers/TitleAndTextContainer.svelte";
-  import AreaChartWithLabels from "../components/charts/AreaChartWithLabels.svelte";
   import ChartWithTimeButtonsContainer from "../components/containers/ChartWithTimeButtonsContainer.svelte";
-  import TitleAndTextContainerGreen from "../components/containers/TitleAndTextContainerGreen.svelte";
   import Grid from "../components/grids/Grid.svelte";
+  import ColumnChart from "../components/charts/ColumnChart.svelte";
+  import AreaChart from "../components/charts/AreaChart.svelte";
 </script>
 
 <ToggleBox title={"Quick overview"}>
@@ -42,22 +49,24 @@
 
 <ToggleBox title={"History"}>
   <Grid columns={3} gridClass="md-grid">
-    <ChartWithTimeButtonsContainer title="CPU usage" height={"h-80"}>
-      <AreaChartWithLabels data={chart4.data} id={chart4.name} />
+    <ChartWithTimeButtonsContainer title="CPU usage">
+      <AreaChart data={chart4.data} id={chart4.name} tooltipEnabled={true} />
     </ChartWithTimeButtonsContainer>
 
-    <ChartWithTimeButtonsContainer title="RAM usage" height={"h-80"}>
-      <AreaChartWithLabels
+    <ChartWithTimeButtonsContainer title="RAM usage">
+      <AreaChart
         data={chart5.data}
         id={chart5.name}
-        colors={[COLOR.VIOLET]}
+        tooltipEnabled={true}
+        colors={[COLOR.FUSCHIA]}
       />
     </ChartWithTimeButtonsContainer>
-    <ChartWithTimeButtonsContainer title="DISK usage" height={"h-80"}>
-      <AreaChartWithLabels
+    <ChartWithTimeButtonsContainer title="DISK usage">
+      <AreaChart
         data={chart1.data}
         id={chart1.name}
-        colors={[COLOR.FUSCHIA]}
+        tooltipEnabled={true}
+        colors={[COLOR.VIOLET]}
       />
     </ChartWithTimeButtonsContainer>
   </Grid>
@@ -65,13 +74,30 @@
 
 <div class="mt-8" />
 
-<ToggleBox title={"Status"}>
-  <Grid columns={6}>
-    <TitleAndTextContainerGreen title="Something" text="OK" />
-    <TitleAndTextContainerGreen title="Something" text="OK" />
-    <TitleAndTextContainerGreen title="Something" text="OK" />
-    <TitleAndTextContainer title="Something" text="OFFLINE" />
-    <TitleAndTextContainer title="Something" text="OFFLINE" />
-    <TitleAndTextContainerGreen title="Something" text="OK" />
+<ToggleBox title={"Requests"}>
+  <Grid columns={3} gridClass="sm-grid">
+    <TitleAndTextContainer title="Total requests" text="19000">
+      <ColumnChart
+        data={requestsChart.data}
+        id={requestsChart.name}
+        tooltipEnabled={true}
+      />
+    </TitleAndTextContainer>
+    <TitleAndTextContainer title="Bad requests" text="3000">
+      <ColumnChart
+        data={badRequestsChart.data}
+        id={badRequestsChart.name}
+        tooltipEnabled={true}
+        colors={[COLOR.ORANGE]}
+      />
+    </TitleAndTextContainer>
+    <TitleAndTextContainer title="Successful requests" text="16000">
+      <ColumnChart
+        data={SuccessfulRequestsChart.data}
+        id={SuccessfulRequestsChart.name}
+        tooltipEnabled={true}
+        colors={[COLOR.GREEN]}
+      />
+    </TitleAndTextContainer>
   </Grid>
 </ToggleBox>

@@ -4,6 +4,7 @@
   export let data = [];
   export let id = "";
   export let colors = COLORS;
+  export let tooltipEnabled = false;
 
   var options = {
     series: data,
@@ -27,7 +28,7 @@
       type: "solid",
     },
     tooltip: {
-      enabled: false,
+      enabled: tooltipEnabled,
     },
     grid: {
       show: false,

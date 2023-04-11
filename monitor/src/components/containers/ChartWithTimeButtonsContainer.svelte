@@ -7,14 +7,14 @@
 </script>
 
 <div class={color + " w-full  rounded-md overflow-hidden relative " + height}>
-  <div class="h-1/5 pt-1 text-center">
+  <div class="h-2/5 pt-1 text-center">
     <p class="pb-1">{title}</p>
     <GrayButton text="1h" />
     <GrayButton text="24h" />
     <GrayButton text="1 Week" />
-    <GrayButton text="1 Month" />
+    <GrayButton text="1 month" />
   </div>
-  <div class="h-4/5">
+  <div class="h-3/5">
     <slot />
   </div>
 </div>

@@ -10,7 +10,6 @@
   import Grid from "../components/grids/Grid.svelte";
 </script>
 
-<div id="main" />
 <ToggleBox title={"Quick overview"}>
   <Grid columns={5}>
     <TitleAndTextContainer title="Threads" text="14" />
@@ -76,5 +75,3 @@
     <TitleAndTextContainerGreen title="Something" text="OK" />
   </Grid>
 </ToggleBox>
-
-<div class="mt-8" />

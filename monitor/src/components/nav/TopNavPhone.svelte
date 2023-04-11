@@ -1,7 +1,6 @@
 <script>
   import { goto } from "$app/navigation";
-  import { user } from "../../stores/user";
-  import GreenButton from "../buttons/GreenButton.svelte";
+  import { base } from "$app/paths";
 
   let phoneMenu;
   let show = false;
@@ -95,13 +94,13 @@
     <div class="flex flex-col gap-4">
       <button
         on:click={() => {
-          navigate("/nodes");
+          navigate(`${base}/nodes`);
         }}
         class="pt-4"><i class="fa-solid fa-network-wired" /> nodes</button
       >
       <button
         on:click={() => {
-          navigate("/pools");
+          navigate(`${base}/pools`);
         }}
         class="pb-4"><i class="fa-solid fa-water-ladder" /> pools</button
       >

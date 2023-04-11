@@ -1,8 +1,5 @@
 <script>
   import TopNavButton from "./TopNavButton.svelte";
-  import GreenButton from "../buttons/GreenButton.svelte";
-  import { login } from "../../api/login";
-  import { user } from "../../stores/user";
   import { base } from "$app/paths";
   export let repo;
 </script>

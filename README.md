@@ -34,7 +34,7 @@ Kryptokrona API in Kotlin, Ktor and Kryptokrona SDK for caching and processing d
 - GitHub: https://github.com/kryptokrona/kryptokrona-api
 - Discord: https://discord.gg/VTgsTGS9b7
 - Twitter: https://twitter.com/mjovanc
-- OpenAPI Specification (Dev): https://petstore.swagger.io/?url=http://localhost:8080/openapi.json#/
+- OpenAPI Specification (Dev): https://petstore.swagger.io/?url=http://localhost:8080/api/openapi.json#/
 
 ## Getting Help
 
@@ -74,7 +74,7 @@ If you want to deploy the API yourself you can checkout the ansible directory fo
 To use the staging server you have three options:
 
 - Access the API: `https://stage.xkr.mjovanc.com/api/v{number}/{endppoint}`
-- Access the OpenAPI Specification: https://petstore.swagger.io/?url=https://stage.xkr.mjovanc.com/openapi.json#/
+- Access the OpenAPI Specification: https://petstore.swagger.io/?url=https://stage.xkr.mjovanc.com/api/openapi.json#/
 - Access the monitor view: https://stage.xkr.mjovanc.com/monitor
 
 ### Production
@@ -82,7 +82,7 @@ To use the staging server you have three options:
 To use the production server you have three options:
 
 - Access the API: `https://xkr.mjovanc.com/api/v{number}/{endppoint}`
-- Access the OpenAPI Specification: https://petstore.swagger.io/?url=https://xkr.mjovanc.com/openapi.json#/
+- Access the OpenAPI Specification: https://petstore.swagger.io/?url=https://xkr.mjovanc.com/api/openapi.json#/
 - Access the monitor view: https://xkr.mjovanc.com/monitor
 
 ## Contribute

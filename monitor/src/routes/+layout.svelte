@@ -6,6 +6,7 @@
   import TopNavPhone from "../components/nav/TopNavPhone.svelte";
   import { browser } from "$app/environment";
   import Footer from "../components/Footer.svelte";
+  import Head from "../components/Head.svelte";
   export let data;
   let isPhone = false;
   export const trailingSlash = "always";
@@ -19,6 +20,7 @@
   });
 </script>
 
+<Head />
 <div
   class=" bg-neutral-50 text-neutral-700 dark:bg-neutral-900 dark:text-neutral-100 font-roboto"
 >

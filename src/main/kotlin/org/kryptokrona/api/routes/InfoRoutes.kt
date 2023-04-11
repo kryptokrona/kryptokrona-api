@@ -40,9 +40,12 @@ import io.ktor.server.routing.*
 import org.kryptokrona.api.models.request.NodeRequest
 import org.kryptokrona.api.models.response.ExceptionResponse
 import org.kryptokrona.api.models.response.ResultResponse
+import org.kryptokrona.api.services.github.GitHubService
 import org.kryptokrona.api.utils.jsonObjectMapper
 import org.kryptokrona.sdk.http.client.NodeClient
 import org.kryptokrona.sdk.util.node.Node
+
+val gitHubService = GitHubService()
 
 fun Route.infoRoute() {
     route("/v1/info") {
@@ -57,6 +60,18 @@ fun Route.infoRoute() {
                 val result = nodeClient.getNodeInfo()
 
                 val json = jsonObjectMapper().writeValueAsString(result)
+
+                call.respond(HttpStatusCode.OK, json)
+            }
+        }
+
+        route("/contributors") {
+            // nodeDocumentation()
+
+            get {
+                val contributors = gitHubService.getContributors()
+
+                val json = jsonObjectMapper().writeValueAsString(contributors)
 
                 call.respond(HttpStatusCode.OK, json)
             }

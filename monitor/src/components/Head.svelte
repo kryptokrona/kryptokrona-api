@@ -1,6 +1,5 @@
 <script>
   import { page } from "$app/stores";
-  console.log(new URL($page.url));
 </script>
 
 <svelte:head>

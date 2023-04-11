@@ -42,6 +42,7 @@ import org.kryptokrona.api.models.response.ExceptionResponse
 import org.kryptokrona.api.models.response.ResultResponse
 import org.kryptokrona.api.utils.jsonObjectMapper
 import org.kryptokrona.sdk.http.client.NodeClient
+import org.kryptokrona.sdk.http.model.node.Info
 import org.kryptokrona.sdk.util.node.Node
 
 fun Route.infoRoute() {
@@ -72,7 +73,7 @@ private fun Route.nodeDocumentation() {
             description("Gets a specific node information.")
             response {
                 responseCode(HttpStatusCode.OK)
-                responseType<ResultResponse>()
+                responseType<Info>()
                 description("Will return node information.")
             }
             canRespond {

@@ -11,8 +11,8 @@
     <p class="pb-1">{title}</p>
     <GrayButton text="1h" />
     <GrayButton text="24h" />
-    <GrayButton text="Weeks" />
-    <GrayButton text="Months" />
+    <GrayButton text="1 Week" />
+    <GrayButton text="1 Month" />
   </div>
   <div class="h-4/5">
     <slot />

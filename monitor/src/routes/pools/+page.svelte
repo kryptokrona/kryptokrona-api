@@ -23,7 +23,7 @@
 <div class="flex items-center justify-center">
   <div class="w-full">
     <div class="relative dark:text-neutral-900">
-      <i class="fa-solid fa-magnifying-glass search-icon " />
+      <i class="fa-solid fa-magnifying-glass search-icon" />
       <input
         bind:value={searchInput}
         class="search-input rounded-md w-full border-neutral-700 border dark:border-none"
@@ -158,8 +158,8 @@
   <div class="text-center">
     <GrayButton text="1h" />
     <GrayButton text="24h" />
-    <GrayButton text="Weeks" />
-    <GrayButton text="Months" />
+    <GrayButton text="1 Week" />
+    <GrayButton text="1 Month" />
   </div>
   <div class="w-full h-60 md:h-96">
     <LineColumnChartWithLabels
@@ -175,8 +175,8 @@
   <div class="text-center">
     <GrayButton text="1h" />
     <GrayButton text="24h" />
-    <GrayButton text="Weeks" />
-    <GrayButton text="Months" />
+    <GrayButton text="1 Week" />
+    <GrayButton text="1 Month" />
   </div>
   <div class="w-full h-60 md:h-96">
     <AreaChartWithLabels

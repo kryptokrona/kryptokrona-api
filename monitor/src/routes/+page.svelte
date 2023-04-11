@@ -15,21 +15,21 @@
   <Grid columns={5}>
     <TitleAndTextContainer title="Threads" text="14" />
     <TitleAndTextContainer title="Uptime" text="4 days" />
-    <TitleAndTextContainer title="CPU total" text="30%">
+    <TitleAndTextContainer title="CPU usage" text="30%">
       <div
         class="flex h-5/6 items-end justify-center absolute top-7 left-0 right-0"
       >
         <CircleChart data={[30]} id="id8" />
       </div>
     </TitleAndTextContainer>
-    <TitleAndTextContainer title="RAM total" text="50%">
+    <TitleAndTextContainer title="RAM usage" text="50%">
       <div
         class="flex h-5/6 items-end justify-center absolute top-7 left-0 right-0"
       >
         <CircleChart data={[50]} id="id9" />
       </div>
     </TitleAndTextContainer>
-    <TitleAndTextContainer title="DISK total" text="40%">
+    <TitleAndTextContainer title="DISK usage" text="40%">
       <div
         class="flex h-5/6 items-end justify-center absolute top-7 left-0 right-0"
       >

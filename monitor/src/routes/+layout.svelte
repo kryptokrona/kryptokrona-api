@@ -5,16 +5,12 @@
   import { onMount } from "svelte";
   import TopNavPhone from "../components/nav/TopNavPhone.svelte";
   import { browser } from "$app/environment";
-  import { initKeycloak } from "../api/login";
   export let data;
   let isPhone = false;
-  export const trailingSlash = 'always';
+  export const trailingSlash = "always";
 
   onMount(async () => {
     if (!browser) return;
-
-    initKeycloak();
-
     isPhone = window.innerWidth < 1024;
     addEventListener("resize", () => {
       isPhone = window.innerWidth < 1024;

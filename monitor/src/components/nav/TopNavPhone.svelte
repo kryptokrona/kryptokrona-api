@@ -71,10 +71,10 @@
         on:click={toggleMenu}
         class="
                     text-center
-                    relative 
+                    relative
                     bg-neutral-400
                     dark:bg-neutral-700
-                    rounded-md 
+                    rounded-md
                     py-1.5 px-2
                     mr-1"
         aria-label="toggle menu"
@@ -102,8 +102,10 @@
       <button
         on:click={() => {
           navigate("/pools");
-        }}><i class="fa-solid fa-water-ladder " /> pools</button
+        }}
+        class="pb-4"><i class="fa-solid fa-water-ladder" /> pools</button
       >
+      <!-- 
       {#if $user.email != null}
         <button
           on:click={() => {
@@ -119,7 +121,7 @@
             }}
           />
         </div>
-      {/if}
+      {/if}-->
     </div>
   </div>
 </nav>

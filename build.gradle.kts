@@ -12,6 +12,7 @@ val liquibase_core: String by project
 val ktorm_jackson_version: String by project
 val slf4j_version: String by project
 val kryptokrona_version: String by project
+val prometheus_version: String by project
 
 plugins {
     application
@@ -61,7 +62,7 @@ dependencies {
     implementation("org.kryptokrona.sdk:kryptokrona-http:$kryptokrona_version")
     implementation("org.kryptokrona.sdk:kryptokrona-util:$kryptokrona_version")
 
-    // various
+    // ktor
     implementation("io.ktor:ktor-server-core-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktor_version")
     implementation("io.ktor:ktor-utils-jvm:$ktor_version")
@@ -71,13 +72,14 @@ dependencies {
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-servlet:$ktor_version")
     implementation("io.ktor:ktor-server-openapi:$ktor_version")
-    implementation("org.ktorm:ktorm-support-postgresql:$ktorm_version")
-    implementation("org.postgresql:postgresql:$postgres_version")
+    implementation("io.ktor:ktor-server-metrics-micrometer:$ktor_version")
+    implementation("io.micrometer:micrometer-registry-prometheus:$prometheus_version")
     implementation("io.ktor:ktor-serialization-jackson-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-cors:$ktor_version")
-    implementation("org.ktorm:ktorm-core:$ktorm_version")
     implementation("io.ktor:ktor-server-config-yaml-jvm:2.2.4")
+
+    // various
     implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("org.ktorm:ktorm-jackson:$ktorm_jackson_version")
     implementation("org.slf4j:slf4j-api:$slf4j_version")
@@ -87,6 +89,9 @@ dependencies {
     implementation("io.bkbn:kompendium-core:3.14.0")
 
     // database
+    implementation("org.ktorm:ktorm-support-postgresql:$ktorm_version")
+    implementation("org.postgresql:postgresql:$postgres_version")
+    implementation("org.ktorm:ktorm-core:$ktorm_version")
     implementation("org.apache.commons:commons-dbcp2:2.9.0")
 
     // liquibase

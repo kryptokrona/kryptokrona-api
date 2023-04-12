@@ -8,7 +8,7 @@ prometheus_db_dir: /var/lib/prometheus
 prometheus_read_only_dirs: []
 
 prometheus_web_listen_address: "0.0.0.0:9090"
-prometheus_web_external_url: '/prometheus/'
+prometheus_web_external_url: '/prometheus'
 # See https://github.com/prometheus/exporter-toolkit/blob/master/docs/web-configuration.md
 prometheus_web_config:
   tls_server_config: {}
@@ -79,6 +79,10 @@ prometheus_scrape_configs:
     file_sd_configs:
       - files:
           - "{{ prometheus_config_dir }}/file_sd/node.yml"
+  - job_name: 'backend'
+    metrics_path: '/requests/metrics'
+    static_configs:
+      - targets: [ 'localhost:8080' ]
 
 # Alternative config file name, searched in ansible templates path.
 prometheus_config_file: 'prometheus.yml.j2'

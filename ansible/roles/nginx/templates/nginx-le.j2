@@ -88,7 +88,7 @@ server {
     }
 
 
-    location /prometheus/ {
+    location /prometheus {
       set $prometheusUrl {{ kryptokrona_api_name }}_monitoring;
 
       proxy_set_header Accept-Encoding "";

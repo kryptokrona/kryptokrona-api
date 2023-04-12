@@ -3,7 +3,7 @@
 </script>
 
 <footer
-  class="border-t border-neutral-700 dark:border-neutral-50 flex justify-center mt-8"
+  class="border-t border-neutral-700 dark:border-neutral-50 flex justify-center mt-16"
 >
   <div class="flex flex-row p-4" style="font-size: clamp(10px,2.5vw,16px)">
     <p class="mr-4">Powered by:</p>

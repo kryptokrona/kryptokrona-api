@@ -5,7 +5,7 @@
   export let height = "h-52 sm:h-64";
 </script>
 
-<div class={color + " w-full rounded-md overflow-hidden relative " + height}>
+<div class={color + " w-full rounded-md relative " + height}>
   <div class={(text == "" ? "h-1/5" : "h-2/5") + " pt-1 text-center"}>
     <p>{title}</p>
   </div>

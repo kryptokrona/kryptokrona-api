@@ -8,3 +8,19 @@ export async function getNodes() {
   }
   return [];
 }
+
+export async function getNode(name, port) {
+  try {
+    const response = await fetch("http://localhost:8080/api/v1/info/node", {
+      method: "POST",
+      body: JSON.stringify({
+        hostName: name,
+        port: port,
+        ssl: false,
+      }),
+    });
+  } catch (error) {
+    console.error("failed fetching nodes " + error);
+  }
+  return {};
+}

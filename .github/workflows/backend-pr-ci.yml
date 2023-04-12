@@ -95,6 +95,9 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
+      - name: Run Liquibase Migrations
+        run: ./gradlew update -PdbEnv=dev
+
       - name: Run Unit Test
         run: ./gradlew test
 

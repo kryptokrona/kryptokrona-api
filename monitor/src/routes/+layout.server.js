@@ -1,4 +1,7 @@
 export const ssr = true;
+
+import { getPosts } from "../api/hugin";
+import { getThreads, getCpuUsage, getCpuUsage1h, getramUsage, getUptime, getCpuUsage24h, getCpuUsage7d, getCpuUsage30d } from "../api/prometheus";
 import { getRepoStats } from "../server/github.server";
 import { getNodes } from "../api/nodes";
 

@@ -32,6 +32,7 @@
 		"@sveltejs/adapter-static": "^2.0.1",
 		"apexcharts": "^3.37.1",
 		"dotenv": "^16.0.3",
-		"keycloak-js": "^21.0.1"
+		"keycloak-js": "^21.0.1",
+		"prometheus-query": "^3.3.1"
 	}
 }

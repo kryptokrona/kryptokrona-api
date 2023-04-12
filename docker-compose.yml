@@ -64,7 +64,6 @@ services:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     ports:
       - "9090:9090"
-      - "9323:9323"
     networks:
       - kryptokrona_api_net
 

@@ -88,7 +88,7 @@ server {
     }
 
 
-    location /monitoring {
+    location /prometheus/ {
       set $prometheusUrl {{ kryptokrona_api_name }}_monitoring;
 
       proxy_set_header Accept-Encoding "";
@@ -106,14 +106,6 @@ server {
 
       rewrite ^/monitoring/?$ /monitoring/graph redirect;
       rewrite ^/monitoring/(.*)$ /$1 break;
-  }
-
-  location /prometheus {
-    proxy_pass http://{{ kryptokrona_api_name }}_monitoring/api/v1;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "Upgrade";
-    proxy_set_header Host $host;
   }
 
   location /metrics {

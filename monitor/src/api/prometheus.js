@@ -1,7 +1,7 @@
 import { PrometheusDriver } from 'prometheus-query';
 
 const prom = new PrometheusDriver({
-    endpoint: "https://172.0.0.1:9090",
+    endpoint: "https://stage.xkr.mjovanc.com/prometheus",
     baseURL: "/api/v1" // default value
 });
 
@@ -29,17 +29,16 @@ export async function getCpuUsage1h() {
     var values = []
     var times = []
     var usage = 0;
-    const q = "rate(node_cpu_seconds_total{mode!='idle', job='node'}[30s])";
+    const q = "100 - (avg by (instance) (rate(node_cpu_seconds_total{job='node',mode='idle'}[1m])) * 100)";
     prom.rangeQuery(q, start, end, step)
     .then((res) => {
         const series = res.result;
+        var i = 0;
         series.forEach((serie) => {
-          
-           serie.values.forEach((value) => {
-            usage = usage + value.value
-           })
-           values.push(usage)
-           times.push(serie.values[0].time)
+         serie.values.forEach((value) => {
+          values.push(value.value)
+          times.push(value.time)
+         })
         });
       
       var object = { values, times }
@@ -56,21 +55,20 @@ export async function getCpuUsage24h() {
     const step = 60 * 60
     var values = []
     var times = []
-    const q = "rate(node_cpu_seconds_total{mode!='idle', job='node'}[30s])";
+    const q = "100 - (avg by (instance) (rate(node_cpu_seconds_total{job='node',mode='idle'}[1m])) * 100)";
     prom.rangeQuery(q, start, end, step)
     .then((res) => {
-      const series = res.result;
-      series.forEach((serie) => {
-        
+        const series = res.result;
+        var i = 0;
+        series.forEach((serie) => {
          serie.values.forEach((value) => {
-          usage = usage + value.value
+          values.push(value.value)
+          times.push(value.time)
          })
-         values.push(usage)
-         times.push(serie.values[0].time)
-      });
-    
-    var object = { values, times }
-    return object
+        });
+      
+      var object = { values, times }
+      return object
     })
   } catch (error) {
     console.error(error);
@@ -83,18 +81,16 @@ export async function getCpuUsage7d() {
     const step = 60 * 60 * 24
     var values = []
     var times = []
-    const q = "rate(node_cpu_seconds_total{mode!='idle', job='node'}[30s])";
+    const q = "100 - (avg by (instance) (rate(node_cpu_seconds_total{job='node',mode='idle'}[1m])) * 100)";
     prom.rangeQuery(q, start, end, step)
     .then((res) => {
-      const series = res.result;
-      series.forEach((serie) => {
-        
+        const series = res.result;
+        var i = 0;
+        series.forEach((serie) => {
          serie.values.forEach((value) => {
-          usage = usage + value.value
+          values.push(value.value)
+          times.push(value.time)
          })
-         values.push(usage)
-         times.push(serie.values[0].time)
-    
         });
       
       var object = { values, times }
@@ -111,17 +107,16 @@ export async function getCpuUsage30d() {
     const step = 60 * 60 * 24 
     var values = []
     var times = []
-    const q = "rate(node_cpu_seconds_total{mode!='idle', job='node'}[30s])";
+    const q = "100 - (avg by (instance) (rate(node_cpu_seconds_total{job='node',mode='idle'}[1m])) * 100)";
     prom.rangeQuery(q, start, end, step)
     .then((res) => {
-      const series = res.result;
-      series.forEach((serie) => {
-        
+        const series = res.result;
+        var i = 0;
+        series.forEach((serie) => {
          serie.values.forEach((value) => {
-          usage = usage + value.value
+          values.push(value.value)
+          times.push(value.time)
          })
-         values.push(usage)
-         times.push(serie.values[0].time)
         });
       
       var object = { values, times }

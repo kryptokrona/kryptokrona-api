@@ -12,6 +12,7 @@ export const load = async () => {
   async function fetchRepo() {
     return await getRepoStats();
   }
+  await getCpuUsage1h()
   /*
 	async function fetchPosts()  {
 		return await getPosts("1m");

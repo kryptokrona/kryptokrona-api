@@ -27,11 +27,11 @@
 
 <div class="flex items-center justify-center">
   <div class="w-full">
-    <div class="relative dark:text-neutral-900">
+    <div class="relative dark:text-neutral-50">
       <i class="fa-solid fa-magnifying-glass search-icon" />
       <input
         bind:value={searchInput}
-        class="search-input rounded-md w-full border-neutral-700 border dark:border-none"
+        class="search-input rounded-md dark:bg-neutral-900 w-full border-neutral-700 border dark:border-neutral-50"
         type="text"
         aria-label="search for node"
         placeholder="search"

@@ -4,9 +4,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const prom = new PrometheusDriver({
-    endpoint: `http://${process.env.PROMETHEUS_URL}/prometheus`,
+    endpoint: `${process.env.PROMETHEUS_URL}`,
     baseURL: "/api/v1" // default value
 });
+
+console.log("PROMETHEUS DRIVER: ", prom)
 
 export async function getCpuUsage() {
   try {
@@ -33,24 +35,21 @@ export async function getCpuUsage1h() {
     var times = []
     var usage = 0;
     const q = "100 - (avg by (instance) (rate(node_cpu_seconds_total{job='node',mode='idle'}[1m])) * 100)";
-    prom.rangeQuery(q, start, end, step)
-    .then((res) => {
-        const series = res.result;
-        var i = 0;
-        series.forEach((serie) => {
-         serie.values.forEach((value) => {
-          values.push(value.value)
-          times.push(value.time)
-         })
-        });
-      
-      var object = { values, times }
-      return object
-    })
+    const res = await prom.rangeQuery(q, start, end, step); // wait for the promise to resolve
+    const series = res.result;
+    series.forEach((serie) => {
+      serie.values.forEach((value) => {
+        values.push(value.value)
+        times.push(value.time)
+      })
+    });
+    var object = { values, times }
+    return object; // return the object from the function
   } catch (error) {
     console.error(error);
   }
 }
+
 export async function getCpuUsage24h() {
   try {
     const start = new Date().getTime() - 60 * 60 * 24 * 1000;

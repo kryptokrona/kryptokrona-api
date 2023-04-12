@@ -13,6 +13,6 @@ scrape_configs:
       - targets: ['host.docker.internal:9323']
 
   - job_name: 'backend'
-    metrics_path: '/v1/info/requests/metrics'
+    metrics_path: '/api/v1/info/requests/metrics'
     static_configs:
-      - targets: [ 'localhost:8080' ]
+      - targets: [ 'backend:8080' ]

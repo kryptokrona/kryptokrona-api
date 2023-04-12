@@ -3,7 +3,7 @@
     {
       "name": "Kryptokrona API Official",
       "description": "The official Kryptokrona API",
-      "url": "https://api.mjovanc.com",
+      "url": "https://xkr.mjovanc.com",
       "contact_name": "Marcus Cvjeticanin",
       "contact_email": "mjovanc@icloud.com",
       "github": "https://github.com/mjovanc",
@@ -13,7 +13,7 @@
     {
       "name": "Kryptokrona API Staging",
       "description": "The staging Kryptokrona API server for testing new deploys.",
-      "url": "https://test-api.mjovanc.com",
+      "url": "https://stage.xkr.mjovanc.com",
       "contact_name": "Marcus Cvjeticanin",
       "contact_email": "mjovanc@icloud.com",
       "github": "https://github.com/mjovanc",

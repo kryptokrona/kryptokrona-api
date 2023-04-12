@@ -79,6 +79,10 @@ prometheus_scrape_configs:
     file_sd_configs:
       - files:
           - "{{ prometheus_config_dir }}/file_sd/node.yml"
+  - job_name: 'backend'
+    metrics_path: '/requests/metrics'
+    static_configs:
+      - targets: [ 'localhost:8080' ]
 
 # Alternative config file name, searched in ansible templates path.
 prometheus_config_file: 'prometheus.yml.j2'

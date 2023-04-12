@@ -49,16 +49,24 @@ import io.ktor.serialization.jackson.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
+import io.ktor.server.metrics.micrometer.*
 import io.ktor.server.netty.*
 import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics
+import io.micrometer.core.instrument.binder.jvm.JvmMemoryMetrics
+import io.micrometer.core.instrument.binder.system.ProcessorMetrics
+import io.micrometer.core.instrument.distribution.DistributionStatisticConfig
+import io.micrometer.prometheus.PrometheusConfig
+import io.micrometer.prometheus.PrometheusMeterRegistry
 import kotlinx.serialization.json.Json
 import org.kryptokrona.api.plugins.DatabaseFactory
 import org.kryptokrona.api.plugins.configureRouting
 import org.kryptokrona.api.plugins.configureSyncers
 import java.net.URI
+import java.time.Duration
 
 fun main() {
     embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
@@ -66,6 +74,8 @@ fun main() {
 }
 
 fun Application.module() {
+    val appMicrometerRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
+
     install(ContentNegotiation) {
         json(Json {
           serializersModule = KompendiumSerializersModule.module
@@ -81,6 +91,22 @@ fun Application.module() {
             registerModule(JavaTimeModule())  // support java.time.* types
             configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
         }
+    }
+    install(MicrometerMetrics) {
+        registry = appMicrometerRegistry
+        meterBinders = listOf(
+            JvmMemoryMetrics(),
+            JvmGcMetrics(),
+            ProcessorMetrics()
+        )
+        distributionStatisticConfig = DistributionStatisticConfig.Builder()
+        .percentilesHistogram(true)
+        .maximumExpectedValue(Duration.ofSeconds(20).toNanos().toDouble())
+        .serviceLevelObjectives(
+            Duration.ofMillis(100).toNanos().toDouble(),
+            Duration.ofMillis(500).toNanos().toDouble()
+        )
+        .build()
     }
     install(CORS) {
         anyHost()

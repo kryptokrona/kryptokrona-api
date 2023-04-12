@@ -1,4 +1,4 @@
-const endpoint = "http://localhost:9090/api/v1";
+const endpoint = "https://stage.xkr.mjovanc.com/prometheus/api/v1";
 
 export async function getCpuUsage() {
   try {
@@ -14,7 +14,7 @@ export async function getCpuUsage() {
 export async function getramUsage() {
   try {
     const response = await fetch(
-      endpoint + "/query?query=10*(avg_over_time(node_memory_MemTotal_bytes[1m]))/(avg_over_time(node_memory_MemFree_bytes[1m])+avg_over_time(node_memory_Cached_bytes[1m])+avg_over_time(node_memory_Buffers_bytes[1m]))"
+      endpoint + "/query?query=100 * (((avg_over_time(node_memory_MemFree_bytes[10m]) + avg_over_time(node_memory_Cached_bytes[10m]) + avg_over_time(node_memory_Buffers_bytes[10m])) / avg_over_time(node_memory_MemTotal_bytes[10m])))"
     );
     const data = await response.json();
     console.log(data)

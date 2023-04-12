@@ -33,6 +33,7 @@ services:
     container_name: kryptokrona_api_monitor
     environment:
      PRIVATE_GITHUB_TOKEN: change-me
+     PROMETHEUS_URL: "http://prometheus"
     ports:
       - "3000:3000"
     networks:

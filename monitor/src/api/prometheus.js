@@ -1,7 +1,10 @@
 import { PrometheusDriver } from 'prometheus-query';
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const prom = new PrometheusDriver({
-    endpoint: "http://localhost:9090",
+    endpoint: `http://${process.env.PROMETHEUS_URL}/prometheus`,
     baseURL: "/api/v1" // default value
 });
 

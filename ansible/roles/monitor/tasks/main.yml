@@ -8,7 +8,8 @@
     force_kill: yes
     recreate: yes
     env: {
-      PRIVATE_GITHUB_TOKEN: "{{ vault_github_token }}"
+      PRIVATE_GITHUB_TOKEN: "{{ vault_github_token }}",
+      PROMETHEUS_URL: "https://{{ domain_name }}"
     }
     networks:
       - name: "host"

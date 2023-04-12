@@ -66,6 +66,12 @@ jobs:
       - name: Assemble
         run: ./gradlew assemble
 
+      - name: Upload Build Directory Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: build-dir
+          path: ./build
+
   unit-test:
     name: Unit Test
     runs-on: ubuntu-latest

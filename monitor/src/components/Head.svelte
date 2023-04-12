@@ -4,7 +4,7 @@
 
 <svelte:head>
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Kryptokrona api" />
+  <meta property="og:title" content="Kryptokrona API" />
   <meta property="og:url" content={$page.url} />
   <meta
     property="og:description"

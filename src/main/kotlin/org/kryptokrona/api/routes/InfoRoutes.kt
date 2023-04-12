@@ -39,7 +39,6 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.kryptokrona.api.models.request.NodeRequest
 import org.kryptokrona.api.models.response.ExceptionResponse
-import org.kryptokrona.api.models.response.ResultResponse
 import org.kryptokrona.api.utils.Metrics
 import org.kryptokrona.api.utils.jsonObjectMapper
 import org.kryptokrona.sdk.http.client.NodeClient

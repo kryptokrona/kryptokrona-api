@@ -1,9 +1,9 @@
 <script>
-  import TitleAndTextContainer from "../../../components/containers/TitleAndTextContainer.svelte";
-  import TitleAndTextContainerGreen from "../../../components/containers/TitleAndTextContainerGreen.svelte";
-  import Grid from "../../../components/grids/Grid.svelte";
+    import TitleAndTextContainer from "../../../components/containers/TitleAndTextContainer.svelte";
+    import TitleAndTextContainerGreen from "../../../components/containers/TitleAndTextContainerGreen.svelte";
+    import Grid from "../../../components/grids/Grid.svelte";
 
-  import ToggleBox from "../../../components/toggle-box/ToggleBox.svelte";
+    import ToggleBox from "../../../components/toggle-box/ToggleBox.svelte";
 </script>
 
 <h1>Göta Pool</h1>

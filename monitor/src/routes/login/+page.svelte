@@ -1,10 +1,10 @@
 <script>
-  import BlueButton from "../../components/buttons/BlueButton.svelte";
-  import GreenButton from "../../components/buttons/GreenButton.svelte";
-  import { login } from "../../api/login";
-  import { goto } from "$app/navigation";
-  import { user } from "../../stores/user";
-  let email;
+    import BlueButton from "../../components/buttons/BlueButton.svelte";
+    import GreenButton from "../../components/buttons/GreenButton.svelte";
+    import {login} from "../../api/login";
+    import {user} from "../../stores/user";
+
+    let email;
 
   async function onLogin() {
     $user = await login(email);

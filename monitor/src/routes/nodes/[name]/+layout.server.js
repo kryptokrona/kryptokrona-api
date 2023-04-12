@@ -1,5 +1,5 @@
 export const ssr = true;
-import { getNode } from "../../../api/nodes";
+import {getNode} from "../../../api/nodes";
 
 export const load = async ({ url }) => {
   const searchparams = new URLSearchParams(url.searchParams);

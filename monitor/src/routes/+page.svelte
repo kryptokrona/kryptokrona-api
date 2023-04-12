@@ -1,15 +1,8 @@
 <script>
-  import { COLOR } from "../helpers/colors";
+  import {COLOR} from "../helpers/colors";
   import CircleChart from "../components/charts/CircleChart.svelte";
   import ToggleBox from "../components/toggle-box/ToggleBox.svelte";
-  import {
-    chart1,
-    chart4,
-    chart5,
-    requestsChart,
-    SuccessfulRequestsChart,
-    badRequestsChart,
-  } from "../mock-data/data";
+  import {badRequestsChart, chart1, chart4, chart5, requestsChart, SuccessfulRequestsChart,} from "../mock-data/data";
   import TitleAndTextContainer from "../components/containers/TitleAndTextContainer.svelte";
   import ChartWithTimeButtonsContainer from "../components/containers/ChartWithTimeButtonsContainer.svelte";
   import Grid from "../components/grids/Grid.svelte";

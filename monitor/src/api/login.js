@@ -1,6 +1,5 @@
-
 import Keycloak from "keycloak-js";
-import { setUser } from "../stores/user";
+import {setUser} from "../stores/user";
 
 // temporary
 const PUBLIC_KEYCLOAK_URL="http://localhost:18080/"

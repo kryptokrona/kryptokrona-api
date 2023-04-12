@@ -1,13 +1,13 @@
 <script>
-  import { COLOR } from "../../helpers/colors";
-  import AreaChart from "../../components/charts/AreaChart.svelte";
-  import { pools, poolChart, months } from "../../mock-data/data";
-  import PercentageBar from "../../components/PercentageBar.svelte";
-  import PieChartWithLabels from "../../components/charts/PieChartWithLabels.svelte";
-  import LineChartWithLabels from "../../components/charts/LineChartWithLabels.svelte";
-  import Grid from "../../components/grids/Grid.svelte";
+    import {COLOR} from "../../helpers/colors";
+    import AreaChart from "../../components/charts/AreaChart.svelte";
+    import {months, poolChart, pools} from "../../mock-data/data";
+    import PercentageBar from "../../components/PercentageBar.svelte";
+    import PieChartWithLabels from "../../components/charts/PieChartWithLabels.svelte";
+    import LineChartWithLabels from "../../components/charts/LineChartWithLabels.svelte";
+    import Grid from "../../components/grids/Grid.svelte";
 
-  //TODO add sort on height
+    //TODO add sort on height
   let page = 0;
   let rowsPerPage = 5;
   let sliceIndex = 5;

@@ -1,6 +1,7 @@
 <script>
-  import { COLOR } from "../helpers/colors";
-  export let percentage = 50;
+    import {COLOR} from "../helpers/colors";
+
+    export let percentage = 50;
   export let color = COLOR.BLUE;
 </script>
 

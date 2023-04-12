@@ -1,13 +1,14 @@
 <script>
-  import "../app.scss";
-  import "../theme/chart.scss";
-  import TopNav from "../components/nav/TopNav.svelte";
-  import { onMount } from "svelte";
-  import TopNavPhone from "../components/nav/TopNavPhone.svelte";
-  import { browser } from "$app/environment";
-  import Footer from "../components/Footer.svelte";
-  import Head from "../components/Head.svelte";
-  export let data;
+    import "../app.scss";
+    import "../theme/chart.scss";
+    import TopNav from "../components/nav/TopNav.svelte";
+    import {onMount} from "svelte";
+    import TopNavPhone from "../components/nav/TopNavPhone.svelte";
+    import {browser} from "$app/environment";
+    import Footer from "../components/Footer.svelte";
+    import Head from "../components/Head.svelte";
+
+    export let data;
   let isPhone = false;
   export const trailingSlash = "always";
 

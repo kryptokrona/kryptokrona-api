@@ -1,4 +1,4 @@
-import { PrometheusDriver } from 'prometheus-query';
+import {PrometheusDriver} from 'prometheus-query';
 import dotenv from "dotenv";
 
 dotenv.config();

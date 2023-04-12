@@ -1,8 +1,8 @@
 <script>
-  import { goto } from "$app/navigation";
-  import { base } from "$app/paths";
+    import {goto} from "$app/navigation";
+    import {base} from "$app/paths";
 
-  let phoneMenu;
+    let phoneMenu;
   let show = false;
   export let repo;
 

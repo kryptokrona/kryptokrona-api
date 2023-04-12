@@ -1,7 +1,8 @@
 <script>
-  import { COLOR } from "../../helpers/colors";
-  import { onMount } from "svelte";
-  export let id;
+    import {COLOR} from "../../helpers/colors";
+    import {onMount} from "svelte";
+
+    export let id;
   export let data = 0;
   export let color = COLOR.green;
   export let warningPoint = 60;

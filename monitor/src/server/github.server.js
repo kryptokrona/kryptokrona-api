@@ -1,5 +1,5 @@
-import { formatDate } from "../helpers/helpers";
-import { Octokit } from "@octokit/rest";
+import {formatDate} from "../helpers/helpers";
+import {Octokit} from "@octokit/rest";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -31,7 +31,7 @@ export async function getRepoStats() {
         return {stargazers, latestVersion, latestCommit, contributors }; //TODO: change version to the latest release with GitHub API later
     } catch (error) {
         console.error(error);
-    }   
+    }
     return {};
 }
 

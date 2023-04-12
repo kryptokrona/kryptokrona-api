@@ -1,6 +1,6 @@
 <script>
-  import BlueButton from "../../components/buttons/BlueButton.svelte";
-  import { user } from "../../stores/user";
+    import BlueButton from "../../components/buttons/BlueButton.svelte";
+    import {user} from "../../stores/user";
 </script>
 
 <div class="text-center">

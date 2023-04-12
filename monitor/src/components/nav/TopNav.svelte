@@ -1,7 +1,8 @@
 <script>
-  import TopNavButton from "./TopNavButton.svelte";
-  import { base } from "$app/paths";
-  export let repo;
+    import TopNavButton from "./TopNavButton.svelte";
+    import {base} from "$app/paths";
+
+    export let repo;
 </script>
 
 <nav class="top-nav flex pt-4 pb-4" aria-label="main navigation">

@@ -59,12 +59,11 @@ import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics
 import io.micrometer.core.instrument.binder.jvm.JvmMemoryMetrics
 import io.micrometer.core.instrument.binder.system.ProcessorMetrics
 import io.micrometer.core.instrument.distribution.DistributionStatisticConfig
-import io.micrometer.prometheus.PrometheusConfig
-import io.micrometer.prometheus.PrometheusMeterRegistry
 import kotlinx.serialization.json.Json
 import org.kryptokrona.api.plugins.DatabaseFactory
 import org.kryptokrona.api.plugins.configureRouting
 import org.kryptokrona.api.plugins.configureSyncers
+import org.kryptokrona.api.utils.Metrics
 import java.net.URI
 import java.time.Duration
 
@@ -74,8 +73,6 @@ fun main() {
 }
 
 fun Application.module() {
-    val appMicrometerRegistry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
-
     install(ContentNegotiation) {
         json(Json {
           serializersModule = KompendiumSerializersModule.module
@@ -93,7 +90,7 @@ fun Application.module() {
         }
     }
     install(MicrometerMetrics) {
-        registry = appMicrometerRegistry
+        registry = Metrics.getRegistry()
         meterBinders = listOf(
             JvmMemoryMetrics(),
             JvmGcMetrics(),

@@ -19,6 +19,17 @@
   }
 }
 
+@media (prefers-color-scheme: dark) {
+  body:focus,*:focus {
+    outline: 2px solid white;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  body:focus,*:focus {
+    outline: 2px solid #0a0a0a;
+  }
+ }
 
 
 .togglebox-hidden {

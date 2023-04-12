@@ -1,7 +1,7 @@
 import { PrometheusDriver } from 'prometheus-query';
 
 const prom = new PrometheusDriver({
-    endpoint: "https://stage.xkr.mjovanc.com/prometheus",
+    endpoint: "http://localhost:9090",
     baseURL: "/api/v1" // default value
 });
 

@@ -80,7 +80,7 @@ prometheus_scrape_configs:
       - files:
           - "{{ prometheus_config_dir }}/file_sd/node.yml"
   - job_name: 'backend'
-    metrics_path: '/requests/metrics'
+    metrics_path: '/v1/info/requests/metrics'
     static_configs:
       - targets: [ 'localhost:8080' ]
 

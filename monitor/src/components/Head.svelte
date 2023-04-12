@@ -10,5 +10,8 @@
     property="og:description"
     content="Kryptokrona API for caching and processing data from the blockchain to provide faster access for services."
   />
-  <meta property="og:image" content={$page.url.origin + "/monitor/logo.png"} />
+  <meta
+    property="og:image"
+    content={$page.url.origin + "/monitor/logo_meta.png"}
+  />
 </svelte:head>

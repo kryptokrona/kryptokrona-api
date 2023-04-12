@@ -62,7 +62,7 @@
 </div>
 <nav class="top-nav pt-4 pb-4" aria-label="main navigation">
   <div class="flex">
-    <a href="/">
+    <a href={`${base}/`}>
       <img src={`${base}/logo.png`} class="w-36" alt="kryptokrona api" />
     </a>
     <div class="flex justify-end w-full items-center">

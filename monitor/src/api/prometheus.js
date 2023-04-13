@@ -1,8 +1,5 @@
 import { PrometheusDriver } from "prometheus-query";
-//import { PUBLIC_PROMETHEUS_URL } from "$env/static/public";
-
-// Detta ska vara i en env variabel. Men dotenv funkar inte på klienten och $env/static/public funkar inte i stage. Hjälp
-const PUBLIC_PROMETHEUS_URL = "https://stage.xkr.mjovanc.com/prometheus";
+import { PUBLIC_PROMETHEUS_URL } from "$env/static/public";
 
 let prom = new PrometheusDriver({
   endpoint: `${PUBLIC_PROMETHEUS_URL}`,

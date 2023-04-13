@@ -154,6 +154,21 @@ liquibase {
         )
     }
 
+    activities.register("test") {
+        val url = properties.getProperty("liquibase.test.url") ?: System.getenv("LIQUIBASE_TEST_URL")
+        val user = properties.getProperty("liquibase.test.user") ?: System.getenv("LIQUIBASE_TEST_USER")
+        val password = properties.getProperty("liquibase.test.password") ?: System.getenv("LIQUIBASE_TEST_PASSWORD")
+
+        this.arguments = mapOf(
+            "logLevel" to "info",
+            "changeLogFile" to "src/main/resources/db/changelog/master.xml",
+            "url" to url,
+            "username" to user,
+            "password" to password,
+            "classpath" to "src/main/resources/"
+        )
+    }
+
     activities.register("prod") {
         val url = System.getenv("LIQUIBASE_URL")
         val user = System.getenv("LIQUIBASE_USER")

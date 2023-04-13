@@ -1,21 +1,21 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="tests" type="GradleRunConfiguration" factoryName="Gradle">
+  <configuration default="false" name="migrate-test" type="GradleRunConfiguration" factoryName="Gradle">
     <ExternalSystemSettings>
       <option name="executionName" />
       <option name="externalProjectPath" value="$PROJECT_DIR$" />
       <option name="externalSystemIdString" value="GRADLE" />
-      <option name="scriptParameters" value="" />
+      <option name="scriptParameters" value="-PdbEnv=test" />
       <option name="taskDescriptions">
         <list />
       </option>
       <option name="taskNames">
         <list>
-          <option value=":test" />
+          <option value="update" />
         </list>
       </option>
-      <option name="vmOptions" value="-DDB_URL=jdbc:postgresql://127.0.0.1:5433/kryptokrona_api_test -DDB_USER=postgres -DDB_PASSWORD=test1234" />
+      <option name="vmOptions" />
     </ExternalSystemSettings>
-    <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+    <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
     <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
     <EXTENSION ID="com.intellij.execution.ExternalSystemRunConfigurationJavaExtension">
       <extension name="net.ashald.envfile">

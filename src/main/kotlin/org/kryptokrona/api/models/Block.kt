@@ -40,7 +40,7 @@ import java.time.LocalDateTime
 interface Block : Entity<Block> {
     companion object : Entity.Factory<Block>()
 
-    val id: Long
+    var id: Long
     var hash: String
     var time: Long
     var difficulty: Float

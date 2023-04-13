@@ -1,20 +1,28 @@
 <script>
-    import {COLOR} from "../../helpers/colors";
-    import AreaChart from "../../components/charts/AreaChart.svelte";
-    import ColumnChart from "../../components/charts/ColumnChart.svelte";
-    import AreaChartWithLabels from "../../components/charts/AreaChartWithLabels.svelte";
-    import TitleAndTextContainer from "../../components/containers/TitleAndTextContainer.svelte";
-    import ToggleBox from "../../components/toggle-box/ToggleBox.svelte";
-    import {base} from "$app/paths";
-    import {chart1, chart2, chart3, chart4, chart5, chart7, chart8, months,} from "../../mock-data/data";
-    import {goto} from "$app/navigation";
-    import LineChartWithLabels from "../../components/charts/LineChartWithLabels.svelte";
-    import TitleAndTextContainerGreen from "../../components/containers/TitleAndTextContainerGreen.svelte";
-    import Grid from "../../components/grids/Grid.svelte";
-    import {nodes} from "../../stores/data";
-    import {onMount} from "svelte";
+  import { COLOR } from "../../helpers/colors";
+  import AreaChart from "../../components/charts/AreaChart.svelte";
+  import ColumnChart from "../../components/charts/ColumnChart.svelte";
+  import AreaChartWithLabels from "../../components/charts/AreaChartWithLabels.svelte";
+  import TitleAndTextContainer from "../../components/containers/TitleAndTextContainer.svelte";
+  import ToggleBox from "../../components/toggle-box/ToggleBox.svelte";
+  import { base } from "$app/paths";
+  import {
+    chart1,
+    chart2,
+    chart3,
+    chart4,
+    chart5,
+    chart7,
+    chart8,
+    months,
+  } from "../../mock-data/data";
+  import { goto } from "$app/navigation";
+  import LineChartWithLabels from "../../components/charts/LineChartWithLabels.svelte";
+  import TitleAndTextContainerGreen from "../../components/containers/TitleAndTextContainerGreen.svelte";
+  import Grid from "../../components/grids/Grid.svelte";
+  import { nodes } from "../../stores/data";
 
-    export let data;
+  export let data;
 
   let page = 0;
   let rowsPerPage = 5;
@@ -24,9 +32,6 @@
 
   $: sliceIndex = calculateSliceIndex(page);
 
-  onMount(() => {
-    console.log($nodes);
-  });
   function calculateSliceIndex(page) {
     if (page == 0) return rowsPerPage;
     if (page + rowsPerPage > $nodes.length) return $nodes.length;

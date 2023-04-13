@@ -1,27 +1,33 @@
 export const ssr = true;
 
-import { getCpuUsage } from "../api/prometheus";
+import {
+  getCpuUsage,
+  getCpuUsageOverTime,
+  getRamUsage,
+  getUptime,
+  getThreads,
+} from "../api/prometheus";
 import { getRepoStats } from "../server/github.server";
 import { getNodes } from "../api/nodes";
 
 export const load = async () => {
-  let usage = await getCpuUsage();
-
+  async function fetchPrometheus() {
+    let cpuUsage = await getCpuUsage();
+    let cpuUsageOverTime = await getCpuUsageOverTime("1h");
+    let ramUsage = await getRamUsage();
+    let uptime = await getUptime();
+    let threads = await getThreads();
+    return { cpuUsage, cpuUsageOverTime, ramUsage, uptime, threads };
+  }
   async function fetchNodes() {
     return await getNodes();
   }
   async function fetchRepo() {
     return await getRepoStats();
   }
-  /*
-	async function fetchPosts()  {
-		return await getPosts("1m");
-	}*/
   return {
     repo: fetchRepo(),
     nodes: fetchNodes(),
-    prometheus: {
-      cpuUsage: usage,
-    } /* huginStats: fetchPosts() */,
+    prometheus: fetchPrometheus(),
   };
 };

@@ -4,11 +4,11 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const prom = new PrometheusDriver({
-    endpoint: `https://stage.xkr.mjovanc.com/prometheus`,
+    endpoint: `${process.env.PROMETHEUS_URL}`,
     baseURL: "/api/v1" // default value
 });
 
-//onsole.log("PROMETHEUS DRIVER: ", prom)
+console.log("PROMETHEUS DRIVER: ", prom)
 
 export async function getCpuUsage() {
   try {

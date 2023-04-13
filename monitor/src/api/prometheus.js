@@ -13,15 +13,15 @@ console.log("PROMETHEUS DRIVER: ", prom)
 export async function getCpuUsage() {
   try {
     var usage = 0;
-    const q = "rate(node_cpu_seconds_total{mode!='idle'}[30s])";
+    const q = "100 - (avg by (instance) (rate(node_cpu_seconds_total{job='node',mode='idle'}[1m])) * 100)";
     prom.instantQuery(q)
     .then((res) => {
         const series = res.result;
         series.forEach((serie) => {
             usage = usage + serie.value.value
         });
+        return usage;
     })
-    return usage * 100;
   } catch (error) {
     console.error(error);
   }

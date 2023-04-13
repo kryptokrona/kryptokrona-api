@@ -14,8 +14,7 @@ export async function getCpuUsage() {
     const q =
       "100 - (avg by (instance) (rate(node_cpu_seconds_total{job='node',mode='idle'}[1m])) * 100)";
     const response = await prom.instantQuery(q);
-    const series = response.result;
-    series.forEach((serie) => {
+    response.result.forEach((serie) => {
       usage = usage + serie.value.value;
     });
     return usage;
@@ -46,9 +45,8 @@ export async function getCpuUsage1h() {
     let times = [];
     const q =
       "100 - (avg by (instance) (rate(node_cpu_seconds_total{job='node',mode='idle'}[1m])) * 100)";
-    const res = await prom.rangeQuery(q, start, end, step); // wait for the promise to resolve
-    const series = res.result;
-    series.forEach((serie) => {
+    const response = await prom.rangeQuery(q, start, end, step); // wait for the promise to resolve
+    response.result.forEach((serie) => {
       serie.values.forEach((value) => {
         values.push(value.value);
         times.push(value.time);
@@ -163,7 +161,7 @@ export async function getThreads() {
   try {
     let cores = 0;
     const q = "count without(cpu, mode) (node_cpu_seconds_total{mode='idle'})";
-    const response = prom.instantQuery(q);
+    const response = await prom.instantQuery(q);
     response.result.forEach((serie) => {
       cores = cores + serie.value.value;
     });

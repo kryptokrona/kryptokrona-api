@@ -165,7 +165,7 @@ liquibase {
             "url" to url,
             "username" to user,
             "password" to password,
-            "classpath" to "src/test/resources/"
+            "classpath" to "src/main/resources/"
         )
     }
 

@@ -1,24 +1,35 @@
 <script>
-  import {COLOR} from "../helpers/colors";
+  import { COLOR } from "../helpers/colors";
   import CircleChart from "../components/charts/CircleChart.svelte";
   import ToggleBox from "../components/toggle-box/ToggleBox.svelte";
-  import {badRequestsChart, chart1, chart4, chart5, requestsChart, SuccessfulRequestsChart,} from "../mock-data/data";
+  import {
+    badRequestsChart,
+    chart1,
+    chart4,
+    chart5,
+    requestsChart,
+    SuccessfulRequestsChart,
+  } from "../mock-data/data";
   import TitleAndTextContainer from "../components/containers/TitleAndTextContainer.svelte";
   import ChartWithTimeButtonsContainer from "../components/containers/ChartWithTimeButtonsContainer.svelte";
   import Grid from "../components/grids/Grid.svelte";
   import ColumnChart from "../components/charts/ColumnChart.svelte";
   import AreaChart from "../components/charts/AreaChart.svelte";
+  export let data;
 </script>
 
 <ToggleBox title={"Quick overview"}>
   <Grid columns={5}>
     <TitleAndTextContainer title="Threads" text="14" />
     <TitleAndTextContainer title="Uptime" text="4 days" />
-    <TitleAndTextContainer title="CPU usage" text="30%">
+    <TitleAndTextContainer
+      title="CPU usage"
+      text={data.prometheus.cpuUsage + "%"}
+    >
       <div
         class="flex h-5/6 items-end justify-center absolute top-7 left-0 right-0"
       >
-        <CircleChart data={[30]} id="id8" />
+        <CircleChart data={[data.prometheus.cpuUsage]} id="cpuUsage" />
       </div>
     </TitleAndTextContainer>
     <TitleAndTextContainer title="RAM usage" text="50%">

@@ -1,16 +1,16 @@
-package org.kryptokrona.api.routes;
+package org.kryptokrona.api.routes
 
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.server.testing.*
-import kotlin.test.Test
+import org.junit.Test
 import kotlin.test.assertEquals
 
-class BlockRoutesTest {
+class OutputRoutesTest {
 
     @Test
-    fun `can get all blocks`() = testApplication {
-        client.get("/api/v1/blocks").apply {
+    fun `can get all outputs`() = testApplication {
+        client.get("/api/v1/nodes").apply {
             assertEquals(HttpStatusCode.OK, status)
         }
     }

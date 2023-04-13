@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const prom = new PrometheusDriver({
-    endpoint: `${process.env.PROMETHEUS_URL}`,
+    endpoint: `${process.env.PROMETHEUS_URL}/prometheus`,
     baseURL: "/api/v1" // default value
 });
 

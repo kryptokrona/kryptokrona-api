@@ -9,7 +9,7 @@
     recreate: yes
     env: {
       PRIVATE_GITHUB_TOKEN: "{{ vault_github_token }}",
-      PROMETHEUS_URL: "https://{{ domain_name }}/prometheus"
+      PROMETHEUS_URL: "http://127.0.0.1:9090"
     }
     networks:
       - name: "host"

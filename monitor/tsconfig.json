@@ -10,7 +10,7 @@
     "sourceMap": true,
     "strict": true
   },
-  "include": ["src/**/*", "src/node_modules", ".svelte-kit/ambient.d.ts"],
+  "include": ["src/**/*.d.ts", "src/**/*.js", "src/**/*.ts", "src/**/*.svelte",".svelte-kit/ambient.d.ts"]
   // Path aliases are handled by https://kit.svelte.dev/docs/configuration#alias
   //
   // If you want to overwrite includes/excludes, make sure to copy over the relevant includes/excludes

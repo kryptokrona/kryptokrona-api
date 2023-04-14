@@ -1,10 +1,9 @@
 import { PrometheusDriver } from "prometheus-query";
-import dotenv from "dotenv";
 
-dotenv.config();
+const PUBLIC_PROMETHEUS_URL = "https://stage.xkr.mjovanc.com/prometheus";
 
 let prom = new PrometheusDriver({
-  endpoint: `https://${process.env.PUBLIC_PROMETHEUS_URL}/prometheus`,
+  endpoint: `${PUBLIC_PROMETHEUS_URL}`,
   baseURL: "/api/v1", // default value
 });
 

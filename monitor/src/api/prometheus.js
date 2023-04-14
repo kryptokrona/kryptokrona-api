@@ -2,14 +2,12 @@ import { PrometheusDriver } from "prometheus-query";
 import dotenv from "dotenv";
 
 dotenv.config();
-try {
+
 let prom = new PrometheusDriver({
   endpoint: `https://${process.env.PUBLIC_PROMETHEUS_URL}/prometheus`,
   baseURL: "/api/v1", // default value
 });
-} catch(error) {
-  console.error(error)
-}
+
 
 console.log("PROMETHEUS DRIVER: ", prom);
 

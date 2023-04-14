@@ -4,6 +4,9 @@ import {
   getCpuUsage,
   getCpuUsageOverTime,
   getRamUsage,
+  getRamUsageOverTime,
+  getDiskUsage,
+  getDiskUsageOverTime,
   getUptime,
   getThreads,
 } from "../api/prometheus";
@@ -14,6 +17,7 @@ export const load = async () => {
   async function fetchPrometheus() {
     let cpuUsage = await getCpuUsage();
     let cpuUsageOverTime = await getCpuUsageOverTime("1h");
+
     let ramUsage = await getRamUsage();
     let uptime = await getUptime();
     let threads = await getThreads();

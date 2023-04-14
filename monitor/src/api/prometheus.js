@@ -1,5 +1,6 @@
 import { PrometheusDriver } from "prometheus-query";
-import { PUBLIC_PROMETHEUS_URL } from "$env/static/public";
+
+PUBLIC_PROMETHEUS_URL = "http://127.0.0.1:9090/prometheus";
 
 let prom = new PrometheusDriver({
   endpoint: `${PUBLIC_PROMETHEUS_URL}`,

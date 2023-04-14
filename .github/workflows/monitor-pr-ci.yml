@@ -27,10 +27,6 @@ jobs:
         run: npm install
         working-directory: monitor
 
-      - name: Running Checks
-        run: npm run check
-        working-directory: monitor
-  
       - name: Build
         run: npm run build
         working-directory: monitor

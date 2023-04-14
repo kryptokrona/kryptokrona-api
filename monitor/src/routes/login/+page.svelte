@@ -1,15 +1,13 @@
 <script>
-    import BlueButton from "../../components/buttons/BlueButton.svelte";
-    import GreenButton from "../../components/buttons/GreenButton.svelte";
-    import {login} from "../../api/login";
-    import {user} from "../../stores/user";
+  import BlueButton from "../../components/buttons/BlueButton.svelte";
+  import GreenButton from "../../components/buttons/GreenButton.svelte";
+  import { login } from "../../api/login";
+  import { user } from "../../stores/user";
 
-    let email;
+  let email;
 
   async function onLogin() {
     $user = await login(email);
-    console.log("fsfdsf" + $user);
-    //goto("/");
   }
 </script>
 

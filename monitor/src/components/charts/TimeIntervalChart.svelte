@@ -1,9 +1,15 @@
 <script>
   import { onMount } from "svelte";
-  import { COLORS } from "../../helpers/colors";
-  import { getCpuUsageOverTime } from "../../api/prometheus";
-  import { cpuUsageOverTime } from "../../stores/data";
   import { getISODate, getTwoDecimalsPercentage } from "../../helpers/helpers";
+  import { createEventDispatcher } from "svelte";
+
+  const dispatch = createEventDispatcher();
+
+  export let title;
+  export let data;
+  export let labels;
+  export let id;
+  export let color;
 
   let hourButton, hoursButton, weekButton, monthButton, activeButton;
   let chart;
@@ -15,10 +21,11 @@
     render();
   });
 
-  $: update($cpuUsageOverTime);
+  $: update(data);
 
   let options = {
-    series: [{ data: $cpuUsageOverTime.values, name: "CPU" }],
+    series: data,
+    labels: labels,
     chart: {
       type: "area",
       height: "100%",
@@ -27,14 +34,20 @@
         enabled: true,
       },
       animations: {
-        enabled: false,
+        enabled: true,
+        easing: "easeinout",
+        speed: 800,
+        dynamicAnimation: {
+          enabled: true,
+          speed: 350,
+        },
       },
     },
     stroke: {
       curse: "smooth",
-      width: 1,
+      width: 0,
     },
-    colors: COLORS,
+    colors: [color],
     fill: {
       type: "solid",
     },
@@ -54,7 +67,6 @@
         formatter: getTwoDecimalsPercentage,
       },
     },
-    labels: $cpuUsageOverTime.times,
     dataLabels: {
       enabled: false,
     },
@@ -63,26 +75,25 @@
     },
   };
 
-  async function setCpuUsageOverTime(time) {
-    $cpuUsageOverTime = await getCpuUsageOverTime(time);
+  function updateTimeInterval(time) {
+    dispatch("updateTimeInterval", {
+      time: time,
+    });
   }
 
-  const update = () => {
-    if (!$cpuUsageOverTime) return;
+  function update() {
+    if (!data) return;
     if (chart) {
       chart.updateOptions({
-        series: [{ data: $cpuUsageOverTime.values, name: "CPU" }],
-        labels: $cpuUsageOverTime.times,
+        series: data,
+        labels: labels,
       });
     }
-  };
+  }
 
   async function render() {
     const ApexCharts = (await import("apexcharts")).default;
-    chart = new ApexCharts(
-      document.querySelector("#cpuUsageOverTime1"),
-      options
-    );
+    chart = new ApexCharts(document.querySelector("#" + id), options);
     chart.render();
   }
 </script>
@@ -91,14 +102,14 @@
   class={"bg-neutral-200 dark:bg-neutral-800 w-full  rounded-md relative h-64"}
 >
   <div class="h-2/5 pt-1 text-center">
-    <p class="pb-1">CPU usage</p>
+    <p class="pb-1">{title}</p>
     <button
       bind:this={hourButton}
       on:click={() => {
         activeButton.classList.remove("active");
         hourButton.classList.add("active");
         activeButton = hourButton;
-        setCpuUsageOverTime("1h");
+        updateTimeInterval("1h");
       }}
       aria-label="1 hour"
       class={buttonClass + " active"}
@@ -111,7 +122,7 @@
         activeButton.classList.remove("active");
         hoursButton.classList.add("active");
         activeButton = hoursButton;
-        setCpuUsageOverTime("24h");
+        updateTimeInterval("24h");
       }}
       aria-label="24 hours"
       class={buttonClass}
@@ -124,7 +135,7 @@
         activeButton.classList.remove("active");
         weekButton.classList.add("active");
         activeButton = weekButton;
-        setCpuUsageOverTime("7d");
+        updateTimeInterval("7d");
       }}
       aria-label="7 days"
       class={buttonClass}
@@ -138,7 +149,7 @@
         activeButton.classList.remove("active");
         monthButton.classList.add("active");
         activeButton = monthButton;
-        setCpuUsageOverTime("30d");
+        updateTimeInterval("30d");
       }}
       aria-label="30 days"
       class={buttonClass}
@@ -147,6 +158,6 @@
     </button>
   </div>
   <div class="h-3/5">
-    <div id="cpuUsageOverTime1" />
+    <div {id} />
   </div>
 </div>

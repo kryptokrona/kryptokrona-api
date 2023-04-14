@@ -16,6 +16,21 @@ services:
     networks:
       - kryptokrona_api_net
 
+  db-test:
+    image: postgres
+    container_name: kryptokrona_api_db_test
+    restart: always
+    environment:
+      POSTGRES_DB: kryptokrona_api_test
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: test1234
+    volumes:
+      - db:/data/postgres
+    ports:
+      - "5433:5432"
+    networks:
+      - kryptokrona_api_net
+
   liquibase:
     image: liquibase/liquibase
     container_name: kryptokrona_api_liquibase

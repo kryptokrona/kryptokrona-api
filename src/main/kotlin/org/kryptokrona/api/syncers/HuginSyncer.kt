@@ -30,6 +30,7 @@
 
 package org.kryptokrona.api.syncers
 
+import io.ktor.client.plugins.*
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -74,25 +75,30 @@ class HuginSyncer {
         launch {
             while(isActive) {
                 logger.debug("Syncing Hugin...")
-                val retrievedData = poolChangesClient.getPoolChangesLite()
-                val transactions = retrievedData?.addedTxs
 
-                transactions?.let {
-                    for (tx in it) {
-                        val extra = tx.transactionPrefix.extra
-                        val transactionHash = tx.transactionHash
+                try {
+                    val retrievedData = poolChangesClient.getPoolChangesLite()
+                    val transactions = retrievedData?.addedTxs
 
-                        if (extra.length > 200 && transactionHash !in knownPoolTxsList) {
-                            logger.debug("Incoming transaction $transactionHash")
-                            knownPoolTxsList += transactionHash
-                            val extraData = trimExtra(extra)
+                    transactions?.let {
+                        for (tx in it) {
+                            val extra = tx.transactionPrefix.extra
+                            val transactionHash = tx.transactionHash
 
-                            if ("box" in extraData) savePostEncrypted(extraData, tx)
-                            else if ("sb" in extraData) savePostEncryptedGroup(extraData, tx)
-                        } else {
-                            logger.debug("Extra is less than 200 in length, skipping...")
+                            if (extra.length > 200 && transactionHash !in knownPoolTxsList) {
+                                logger.debug("Incoming transaction $transactionHash")
+                                knownPoolTxsList += transactionHash
+                                val extraData = trimExtra(extra)
+
+                                if ("box" in extraData) savePostEncrypted(extraData, tx)
+                                else if ("sb" in extraData) savePostEncryptedGroup(extraData, tx)
+                            } else {
+                                logger.debug("Extra is less than 200 in length, skipping...")
+                            }
                         }
                     }
+                } catch (e: HttpRequestTimeoutException) {
+                    logger.error("Error syncing Hugin: ${e.message}")
                 }
 
                 delay(HuginConfig.SYNC_INTERVAL)

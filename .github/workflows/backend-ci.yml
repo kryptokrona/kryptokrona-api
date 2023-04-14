@@ -40,11 +40,11 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_DB: kryptokrona_api_dev
+          POSTGRES_DB: kryptokrona_api_test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: test1234
         ports:
-          - 5432:5432
+          - 5433:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -61,7 +61,7 @@ jobs:
           cache: 'gradle'
 
       - name: Run Liquibase Migrations
-        run: ./gradlew update -PdbEnv=dev
+        run: ./gradlew update -PdbEnv=test
 
       - name: Run Unit Test
         run: ./gradlew test

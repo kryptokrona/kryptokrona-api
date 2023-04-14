@@ -73,17 +73,11 @@ dependencies {
     implementation("io.ktor:ktor-server-servlet:$ktor_version")
     implementation("io.ktor:ktor-server-openapi:$ktor_version")
     implementation("io.ktor:ktor-server-metrics-micrometer:$ktor_version")
+    implementation("io.micrometer:micrometer-registry-prometheus:$prometheus_version")
     implementation("io.ktor:ktor-serialization-jackson-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-cors:$ktor_version")
     implementation("io.ktor:ktor-server-config-yaml-jvm:2.2.4")
-
-    // micrometer
-    implementation("io.micrometer:micrometer-core:$prometheus_version")
-    implementation("io.micrometer:micrometer-registry-prometheus:$prometheus_version")
-    implementation("io.micrometer:micrometer-httpclient:$prometheus_version")
-    implementation("io.micrometer:micrometer-registry-http:$prometheus_version")
-    implementation("io.micrometer:micrometer-registry-prometheus:$prometheus_version")
 
     // various
     implementation("ch.qos.logback:logback-classic:$logback_version")

@@ -20,18 +20,14 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  button:focus, a:focus {
-    outline: 1px solid white;
-  }
+
   .active {
     outline: 1px solid white;
   }
 }
 
 @media (prefers-color-scheme: light) {
-  button:focus, a:focus {
-    outline: 1px solid #0a0a0a;
-  }
+
   .active {
     outline: 1px solid #0a0a0a;
   }

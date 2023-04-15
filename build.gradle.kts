@@ -110,6 +110,12 @@ dependencies {
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
 
+configurations {
+  implementation {
+    exclude("org.slf4j", "slf4j-simple")
+  }
+}
+
 tasks.jar {
     archiveFileName.set("kryptokrona-api.jar")
     manifest {

@@ -55,10 +55,16 @@ import io.ktor.server.plugins.contentnegotiation.*
 import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.micrometer.core.instrument.binder.jvm.ClassLoaderMetrics
 import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics
 import io.micrometer.core.instrument.binder.jvm.JvmMemoryMetrics
+import io.micrometer.core.instrument.binder.jvm.JvmThreadMetrics
+import io.micrometer.core.instrument.binder.system.FileDescriptorMetrics
 import io.micrometer.core.instrument.binder.system.ProcessorMetrics
+import io.micrometer.core.instrument.binder.system.UptimeMetrics
 import io.micrometer.core.instrument.distribution.DistributionStatisticConfig
+import io.micrometer.prometheus.PrometheusConfig
+import io.micrometer.prometheus.PrometheusMeterRegistry
 import kotlinx.serialization.json.Json
 import org.kryptokrona.api.plugins.DatabaseFactory
 import org.kryptokrona.api.plugins.configureRouting
@@ -92,9 +98,13 @@ fun Application.module() {
     install(MicrometerMetrics) {
         registry = Metrics.getRegistry()
         meterBinders = listOf(
+            ClassLoaderMetrics(),
             JvmMemoryMetrics(),
             JvmGcMetrics(),
-            ProcessorMetrics()
+            ProcessorMetrics(),
+            JvmThreadMetrics(),
+            FileDescriptorMetrics(),
+            UptimeMetrics()
         )
         distributionStatisticConfig = DistributionStatisticConfig.Builder()
         .percentilesHistogram(true)

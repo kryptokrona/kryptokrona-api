@@ -31,11 +31,16 @@
           env: prod
 
     node_exporter_version: "{{ exporter_version }}"
-
     website_name: kryptokrona_api
     web_server_ip: "{{ domain_name }}"
     web_server_port: "443"
     hidden_service_port: "443"
+
+    # node to pick data from
+    # TODO we should set localhost later here when we deployed our own node
+    node_hostname: "blocksum.org"
+    node_port: 11898
+    node_ssl: "false"
 
   roles:
   #- base

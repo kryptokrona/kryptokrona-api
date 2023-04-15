@@ -60,8 +60,14 @@ class DiscordSyncer {
 
     private val logger = LoggerFactory.getLogger("DiscordSyncer")
 
+    // TODO remove hard coded values here and fetch from database once it's implemented
     private val nodes = listOf(
+        Node("blocksum.org", 11898, false),
+        Node("privacymine.net", 11898, false),
+        Node("privacymine.net", 21898, true),
         Node("techy.ddns.net", 11898, false),
+        Node("wasa.kryptokrona.se", 11898, false),
+        Node("tifo.info", 11898, false),
     )
 
     private val nodeStatuses = mutableListOf<NodeStatus>()
@@ -108,7 +114,7 @@ class DiscordSyncer {
 
                         sendDiscordMessage(
                             """
-                                |✅ INFO: ${node.hostName} is **UP**!
+                                |✅ ${node.hostName} is **UP** again!
                                 |📊 Height: **${cl.getNodeHeight()?.height}**
                                 |--------------------------------
                                 |*Pushing it to the limit!* ⚡
@@ -138,9 +144,18 @@ class DiscordSyncer {
                     }
                 }
 
-                // check uptime here for each node
+                // if all nodestatuses is running and up-to-date, send a message to discord
+                val allNodesRunning = nodeStatuses.all { it.isRunning }
 
-                // if not up, send a message to discord
+                if (allNodesRunning) {
+                    sendDiscordMessage(
+                        """
+                            |❇️ PUBLIC NODES FULLY OPERATIONAL!
+                            |--------------------------------
+                            |*All nodes online! We've got ourselves a Node Party in here!* 🥳
+                        """.trimMargin()
+                    )
+                }
 
                 delay(DELAY_MS)
             }

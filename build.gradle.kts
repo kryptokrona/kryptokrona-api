@@ -80,7 +80,6 @@ dependencies {
     implementation("io.ktor:ktor-server-config-yaml-jvm:2.2.4")
 
     // various
-    implementation("ch.qos.logback:logback-classic:$logback_version")
     implementation("org.ktorm:ktorm-jackson:$ktorm_jackson_version")
     implementation("org.slf4j:slf4j-api:$slf4j_version")
     implementation("org.slf4j:slf4j-simple:$slf4j_version")
@@ -108,12 +107,6 @@ dependencies {
     testImplementation("io.ktor:ktor-server-test-host-jvm:2.2.4")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
-}
-
-configurations {
-  implementation {
-    exclude("org.slf4j", "slf4j-simple")
-  }
 }
 
 tasks.jar {

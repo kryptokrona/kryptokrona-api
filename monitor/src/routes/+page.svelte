@@ -134,7 +134,7 @@
       data={[{ data: $cpuUsageOverTime.values, name: "CPU" }]}
       labels={$cpuUsageOverTime.times}
       id="cpuUsageOverTime"
-      title="CPU Usage"
+      title="CPU usage"
       color={COLOR.BLUE}
       on:updateTimeInterval={setCpuUsageOverTime}
     />
@@ -142,7 +142,7 @@
       data={[{ data: $ramUsageOverTime.values, name: "RAM" }]}
       labels={$ramUsageOverTime.times}
       id="ramUsageOverTime"
-      title="RAM Usage"
+      title="RAM usage"
       color={COLOR.VIOLET}
       on:updateTimeInterval={setRamUsageOverTime}
     />
@@ -150,7 +150,7 @@
       data={[{ data: $diskUsageOverTime.values, name: "DISK" }]}
       labels={$diskUsageOverTime.times}
       id="diskUsageOverTime"
-      title="DISK Usage"
+      title="DISK usage"
       color={COLOR.FUSCHIA}
       on:updateTimeInterval={setDiskUsageOverTime}
     />

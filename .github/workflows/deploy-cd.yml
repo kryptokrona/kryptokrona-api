@@ -73,6 +73,8 @@ jobs:
           options: |
             --inventory prod.inventory
             --verbose
+          extra-vars: |
+            myvar: ${{ env.DISCORD_TOKEN }}
 
   smoke-test-prod:
     name: Smoke Test Prod

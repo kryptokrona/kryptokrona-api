@@ -41,39 +41,124 @@ import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import org.kryptokrona.api.config.DiscordConfig.CHANNEL_ID
 import org.kryptokrona.api.config.DiscordConfig.DELAY_MS
-import org.kryptokrona.api.config.DiscordConfig.MESSAGE_COUNT
 import org.kryptokrona.api.config.DiscordConfig.TOKEN
+import org.kryptokrona.sdk.http.client.NodeClient
+import org.kryptokrona.sdk.util.node.Node
 import org.slf4j.LoggerFactory
+import java.time.LocalDateTime
+import java.time.LocalDateTime.now
+
+data class NodeStatus(
+    val node: Node,
+    var isRunning: Boolean,
+    var height: Int?,
+    var upToDate: Boolean,
+    var lastResponse: LocalDateTime,
+)
 
 class DiscordSyncer {
 
     private val logger = LoggerFactory.getLogger("DiscordSyncer")
 
+    private val nodes = listOf(
+        Node("techy.ddns.net", 11898, false),
+    )
+
+    private val nodeStatuses = mutableListOf<NodeStatus>()
+
+    init {
+        // initialize node statuses
+        nodes.forEach {
+            nodeStatuses.add(NodeStatus(it, true, 0, true, now()))
+        }
+    }
+
     suspend fun sync(): Unit = coroutineScope {
         launch {
             while(isActive) {
                 logger.info("Running Discord syncer...")
+
+                nodes.forEach { node ->
+                    logger.info("Checking node ${node.hostName}...")
+                    val cl = NodeClient(node)
+                    val ns = nodeStatuses.find { nodeStatus -> nodeStatus.node.hostName == node.hostName }
+                    val currentNode = nodeStatuses.find { it.node == node }?.node
+                    val currentNodeStatus = nodeStatuses.find { it.node == currentNode } ?: return@forEach // exit early if node not found
+
+                    // if the node is down, send a message to discord
+                    // we also check if the last state was up to avoid spamming the channel
+                    if (!cl.isNodeRunning() && currentNodeStatus.isRunning) {
+                        sendDiscordMessage(
+                            """
+                                |❌ ALERT: ${node.hostName} is **DOWN**!
+                                |--------------------------------
+                                |Last response: ${ns?.lastResponse}
+                            """.trimMargin()
+                        )
+
+                        // set isRunning to false
+                        currentNodeStatus.isRunning = false
+                    }
+
+                    // if the node is up, send a message to discord
+                    // we also check if the last state was down to avoid spamming the channel
+                    if (cl.isNodeRunning() && !currentNodeStatus.isRunning) {
+                        // set current node height
+                        currentNodeStatus.height = cl.getNodeHeight()?.height
+
+                        sendDiscordMessage(
+                            """
+                                |✅ INFO: ${node.hostName} is **UP**!
+                                |📊 Height: **${cl.getNodeHeight()?.height}**
+                                |--------------------------------
+                                |*Pushing it to the limit!* ⚡
+                            """.trimMargin()
+                        )
+
+                        // set date and time of last response here
+                        currentNodeStatus.lastResponse = now()
+                    }
+
+                    val highestHeight = nodeStatuses.maxOfOrNull { it.height ?: 0 } ?: 0
+                    val heightDiff = (highestHeight - (currentNodeStatus.height ?: 0))
+
+                    // if the node is not up-to-date, send a message to discord
+                    // we also check if the last state was up-to-date to avoid spamming the channel
+                    if (heightDiff >= 5 && currentNodeStatus.upToDate) {
+                        sendDiscordMessage(
+                            """
+                                |⚠️ IS NOT UP TO DATE: ${node.hostName}
+                                |📊 Height: **${cl.getNodeHeight()?.height}**
+                                |--------------------------------
+                                |*The network is counting on you!* ⚡
+                            """.trimMargin()
+                        )
+
+                        currentNodeStatus.upToDate = false
+                    }
+                }
+
+                // check uptime here for each node
+
+                // if not up, send a message to discord
+
                 delay(DELAY_MS)
             }
         }
     }
 
-    suspend fun sendDiscordMessage(message: String): Unit = coroutineScope {
+    private suspend fun sendDiscordMessage(message: String): Unit = coroutineScope {
         // launch a separate coroutine to send messages
         val job = launch {
             val client = RestClient.default(TOKEN)
             val channel = ChannelClient(CHANNEL_ID, client)
-            for (count in 0..MESSAGE_COUNT) {
-                channel.sendMessage("This is message ${count + 1} out of $MESSAGE_COUNT.")
-
-                delay(DELAY_MS)
-            }
+            channel.sendMessage(message)
         }
 
         bot(TOKEN) {
             classicCommands {
                 command("shutdown") { message ->
-                    message.reply("Stopping Discord syncer.")
+                    message.reply("Stopping Discord syncer...")
                     shutdown()
 
                     // stop the coroutine

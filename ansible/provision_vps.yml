@@ -39,7 +39,7 @@
     # node to pick data from
     # TODO we should set localhost later here when we deployed our own node
     node_hostname: "blocksum.org"
-    node_port: 11898
+    node_port: "11898"
     node_ssl: "false"
 
   roles:

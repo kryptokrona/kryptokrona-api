@@ -8,3 +8,7 @@ export const cpuUsageOverTime = writable({});
 export const ramUsageOverTime = writable({});
 export const diskUsageOverTime = writable({});
 export const threads = writable(0);
+export const posts = writable([]);
+export const groupPosts = writable([]);
+export const totalPosts = writable(0);
+export const totalGroupPosts = writable(0);

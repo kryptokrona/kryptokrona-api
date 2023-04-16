@@ -12,6 +12,12 @@ import {
 } from "../api/prometheus";
 import { getRepoStats } from "../server/github.server";
 import { getNodes } from "../api/nodes";
+import {
+  getPosts,
+  getGroupPosts,
+  getTotalPostsThisYear,
+  getTotalGroupPostsThisYear,
+} from "../api/hugin";
 
 export const load = async () => {
   async function fetchPrometheus() {
@@ -40,9 +46,25 @@ export const load = async () => {
   async function fetchRepo() {
     return await getRepoStats();
   }
+  async function fetchPosts() {
+    return await getPosts("1h");
+  }
+  async function fetchGroupPosts() {
+    return await getGroupPosts("1h");
+  }
+  async function fetchTotalPosts() {
+    return await getTotalPostsThisYear();
+  }
+  async function fetchTotalGroupPosts() {
+    return await getTotalGroupPostsThisYear();
+  }
   return {
     repo: fetchRepo(),
     nodes: fetchNodes(),
     prometheus: fetchPrometheus(),
+    posts: fetchPosts(),
+    groupPosts: fetchGroupPosts(),
+    totalPosts: fetchTotalPosts(),
+    totalGroupPosts: fetchTotalGroupPosts(),
   };
 };

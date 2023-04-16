@@ -2,6 +2,7 @@
 - name: Create blockchain directory
   file:
     path: /root/.kryptokrona
+    state: directory
 
 - name: Start Kryptokrona Node Container
   docker_container:

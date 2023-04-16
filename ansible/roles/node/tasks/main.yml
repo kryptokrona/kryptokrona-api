@@ -1,4 +1,8 @@
 ---
+- name: Create blockchain directory
+  file:
+    path: /root/.kryptokrona
+
 - name: Start Kryptokrona Node Container
   docker_container:
     name: "{{ docker_container_name_node }}"
@@ -7,5 +11,7 @@
     pull: true
     force_kill: yes
     recreate: yes
+    volumes:
+      - "/root/.kryptokrona:/kryptokrona/blockloc"
     networks:
       - name: "host"

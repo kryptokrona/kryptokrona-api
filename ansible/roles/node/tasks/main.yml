@@ -7,5 +7,7 @@
     pull: true
     force_kill: yes
     recreate: yes
+    volumes:
+      - "/root/.kryptokrona:/kryptokrona/blockloc"
     networks:
       - name: "host"

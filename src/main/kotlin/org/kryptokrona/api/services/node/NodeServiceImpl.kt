@@ -63,8 +63,6 @@ class NodeServiceImpl : NodeService {
     override suspend fun save(node: Node): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
             db.nodes.add(node)
-        }.onSuccess {
-            logger.info("Node saved: $node")
         }.onFailure {
             logger.error("Error while saving node: $node", it)
         }.getOrNull()

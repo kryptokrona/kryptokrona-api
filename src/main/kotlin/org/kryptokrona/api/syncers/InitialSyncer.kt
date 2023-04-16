@@ -102,11 +102,10 @@ class InitialSyncer {
         launch(Dispatchers.IO) {
             nodeService.existsByUrl(node.url).let {
                 if (it) {
-                    logger.info("Node already exists, updating values...")
                     nodeService.update(node)
+                    return@launch
                 }
 
-                logger.info("Saving node...")
                 nodeService.save(node)
             }
         }

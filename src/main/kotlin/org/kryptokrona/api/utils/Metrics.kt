@@ -30,11 +30,20 @@
 
 package org.kryptokrona.api.utils
 
+import io.micrometer.core.instrument.Counter
 import io.micrometer.prometheus.PrometheusConfig
 import io.micrometer.prometheus.PrometheusMeterRegistry
 
 object Metrics {
+
     private val registry = PrometheusMeterRegistry(PrometheusConfig.DEFAULT)
+
+    private var totalRequestCounter: Counter? = null
+
+    init {
+        totalRequestCounter = registry.counter("requests_total")
+        Counter.builder("requests_total").register(registry)
+    }
 
     fun getRegistry(): PrometheusMeterRegistry {
         return registry

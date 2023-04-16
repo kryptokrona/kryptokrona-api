@@ -59,7 +59,8 @@ class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {
             .map { row ->
                 mapOf(
                     "id" to row[PostsEncrypted.id]!!,
-                    "txHash" to row[PostsEncrypted.txHash]!!
+                    "txHash" to row[PostsEncrypted.txHash]!!,
+                    "createdAt" to row[PostsEncrypted.createdAt]!!,
                 )
             }
             .toList()
@@ -84,7 +85,8 @@ class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {
             .map { row ->
                 mapOf(
                     "id" to row[PostsEncrypted.id]!!,
-                    "txHash" to row[PostsEncrypted.txHash]!!
+                    "txHash" to row[PostsEncrypted.txHash]!!,
+                    "createdAt" to row[PostsEncrypted.createdAt]!!,
                 )
             }
             .toList()
@@ -109,7 +111,8 @@ class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {
             .map { row ->
                 mapOf(
                     "id" to row[PostsEncrypted.id]!!,
-                    "txHash" to row[PostsEncrypted.txHash]!!
+                    "txHash" to row[PostsEncrypted.txHash]!!,
+                    "createdAt" to row[PostsEncrypted.createdAt]!!,
                 )
             }
             .toList()
@@ -134,7 +137,8 @@ class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {
             .map { row ->
                 mapOf(
                     "id" to row[PostsEncrypted.id]!!,
-                    "txHash" to row[PostsEncrypted.txHash]!!
+                    "txHash" to row[PostsEncrypted.txHash]!!,
+                    "createdAt" to row[PostsEncrypted.createdAt]!!,
                 )
             }
             .toList()
@@ -159,7 +163,8 @@ class PostEncryptedStatisticsServiceImpl : PostEncryptedStatisticsService {
             .map { row ->
                 mapOf(
                     "id" to row[PostsEncrypted.id]!!,
-                    "txHash" to row[PostsEncrypted.txHash]!!
+                    "txHash" to row[PostsEncrypted.txHash]!!,
+                    "createdAt" to row[PostsEncrypted.createdAt]!!,
                 )
             }
             .toList()

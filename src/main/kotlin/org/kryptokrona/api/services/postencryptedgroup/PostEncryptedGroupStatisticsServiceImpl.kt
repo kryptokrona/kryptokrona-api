@@ -59,7 +59,8 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
             .map { row ->
                 mapOf(
                     "id" to row[PostsEncryptedGroup.id]!!,
-                    "txHash" to row[PostsEncryptedGroup.txHash]!!
+                    "txHash" to row[PostsEncryptedGroup.txHash]!!,
+                    "createdAt" to row[PostsEncryptedGroup.createdAt]!!
                 )
             }
             .toList()
@@ -84,7 +85,8 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
             .map { row ->
                 mapOf(
                     "id" to row[PostsEncryptedGroup.id]!!,
-                    "txHash" to row[PostsEncryptedGroup.txHash]!!
+                    "txHash" to row[PostsEncryptedGroup.txHash]!!,
+                    "createdAt" to row[PostsEncryptedGroup.createdAt]!!
                 )
             }
             .toList()
@@ -109,7 +111,8 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
             .map { row ->
                 mapOf(
                     "id" to row[PostsEncryptedGroup.id]!!,
-                    "txHash" to row[PostsEncryptedGroup.txHash]!!
+                    "txHash" to row[PostsEncryptedGroup.txHash]!!,
+                    "createdAt" to row[PostsEncryptedGroup.createdAt]!!
                 )
             }
             .toList()
@@ -134,7 +137,8 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
             .map { row ->
                 mapOf(
                     "id" to row[PostsEncryptedGroup.id]!!,
-                    "txHash" to row[PostsEncryptedGroup.txHash]!!
+                    "txHash" to row[PostsEncryptedGroup.txHash]!!,
+                    "createdAt" to row[PostsEncryptedGroup.createdAt]!!
                 )
             }
             .toList()
@@ -159,7 +163,8 @@ class PostEncryptedGroupStatisticsServiceImpl : PostEncryptedGroupStatisticsServ
             .map { row ->
                 mapOf(
                     "id" to row[PostsEncryptedGroup.id]!!,
-                    "txHash" to row[PostsEncryptedGroup.txHash]!!
+                    "txHash" to row[PostsEncryptedGroup.txHash]!!,
+                    "createdAt" to row[PostsEncryptedGroup.createdAt]!!
                 )
             }
             .toList()

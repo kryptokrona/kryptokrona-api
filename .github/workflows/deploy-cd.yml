@@ -34,7 +34,6 @@ jobs:
           vault_password: ${{secrets.ANSIBLE_VAULT_PASS}}
           options: |
             --inventory staging.inventory
-            --verbose
 
   smoke-test-staging:
     name: Smoke Test Staging
@@ -72,7 +71,8 @@ jobs:
           vault_password: ${{secrets.ANSIBLE_VAULT_PASS}}
           options: |
             --inventory prod.inventory
-            --verbose
+          extra-vars: |
+            myvar: ${{ env.DISCORD_TOKEN }}
 
   smoke-test-prod:
     name: Smoke Test Prod

@@ -23,6 +23,7 @@ Kryptokrona API in Kotlin, Ktor and Kryptokrona SDK for caching and processing d
   - [Pull Request](#pull-request)
   - [Donate](#donate)
 - [Contributors](#contributors)
+- [Powered By](#powered-by)
 - [License](#license)
 
 
@@ -127,6 +128,20 @@ being awesome contributors to this project. **We'd like to take a moment to reco
 [<img src="https://github.com/appelskrutt34.png?size=72" alt="appelskrutt34" width="72">](https://github.com/appelskrutt34)
 [<img src="https://github.com/renovatebot.png?size=72" alt="mjovanc" width="72">](https://github.com/renovatebot)
 [<img src="https://github.com/TechyGuy17.png?size=72" alt="TechyGuy" width="72">](https://github.com/TechyGuy17)
+
+## Powered by
+
+[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/poweredby/kotlin.png" alt="Kotlin" height="72">](https://github.com/JetBrains/kotlin)
+[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/poweredby/ktor.png" alt="Ktor" height="72">](https://github.com/ktorio/ktor)
+[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/poweredby/svelte.png" alt="Svelte" height="72">](https://github.com/sveltejs/svelte)
+[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/poweredby/liquibase.png" alt="Liquibase" height="72">](https://github.com/liquibase/liquibase)
+[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/poweredby/postgresql.png" alt="PostgreSQL" height="72">](https://github.com/postgres/postgres)
+[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/poweredby/prometheus.png" alt="Prometheus" height="72">](https://github.com/prometheus/prometheus)
+[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/poweredby/ansible.png" alt="Ansible" height="72">](https://github.com/ansible/ansible)
+[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/poweredby/docker.png" alt="Docker" height="72">](https://github.com/docker)
+[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/poweredby/keycloak.png" alt="Keycloak" height="72">](https://github.com/keycloak/keycloak)
+[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/poweredby/githubactions.png" alt="GitHub Actions" height="72">](https://github.com/actions)
+
 ## License
 
 The 3-Clause BSD License.

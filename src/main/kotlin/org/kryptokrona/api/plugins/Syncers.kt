@@ -39,5 +39,11 @@ fun Application.configureSyncers() {
 
     //TODO: we should start this sync process ONCE the IntialSyncer has finished
     launch { HuginSyncer().sync() }
-    launch { DiscordSyncer().sync() } //TODO: should only be launched when on PROD
+
+    // will only get launched if we have the XKR_DISCORD_TOKEN env var set
+    // it is only set on the production server
+    val token = System.getenv("XKR_DISCORD_TOKEN")
+    if (!token.isNullOrEmpty()) {
+        launch { DiscordSyncer().sync() }
+    }
 }

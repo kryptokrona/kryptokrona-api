@@ -141,6 +141,7 @@ being awesome contributors to this project. **We'd like to take a moment to reco
 [<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/poweredby/docker.png" alt="Docker" height="72">](https://github.com/docker)
 [<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/poweredby/keycloak.png" alt="Keycloak" height="72">](https://github.com/keycloak/keycloak)
 [<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/poweredby/githubactions.png" alt="GitHub Actions" height="72">](https://github.com/actions)
+[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/poweredby/xkr.png" alt="Kryptokrona" height="72">](https://github.com/kryptokrona)
 
 ## License
 

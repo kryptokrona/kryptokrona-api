@@ -56,6 +56,12 @@ tasks.withType<KotlinCompile>().all {
     }
 }
 
+configurations {
+  implementation {
+    exclude("org.slf4j", "slf4j-simple")
+  }
+}
+
 dependencies {
     // kryptokrona kotlin sdk
     implementation("org.kryptokrona.sdk:kryptokrona-core:$kryptokrona_version")
@@ -78,6 +84,7 @@ dependencies {
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-cors:$ktor_version")
     implementation("io.ktor:ktor-server-config-yaml-jvm:2.2.4")
+    implementation("io.ktor:ktor-client-logging:$ktor_version")
 
     // various
     implementation("org.ktorm:ktorm-jackson:$ktorm_jackson_version")

@@ -66,8 +66,6 @@ class PostEncryptedServiceImpl : PostEncryptedService {
     override suspend fun save(postEncrypted: PostEncrypted): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
             db.postsencrypted.add(postEncrypted)
-        }.onSuccess {
-            logger.info("Saved encrypted post with hash: ${postEncrypted.txHash}")
         }.onFailure {
             logger.error("Error saving encrypted post with hash: ${postEncrypted.txHash}", it)
         }
@@ -81,12 +79,13 @@ class PostEncryptedServiceImpl : PostEncryptedService {
         }
     }
 
-    override suspend fun existsByTxBox(txBox: String): Boolean = withContext(Dispatchers.IO) {
-        this.runCatching {
-            db.postsencrypted.find { it.txBox eq txBox }
-        }.onFailure {
-            logger.error("Error finding encrypted post with txBox: $txBox", it)
-        }.isSuccess
+    override suspend fun existsByTxHash(txHash: String): Boolean = withContext(Dispatchers.IO) {
+        try {
+            db.postsencrypted.find { it.txHash eq txHash } != null
+        } catch (e: Exception) {
+            logger.error("Error finding encrypted post with txBox: $txHash", e)
+            false
+        }
     }
 
     override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {

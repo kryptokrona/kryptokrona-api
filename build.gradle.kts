@@ -56,12 +56,6 @@ tasks.withType<KotlinCompile>().all {
     }
 }
 
-configurations {
-  implementation {
-    exclude("org.slf4j", "slf4j-simple")
-  }
-}
-
 dependencies {
     // kryptokrona kotlin sdk
     implementation("org.kryptokrona.sdk:kryptokrona-core:$kryptokrona_version")

@@ -1,0 +1,11 @@
+---
+- name: Start Kryptokrona Node Container
+  docker_container:
+    name: "{{ docker_container_name_node }}"
+    image: "{{ docker_image_node }}:latest"
+    state: started
+    pull: true
+    force_kill: yes
+    recreate: yes
+    networks:
+      - name: "host"

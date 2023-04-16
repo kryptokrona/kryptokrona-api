@@ -23,6 +23,7 @@ Kryptokrona API in Kotlin, Ktor and Kryptokrona SDK for caching and processing d
   - [Pull Request](#pull-request)
   - [Donate](#donate)
 - [Contributors](#contributors)
+- [Powered By](#powered-by)
 - [License](#license)
 
 
@@ -127,6 +128,13 @@ being awesome contributors to this project. **We'd like to take a moment to reco
 [<img src="https://github.com/appelskrutt34.png?size=72" alt="appelskrutt34" width="72">](https://github.com/appelskrutt34)
 [<img src="https://github.com/renovatebot.png?size=72" alt="mjovanc" width="72">](https://github.com/renovatebot)
 [<img src="https://github.com/TechyGuy17.png?size=72" alt="TechyGuy" width="72">](https://github.com/TechyGuy17)
+
+## Powered by
+
+[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/resources/kotlin.png" alt="Kotlin" height="72">](https://github.com/JetBrains/kotlin)
+[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/resources/ktor.png" alt="Ktor" height="72">](https://github.com/ktorio/ktor)
+[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/resources/svelte.png" alt="Svelte" height="72">](https://github.com/sveltejs/svelte)
+
 ## License
 
 The 3-Clause BSD License.

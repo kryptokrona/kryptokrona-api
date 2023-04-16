@@ -30,15 +30,13 @@
 
 package org.kryptokrona.api.syncers
 
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.api.config.HuginConfig
 import org.kryptokrona.api.models.PostEncrypted
 import org.kryptokrona.api.models.PostEncryptedGroup
+import org.kryptokrona.api.models.PostsEncrypted
 import org.kryptokrona.api.services.postencrypted.PostEncryptedServiceImpl
 import org.kryptokrona.api.services.postencryptedgroup.PostEncryptedGroupServiceImpl
 import org.kryptokrona.api.utils.Box
@@ -101,34 +99,47 @@ class HuginSyncer {
     }
 
     private suspend fun savePostEncrypted(extraData: String, transaction: Transaction): Unit = coroutineScope {
-        launch {
+        launch(Dispatchers.IO) {
             // check if the new viewKey and txKey is in the extra data
             if ("vt" in extraData && "txKey" in extraData) {
-                val newBoxObj: NewBox = Json.decodeFromString(extraData)
-                val postEncrypted = PostEncrypted {
-                    txHash = transaction.transactionHash
-                    txBox = newBoxObj.box
-                    txTimestamp = newBoxObj.timestamp
-                    createdAt = now()
+                postEncryptedServiceImpl.existsByTxHash(transaction.transactionHash).let {
+                    if (it) return@launch
+
+                    // only save to database if it doesn't exist
+                    val newBoxObj: NewBox = Json.decodeFromString(extraData)
+                    val postEncrypted = PostEncrypted {
+                        txHash = transaction.transactionHash
+                        txBox = newBoxObj.box
+                        txTimestamp = newBoxObj.timestamp
+                        createdAt = now()
+                    }
+                    postEncryptedServiceImpl.save(postEncrypted)
                 }
-                postEncryptedServiceImpl.save(postEncrypted)
             } else {
-                val boxObj: Box = Json.decodeFromString(extraData)
-                val postEncrypted = PostEncrypted {
-                    txHash = transaction.transactionHash
-                    txBox = boxObj.box
-                    txTimestamp = boxObj.timestamp
-                    createdAt = now()
+                postEncryptedServiceImpl.existsByTxHash(transaction.transactionHash).let {
+                    if (it) return@launch
+
+                    // only save to database if it doesn't exist
+                    val boxObj: Box = Json.decodeFromString(extraData)
+                    val postEncrypted = PostEncrypted {
+                        txHash = transaction.transactionHash
+                        txBox = boxObj.box
+                        txTimestamp = boxObj.timestamp
+                        createdAt = now()
+                    }
+                    postEncryptedServiceImpl.save(postEncrypted)
                 }
-                postEncryptedServiceImpl.save(postEncrypted)
             }
         }
     }
 
     private suspend fun savePostEncryptedGroup(extraData: String, transaction: Transaction): Unit = coroutineScope {
-        launch {
+        launch(Dispatchers.IO) {
             val sealedBoxObj: SealedBox = Json.decodeFromString(extraData)
-            postEncryptedGroupServiceImpl.existsByTxSb(sealedBoxObj.secretBox).let {
+            postEncryptedGroupServiceImpl.existsByTxHash(transaction.transactionHash).let {
+                if (it) return@launch
+
+                // only save to database if it doesn't exist
                 val postEncryptedGroup = PostEncryptedGroup {
                     txHash = transaction.transactionHash
                     txSb = sealedBoxObj.secretBox

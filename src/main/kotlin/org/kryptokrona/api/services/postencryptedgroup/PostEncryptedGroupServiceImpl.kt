@@ -66,8 +66,6 @@ class PostEncryptedGroupServiceImpl : PostEncryptedGroupService {
     override suspend fun save(postEncryptedGroup: PostEncryptedGroup): Unit = withContext(Dispatchers.IO)  {
         this.runCatching {
             db.postsencryptedgroup.add(postEncryptedGroup)
-        }.onSuccess {
-            logger.info("Saved encrypted group post: ${postEncryptedGroup.txHash}")
         }.onFailure {
             logger.error("Error saving encrypted group post: ${postEncryptedGroup.txHash}", it)
         }
@@ -76,19 +74,18 @@ class PostEncryptedGroupServiceImpl : PostEncryptedGroupService {
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
             db.postsencryptedgroup.removeIf { it.id eq id }
-        }.onSuccess {
-            logger.info("Deleted encrypted group post: $id")
         }.onFailure {
             logger.error("Error deleting encrypted group post: $id", it)
         }
     }
 
-    override suspend fun existsByTxSb(txSb: String): Boolean = withContext(Dispatchers.IO) {
-        this.runCatching {
-            db.postsencryptedgroup.find { it.txSb eq txSb }
-        }.onFailure {
-            logger.error("Error checking if encrypted group post exists: $txSb", it)
-        }.isSuccess
+    override suspend fun existsByTxHash(txHash: String): Boolean = withContext(Dispatchers.IO) {
+        try {
+            db.postsencryptedgroup.find { it.txHash eq txHash } != null
+        } catch (e: Exception) {
+            logger.error("Error checking if encrypted group post exists: $txHash", e)
+            false
+        }
     }
 
     override suspend fun getTotalCount(): Int = withContext(Dispatchers.IO) {

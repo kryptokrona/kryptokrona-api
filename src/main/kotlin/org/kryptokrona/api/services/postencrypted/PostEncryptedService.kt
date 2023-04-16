@@ -42,7 +42,7 @@ interface PostEncryptedService {
 
     suspend fun delete(id: Long)
 
-    suspend fun existsByTxBox(txBox: String): Boolean
+    suspend fun existsByTxHash(txHash: String): Boolean
 
     suspend fun getTotalCount(): Int
 

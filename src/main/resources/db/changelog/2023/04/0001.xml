@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="040001" author="mjovanc">
+        <dropColumn tableName="nodes" columnName="tx_in"/>
+        <dropColumn tableName="nodes" columnName="tx_out"/>
+        <dropColumn tableName="nodes" columnName="status"/>
+        <dropColumn tableName="nodes" columnName="height"/>
+        <renameColumn tableName="nodes" oldColumnName="hostname" newColumnName="url"/>
+        <addColumn tableName="nodes">
+            <column name="ssl" type="BOOLEAN"/>
+        </addColumn>
+    </changeSet>
+</databaseChangeLog>

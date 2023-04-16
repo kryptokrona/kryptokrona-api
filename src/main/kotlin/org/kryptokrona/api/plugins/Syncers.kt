@@ -34,10 +34,10 @@ import io.ktor.server.application.*
 import kotlinx.coroutines.launch
 import org.kryptokrona.api.syncers.DiscordSyncer
 import org.kryptokrona.api.syncers.HuginSyncer
+import org.kryptokrona.api.syncers.InitialSyncer
 
 fun Application.configureSyncers() {
-
-    //TODO: we should start this sync process ONCE the IntialSyncer has finished
+    launch { InitialSyncer().sync() }
     launch { HuginSyncer().sync() }
 
     // will only get launched if we have the XKR_DISCORD_TOKEN env var set

@@ -18,6 +18,10 @@
     ramUsage,
     diskUsage,
     threads,
+    posts,
+    groupPosts,
+    totalPosts,
+    totalGroupPosts,
   } from "../stores/data";
   import { onMount, onDestroy } from "svelte";
   import {
@@ -29,8 +33,12 @@
     getDiskUsageOverTime,
     getThreads,
   } from "../api/prometheus";
+  import { getPosts, getGroupPosts } from "../api/hugin";
   import TimeIntervalChart from "../components/charts/TimeIntervalChart.svelte";
-
+  import {
+    getLocaleString,
+    getTwoDecimalsPercentage,
+  } from "../helpers/helpers";
   export let data;
 
   $cpuUsage = data.prometheus.cpuUsage;
@@ -40,19 +48,26 @@
   $ramUsageOverTime = data.prometheus.ramUsageOverTime;
   $diskUsageOverTime = data.prometheus.diskUsageOverTime;
   $threads = data.prometheus.threads;
+  $posts = data.posts;
+  $groupPosts = data.groupPosts;
+  $totalPosts = data.totalPosts;
+  $totalGroupPosts = data.totalGroupPosts;
 
   let fiveSecondInterval;
   let oneSecondInterval;
+  let oneMinInterval;
   let ramUsageOverTimeInterval = "1h";
   let cpuUsageOverTimeInterval = "1h";
   let diskUsageOverTimeInterval = "1h";
+  let postsInterval = "1h";
+  let groupPostsInterval = "1h";
 
   onMount(() => {
     fiveSecondInterval = setInterval(() => {
       setRamUsageOverTime();
       setCpuUsageOverTime();
       setDiskUsageOverTime();
-    }, 5000);
+    }, 1000 * 5);
     oneSecondInterval = setInterval(() => {
       setCpuUsage();
       setRamUsage();
@@ -64,6 +79,7 @@
   onDestroy(() => {
     clearInterval(oneSecondInterval);
     clearInterval(fiveSecondInterval);
+    clearInterval(oneMinInterval);
   });
 
   async function setCpuUsage() {
@@ -90,14 +106,30 @@
   async function setThreads() {
     $threads = await getThreads();
   }
+
+  async function setPostsOverTime(event) {
+    if (event) postsInterval = event.detail.time;
+    $posts = {};
+    $posts = await getPosts(postsInterval);
+  }
+  async function setGroupPostsOverTime(event) {
+    if (event) groupPostsInterval = event.detail.time;
+    $groupPosts = {};
+    $groupPosts = await getGroupPosts(groupPostsInterval);
+  }
 </script>
 
 <ToggleBox title={"Quick overview"}>
   <Grid columns={5}>
-    <TitleAndTextContainer title="Threads" text={$threads.toString()} />
+    <TitleAndTextContainer
+      title="Threads"
+      text={$threads.toString()}
+      bigText={true}
+    />
     <TitleAndTextContainer
       title="Uptime"
-      text={data.prometheus.uptime.toFixed(0) + " days"}
+      text={data.prometheus.uptime.toFixed(0) + " Days"}
+      bigText={true}
     />
     <TitleAndTextContainer title="CPU usage" text={$cpuUsage.toFixed(0) + "%"}>
       <div
@@ -128,7 +160,7 @@
 
 <div class="mt-8" />
 
-<ToggleBox title={"History"}>
+<ToggleBox title={"Server activity"}>
   <Grid columns={3} gridClass="md-grid">
     <TimeIntervalChart
       data={[{ data: $cpuUsageOverTime.values, name: "CPU" }]}
@@ -136,6 +168,8 @@
       id="cpuUsageOverTime"
       title="CPU usage"
       color={COLOR.BLUE}
+      xFormatter={getLocaleString}
+      yFormatter={getTwoDecimalsPercentage}
       on:updateTimeInterval={setCpuUsageOverTime}
     />
     <TimeIntervalChart
@@ -143,7 +177,9 @@
       labels={$ramUsageOverTime.times}
       id="ramUsageOverTime"
       title="RAM usage"
-      color={COLOR.VIOLET}
+      color={COLOR.BLUE}
+      xFormatter={getLocaleString}
+      yFormatter={getTwoDecimalsPercentage}
       on:updateTimeInterval={setRamUsageOverTime}
     />
     <TimeIntervalChart
@@ -151,8 +187,69 @@
       labels={$diskUsageOverTime.times}
       id="diskUsageOverTime"
       title="DISK usage"
-      color={COLOR.FUSCHIA}
+      color={COLOR.BLUE}
+      xFormatter={getLocaleString}
+      yFormatter={getTwoDecimalsPercentage}
       on:updateTimeInterval={setDiskUsageOverTime}
+    />
+  </Grid>
+</ToggleBox>
+
+<div class="mt-8" />
+
+<ToggleBox title="Hugin activity">
+  <Grid columns={4} gridClass="sm-grid">
+    {#if $posts.values}
+      <TimeIntervalChart
+        data={[{ data: $posts.values, name: "Private messages" }]}
+        labels={$posts.times}
+        id="posts"
+        title="Private messages"
+        color={COLOR.VIOLET}
+        includeYear="true"
+        activeInterval={postsInterval}
+        type="bar"
+        on:updateTimeInterval={setPostsOverTime}
+      />
+    {:else}
+      <TitleAndTextContainer title="Private messages">
+        <div class="w-full h-full flex justify-center">
+          <div class="text-3xl pt-16">
+            <i class="fa-solid fa-spinner fa-spin-pulse" />
+          </div>
+        </div>
+      </TitleAndTextContainer>
+    {/if}
+    {#if $groupPosts.values}
+      <TimeIntervalChart
+        data={[{ data: $groupPosts.values, name: "Group messages" }]}
+        labels={$groupPosts.times}
+        id="groupPosts"
+        title="Group messages"
+        color={COLOR.VIOLET}
+        includeYear="true"
+        activeInterval={groupPostsInterval}
+        type="bar"
+        on:updateTimeInterval={setGroupPostsOverTime}
+      />
+    {:else}
+      <TitleAndTextContainer title="Group messages">
+        <div class="w-full h-full flex justify-center">
+          <div class="text-3xl pt-16">
+            <i class="fa-solid fa-spinner fa-spin-pulse" />
+          </div>
+        </div>
+      </TitleAndTextContainer>
+    {/if}
+    <TitleAndTextContainer
+      title="Total private messages 1 year"
+      text={$totalPosts}
+      bigText={true}
+    />
+    <TitleAndTextContainer
+      title="Total Group messages 1 year"
+      text={$totalGroupPosts}
+      bigText={true}
     />
   </Grid>
 </ToggleBox>

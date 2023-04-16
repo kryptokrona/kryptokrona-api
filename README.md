@@ -131,9 +131,9 @@ being awesome contributors to this project. **We'd like to take a moment to reco
 
 ## Powered by
 
-[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/resources/kotlin.png" alt="Kotlin" height="72">](https://github.com/JetBrains/kotlin)
-[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/resources/ktor.png" alt="Ktor" height="72">](https://github.com/ktorio/ktor)
-[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/resources/svelte.png" alt="Svelte" height="72">](https://github.com/sveltejs/svelte)
+[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/poweredby/kotlin.png" alt="Kotlin" height="72">](https://github.com/JetBrains/kotlin)
+[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/poweredby/ktor.png" alt="Ktor" height="72">](https://github.com/ktorio/ktor)
+[<img src="https://github.com/kryptokrona/kryptokrona-api/blob/master/resources/poweredby/svelte.png" alt="Svelte" height="72">](https://github.com/sveltejs/svelte)
 
 ## License
 

@@ -1,6 +1,5 @@
 <script>
   import { onMount } from "svelte";
-  import { getISODate, getTwoDecimalsPercentage } from "../../helpers/helpers";
   import { createEventDispatcher } from "svelte";
 
   const dispatch = createEventDispatcher();
@@ -10,14 +9,45 @@
   export let labels;
   export let id;
   export let color;
+  export let includeYear = false;
+  export let activeInterval = "1h";
+  export let type = "line";
+  export let yFormatter = (v) => {
+    return v;
+  };
+  export let xFormatter = (v) => {
+    return v;
+  };
 
-  let hourButton, hoursButton, weekButton, monthButton, activeButton;
+  let hourButton,
+    hoursButton,
+    weekButton,
+    monthButton,
+    yearButton,
+    activeButton;
   let chart;
   const buttonClass =
     "text-center bg-neutral-300 hover:bg-neutral-400 dark:bg-neutral-700 dark:hover:bg-neutral-500 rounded-md p-1.5 mr-1";
 
   onMount(() => {
-    activeButton = hourButton;
+    switch (activeInterval) {
+      case "1h":
+        activeButton = hourButton;
+        break;
+      case "24h":
+        activeButton = hoursButton;
+        break;
+      case "1w":
+        activeButton = weekButton;
+        break;
+      case "1m":
+        activeButton = monthButton;
+        break;
+      case "1y":
+        activeButton = yearButton;
+        break;
+    }
+    activeButton.classList.add("active");
     render();
   });
 
@@ -27,7 +57,7 @@
     series: data,
     labels: labels,
     chart: {
-      type: "area",
+      type: type,
       height: "100%",
       width: "100%",
       sparkline: {
@@ -45,7 +75,7 @@
     },
     stroke: {
       curse: "smooth",
-      width: 0,
+      width: type == "line" ? 3 : 0,
     },
     colors: [color],
     fill: {
@@ -59,12 +89,12 @@
     },
     xaxis: {
       labels: {
-        formatter: getISODate,
+        formatter: xFormatter,
       },
     },
     yaxis: {
       labels: {
-        formatter: getTwoDecimalsPercentage,
+        formatter: yFormatter,
       },
     },
     dataLabels: {
@@ -72,6 +102,12 @@
     },
     legend: {
       show: false,
+    },
+    plotOptions: {
+      bar: {
+        borderRadius: 2,
+        borderRadiusApplication: "end",
+      },
     },
   };
 
@@ -102,7 +138,7 @@
   class={"bg-neutral-200 dark:bg-neutral-800 w-full  rounded-md relative h-64"}
 >
   <div class="h-2/5 pt-1 text-center">
-    <p class="pb-1">{title}</p>
+    <p class="pb-2">{title}</p>
     <button
       bind:this={hourButton}
       on:click={() => {
@@ -112,7 +148,7 @@
         updateTimeInterval("1h");
       }}
       aria-label="1 hour"
-      class={buttonClass + " active"}
+      class={buttonClass}
     >
       1h
     </button>
@@ -135,27 +171,41 @@
         activeButton.classList.remove("active");
         weekButton.classList.add("active");
         activeButton = weekButton;
-        updateTimeInterval("7d");
+        updateTimeInterval("1w");
       }}
       aria-label="7 days"
       class={buttonClass}
     >
       7d
     </button>
-
     <button
       bind:this={monthButton}
       on:click={() => {
         activeButton.classList.remove("active");
         monthButton.classList.add("active");
         activeButton = monthButton;
-        updateTimeInterval("30d");
+        updateTimeInterval("1m");
       }}
       aria-label="30 days"
       class={buttonClass}
     >
       30d
     </button>
+    {#if includeYear}
+      <button
+        bind:this={yearButton}
+        on:click={() => {
+          activeButton.classList.remove("active");
+          yearButton.classList.add("active");
+          activeButton = yearButton;
+          updateTimeInterval("1y");
+        }}
+        aria-label="1 year"
+        class={buttonClass}
+      >
+        1y
+      </button>
+    {/if}
   </div>
   <div class="h-3/5">
     <div {id} />

@@ -1,8 +1,8 @@
 <script>
-    import {COLORS} from "../../helpers/colors";
-    import {onMount} from "svelte";
+  import { COLORS } from "../../helpers/colors";
+  import { onMount } from "svelte";
 
-    export let data = [];
+  export let data = [];
   export let id = "";
   export let colors = COLORS;
   export let tooltipEnabled = false;
@@ -36,6 +36,12 @@
     },
     legend: {
       show: false,
+    },
+    plotOptions: {
+      bar: {
+        borderRadius: 2,
+        borderRadiusApplication: "end",
+      },
     },
   };
 

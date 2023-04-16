@@ -7,9 +7,9 @@ export function getShortdate(d) {
   return month + "/" + day + "/" + year;
 }
 
-export const getISODate = (d) => {
+export const getLocaleString = (d) => {
   if (!d) return d;
-  return new Date(d).toISOString();
+  return new Date(d).toLocaleString();
 };
 
 export const getTwoDecimalsPercentage = (n) => {

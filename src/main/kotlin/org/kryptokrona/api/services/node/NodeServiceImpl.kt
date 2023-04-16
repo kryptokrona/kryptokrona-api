@@ -91,4 +91,13 @@ class NodeServiceImpl : NodeService {
         }.getOrNull() ?: 0
     }
 
+    override suspend fun existsByHostName(hostName: String): Boolean = withContext(Dispatchers.IO) {
+        try {
+            db.nodes.find { it.hostname eq hostName } != null
+        } catch(e: Exception) {
+            logger.error("Error while checking if node exists by host name: $hostName", e)
+            false
+        }
+    }
+
 }

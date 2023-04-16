@@ -44,4 +44,6 @@ interface NodeService {
 
     suspend fun getTotalCount(): Int
 
+    suspend fun existsByHostName(hostName: String): Boolean
+
 }

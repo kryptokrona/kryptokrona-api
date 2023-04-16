@@ -81,9 +81,9 @@ class DiscordSyncer {
 
     suspend fun sync(): Unit = coroutineScope {
         launch {
-            while(isActive) {
-                logger.info("Running Discord syncer...")
+            logger.info("Starting Discord Syncer...")
 
+            while(isActive) {
                 nodes.forEach { node ->
                     logger.info("Checking node ${node.hostName}...")
                     val cl = NodeClient(node)

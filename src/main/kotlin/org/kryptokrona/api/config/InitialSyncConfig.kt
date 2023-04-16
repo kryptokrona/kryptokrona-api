@@ -29,30 +29,13 @@
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-package org.kryptokrona.api.syncers
+package org.kryptokrona.api.config
 
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
-import org.kryptokrona.api.config.InitialSyncConfig
-import org.slf4j.LoggerFactory
+object InitialSyncConfig {
 
-class InitialSyncer {
-
-    private val logger = LoggerFactory.getLogger("InitialSyncer")
-
-    suspend fun sync(): Unit = coroutineScope {
-        launch {
-            logger.info("Starting Initial Syncer...")
-
-            while (isActive) {
-
-                delay(InitialSyncConfig.SYNC_INTERVAL)
-            }
-        }
-
-
-    }
+    /**
+     * The sync interval in milliseconds.
+     */
+    const val SYNC_INTERVAL: Long = 500
 
 }

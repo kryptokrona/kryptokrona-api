@@ -38,4 +38,9 @@ object InitialSyncConfig {
      */
     const val SYNC_INTERVAL: Long = 500
 
+    /**
+     * The sync interval for obtaining the node list in milliseconds.
+     */
+    const val SYNC_INTERVAL_NODE_LIST: Long = 60_000
+
 }

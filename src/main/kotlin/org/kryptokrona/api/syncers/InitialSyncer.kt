@@ -31,11 +31,10 @@
 
 package org.kryptokrona.api.syncers
 
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import org.kryptokrona.api.config.InitialSyncConfig
+import org.kryptokrona.api.models.Node
+import org.kryptokrona.api.models.response.NodeListResponse
 import org.slf4j.LoggerFactory
 
 class InitialSyncer {
@@ -47,12 +46,39 @@ class InitialSyncer {
             logger.info("Starting Initial Syncer...")
 
             while (isActive) {
+                syncNodeList()
 
                 delay(InitialSyncConfig.SYNC_INTERVAL)
             }
         }
+    }
 
+    suspend fun syncNodeList(): Unit = coroutineScope {
+        launch(Dispatchers.IO) {
+            while (isActive) {
+                logger.info("Fetching new node list...")
 
+                val nodeListResponse =
+                    client.get("https://raw.githubusercontent.com/kryptokrona/kryptokrona-nodes-list/master/nodes.json")
+                        .body<NodeListResponse>()
+
+                nodeListResponse.nodes.forEach { node ->
+                    saveNode(node)
+                }
+
+                delay(InitialSyncConfig.SYNC_INTERVAL_NODE_LIST)
+            }
+        }
+    }
+
+    suspend fun saveNode(node: Node): Unit = coroutineScope {
+        launch(Dispatchers.IO) {
+            logger.info("Saving node...")
+
+            // save to db if not exists
+
+            // if it exists, we update some fields in the database (height, etc)
+        }
     }
 
 }

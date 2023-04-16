@@ -31,11 +31,16 @@
 
 package org.kryptokrona.api.syncers
 
+import com.fasterxml.jackson.databind.json.JsonMapper
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.request.*
+import io.ktor.client.statement.*
+import io.ktor.http.*
 import kotlinx.coroutines.*
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.kryptokrona.api.config.InitialSyncConfig
 import org.kryptokrona.api.models.Node
@@ -44,6 +49,7 @@ import org.kryptokrona.api.services.node.NodeService
 import org.kryptokrona.api.services.node.NodeServiceImpl
 import org.kryptokrona.api.utils.HttpClient.client
 import org.slf4j.LoggerFactory
+import java.time.LocalDateTime.now
 
 class InitialSyncer {
 
@@ -68,9 +74,10 @@ class InitialSyncer {
             while (isActive) {
                 logger.info("Fetching new node list...")
 
-                val nodeListResponse =
+                val response =
                     client.get("https://raw.githubusercontent.com/kryptokrona/kryptokrona-nodes-list/master/nodes.json")
-                        .body<NodeListResponse>()
+
+                val nodeListResponse: NodeListResponse = Json.decodeFromString(response.bodyAsText())
 
                 // goes through all nodes and saves them to the database
                 nodeListResponse.nodes.forEach { node ->
@@ -81,6 +88,7 @@ class InitialSyncer {
                         ssl = node.ssl
                         fee = node.fee.toFloat()
                         version = node.version
+                        createdAt = now()
                     }
                     saveNode(nodeObj)
                 }

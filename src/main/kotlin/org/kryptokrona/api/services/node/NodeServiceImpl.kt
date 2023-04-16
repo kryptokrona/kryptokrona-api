@@ -37,10 +37,7 @@ import org.kryptokrona.api.models.Nodes
 import org.kryptokrona.api.models.nodes
 import org.kryptokrona.api.plugins.DatabaseFactory.db
 import org.ktorm.dsl.*
-import org.ktorm.entity.add
-import org.ktorm.entity.count
-import org.ktorm.entity.find
-import org.ktorm.entity.removeIf
+import org.ktorm.entity.*
 import org.slf4j.LoggerFactory
 
 class NodeServiceImpl : NodeService {
@@ -74,7 +71,19 @@ class NodeServiceImpl : NodeService {
     }
 
     override suspend fun update(node: Node): Unit = withContext(Dispatchers.IO) {
+        this.runCatching {
+            val nodeDbObj = db.nodes.find { it.id eq node.id } ?: return@runCatching
+            nodeDbObj.name = node.name
+            nodeDbObj.url = node.url
+            nodeDbObj.port = node.port
+            nodeDbObj.ssl = node.ssl
+            nodeDbObj.fee = node.fee
+            nodeDbObj.version = node.version
 
+            db.nodes.update(node)
+        }.onFailure {
+            logger.error("Error while updating node: $node", it)
+        }
     }
 
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {

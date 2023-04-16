@@ -31,15 +31,25 @@
 
 package org.kryptokrona.api.syncers
 
+import io.ktor.client.*
+import io.ktor.client.call.*
+import io.ktor.client.engine.cio.*
+import io.ktor.client.request.*
 import kotlinx.coroutines.*
+import kotlinx.serialization.json.Json
 import org.kryptokrona.api.config.InitialSyncConfig
 import org.kryptokrona.api.models.Node
 import org.kryptokrona.api.models.response.NodeListResponse
+import org.kryptokrona.api.services.node.NodeService
+import org.kryptokrona.api.services.node.NodeServiceImpl
+import org.kryptokrona.api.utils.HttpClient.client
 import org.slf4j.LoggerFactory
 
 class InitialSyncer {
 
     private val logger = LoggerFactory.getLogger("InitialSyncer")
+
+    private val nodeService: NodeService = NodeServiceImpl()
 
     suspend fun sync(): Unit = coroutineScope {
         launch {
@@ -53,7 +63,7 @@ class InitialSyncer {
         }
     }
 
-    suspend fun syncNodeList(): Unit = coroutineScope {
+    private suspend fun syncNodeList(): Unit = coroutineScope {
         launch(Dispatchers.IO) {
             while (isActive) {
                 logger.info("Fetching new node list...")
@@ -62,8 +72,17 @@ class InitialSyncer {
                     client.get("https://raw.githubusercontent.com/kryptokrona/kryptokrona-nodes-list/master/nodes.json")
                         .body<NodeListResponse>()
 
+                // goes through all nodes and saves them to the database
                 nodeListResponse.nodes.forEach { node ->
-                    saveNode(node)
+                    val nodeObj = Node {
+                        name = node.name
+                        url = node.url
+                        port = node.port
+                        ssl = node.ssl
+                        fee = node.fee.toFloat()
+                        version = node.version
+                    }
+                    saveNode(nodeObj)
                 }
 
                 delay(InitialSyncConfig.SYNC_INTERVAL_NODE_LIST)
@@ -71,13 +90,17 @@ class InitialSyncer {
         }
     }
 
-    suspend fun saveNode(node: Node): Unit = coroutineScope {
+    private suspend fun saveNode(node: Node): Unit = coroutineScope {
         launch(Dispatchers.IO) {
-            logger.info("Saving node...")
+            nodeService.existsByUrl(node.url).let {
+                if (it) {
+                    logger.info("Node already exists, updating values...")
+                    nodeService.update(node)
+                }
 
-            // save to db if not exists
-
-            // if it exists, we update some fields in the database (height, etc)
+                logger.info("Saving node...")
+                nodeService.save(node)
+            }
         }
     }
 

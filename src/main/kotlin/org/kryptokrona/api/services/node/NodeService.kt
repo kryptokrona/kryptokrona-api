@@ -40,10 +40,12 @@ interface NodeService {
 
     suspend fun save(node: Node)
 
+    suspend fun update(node: Node)
+
     suspend fun delete(id: Long)
 
     suspend fun getTotalCount(): Int
 
-    suspend fun existsByHostName(hostName: String): Boolean
+    suspend fun existsByUrl(url: String): Boolean
 
 }

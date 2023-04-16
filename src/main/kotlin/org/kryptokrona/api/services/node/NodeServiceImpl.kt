@@ -73,6 +73,10 @@ class NodeServiceImpl : NodeService {
         }.getOrNull()
     }
 
+    override suspend fun update(node: Node): Unit = withContext(Dispatchers.IO) {
+
+    }
+
     override suspend fun delete(id: Long): Unit = withContext(Dispatchers.IO) {
         this.runCatching {
             db.nodes.removeIf { it.id eq id }
@@ -91,11 +95,11 @@ class NodeServiceImpl : NodeService {
         }.getOrNull() ?: 0
     }
 
-    override suspend fun existsByHostName(hostName: String): Boolean = withContext(Dispatchers.IO) {
+    override suspend fun existsByUrl(url: String): Boolean = withContext(Dispatchers.IO) {
         try {
-            db.nodes.find { it.hostname eq hostName } != null
+            db.nodes.find { it.url eq url } != null
         } catch(e: Exception) {
-            logger.error("Error while checking if node exists by host name: $hostName", e)
+            logger.error("Error while checking if node exists by url: $url", e)
             false
         }
     }

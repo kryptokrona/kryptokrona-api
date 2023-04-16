@@ -35,6 +35,6 @@ object HuginConfig {
     /**
      * The sync interval in milliseconds.
      */
-    const val SYNC_INTERVAL: Long = 500
+    const val SYNC_INTERVAL: Long = 2000
 
 }

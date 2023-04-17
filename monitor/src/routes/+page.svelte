@@ -2,14 +2,8 @@
   import { COLOR } from "../helpers/colors";
   import CircleChart from "../components/charts/CircleChart.svelte";
   import ToggleBox from "../components/toggle-box/ToggleBox.svelte";
-  import {
-    badRequestsChart,
-    requestsChart,
-    SuccessfulRequestsChart,
-  } from "../mock-data/data";
   import TitleAndTextContainer from "../components/containers/TitleAndTextContainer.svelte";
   import Grid from "../components/grids/Grid.svelte";
-  import ColumnChart from "../components/charts/ColumnChart.svelte";
   import {
     cpuUsageOverTime,
     ramUsageOverTime,
@@ -255,31 +249,3 @@
 </ToggleBox>
 
 <div class="mt-8" />
-
-<ToggleBox title={"Requests"}>
-  <Grid columns={3} gridClass="sm-grid">
-    <TitleAndTextContainer title="Total requests" text="19000">
-      <ColumnChart
-        data={requestsChart.data}
-        id={requestsChart.name}
-        tooltipEnabled={true}
-      />
-    </TitleAndTextContainer>
-    <TitleAndTextContainer title="Bad requests" text="3000">
-      <ColumnChart
-        data={badRequestsChart.data}
-        id={badRequestsChart.name}
-        tooltipEnabled={true}
-        colors={[COLOR.ORANGE]}
-      />
-    </TitleAndTextContainer>
-    <TitleAndTextContainer title="Successful requests" text="16000">
-      <ColumnChart
-        data={SuccessfulRequestsChart.data}
-        id={SuccessfulRequestsChart.name}
-        tooltipEnabled={true}
-        colors={[COLOR.GREEN]}
-      />
-    </TitleAndTextContainer>
-  </Grid>
-</ToggleBox>

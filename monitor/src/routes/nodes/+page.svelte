@@ -2,22 +2,11 @@
   import { COLOR } from "../../helpers/colors";
   import AreaChart from "../../components/charts/AreaChart.svelte";
   import ColumnChart from "../../components/charts/ColumnChart.svelte";
-  import AreaChartWithLabels from "../../components/charts/AreaChartWithLabels.svelte";
   import TitleAndTextContainer from "../../components/containers/TitleAndTextContainer.svelte";
   import ToggleBox from "../../components/toggle-box/ToggleBox.svelte";
   import { base } from "$app/paths";
-  import {
-    chart1,
-    chart2,
-    chart3,
-    chart4,
-    chart5,
-    chart7,
-    chart8,
-    months,
-  } from "../../mock-data/data";
+  import { chart1, chart2, chart3, chart4, chart5 } from "../../mock-data/data";
   import { goto } from "$app/navigation";
-  import LineChartWithLabels from "../../components/charts/LineChartWithLabels.svelte";
   import TitleAndTextContainerGreen from "../../components/containers/TitleAndTextContainerGreen.svelte";
   import Grid from "../../components/grids/Grid.svelte";
   import { nodes } from "../../stores/data";
@@ -104,18 +93,6 @@
     >
   </div>
 </div>
-
-<div class="mt-8" />
-
-<Grid columns={2} gridClass="md-grid">
-  <div class="w-full h-60 md:h-80">
-    <AreaChartWithLabels data={chart7.data} labels={months} id={chart7.name} />
-  </div>
-
-  <div class="w-full h-60 md:h-80">
-    <LineChartWithLabels data={chart8.data} labels={months} id={chart8.name} />
-  </div>
-</Grid>
 
 <div class="mt-8" />
 

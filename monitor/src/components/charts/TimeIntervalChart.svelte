@@ -66,7 +66,7 @@
       animations: {
         enabled: true,
         easing: "easeinout",
-        speed: 800,
+        speed: 600,
         dynamicAnimation: {
           enabled: true,
           speed: 350,

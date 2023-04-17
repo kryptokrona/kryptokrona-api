@@ -1,13 +1,10 @@
 <script>
-    import {COLOR} from "../../helpers/colors";
-    import AreaChart from "../../components/charts/AreaChart.svelte";
-    import {months, poolChart, pools} from "../../mock-data/data";
-    import PercentageBar from "../../components/PercentageBar.svelte";
-    import PieChartWithLabels from "../../components/charts/PieChartWithLabels.svelte";
-    import LineChartWithLabels from "../../components/charts/LineChartWithLabels.svelte";
-    import Grid from "../../components/grids/Grid.svelte";
+  import { COLOR } from "../../helpers/colors";
+  import AreaChart from "../../components/charts/AreaChart.svelte";
+  import PercentageBar from "../../components/PercentageBar.svelte";
+  import { pools } from "../../mock-data/data";
 
-    //TODO add sort on height
+  //TODO add sort on height
   let page = 0;
   let rowsPerPage = 5;
   let sliceIndex = 5;
@@ -138,41 +135,7 @@
 
 <div class="mt-8" />
 
-<Grid columns={2} gridClass="md-grid">
-  <div>
-    <h2>Hashrate history</h2>
-    <div class="w-full h-60 md:h-80">
-      <LineChartWithLabels data={poolChart.data} labels={months} id={"line1"} />
-    </div>
-  </div>
-  <div>
-    <h2>Block distribution</h2>
-    <div class="w-full h-60 md:h-80">
-      <PieChartWithLabels
-        data={[35, 40, 10, 5, 15, 10]}
-        labels={pools.map((p) => p.name)}
-        id="pie1"
-      />
-    </div>
-  </div>
-</Grid>
-
 <style>
-  .search-icon {
-    display: flex;
-    align-items: center;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    padding-left: 0.5rem;
-  }
-  .search-input {
-    padding-left: 2rem;
-    padding-bottom: 0.5rem;
-    padding-top: 0.5rem;
-  }
-
   .table-grid {
     display: grid;
     grid-template-columns: 14% 9% 9% 14% 14% 11% 11% 9% 9%;

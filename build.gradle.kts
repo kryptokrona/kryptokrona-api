@@ -17,7 +17,7 @@ val prometheus_version: String by project
 plugins {
     application
     kotlin("jvm") version "1.8.20"
-    id("io.ktor.plugin") version "2.2.4"
+    id("io.ktor.plugin") version "2.3.0"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.20"
     id("java")
     id("org.liquibase.gradle") version "2.2.0"

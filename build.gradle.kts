@@ -77,7 +77,7 @@ dependencies {
     implementation("io.ktor:ktor-serialization-jackson-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-cors:$ktor_version")
-    implementation("io.ktor:ktor-server-config-yaml-jvm:2.2.4")
+    implementation("io.ktor:ktor-server-config-yaml-jvm:2.3.0")
     implementation("io.ktor:ktor-client-logging:$ktor_version")
 
     // various

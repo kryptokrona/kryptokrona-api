@@ -99,7 +99,7 @@ dependencies {
     liquibaseRuntime("org.postgresql:postgresql:$postgres_version")
     liquibaseRuntime("info.picocli:picocli:4.7.3")
     liquibaseRuntime("ch.qos.logback:logback-core:1.4.6")
-    liquibaseRuntime("ch.qos.logback:logback-classic:1.4.6")
+    liquibaseRuntime("ch.qos.logback:logback-classic:1.4.7")
     liquibaseRuntime("javax.xml.bind:jaxb-api:2.3.1")
 
     runtimeOnly("com.squareup:kotlinpoet:1.13.0")

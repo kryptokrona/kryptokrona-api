@@ -11,22 +11,6 @@ Kryptokrona is a decentralized blockchain from the Nordic based on CryptoNote, w
 
 Kryptokrona API in Kotlin, Ktor and Kryptokrona SDK for caching and processing data from the blockchain to provide faster access for services.
 
-## Table of Contents
-
-- [Development Resources](#development-resources)
-- [Getting Help](#getting-help)
-- [Reporting Issues](#reporting-issues)
-- [Deployment](#deployment)
-  - [Staging](#staging)
-  - [Production](#production)
-- [Contribute](#contribute)
-  - [Pull Request](#pull-request)
-  - [Donate](#donate)
-- [Contributors](#contributors)
-- [Powered By](#powered-by)
-- [License](#license)
-
-
 ## Development Resources
 
 - Web: https://kryptokrona.org

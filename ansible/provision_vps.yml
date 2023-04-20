@@ -10,6 +10,9 @@
     docker_image_backend: "ghcr.io/kryptokrona/kryptokrona-api"
     docker_image_monitor: "ghcr.io/kryptokrona/kryptokrona-api-monitor"
 
+    # Docker hub Container Registry
+    docker_image_node: "jrkalf/kryptokrona-node"
+
     # A list of users who will be added to the docker group.
     docker_users: [
       "kryptokrona_docker"
@@ -17,6 +20,7 @@
 
     docker_container_name: kryptokrona-api
     docker_container_name_monitor: kryptokrona-monitor
+    docker_container_name_node: kryptokrona-node
     docker_network_name: kryptokrona
 
     # Docker daemon options as a dict
@@ -46,6 +50,7 @@
   #- base
   - postgres
   - docker
+  - node
   - liquibase
   - backend
   - monitor

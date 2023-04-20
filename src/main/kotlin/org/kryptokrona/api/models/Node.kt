@@ -41,28 +41,22 @@ interface Node : Entity<Node> {
 
     val id: Long
     var name: String
-    var hostname: String
+    var url: String
     var port: Int
+    var ssl: Boolean
     var fee: Float
     var version: String
-    var height: Long
-    var txIn: Int
-    var txOut: Int
-    var status: String
     var createdAt: LocalDateTime
 }
 
 object Nodes : Table<Node>("nodes") {
     val id = long("id").primaryKey().bindTo { it.id }
     val name = varchar("name").bindTo { it.name }
-    val hostname = varchar("hostname").bindTo { it.hostname }
+    val url = varchar("url").bindTo { it.url }
     val port = int("port").bindTo { it.port }
     val fee = float("fee").bindTo { it.fee }
     val version = varchar("version").bindTo { it.version }
-    val height = long("height").bindTo { it.height }
-    val txIn = int("tx_in").bindTo { it.txIn }
-    val txOut = int("tx_out").bindTo { it.txOut }
-    val status = varchar("status").bindTo { it.status }
+    val ssl = boolean("ssl").bindTo { it.ssl }
     val createdAt = datetime("created_at").bindTo { it.createdAt }
 }
 

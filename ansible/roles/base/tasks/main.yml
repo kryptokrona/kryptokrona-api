@@ -58,6 +58,12 @@
 - name: Iptables Websocket port
   shell : "iptables -C INPUT -s 0/0 -p tcp --dport {{ sys_ws_port }} -j ACCEPT || iptables -I INPUT -s 0/0 -p tcp --dport {{ sys_ws_port }} -j ACCEPT"
 
+- name: Iptables 11897
+  shell: iptables -C INPUT -s 0/0 -p tcp --dport 11897 -j ACCEPT || iptables -I INPUT -s 0/0 -p tcp --dport 11897 -j ACCEPT
+- name: Iptables 11898
+
+  shell: iptables -C INPUT -s 0/0 -p tcp --dport 11898 -j ACCEPT || iptables -I INPUT -s 0/0 -p tcp --dport 11898 -j ACCEPT
+
 - name:  Save iptables changes
   shell: iptables-save > /etc/network/iptables.rules
 

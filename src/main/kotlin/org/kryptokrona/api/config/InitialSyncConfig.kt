@@ -28,24 +28,19 @@
 // STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF
 // THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-package org.kryptokrona.api.services.node
 
-import org.kryptokrona.api.models.Node
+package org.kryptokrona.api.config
 
-interface NodeService {
+object InitialSyncConfig {
 
-    suspend fun getAll(size: Int, page: Int): List<Node>
+    /**
+     * The sync interval in milliseconds.
+     */
+    const val SYNC_INTERVAL: Long = 500
 
-    suspend fun getById(id: Long): Node?
-
-    suspend fun save(node: Node)
-
-    suspend fun update(node: Node)
-
-    suspend fun delete(id: Long)
-
-    suspend fun getTotalCount(): Int
-
-    suspend fun existsByUrl(url: String): Boolean
+    /**
+     * The sync interval for obtaining the node list in milliseconds.
+     */
+    const val SYNC_INTERVAL_NODE_LIST: Long = 60_000 * 60 * 6
 
 }

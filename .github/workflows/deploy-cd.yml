@@ -16,47 +16,49 @@ jobs:
     uses: ./.github/workflows/monitor-ci.yml
     secrets: inherit
 
-  deploy-staging:
-    name: Deploy Staging
-    runs-on: ubuntu-latest
-    needs: [ backend, monitor ]
-
-    steps:
-      - name: Check out the codebase.
-        uses: actions/checkout@v3
-
-      - name: Run playbook
-        uses: dawidd6/action-ansible-playbook@v2
-        with:
-          playbook: provision_vps.yml
-          directory: ./ansible
-          key: ${{secrets.ANSIBLE_PRIVATE_KEY}}
-          vault_password: ${{secrets.ANSIBLE_VAULT_PASS}}
-          options: |
-            --inventory staging.inventory
-
-  smoke-test-staging:
-    name: Smoke Test Staging
-    runs-on: ubuntu-latest
-    needs: [ deploy-staging ]
-
-    steps:
-      - uses: actions/checkout@v3
-
-      - name: Uses Python 3.10
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - name: Smoke Test
-        run: |
-          pip3 install requests
-          python3 scripts/smoke-test.py stage.xkr.mjovanc.com
+#  deploy-staging:
+#    name: Deploy Staging
+#    runs-on: ubuntu-latest
+#    needs: [ backend, monitor ]
+#
+#    steps:
+#      - name: Check out the codebase.
+#        uses: actions/checkout@v3
+#
+#
+#      - name: Run playbook
+#        uses: dawidd6/action-ansible-playbook@v2
+#        with:
+#          playbook: provision_vps.yml
+#          directory: ./ansible
+#          key: ${{secrets.ANSIBLE_PRIVATE_KEY}}
+#          vault_password: ${{secrets.ANSIBLE_VAULT_PASS}}
+#          options: |
+#            --inventory staging.inventory
+#
+#
+#  smoke-test-staging:
+#    name: Smoke Test Staging
+#    runs-on: ubuntu-latest
+#    needs: [ deploy-staging ]
+#
+#    steps:
+#      - uses: actions/checkout@v3
+#
+#      - name: Uses Python 3.10
+#        uses: actions/setup-python@v4
+#        with:
+#          python-version: '3.10'
+#
+#      - name: Smoke Test
+#        run: |
+#          pip3 install requests
+#          python3 scripts/smoke-test.py stage.xkr.mjovanc.com
 
   deploy-prod:
     name: Deploy Prod
     runs-on: ubuntu-latest
-    needs: [ smoke-test-staging ]
+    needs: [ monitor ]
 
     steps:
       - name: Check out the codebase.

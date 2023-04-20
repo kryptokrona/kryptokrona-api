@@ -77,7 +77,7 @@ dependencies {
     implementation("io.ktor:ktor-serialization-jackson-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-netty-jvm:$ktor_version")
     implementation("io.ktor:ktor-server-cors:$ktor_version")
-    implementation("io.ktor:ktor-server-config-yaml-jvm:2.2.4")
+    implementation("io.ktor:ktor-server-config-yaml-jvm:2.3.0")
     implementation("io.ktor:ktor-client-logging:$ktor_version")
 
     // various
@@ -97,15 +97,15 @@ dependencies {
     // liquibase
     liquibaseRuntime("org.liquibase:liquibase-core:$liquibase_core")
     liquibaseRuntime("org.postgresql:postgresql:$postgres_version")
-    liquibaseRuntime("info.picocli:picocli:4.7.2")
+    liquibaseRuntime("info.picocli:picocli:4.7.3")
     liquibaseRuntime("ch.qos.logback:logback-core:1.4.6")
-    liquibaseRuntime("ch.qos.logback:logback-classic:1.4.6")
+    liquibaseRuntime("ch.qos.logback:logback-classic:1.4.7")
     liquibaseRuntime("javax.xml.bind:jaxb-api:2.3.1")
 
     runtimeOnly("com.squareup:kotlinpoet:1.13.0")
 
     // testing
-    testImplementation("io.ktor:ktor-server-test-host-jvm:2.2.4")
+    testImplementation("io.ktor:ktor-server-test-host-jvm:2.3.0")
     testImplementation("io.ktor:ktor-server-tests-jvm:$ktor_version")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }

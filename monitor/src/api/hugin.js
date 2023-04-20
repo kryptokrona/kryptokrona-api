@@ -1,4 +1,4 @@
-const endpoint = "https://stage.xkr.mjovanc.com/api/v1/statistics/";
+let endpoint = import.meta.env.VITE_KRYPTOKRONA_API;
 
 export async function getPosts(timeInterval) {
   let page = 1;
@@ -9,7 +9,7 @@ export async function getPosts(timeInterval) {
   try {
     do {
       let response = await fetch(
-        endpoint + "post-encrypted/" + timeInterval + "?page=" + page
+        endpoint + "/post-encrypted/" + timeInterval + "?page=" + page
       );
       data = await response.json();
       array = array.concat(data.items);
@@ -40,7 +40,7 @@ export async function getGroupPosts(timeInterval) {
   try {
     do {
       let response = await fetch(
-        endpoint + "post-encrypted-group/" + timeInterval + "?page=" + page
+        endpoint + "/post-encrypted-group/" + timeInterval + "?page=" + page
       );
       data = await response.json();
       array = array.concat(data.items);
@@ -66,7 +66,7 @@ export async function getGroupPosts(timeInterval) {
 export async function getTotalPostsThisYear() {
   let count = 0;
   try {
-    let response = await fetch(endpoint + "post-encrypted/1y");
+    let response = await fetch(endpoint + "/post-encrypted/1y");
     let data = await response.json();
     count = data.total;
   } catch (error) {
@@ -77,7 +77,7 @@ export async function getTotalPostsThisYear() {
 export async function getTotalGroupPostsThisYear() {
   let count = 0;
   try {
-    let response = await fetch(endpoint + "post-encrypted-group/1y");
+    let response = await fetch(endpoint + "/post-encrypted-group/1y");
     let data = await response.json();
     count = data.total;
   } catch (error) {

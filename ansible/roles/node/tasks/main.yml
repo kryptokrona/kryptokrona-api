@@ -13,6 +13,6 @@
     force_kill: yes
     recreate: yes
     volumes:
-      - "/root/.kryptokrona:/kryptokrona/blockloc"
+      - "/root/.kryptokrona:/root/.kryptokrona"
     networks:
       - name: "host"

@@ -58,7 +58,7 @@ jobs:
   deploy-prod:
     name: Deploy Prod
     runs-on: ubuntu-latest
-    needs: [ monitor ]
+    needs: [ backend, monitor ]
 
     steps:
       - name: Check out the codebase.

@@ -1,12 +1,4 @@
-import dotenv from "dotenv";
-import { browser } from "$app/environment";
-
-let endpoint = "";
-
-if (browser == false) {
-  dotenv.config();
-  endpoint = process.env.PUBLIC_HUGIN_API;
-}
+let endpoint = import.meta.env.VITE_HUGIN_API;
 
 export async function getPosts(timeInterval) {
   let page = 1;

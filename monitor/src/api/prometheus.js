@@ -1,9 +1,9 @@
 import { PrometheusDriver } from "prometheus-query";
 
-const PUBLIC_PROMETHEUS_URL = "https://xkr.mjovanc.com/prometheus";
+let endpoint = import.meta.env.VITE_PROMETHEUS_URL;
 
 let prom = new PrometheusDriver({
-  endpoint: `${PUBLIC_PROMETHEUS_URL}`,
+  endpoint: `${endpoint}`,
   baseURL: "/api/v1", // default value
 });
 

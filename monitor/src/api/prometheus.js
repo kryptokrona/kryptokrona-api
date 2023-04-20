@@ -1,6 +1,6 @@
 import { PrometheusDriver } from "prometheus-query";
 
-const PUBLIC_PROMETHEUS_URL = "https://stage.xkr.mjovanc.com/prometheus";
+const PUBLIC_PROMETHEUS_URL = "https://xkr.mjovanc.com/prometheus";
 
 let prom = new PrometheusDriver({
   endpoint: `${PUBLIC_PROMETHEUS_URL}`,

@@ -1,6 +1,6 @@
 import { PrometheusDriver } from "prometheus-query";
 
-let endpoint = import.meta.env.VITE_PROMETHEUS_URL;
+let endpoint = import.meta.env.VITE_PROMETHEUS_API;
 
 let prom = new PrometheusDriver({
   endpoint: `${endpoint}`,

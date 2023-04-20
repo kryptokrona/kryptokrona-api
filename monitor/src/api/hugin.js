@@ -1,4 +1,4 @@
-let endpoint = import.meta.env.VITE_HUGIN_API;
+let endpoint = import.meta.env.VITE_KRYPTOKRONA_API;
 
 export async function getPosts(timeInterval) {
   let page = 1;

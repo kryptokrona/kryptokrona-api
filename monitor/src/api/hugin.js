@@ -1,4 +1,5 @@
-let endpoint = import.meta.env.VITE_KRYPTOKRONA_API;
+const VITE_KRYPTOKRONA_API = "https://xkr.mjovanc.com/api/v1/statistics";
+let endpoint = VITE_KRYPTOKRONA_API;
 
 export async function getPosts(timeInterval) {
   let page = 1;

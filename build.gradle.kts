@@ -102,7 +102,7 @@ dependencies {
     liquibaseRuntime("ch.qos.logback:logback-classic:1.4.7")
     liquibaseRuntime("javax.xml.bind:jaxb-api:2.3.1")
 
-    runtimeOnly("com.squareup:kotlinpoet:1.13.0")
+    runtimeOnly("com.squareup:kotlinpoet:1.13.2")
 
     // testing
     testImplementation("io.ktor:ktor-server-test-host-jvm:2.3.0")

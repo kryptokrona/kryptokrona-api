@@ -20,6 +20,7 @@
   $nodes = data.nodes;
 
   $: sliceIndex = calculateSliceIndex(page);
+  $: visible = $nodes.slice(page, sliceIndex);
 
   function calculateSliceIndex(page) {
     if (page == 0) return rowsPerPage;
@@ -28,7 +29,7 @@
   }
 </script>
 
-<div class="w-full">
+<div class="w-full h-64">
   <div
     class="rounded-md border-t border-l border-r dark:border-neutral-100 border-neutral-700"
   >
@@ -45,16 +46,16 @@
       <h2 class="hidden text-center lg:inline-block lg:w-1/5">Status</h2>
       <h2 class="hidden text-center lg:inline-block lg:w-1/5">Synced</h2>
     </div>
-    {#each $nodes.slice(page, sliceIndex) as node, i}
+    {#each visible as node, i}
       <button
         on:click={goto(
           `${base}/nodes/${node.nodeName}?name=${node.nodeName}&port=${node.nodePort}`
         )}
-        class={(i == $nodes.length - 1 ? "rounded-md " : "") +
+        class={(i == visible.length - 1 ? "rounded-md " : "") +
           "flex text-left w-full border-b p-2 dark:border-neutral-100 border-neutral-700 lg:hover:cursor-pointer lg:hover:bg-neutral-200 dark:lg:hover:bg-neutral-800"}
       >
         <p class="text-left w-1/2 sm:w-1/3 lg:w-1/5">
-          {node.nodeName}
+          {node.nodeName + i}
         </p>
         <p class="text-right sm:text-center w-1/2 sm:w-1/3 lg:w-1/5">
           {node.nodeUrl}

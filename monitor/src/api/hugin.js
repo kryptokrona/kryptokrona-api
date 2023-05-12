@@ -20,7 +20,10 @@ export async function getPosts(timeInterval) {
     let dict = {};
 
     for (let i = 0; i < array.length; i++) {
-      let date = new Date(array[i].createdAt).toLocaleString();
+      let date = new Date(array[i].createdAt);
+      date.setHours(date.getHours(), 0, 0);
+      date = date.toLocaleString();
+
       if (dict[date]) dict[date] += 1;
       else dict[date] = 1;
     }
@@ -51,7 +54,10 @@ export async function getGroupPosts(timeInterval) {
     let dict = {};
 
     for (let i = 0; i < array.length; i++) {
-      let date = new Date(array[i].createdAt).toLocaleString();
+      let date = new Date(array[i].createdAt);
+      date.setHours(date.getHours(), 0, 0);
+      date = date.toLocaleString();
+
       if (dict[date]) dict[date] += 1;
       else dict[date] = 1;
     }

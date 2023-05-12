@@ -47,10 +47,10 @@ export const load = async () => {
     return await getRepoStats();
   }
   async function fetchPosts() {
-    return await getPosts("1h");
+    return await getPosts("1w");
   }
   async function fetchGroupPosts() {
-    return await getGroupPosts("1h");
+    return await getGroupPosts("1w");
   }
   async function fetchTotalPosts() {
     return await getTotalPostsThisYear();

@@ -15,3 +15,7 @@ export const getLocaleString = (d) => {
 export const getTwoDecimalsPercentage = (n) => {
   return n.toFixed(2) + "%";
 };
+
+export const getZeroDecimalsPercentage = (n) => {
+  return n.toFixed(0) + "%";
+};

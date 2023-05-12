@@ -18,7 +18,7 @@
   }
 </script>
 
-<div class="w-full">
+<div class="w-full h-96">
   <div
     class="rounded-md border-t border-l border-r mt-4 dark:border-neutral-100 border-neutral-700"
   >

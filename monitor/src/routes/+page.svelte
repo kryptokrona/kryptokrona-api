@@ -32,6 +32,7 @@
   import {
     getLocaleString,
     getTwoDecimalsPercentage,
+    getZeroDecimalsPercentage,
   } from "../helpers/helpers";
   export let data;
 
@@ -53,8 +54,8 @@
   let ramUsageOverTimeInterval = "1h";
   let cpuUsageOverTimeInterval = "1h";
   let diskUsageOverTimeInterval = "1h";
-  let postsInterval = "1h";
-  let groupPostsInterval = "1h";
+  let postsInterval = "1w";
+  let groupPostsInterval = "1w";
 
   onMount(() => {
     fiveSecondInterval = setInterval(() => {
@@ -163,7 +164,9 @@
       title="CPU usage"
       color={COLOR.BLUE}
       xFormatter={getLocaleString}
-      yFormatter={getTwoDecimalsPercentage}
+      yAxisFormatter={getZeroDecimalsPercentage}
+      yFormatterTooltip={getTwoDecimalsPercentage}
+      type="area"
       on:updateTimeInterval={setCpuUsageOverTime}
     />
     <TimeIntervalChart
@@ -173,7 +176,9 @@
       title="RAM usage"
       color={COLOR.BLUE}
       xFormatter={getLocaleString}
-      yFormatter={getTwoDecimalsPercentage}
+      yAxisFormatter={getZeroDecimalsPercentage}
+      yFormatterTooltip={getTwoDecimalsPercentage}
+      type="area"
       on:updateTimeInterval={setRamUsageOverTime}
     />
     <TimeIntervalChart
@@ -183,7 +188,9 @@
       title="DISK usage"
       color={COLOR.BLUE}
       xFormatter={getLocaleString}
-      yFormatter={getTwoDecimalsPercentage}
+      yAxisFormatter={getZeroDecimalsPercentage}
+      yFormatterTooltip={getTwoDecimalsPercentage}
+      type="area"
       on:updateTimeInterval={setDiskUsageOverTime}
     />
   </Grid>
@@ -192,7 +199,7 @@
 <div class="mt-8" />
 
 <ToggleBox title="Hugin activity">
-  <Grid columns={4} gridClass="sm-grid">
+  <Grid columns={2} gridClass="md-grid">
     {#if $posts.values}
       <TimeIntervalChart
         data={[{ data: $posts.values, name: "Private messages" }]}
@@ -200,13 +207,13 @@
         id="posts"
         title="Private messages"
         color={COLOR.VIOLET}
-        includeYear="true"
         activeInterval={postsInterval}
         type="bar"
+        height="h-72"
         on:updateTimeInterval={setPostsOverTime}
       />
     {:else}
-      <TitleAndTextContainer title="Private messages">
+      <TitleAndTextContainer title="Private messages" height="h-72">
         <div class="w-full h-full flex justify-center">
           <div class="text-3xl pt-16">
             <i class="fa-solid fa-spinner fa-spin-pulse" />
@@ -221,13 +228,13 @@
         id="groupPosts"
         title="Group messages"
         color={COLOR.VIOLET}
-        includeYear="true"
         activeInterval={groupPostsInterval}
         type="bar"
+        height="h-72"
         on:updateTimeInterval={setGroupPostsOverTime}
       />
     {:else}
-      <TitleAndTextContainer title="Group messages">
+      <TitleAndTextContainer title="Group messages" height="h-72">
         <div class="w-full h-full flex justify-center">
           <div class="text-3xl pt-16">
             <i class="fa-solid fa-spinner fa-spin-pulse" />
@@ -235,16 +242,6 @@
         </div>
       </TitleAndTextContainer>
     {/if}
-    <TitleAndTextContainer
-      title="Total private messages 1 year"
-      text={$totalPosts}
-      bigText={true}
-    />
-    <TitleAndTextContainer
-      title="Total Group messages 1 year"
-      text={$totalGroupPosts}
-      bigText={true}
-    />
   </Grid>
 </ToggleBox>
 

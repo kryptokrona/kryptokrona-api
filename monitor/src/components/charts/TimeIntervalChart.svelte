@@ -12,10 +12,14 @@
   export let includeYear = false;
   export let activeInterval = "1h";
   export let type = "line";
-  export let yFormatter = (v) => {
+  export let height = "h-64";
+  export let yFormatterTooltip = (v) => {
     return v;
   };
   export let xFormatter = (v) => {
+    return v;
+  };
+  export let yAxisFormatter = (v) => {
     return v;
   };
 
@@ -60,8 +64,8 @@
       type: type,
       height: "100%",
       width: "100%",
-      sparkline: {
-        enabled: true,
+      toolbar: {
+        show: false,
       },
       animations: {
         enabled: true,
@@ -83,18 +87,31 @@
     },
     tooltip: {
       enabled: true,
+      y: {
+        formatter: yFormatterTooltip,
+      },
     },
     grid: {
       show: false,
     },
     xaxis: {
       labels: {
+        maxHeight: 5,
+        show: false,
+        rotate: 0,
         formatter: xFormatter,
+      },
+      axisTicks: {
+        show: false,
       },
     },
     yaxis: {
+      min: 0,
+      tickAmount: 4,
+      opposite: true,
+      forceNiceScale: true,
       labels: {
-        formatter: yFormatter,
+        formatter: yAxisFormatter,
       },
     },
     dataLabels: {
@@ -135,9 +152,10 @@
 </script>
 
 <div
-  class={"bg-neutral-200 dark:bg-neutral-800 w-full  rounded-md relative h-64"}
+  class={"bg-neutral-200 dark:bg-neutral-800 w-full  rounded-md relative " +
+    height}
 >
-  <div class="h-2/5 pt-1 text-center">
+  <div class="h-2/6 pt-1 text-center">
     <p class="pb-2">{title}</p>
     <button
       bind:this={hourButton}
@@ -207,7 +225,7 @@
       </button>
     {/if}
   </div>
-  <div class="h-3/5">
+  <div class="h-4/6">
     <div {id} />
   </div>
 </div>

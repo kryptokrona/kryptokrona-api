@@ -97,7 +97,7 @@ dependencies {
     // liquibase
     liquibaseRuntime("org.liquibase:liquibase-core:$liquibase_core")
     liquibaseRuntime("org.postgresql:postgresql:$postgres_version")
-    liquibaseRuntime("info.picocli:picocli:4.7.3")
+    liquibaseRuntime("info.picocli:picocli:4.7.4")
     liquibaseRuntime("ch.qos.logback:logback-core:1.4.7")
     liquibaseRuntime("ch.qos.logback:logback-classic:1.4.7")
     liquibaseRuntime("javax.xml.bind:jaxb-api:2.3.1")
